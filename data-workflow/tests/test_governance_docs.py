@@ -171,6 +171,9 @@ def test_acquisition_guide_distinguishes_current_commands_from_target() -> None:
     assert "Task 4B 物理迁移" in text
     assert "Task 5B" in text
     assert "data-workflow/adapters/<source>/README.md" in text
+    assert "legacy-workflow/validation/csv/taobao/" in text
+    for stale_claim in ("待 Task 7 归档", "等待 Task 7 归档"):
+        assert stale_claim not in text
 
 
 def test_agents_uses_formal_manlifang_guide_but_defers_asset_paths_to_task_4b() -> None:

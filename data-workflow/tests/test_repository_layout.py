@@ -48,10 +48,21 @@ EXPECTED_ENVIRONMENT_VARIABLES = {
     "DATA_WORKFLOW_RUNTIME_ROOT",
     "DATA_WORKFLOW_DELIVERY_ROOT",
 }
+ACTIVE_WORKFLOW_STATUS_LABELS = (
+    "状态",
+    "登记状态",
+    "启用状态",
+    "工作流状态",
+    "来源状态",
+    "status",
+)
+ACTIVE_WORKFLOW_STATUS_LABEL_PATTERN = "|".join(
+    re.escape(label) for label in ACTIVE_WORKFLOW_STATUS_LABELS
+)
 ACTIVE_WORKFLOW_CLAIM_PATTERNS = (
     re.compile(
-        r"^\s*(?:[-*]\s*)?(?:登记状态|状态|status)\s*[:：]\s*`?active`?"
-        r"(?=\s|$|[,，。；;！!（(])",
+        rf"^\s*(?:[-*]\s*)?(?:{ACTIVE_WORKFLOW_STATUS_LABEL_PATTERN})"
+        r"\s*[:：]\s*`?active`?(?=\s|$|[,，。；;！!（(])",
         re.IGNORECASE,
     ),
     re.compile(
@@ -89,6 +100,9 @@ def assert_no_active_workflow_claims(text: str, context: str) -> None:
     (
         "状态：`active`",
         "- 登记状态：active",
+        "- 启用状态：active",
+        "工作流状态：`active`",
+        "来源状态：active",
         "enabled=true",
         '- "enabled": true',
         "启用状态：已启用",

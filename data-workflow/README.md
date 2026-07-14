@@ -1,11 +1,21 @@
 # 游艺圈数据工作流子项目
 
-状态：已采用的正式目录契约
+状态：已批准的迁移后正式目录契约；当前可执行入口见下文
 上位规范：`../docs/数据工作流与游艺圈系统对接执行基线.md`
 
 `data-workflow/` 是游艺圈数据资产生产线的独立子项目根目录。它负责数据来源接入、采集与接收、清洗治理、增量比较、AI 增强、质量门禁、运行编排和消费交付，不负责游艺圈平台正式业务表或前后端系统建设。
 
-## 已采用目录结构
+## 当前可用入口
+
+Task 3-6 完成目录创建和入口迁移前，使用以下现存来源文档中的命令：
+
+- `data-workflow/manlifang/漫立方抓包流程.md`
+- `data-workflow/1688/1688_公开商品采集流程.md`
+- `data-workflow/taobao/淘宝公开商品采集验证.md`
+
+## 已批准的迁移后正式目录结构
+
+以下目录树是迁移目标，不表示所有目录当前已经存在：
 
 ```text
 data-workflow/
@@ -66,11 +76,11 @@ data-workflow/
 └─ 数据获取执行指南.md             # 通用采集与交付方法
 ```
 
-n8n 控制面的正式路径是 `data-workflow/orchestration/n8n/`，七个平台的正式适配器路径是 `data-workflow/adapters/<source>/`。历史脚本、一次性试采和验证材料统一进入根目录 `legacy-workflow/`，不作为正式入口。
+n8n 控制面的迁移后正式路径是 `data-workflow/orchestration/n8n/`，七个平台适配器的迁移后正式路径是 `data-workflow/adapters/<source>/`。历史脚本、一次性试采和验证材料迁入根目录 `legacy-workflow/`，且不作为正式入口。
 
 目录树仅展开了 `xianyu/` 的单来源模板；其余六个平台使用相同的 `README.md`、`src/`、`tests/` 和 `fixtures/` 边界。
 
-## 目录边界
+## 迁移后目录边界
 
 - `orchestration/n8n/` 只负责 n8n 控制面，不放大批量原始数据、浏览器 profile、图片库或来源采集实现。
 - `adapters/` 只放来源特有逻辑；可复用能力必须下沉到 `shared/`。

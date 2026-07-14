@@ -8,8 +8,7 @@
 ## Directory Boundaries
 
 - `docs/`: execution baseline, architecture, governance and indexes.
-- `data-workflow/`: formal source adapters, orchestration, runtime assets and L3 deliveries.
-- `legacy-workflow/`: protected historical scripts and validation materials; never use it as a formal command entry.
+- `data-workflow/`: current source directories, acquisition guides, scripts, runtime assets and deliveries.
 - `docs/project-split/` and `docs/requirements/`: protected historical references; never modify them or let them override current decisions.
 
 ## Authority And Reading Order
@@ -18,7 +17,7 @@ When documents conflict, use this order:
 
 1. The user's latest explicit instruction.
 2. `docs/数据工作流与游艺圈系统对接执行基线.md`.
-3. The current source guide under `data-workflow/adapters/<source>/README.md`.
+3. The current source guide under the existing `data-workflow/<source>/` directory.
 4. `docs/游艺圈数据资产生产工作流总体执行方案.md` or `data-workflow/数据获取执行指南.md` only when the task needs architecture or general workflow context.
 5. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
 6. Protected historical references, only when historical product context is explicitly needed.
@@ -68,7 +67,17 @@ For ordinary source work, read only `README.md`, the execution baseline and the 
 
 n8n is the control plane for triggers, orchestration, retries, state, human gates and alerts. Python/Node scripts are the execution plane for acquisition, cleaning, images, comparison, AI batches, quality checks and delivery generation.
 
-## Formal Paths
+## Current Executable Paths
+
+- Manlifang source guide: `data-workflow/manlifang/漫立方抓包流程.md`
+- 1688 source guide: `data-workflow/1688/1688_公开商品采集流程.md`
+- Taobao source guide: `data-workflow/taobao/淘宝公开商品采集验证.md`
+
+Use the commands documented in these existing guides until the corresponding adapter migration is complete.
+
+## Approved Migration Target Paths
+
+These paths are the approved formal contract. Task 3-6 must create or migrate them before they become executable entrypoints:
 
 - n8n control plane: `data-workflow/orchestration/n8n/`
 - source adapters: `data-workflow/adapters/<source>/`
@@ -78,12 +87,12 @@ n8n is the control plane for triggers, orchestration, retries, state, human gate
 
 ## Current Manlifang Assets
 
-- Batch: `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`
-- Raw XLSX: `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
-- Cleaned XLSX: `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
-- Delivery: `data-workflow/deliveries/manlifang/manlifang_full_20260712/`
-- Handoff XLSX: `data-workflow/deliveries/manlifang/manlifang_full_20260712/漫立方_全量数据.xlsx`
-- Source guide: `data-workflow/adapters/manlifang/README.md`
+- Batch: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
+- Raw XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
+- Cleaned XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
+- Delivery: `data-workflow/manlifang/漫立方_全量数据/`
+- Handoff XLSX: `data-workflow/manlifang/漫立方_全量数据/漫立方_全量数据.xlsx`
+- Source guide: `data-workflow/manlifang/漫立方抓包流程.md`
 
 The final batch contains 3128 unique public products and 5528 normalized images. Later processing must use the fresh structured JSONL, raw responses and hash-named originals as source assets.
 

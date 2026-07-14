@@ -10,7 +10,6 @@
 |---|---|
 | `docs/` | 当前执行基线、总体架构、治理与索引 |
 | `data-workflow/` | 来源适配、采集、处理、运行产物和交付物 |
-| `legacy-workflow/` | 旧脚本、一次性试采和历史验证材料；只作参考，不是正式入口 |
 | `.codegraph/` | 代码索引；理解代码时优先使用 |
 | `AGENTS.md` | 后续执行人的边界与最小阅读规则 |
 
@@ -19,7 +18,7 @@
 普通数据任务只读：
 
 1. `docs/数据工作流与游艺圈系统对接执行基线.md`
-2. 当前来源的 `data-workflow/adapters/<source>/README.md`
+2. 当前来源的现存执行文档（见“当前可用入口”）
 
 只有需要总体架构、通用方法或目录迁移时，再读：
 
@@ -29,7 +28,7 @@
 
 `docs/project-split/` 和 `docs/requirements/` 是受保护的历史参考，不属于默认上下文，且不得覆盖当前执行基线。
 
-## 主要入口
+## 当前可用入口
 
 | 文件 | 作用 |
 |---|---|
@@ -37,9 +36,20 @@
 | `docs/游艺圈数据资产生产工作流总体执行方案.md` | n8n、脚本、质量和长期运行架构 |
 | `data-workflow/README.md` | 数据工作流目录和适配器契约 |
 | `data-workflow/数据获取执行指南.md` | 通用采集与交付方法 |
-| `data-workflow/orchestration/n8n/` | n8n 控制面的正式入口 |
-| `data-workflow/adapters/<source>/README.md` | 七个平台适配器的正式来源入口 |
+| `data-workflow/manlifang/漫立方抓包流程.md` | 漫立方当前来源说明与复采命令 |
+| `data-workflow/1688/1688_公开商品采集流程.md` | 1688 当前补充采集与公司资产状态 |
+| `data-workflow/taobao/淘宝公开商品采集验证.md` | 淘宝当前人工登录态补充采集边界 |
 | `游艺圈数据导入字段规范_v2.md` | 当前 L3 Excel 兼容格式 |
+
+## 迁移后正式路径
+
+以下是已确认的正式目标契约，由 Task 3-6 创建目录并迁移入口；在对应目录实际存在前，不作为当前可执行入口：
+
+- n8n 控制面：`data-workflow/orchestration/n8n/`
+- 七个平台适配器：`data-workflow/adapters/<source>/`
+- L0-L2 运行资产：`data-workflow/runtime/`
+- L3 交付：`data-workflow/deliveries/`
+- 历史归档：`legacy-workflow/`
 
 ## 执行原则
 

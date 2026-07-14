@@ -1,5 +1,8 @@
 import json
+import re
 from pathlib import Path
+
+import pytest
 
 from test_governance_docs import PROTECTED_PATHS, governance_base_ref, run_git
 
@@ -45,10 +48,69 @@ EXPECTED_ENVIRONMENT_VARIABLES = {
     "DATA_WORKFLOW_RUNTIME_ROOT",
     "DATA_WORKFLOW_DELIVERY_ROOT",
 }
+ACTIVE_WORKFLOW_CLAIM_PATTERNS = (
+    re.compile(
+        r"^\s*(?:[-*]\s*)?(?:登记状态|状态|status)\s*[:：]\s*`?active`?"
+        r"(?=\s|$|[,，。；;！!（(])",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"^\s*(?:[-*]\s*)?(?:启用状态\s*[:：]\s*)?`?[\"']?enabled[\"']?"
+        r"\s*[:=]\s*`?true`?(?=\s|$|[,，。；;！!\]})（(])",
+        re.IGNORECASE,
+    ),
+    re.compile(
+        r"^\s*(?:[-*]\s*)?(?:启用状态\s*[:：]\s*已启用|"
+        r"(?:当前)?(?:来源|工作流)\s*已启用)"
+        r"(?=\s|$|[,，。；;！!（(])"
+    ),
+)
 
 
 def read_json(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
+
+
+def active_workflow_claims(text: str) -> tuple[str, ...]:
+    claims = []
+    for line in text.splitlines():
+        if any(pattern.search(line) for pattern in ACTIVE_WORKFLOW_CLAIM_PATTERNS):
+            claims.append(line.strip())
+    return tuple(claims)
+
+
+def assert_no_active_workflow_claims(text: str, context: str) -> None:
+    claims = active_workflow_claims(text)
+    assert not claims, f"{context} contains active workflow claim(s): {claims}"
+
+
+@pytest.mark.parametrize(
+    "active_claim",
+    (
+        "状态：`active`",
+        "- 登记状态：active",
+        "enabled=true",
+        '- "enabled": true',
+        "启用状态：已启用",
+        "当前工作流已启用。",
+    ),
+)
+def test_active_workflow_claim_detector_rejects_contradictory_text(
+    active_claim: str,
+) -> None:
+    text = (
+        "四道启用门禁通过前，不得在 n8n 中标为 `active`。\n"
+        f"{active_claim}\n"
+    )
+
+    with pytest.raises(AssertionError, match="active workflow claim"):
+        assert_no_active_workflow_claims(text, "contradictory sample")
+
+
+def test_active_workflow_claim_detector_allows_disclaimer() -> None:
+    text = "四道启用门禁通过前，不得在 n8n 中标为 `active`。"
+
+    assert_no_active_workflow_claims(text, "disclaimer sample")
 
 
 def test_every_source_has_adapter_and_n8n_readme() -> None:
@@ -80,6 +142,7 @@ def test_n8n_source_readmes_do_not_claim_active_workflows() -> None:
         assert status in text
         assert f"data-workflow/adapters/{source}/" in text
         assert "不得在 n8n 中标为 `active`" in text
+        assert_no_active_workflow_claims(text, f"{source} n8n README")
 
 
 def test_adapter_readmes_describe_current_migration_state() -> None:

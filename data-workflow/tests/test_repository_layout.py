@@ -12,6 +12,8 @@ WORKFLOW = ROOT / "data-workflow"
 MANLIFANG_ADAPTER = WORKFLOW / "adapters" / "manlifang"
 ADAPTER_1688 = WORKFLOW / "adapters" / "1688"
 LEGACY_1688 = WORKFLOW / "1688"
+TAOBAO_ADAPTER = WORKFLOW / "adapters" / "taobao"
+LEGACY_TAOBAO = WORKFLOW / "taobao"
 MIGRATED_1688_SOURCE_FILES = {
     "run_source.py",
     "collect_1688_public_sample.py",
@@ -22,6 +24,7 @@ HISTORICAL_1688_CSV_FILES = {
     "1688_relevant_product_20260708.csv",
     "1688_relevant_product_sku_20260708.csv",
 }
+HISTORICAL_TAOBAO_CSV_FILES = {"taobao_product_category_full_20260709.csv"}
 MANLIFANG_SOURCE_FILES = (
     "build_manlifang_capture_workbook.py",
     "build_manlifang_delivery_package.py",
@@ -193,17 +196,6 @@ def test_n8n_source_readmes_do_not_claim_active_workflows() -> None:
 
 
 def test_adapter_readmes_describe_current_migration_state() -> None:
-    current_guides = {
-        "taobao": "data-workflow/taobao/淘宝公开商品采集验证.md",
-    }
-    for source, guide in current_guides.items():
-        text = (WORKFLOW / "adapters" / source / "README.md").read_text(
-            encoding="utf-8"
-        )
-        assert guide in text
-        assert "正式入口已建立" in text
-        assert "待后续任务完成" in text
-
     for source in ("jd", "pinduoduo", "douyin", "xianyu"):
         text = (WORKFLOW / "adapters" / source / "README.md").read_text(
             encoding="utf-8"
@@ -240,6 +232,39 @@ def test_1688_readme_documents_formal_entrypoint_and_deferred_profile() -> None:
     assert "Task 5B" in text
     assert "enabled=false" in text
     assert "不含可启用的 n8n JSON" in text
+
+
+def test_taobao_tracked_entrypoint_is_in_formal_adapter_and_history_stays_put() -> None:
+    assert (TAOBAO_ADAPTER / "src" / "run_source.py").is_file()
+    assert (TAOBAO_ADAPTER / "tests" / "unit" / "test_run_source.py").is_file()
+    for retired_name in (
+        "collect_taobao_full_workflow.py",
+        "test_collect_taobao_full_workflow.py",
+        "淘宝公开商品采集验证.md",
+    ):
+        assert not (LEGACY_TAOBAO / retired_name).exists()
+
+    assert {
+        path.name for path in LEGACY_TAOBAO.glob("*.csv") if path.is_file()
+    } == HISTORICAL_TAOBAO_CSV_FILES
+
+
+def test_taobao_readme_documents_formal_entrypoint_and_deferred_assets() -> None:
+    text = (TAOBAO_ADAPTER / "README.md").read_text(encoding="utf-8")
+    for phrase in (
+        "现有原型已迁入正式目录，尚未通过统一 run_result 和连续稳定运行验收",
+        "data-workflow/adapters/taobao/src/run_source.py",
+        "data-workflow/runtime/runs/taobao/taobao_<timestamp>/l1/",
+        "data-workflow/runtime/browser-profiles/taobao/",
+        "data-workflow/runtime/tmp/taobao/",
+        "data-workflow/taobao/taobao_product_category_full_20260709.csv",
+        "Task 7",
+        "Task 6B",
+        "enabled=false",
+        "不含可启用的 n8n JSON",
+        "L0-L2",
+    ):
+        assert phrase in text
 
 
 def test_manlifang_tracked_files_are_in_formal_adapter() -> None:

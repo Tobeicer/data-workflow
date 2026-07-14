@@ -15,9 +15,11 @@ from urllib.parse import parse_qs, quote, urljoin, urlparse
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-BASE_DIR = Path(__file__).resolve().parent
-PROFILE_DIR = BASE_DIR / ".browser-profile"
-DEBUG_DIR = BASE_DIR / "_debug"
+SRC_DIR = Path(__file__).resolve().parent
+WORKFLOW_DIR = Path(__file__).resolve().parents[3]
+PROFILE_DIR = WORKFLOW_DIR / "runtime" / "browser-profiles" / "taobao"
+DEBUG_DIR = WORKFLOW_DIR / "runtime" / "tmp" / "taobao"
+RUNS_DIR = WORKFLOW_DIR / "runtime" / "runs" / "taobao"
 
 CHROME_PATHS = [
     Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
@@ -528,6 +530,10 @@ def write_full_csv(rows: list[dict[str, str]], output_path: Path) -> None:
         writer.writerows(rows)
 
 
+def default_output_path(stamp: str) -> Path:
+    return RUNS_DIR / f"taobao_{stamp}" / "l1" / f"taobao_product_full_{stamp}.csv"
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="淘宝公开商品搜索、详情参数和完整版 CSV 采集")
     parser.add_argument("--keyword", action="append", help="只采集指定关键词，可重复传入")
@@ -542,7 +548,28 @@ def main() -> None:
     parser.add_argument("--delay-max", type=float, default=4.0)
     parser.add_argument("--debug", action="store_true", help="保存页面 HTML 和截图用于调试")
     parser.add_argument("--output", help="完整版 CSV 输出路径")
+    parser.add_argument(
+        "--dry-run",
+        action="store_true",
+        help="离线打印路径和执行计划，不创建资产或启动浏览器",
+    )
     args = parser.parse_args()
+
+    if args.dry_run:
+        output_path = (
+            Path(args.output).expanduser().resolve()
+            if args.output
+            else default_output_path("<timestamp>")
+        )
+        print(f"[taobao-dry-run] profile: {PROFILE_DIR}")
+        print(f"[taobao-dry-run] debug: {DEBUG_DIR}")
+        print(f"[taobao-dry-run] output: {output_path}")
+        print(f"[taobao-dry-run] prepare-login: {str(args.prepare_login).lower()}")
+        print(
+            "[taobao-dry-run] plan: "
+            "public search -> detail enrichment -> in-memory merge -> L1 CSV"
+        )
+        return
 
     from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
     from playwright.sync_api import sync_playwright
@@ -550,9 +577,15 @@ def main() -> None:
     keywords = load_keywords(args.keyword_file, args.keyword)
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     collected_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    output_path = Path(args.output) if args.output else BASE_DIR / f"taobao_product_full_{stamp}.csv"
+    output_path = (
+        Path(args.output).expanduser().resolve()
+        if args.output
+        else default_output_path(stamp)
+    )
     if args.debug:
-        DEBUG_DIR.mkdir(exist_ok=True)
+        DEBUG_DIR.mkdir(parents=True, exist_ok=True)
+
+    PROFILE_DIR.mkdir(parents=True, exist_ok=True)
 
     search_rows: list[dict[str, str]] = []
     detail_rows: list[dict[str, str]] = []
@@ -592,7 +625,7 @@ def main() -> None:
                     break
                 page.wait_for_timeout(3000)
             context.close()
-            print("[taobao] 登录准备步骤结束。本地登录态已保存在 data-workflow/taobao/.browser-profile。")
+            print(f"[taobao] 登录准备步骤结束。本地登录态已保存在 {PROFILE_DIR}。")
             return
 
         for keyword in keywords:

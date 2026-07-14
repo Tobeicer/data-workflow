@@ -71,13 +71,13 @@ n8n is the control plane for triggers, orchestration, retries, state, human gate
 
 - Manlifang source guide: `data-workflow/adapters/manlifang/README.md`
 - 1688 source guide: `data-workflow/adapters/1688/README.md`
-- Taobao source guide: `data-workflow/taobao/淘宝公开商品采集验证.md`
+- Taobao source guide: `data-workflow/adapters/taobao/README.md`
 
-Use the formal Manlifang and 1688 adapter commands. Continue using the existing Taobao guide until its adapter migration is complete.
+Use the formal Manlifang, 1688 and Taobao adapter commands. Taobao remains a prototype; only its tracked code and guide have moved, while the historical CSV and browser profile remain deferred to Tasks 7 and 6B respectively.
 
 ## Approved Migration Target Paths
 
-These paths are the approved formal contract. Manlifang and 1688 tracked code already use their adapter paths; remaining sources must be migrated before their adapter paths become executable entrypoints:
+These paths are the approved formal contract. Manlifang, 1688 and Taobao tracked code already use their adapter paths; remaining sources must be migrated before their adapter paths become executable entrypoints:
 
 - n8n control plane: `data-workflow/orchestration/n8n/`
 - source adapters: `data-workflow/adapters/<source>/`

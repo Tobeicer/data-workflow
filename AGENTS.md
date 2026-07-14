@@ -37,8 +37,8 @@ New confirmed business requirements go to `docs/requirements/信息整理.md`.
 Responsible for:
 
 - source discovery and evaluation;
-- public or authorized acquisition, crawlers and exports;
-- cleaning, deduplication, classification candidates and AI-assisted analysis;
+- public data crawling (大平台爬虫), authorized API integration (店铺入驻), and file-based acquisition;
+- cleaning, deduplication, classification and AI-assisted analysis;
 - update checks, change detection, quality gates and review queues;
 - traceable L0-L2 assets and contract-based L3 deliveries.
 
@@ -59,12 +59,11 @@ n8n is the control plane for triggers, orchestration, retries, state, human gate
 
 ## Current Manlifang Assets
 
-- Batch: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
-- Cleaned XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
-- Delivery: `data-workflow/manlifang/漫立方_全量数据/`
+- Delivery batch: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
+- 3128 unique products, 5528 normalized images delivered.
 - Source guide: `data-workflow/manlifang/漫立方抓包流程.md`
 
-The final batch contains 3128 unique public products and 5528 normalized images. Later processing must use the fresh structured JSONL, raw responses and hash-named originals as source assets.
+Processing uses structured JSONL, raw responses and hash-named originals as source assets.
 
 ## Database Snapshot Reference
 

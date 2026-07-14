@@ -1,0 +1,23 @@
+{
+  "version": "1.0.0",
+  "planned_trigger_modes": [
+    "scheduled",
+    "automatic",
+    "conditional"
+  ],
+  "activation_gates": [
+    "workflow_json",
+    "credentials",
+    "dry_run",
+    "quality_evidence"
+  ],
+  "sources": [
+    {"source": "manlifang", "status": "stabilizing", "enabled": false},
+    {"source": "1688", "status": "stabilizing", "enabled": false},
+    {"source": "taobao", "status": "prototype", "enabled": false},
+    {"source": "jd", "status": "planned", "enabled": false},
+    {"source": "pinduoduo", "status": "planned", "enabled": false},
+    {"source": "douyin", "status": "planned", "enabled": false},
+    {"source": "xianyu", "status": "planned", "enabled": false}
+  ]
+}

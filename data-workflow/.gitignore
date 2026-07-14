@@ -1,0 +1,7 @@
+runtime/
+deliveries/
+**/.browser-profile/
+**/__pycache__/
+**/.pytest_cache/
+**/_debug/
+**/_detail_debug/

@@ -68,7 +68,6 @@ def test_sample_dry_run_blocks_process_browser_and_network_boundaries(
     monkeypatch: pytest.MonkeyPatch,
     capsys: pytest.CaptureFixture[str],
 ) -> None:
-    run_source = load_script("run_source.py")
     guarded_paths = (DEFAULT_DRY_RUN_DIR, DEFAULT_PROFILE_DIR, DEFAULT_DEBUG_DIR)
     before = {path: snapshot_path(path) for path in guarded_paths}
     playwright_modules_before = {
@@ -88,11 +87,12 @@ def test_sample_dry_run_blocks_process_browser_and_network_boundaries(
             raise AssertionError("dry-run attempted to import Playwright")
         return real_import(name, globals, locals, fromlist, level)
 
-    monkeypatch.setattr(run_source.subprocess, "run", reject_process)
+    monkeypatch.setattr(subprocess, "run", reject_process)
     monkeypatch.setattr(socket, "socket", reject_network)
     monkeypatch.setattr(socket, "create_connection", reject_network)
     monkeypatch.setattr(builtins, "__import__", reject_playwright_import)
 
+    run_source = load_script("run_source.py")
     run_source.sample(dry_run_args())
 
     output = capsys.readouterr().out

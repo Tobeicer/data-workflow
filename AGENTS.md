@@ -6,32 +6,30 @@
 
 ## Directory Boundaries
 
-- `docs/`: project-level baseline, architecture, governance and indexes.
+- `docs/`: execution baseline, classification reference and historical requirements.
 - `data-workflow/`: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
-- `database/`: database snapshots and SQL dumps.
-- `docs/project-split/` and `docs/requirements/`: protected historical references; never modify them or let them override current decisions.
+- `database/`: database snapshots and SQL dumps (reference only).
+- `docs/project-split/`: protected original requirements; never modify.
+- `docs/requirements/`: protected historical references; only `信息整理.md` receives new confirmed requirements.
 
 ## Authority And Reading Order
 
 When documents conflict, use this order:
 
 1. The user's latest explicit instruction.
-2. `docs/数据工作流与游艺圈系统对接执行基线.md`.
+2. `docs/数据工作流与游艺圈系统对接执行基线.md` (sole execution baseline).
 3. The current source guide under `data-workflow/<source>/`.
-4. `docs/游艺圈数据资产生产工作流总体执行方案.md` or `data-workflow/数据获取执行指南.md` only when the task needs architecture or general workflow context.
-5. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
-6. Protected historical references, only when historical product context is explicitly needed.
+4. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
+5. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
 
-For ordinary source work, read only `README.md`, the execution baseline and the relevant source guide. Do not load every planning or research document by default.
+New confirmed business requirements go to `docs/requirements/信息整理.md`.
 
 ## Markdown Context Hygiene
 
-- Active documents contain current decisions and current execution instructions, not rejected alternatives.
+- Active documents contain current decisions, not rejected alternatives.
 - Once a decision is confirmed, remove A/B/C comparisons and write the selected approach directly.
 - Do not place command failures, retry history or conversational reasoning in formal documents.
-- Historical batch results should be a short dated summary, not a chronological diary.
 - A fact should have one authoritative definition; other documents link to it instead of repeating it.
-- `task_plan.md`, `findings.md` and `progress.md` keep only current work, valid findings and recent verification evidence.
 - New role, data-layer, database-boundary or integration decisions must update the execution baseline first.
 
 ## Current Data Role
@@ -62,10 +60,8 @@ n8n is the control plane for triggers, orchestration, retries, state, human gate
 ## Current Manlifang Assets
 
 - Batch: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
-- Raw XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
 - Cleaned XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
 - Delivery: `data-workflow/manlifang/漫立方_全量数据/`
-- Handoff XLSX: `data-workflow/manlifang/漫立方_全量数据/漫立方_全量数据.xlsx`
 - Source guide: `data-workflow/manlifang/漫立方抓包流程.md`
 
 The final batch contains 3128 unique public products and 5528 normalized images. Later processing must use the fresh structured JSONL, raw responses and hash-named originals as source assets.
@@ -79,8 +75,6 @@ Historical/current-environment reference only:
 - Schema: `public`
 - Navicat connection name: `youyiquan`
 - Dump: `database/public.sql`
-
-Observed formal tables include `manufacturer`, `product`, `accessory`, `category`, `document`, `file_resource`, `staging_manufacturer` and supporting user/audit/settings tables. Earlier Manlifang work also observed `ingest.*` and `asset.*` receiving tables.
 
 Do not store passwords in Markdown. Use an untracked `.env.local` file.
 

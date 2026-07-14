@@ -6,6 +6,7 @@ database/*.sql
 __pycache__/
 .codegraph/
 .idea/
+.worktrees/
 .pytest_cache/
 **/.pytest_cache/
 **/.mypy_cache/

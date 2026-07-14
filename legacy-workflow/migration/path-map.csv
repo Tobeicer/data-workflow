@@ -1,0 +1,6 @@
+old_path,new_path,classification,replacement_entry,migrated_at
+data-workflow/1688/1688_relevant_product_20260708.csv,legacy-workflow/validation/csv/1688/1688_relevant_product_20260708.csv,historical_validation_csv,data-workflow/adapters/1688/README.md,2026-07-14
+data-workflow/1688/1688_relevant_product_sku_20260708.csv,legacy-workflow/validation/csv/1688/1688_relevant_product_sku_20260708.csv,historical_validation_csv,data-workflow/adapters/1688/README.md,2026-07-14
+data-workflow/taobao/taobao_product_category_full_20260709.csv,legacy-workflow/validation/csv/taobao/taobao_product_category_full_20260709.csv,historical_validation_csv,data-workflow/adapters/taobao/README.md,2026-07-14
+data-workflow/research/微信小程序公开商品数据导出方法.md,legacy-workflow/validation/notes/微信小程序公开商品数据导出方法.md,historical_research_note,data-workflow/数据获取执行指南.md,2026-07-14
+data-workflow/manlifang/manufacturer_evidence/,legacy-workflow/validation/evidence/manlifang/,historical_manufacturer_evidence,data-workflow/adapters/manlifang/README.md,2026-07-14

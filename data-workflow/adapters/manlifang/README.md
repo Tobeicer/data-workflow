@@ -14,6 +14,7 @@
 - 当前原始 XLSX：`data-workflow/manlifang/captures/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
 - 当前清洗 XLSX：`data-workflow/manlifang/captures/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
 - 当前 L3 交付：`data-workflow/manlifang/漫立方_全量数据/`
+- 历史厂家核验页面与来源索引：`legacy-workflow/validation/evidence/manlifang/`（只读参考，不作为当前厂家主数据）
 
 新运行从本适配器写入 `data-workflow/runtime/runs/manlifang/<run_id>/`。Task 4B 将在原 checkout 中把现有正式批次同盘移动到 `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`，把当前交付同盘移动到 `data-workflow/deliveries/manlifang/manlifang_full_20260712/`；目标存在即停止，不合并。迁移前后必须用资产清单严格比较文件身份、相对路径、内容与硬链接拓扑。
 

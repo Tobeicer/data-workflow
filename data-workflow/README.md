@@ -13,7 +13,7 @@
 - `data-workflow/adapters/1688/README.md`
 - `data-workflow/adapters/taobao/README.md`
 
-漫立方新运行产物进入 `data-workflow/runtime/runs/manlifang/<run_id>/`。1688 正式入口的新运行产物进入 `data-workflow/runtime/runs/1688/<run_id>/`，真实浏览器登录态仍待 Task 5B 在原 checkout 中同盘移动。淘宝原型默认输出进入 `data-workflow/runtime/runs/taobao/taobao_<timestamp>/l1/`，真实浏览器登录态待 Task 6B 在原 checkout 中同盘移动，历史 CSV 待 Task 7 归档。漫立方现有正式批次与交付的大型本地资产仍保持旧路径，待 Task 4B 在原 checkout 中完成清单核对和同盘移动。
+漫立方新运行产物进入 `data-workflow/runtime/runs/manlifang/<run_id>/`。1688 正式入口的新运行产物进入 `data-workflow/runtime/runs/1688/<run_id>/`，真实浏览器登录态仍待 Task 5B 在原 checkout 中同盘移动。淘宝原型默认输出进入 `data-workflow/runtime/runs/taobao/taobao_<timestamp>/l1/`，真实浏览器登录态待 Task 6B 在原 checkout 中同盘移动。1688 与淘宝历史验证 CSV 已退出正式入口；漫立方现有正式批次与交付的大型本地资产仍保持旧路径，待 Task 4B 在原 checkout 中完成清单核对和同盘移动。
 
 ## 已批准的迁移后正式目录结构
 
@@ -78,7 +78,7 @@ data-workflow/
 └─ 数据获取执行指南.md             # 通用采集与交付方法
 ```
 
-n8n 控制面的迁移后正式路径是 `data-workflow/orchestration/n8n/`，七个平台适配器的迁移后正式路径是 `data-workflow/adapters/<source>/`。历史脚本、一次性试采和验证材料迁入根目录 `legacy-workflow/`，且不作为正式入口。
+n8n 控制面的迁移后正式路径是 `data-workflow/orchestration/n8n/`，七个平台适配器的迁移后正式路径是 `data-workflow/adapters/<source>/`。历史脚本、一次性试采和验证材料迁入根目录 `legacy-workflow/`，且不作为正式入口；1688 与淘宝历史验证 CSV 位于 `legacy-workflow/validation/csv/`。
 
 目录树仅展开了 `xianyu/` 的单来源模板；其余六个平台使用相同的 `README.md`、`src/`、`tests/` 和 `fixtures/` 边界。
 

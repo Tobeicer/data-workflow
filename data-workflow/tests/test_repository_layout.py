@@ -1,3 +1,5 @@
+import csv
+import hashlib
 import json
 import re
 from pathlib import Path
@@ -9,11 +11,12 @@ from test_governance_docs import PROTECTED_PATHS, governance_base_ref, run_git
 
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW = ROOT / "data-workflow"
+LEGACY_WORKFLOW = ROOT / "legacy-workflow"
 MANLIFANG_ADAPTER = WORKFLOW / "adapters" / "manlifang"
 ADAPTER_1688 = WORKFLOW / "adapters" / "1688"
-LEGACY_1688 = WORKFLOW / "1688"
+OLD_1688 = WORKFLOW / "1688"
 TAOBAO_ADAPTER = WORKFLOW / "adapters" / "taobao"
-LEGACY_TAOBAO = WORKFLOW / "taobao"
+OLD_TAOBAO = WORKFLOW / "taobao"
 MIGRATED_1688_SOURCE_FILES = {
     "run_source.py",
     "collect_1688_public_sample.py",
@@ -25,6 +28,59 @@ HISTORICAL_1688_CSV_FILES = {
     "1688_relevant_product_sku_20260708.csv",
 }
 HISTORICAL_TAOBAO_CSV_FILES = {"taobao_product_category_full_20260709.csv"}
+ARCHIVED_FILE_SHA256 = {
+    "validation/csv/1688/1688_relevant_product_20260708.csv": (
+        "2d82cd655c37fb7bedd2c1a1ce072b41e9d4a5490a3b4373d385418965d47b42"
+    ),
+    "validation/csv/1688/1688_relevant_product_sku_20260708.csv": (
+        "f050a4dd7dfd4bb007b7c991f60dcae9f2e5aa28f7fe682909d3d6e0923ebf9d"
+    ),
+    "validation/csv/taobao/taobao_product_category_full_20260709.csv": (
+        "ed8fb9593085ac7bb57ff6f20946c2626ce9f173fdcbbb559a62d9a6a5c12884"
+    ),
+    "validation/notes/微信小程序公开商品数据导出方法.md": (
+        "f3ce5d9dc5dcc8ce59c15ee61d6cb76b1a82f22e8cd0db676cbe8a34aa60de22"
+    ),
+    "validation/evidence/manlifang/gti_aboutus.html": (
+        "b2bcfb56025228f41012d1f21bdd566a6b9c8b8e7345683350086735885d4325"
+    ),
+    "validation/evidence/manlifang/gti_productlist.html": (
+        "56295f29224901d6997bee600c48e73f6e008cdb3d606f5750530681240c8bfc"
+    ),
+    "validation/evidence/manlifang/manufacturer_sources.json": (
+        "5937f5c9a35b96753726a20ca1d04f6e33d2ee88c42c5dde01fcc736fa5d225b"
+    ),
+    "validation/evidence/manlifang/official_1688_home.html": (
+        "74671031b85fd553efe2db5e653d78c9897c042ce3a1e9717cc09393cb9d8b83"
+    ),
+}
+EXPECTED_ARCHIVE_MOVES = {
+    "data-workflow/1688/1688_relevant_product_20260708.csv": (
+        "legacy-workflow/validation/csv/1688/1688_relevant_product_20260708.csv",
+        "historical_validation_csv",
+        "data-workflow/adapters/1688/README.md",
+    ),
+    "data-workflow/1688/1688_relevant_product_sku_20260708.csv": (
+        "legacy-workflow/validation/csv/1688/1688_relevant_product_sku_20260708.csv",
+        "historical_validation_csv",
+        "data-workflow/adapters/1688/README.md",
+    ),
+    "data-workflow/taobao/taobao_product_category_full_20260709.csv": (
+        "legacy-workflow/validation/csv/taobao/taobao_product_category_full_20260709.csv",
+        "historical_validation_csv",
+        "data-workflow/adapters/taobao/README.md",
+    ),
+    "data-workflow/research/微信小程序公开商品数据导出方法.md": (
+        "legacy-workflow/validation/notes/微信小程序公开商品数据导出方法.md",
+        "historical_research_note",
+        "data-workflow/数据获取执行指南.md",
+    ),
+    "data-workflow/manlifang/manufacturer_evidence/": (
+        "legacy-workflow/validation/evidence/manlifang/",
+        "historical_manufacturer_evidence",
+        "data-workflow/adapters/manlifang/README.md",
+    ),
+}
 MANLIFANG_SOURCE_FILES = (
     "build_manlifang_capture_workbook.py",
     "build_manlifang_delivery_package.py",
@@ -205,7 +261,7 @@ def test_adapter_readmes_describe_current_migration_state() -> None:
             assert heading in text
 
 
-def test_1688_tracked_entrypoint_is_in_formal_adapter_and_history_stays_put() -> None:
+def test_1688_tracked_entrypoint_is_in_formal_adapter_and_history_is_archived() -> None:
     source_names = {path.name for path in (ADAPTER_1688 / "src").iterdir() if path.is_file()}
     assert MIGRATED_1688_SOURCE_FILES <= source_names
 
@@ -216,10 +272,13 @@ def test_1688_tracked_entrypoint_is_in_formal_adapter_and_history_stays_put() ->
         "collect_1688_detail_sample.py",
         "1688_公开商品采集流程.md",
     ):
-        assert not (LEGACY_1688 / retired_name).exists()
+        assert not (OLD_1688 / retired_name).exists()
 
+    assert not list(OLD_1688.glob("*.csv"))
     assert {
-        path.name for path in LEGACY_1688.glob("*.csv") if path.is_file()
+        path.name
+        for path in (LEGACY_WORKFLOW / "validation" / "csv" / "1688").glob("*.csv")
+        if path.is_file()
     } == HISTORICAL_1688_CSV_FILES
 
 
@@ -234,7 +293,7 @@ def test_1688_readme_documents_formal_entrypoint_and_deferred_profile() -> None:
     assert "不含可启用的 n8n JSON" in text
 
 
-def test_taobao_tracked_entrypoint_is_in_formal_adapter_and_history_stays_put() -> None:
+def test_taobao_tracked_entrypoint_is_in_formal_adapter_and_history_is_archived() -> None:
     assert (TAOBAO_ADAPTER / "src" / "run_source.py").is_file()
     assert (TAOBAO_ADAPTER / "tests" / "unit" / "test_run_source.py").is_file()
     for retired_name in (
@@ -242,10 +301,13 @@ def test_taobao_tracked_entrypoint_is_in_formal_adapter_and_history_stays_put() 
         "test_collect_taobao_full_workflow.py",
         "淘宝公开商品采集验证.md",
     ):
-        assert not (LEGACY_TAOBAO / retired_name).exists()
+        assert not (OLD_TAOBAO / retired_name).exists()
 
+    assert not list(OLD_TAOBAO.glob("*.csv"))
     assert {
-        path.name for path in LEGACY_TAOBAO.glob("*.csv") if path.is_file()
+        path.name
+        for path in (LEGACY_WORKFLOW / "validation" / "csv" / "taobao").glob("*.csv")
+        if path.is_file()
     } == HISTORICAL_TAOBAO_CSV_FILES
 
 
@@ -257,14 +319,87 @@ def test_taobao_readme_documents_formal_entrypoint_and_deferred_assets() -> None
         "data-workflow/runtime/runs/taobao/taobao_<timestamp>/l1/",
         "data-workflow/runtime/browser-profiles/taobao/",
         "data-workflow/runtime/tmp/taobao/",
-        "data-workflow/taobao/taobao_product_category_full_20260709.csv",
-        "Task 7",
+        "legacy-workflow/validation/csv/taobao/taobao_product_category_full_20260709.csv",
         "Task 6B",
         "enabled=false",
         "不含可启用的 n8n JSON",
         "L0-L2",
     ):
         assert phrase in text
+    assert "待 Task 7 归档" not in text
+
+
+def test_tracked_historical_assets_exist_only_at_archive_paths() -> None:
+    for old_path, (new_path, _classification, _replacement) in EXPECTED_ARCHIVE_MOVES.items():
+        assert not (ROOT / old_path.rstrip("/")).exists()
+        assert (ROOT / new_path.rstrip("/")).exists()
+
+
+def test_archived_validation_asset_bytes_match_pre_migration_hashes() -> None:
+    for relative_path, expected_sha256 in ARCHIVED_FILE_SHA256.items():
+        actual = hashlib.sha256((LEGACY_WORKFLOW / relative_path).read_bytes()).hexdigest()
+        assert actual == expected_sha256, relative_path
+
+
+def test_legacy_readme_is_read_only_and_points_to_formal_entrypoints() -> None:
+    text = (LEGACY_WORKFLOW / "README.md").read_text(encoding="utf-8")
+    for phrase in (
+        "只作历史参考",
+        "只读",
+        "不得作为正式执行入口",
+        "docs/数据工作流与游艺圈系统对接执行基线.md",
+        "data-workflow/runtime/runs/<source>/<run_id>/",
+        "data-workflow/deliveries/<source>/<delivery_id>/",
+        "Task 7B",
+    ):
+        assert phrase in text
+    for source in ("manlifang", "1688", "taobao", "jd", "pinduoduo", "douyin", "xianyu"):
+        assert f"data-workflow/adapters/{source}/README.md" in text
+
+
+def test_path_map_describes_only_completed_tracked_moves() -> None:
+    with (LEGACY_WORKFLOW / "migration" / "path-map.csv").open(
+        encoding="utf-8", newline=""
+    ) as file:
+        reader = csv.DictReader(file)
+        rows = list(reader)
+
+    assert reader.fieldnames == [
+        "old_path",
+        "new_path",
+        "classification",
+        "replacement_entry",
+        "migrated_at",
+    ]
+    assert len(rows) == len(EXPECTED_ARCHIVE_MOVES)
+    assert len({row["old_path"] for row in rows}) == len(rows)
+    assert {
+        row["old_path"]: (
+            row["new_path"],
+            row["classification"],
+            row["replacement_entry"],
+        )
+        for row in rows
+    } == EXPECTED_ARCHIVE_MOVES
+    assert {row["migrated_at"] for row in rows} == {"2026-07-14"}
+
+
+def test_formal_readmes_link_to_completed_archive_paths() -> None:
+    readme_1688 = (ADAPTER_1688 / "README.md").read_text(encoding="utf-8")
+    readme_taobao = (TAOBAO_ADAPTER / "README.md").read_text(encoding="utf-8")
+    readme_manlifang = (MANLIFANG_ADAPTER / "README.md").read_text(encoding="utf-8")
+
+    assert "legacy-workflow/validation/csv/1688/" in readme_1688
+    assert "等待 Task 7 归档" not in readme_1688
+    assert (
+        "legacy-workflow/validation/csv/taobao/taobao_product_category_full_20260709.csv"
+        in readme_taobao
+    )
+    assert "待 Task 7 归档" not in readme_taobao
+    assert (
+        "legacy-workflow/validation/evidence/manlifang/"
+        in readme_manlifang
+    )
 
 
 def test_manlifang_tracked_files_are_in_formal_adapter() -> None:

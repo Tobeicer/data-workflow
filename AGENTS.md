@@ -3,12 +3,13 @@
 - Project: 游艺圈
 - Workspace: `E:\Desktop_zm\data-workflow`
 - Current scope: data asset workflow, not platform construction
+- Product boundary: an information supply platform for amusement-facility products and manufacturers, not a marketplace
 
 ## Directory Boundaries
 
-- `docs/`: project-level baseline, architecture, governance and indexes.
-- `data-workflow/`: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
-- `database/`: database snapshots and SQL dumps.
+- `docs/`: execution baseline, architecture, governance and indexes.
+- `data-workflow/`: formal source adapters, orchestration, runtime assets and L3 deliveries.
+- `legacy-workflow/`: protected historical scripts and validation materials; never use it as a formal command entry.
 - `docs/project-split/` and `docs/requirements/`: protected historical references; never modify them or let them override current decisions.
 
 ## Authority And Reading Order
@@ -17,7 +18,7 @@ When documents conflict, use this order:
 
 1. The user's latest explicit instruction.
 2. `docs/数据工作流与游艺圈系统对接执行基线.md`.
-3. The current source guide under `data-workflow/<source>/`.
+3. The current source guide under `data-workflow/adapters/<source>/README.md`.
 4. `docs/游艺圈数据资产生产工作流总体执行方案.md` or `data-workflow/数据获取执行指南.md` only when the task needs architecture or general workflow context.
 5. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
 6. Protected historical references, only when historical product context is explicitly needed.
@@ -34,21 +35,29 @@ For ordinary source work, read only `README.md`, the execution baseline and the 
 - `task_plan.md`, `findings.md` and `progress.md` keep only current work, valid findings and recent verification evidence.
 - New role, data-layer, database-boundary or integration decisions must update the execution baseline first.
 
-## Current Data Role
+## Current Ownership
 
-Responsible for:
+### Data Owner
 
-- source discovery and evaluation;
-- public or authorized acquisition, crawlers and exports;
-- cleaning, deduplication, classification candidates and AI-assisted analysis;
-- update checks, change detection, quality gates and review queues;
-- traceable L0-L2 assets and contract-based L3 deliveries.
+- discover, register, grade and evaluate compliant public or authorized sources;
+- maintain the Manlifang, 1688, Taobao, JD, Pinduoduo, Douyin and Xianyu adapters;
+- retain source fields as completely as possible and maintain traceable L0-L2 assets;
+- generate replaceable, contract-based L3 deliveries;
+- maintain n8n orchestration, retries, state, quality gates and update detection;
+- prioritize stable acquisition workflows; classification, field rendering and formal database models are not the current implementation focus.
 
-Not responsible for:
+### Platform Owner
 
-- mini program, APP, Web admin, payment, order or transaction features;
-- formal database schema, migrations or production business-table writes;
-- platform review, promotion to formal records or publishing.
+- maintain the formal database structure, migrations, indexes and permissions;
+- maintain platform applications and field consumption or rendering;
+- maintain import APIs, receiving validation and error receipts;
+- own review, promotion to formal records, publishing and rollback.
+
+### Joint Decisions
+
+- confirm the L3 contract, source legality and authorization boundaries;
+- confirm quality thresholds, exception handling and change compatibility;
+- keep formal business-table writes on the platform side.
 
 ## Data Layers And Execution Boundary
 
@@ -59,34 +68,29 @@ Not responsible for:
 
 n8n is the control plane for triggers, orchestration, retries, state, human gates and alerts. Python/Node scripts are the execution plane for acquisition, cleaning, images, comparison, AI batches, quality checks and delivery generation.
 
+## Formal Paths
+
+- n8n control plane: `data-workflow/orchestration/n8n/`
+- source adapters: `data-workflow/adapters/<source>/`
+- L0-L2 runtime assets: `data-workflow/runtime/`
+- L3 deliveries: `data-workflow/deliveries/`
+- historical archive: `legacy-workflow/`
+
 ## Current Manlifang Assets
 
-- Batch: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
-- Raw XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
-- Cleaned XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
-- Delivery: `data-workflow/manlifang/漫立方_全量数据/`
-- Handoff XLSX: `data-workflow/manlifang/漫立方_全量数据/漫立方_全量数据.xlsx`
-- Source guide: `data-workflow/manlifang/漫立方抓包流程.md`
+- Batch: `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`
+- Raw XLSX: `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
+- Cleaned XLSX: `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
+- Delivery: `data-workflow/deliveries/manlifang/manlifang_full_20260712/`
+- Handoff XLSX: `data-workflow/deliveries/manlifang/manlifang_full_20260712/漫立方_全量数据.xlsx`
+- Source guide: `data-workflow/adapters/manlifang/README.md`
 
 The final batch contains 3128 unique public products and 5528 normalized images. Later processing must use the fresh structured JSONL, raw responses and hash-named originals as source assets.
-
-## Database Snapshot Reference
-
-Historical/current-environment reference only:
-
-- PostgreSQL: `192.168.1.98:5432`
-- Database: `postgres`
-- Schema: `public`
-- Navicat connection name: `youyiquan`
-- Dump: `database/public.sql`
-
-Observed formal tables include `manufacturer`, `product`, `accessory`, `category`, `document`, `file_resource`, `staging_manufacturer` and supporting user/audit/settings tables. Earlier Manlifang work also observed `ingest.*` and `asset.*` receiving tables.
-
-Do not store passwords in Markdown. Use an untracked `.env.local` file.
 
 ## Integration Rules
 
 - Do not write to `public.product`, `public.accessory`, `public.manufacturer` or other formal business tables without explicit scope expansion and an approved platform contract.
 - Preferred integration order: internal import API, agreed permission-isolated `ingest/staging`, then L3 file import.
 - The platform Git repository has not been received. When available, inspect it only to finalize the L3 adapter; never delete L0-L2 fields because the platform cannot currently consume them.
+- Store credentials only in an untracked `.env.local` file, never in Markdown.
 - If `.codegraph/` exists and the task is about locating or understanding code, use CodeGraph before text search.

@@ -1,25 +1,26 @@
 # 游艺圈数据工作流子项目
 
-状态：当前目录契约；旧来源目录仍按迁移原则逐步收束  
+状态：已采用的正式目录契约
 上位规范：`../docs/数据工作流与游艺圈系统对接执行基线.md`
 
 `data-workflow/` 是游艺圈数据资产生产线的独立子项目根目录。它负责数据来源接入、采集与接收、清洗治理、增量比较、AI 增强、质量门禁、运行编排和消费交付，不负责游艺圈平台正式业务表或前后端系统建设。
 
-## 目标目录结构
+## 已采用目录结构
 
 ```text
 data-workflow/
 ├─ README.md                       # 子项目入口、目录规则、运行方式
 ├─ .env.example                    # 环境变量示例，不包含真实凭据
 ├─ .gitignore                      # 忽略运行产物、登录态、缓存、密钥和大文件
-├─ orchestration/                  # n8n 控制面，只放编排相关资产
-│  ├─ workflows/                   # 主工作流和来源子工作流 JSON
-│  ├─ configs/                     # 编排级非敏感配置
-│  ├─ schemas/                     # run_result、事件和工作流输入输出 Schema
-│  ├─ prompts/                     # 经版本化的大模型提示词
-│  ├─ fixtures/                    # n8n dry-run 和契约测试样本
-│  ├─ deployment/                  # Docker Compose、部署和备份说明
-│  └─ README.md
+├─ orchestration/                  # 控制面根目录
+│  └─ n8n/                         # n8n 正式入口
+│     ├─ workflows/                # 主工作流和来源子工作流 JSON
+│     ├─ configs/                  # 编排级非敏感配置
+│     ├─ schemas/                  # run_result、事件和工作流输入输出 Schema
+│     ├─ prompts/                  # 经版本化的大模型提示词
+│     ├─ fixtures/                 # n8n dry-run 和契约测试样本
+│     ├─ deployment/               # Docker Compose、部署和备份说明
+│     └─ README.md
 ├─ adapters/                       # 数据源适配器；一个来源一个独立模块
 │  ├─ manlifang/
 │  ├─ 1688/
@@ -27,14 +28,11 @@ data-workflow/
 │  ├─ jd/
 │  ├─ pinduoduo/
 │  ├─ douyin/
-│  ├─ qichacha/
-│  ├─ supplier_files/
-│  └─ policy_documents/
-│     └─ <source>/
-│        ├─ README.md              # 来源用途、边界、命令、停用条件
-│        ├─ src/                   # 采集/接收和来源解析代码
-│        ├─ tests/                 # 解析、契约和 dry-run 测试
-│        └─ fixtures/              # 脱敏、最小化来源样本
+│  └─ xianyu/
+│     ├─ README.md                 # 来源用途、边界、命令、停用条件
+│     ├─ src/                      # 采集/接收和来源解析代码
+│     ├─ tests/                    # 解析、契约和 dry-run 测试
+│     └─ fixtures/                 # 脱敏、最小化来源样本
 ├─ shared/                         # 跨来源通用执行能力
 │  ├─ batch/                       # run_id、批次清单和状态机
 │  ├─ cleaning/                    # 字段标准化、单位和文本清洗
@@ -57,7 +55,6 @@ data-workflow/
 │  └─ quality/                     # 来源级质量阈值
 ├─ tests/                          # 跨模块契约、集成和端到端 dry-run 测试
 ├─ tools/                          # 开发、迁移、校验和运维辅助脚本
-├─ research/                       # 通用研究方法和来源可行性记录
 ├─ runtime/                        # 运行态目录，默认不进入 Git
 │  ├─ runs/<source>/<run_id>/      # 每次运行的 L0-L2 结果和 run_result
 │  ├─ browser-profiles/            # 人工登录态，敏感且不提交
@@ -66,17 +63,20 @@ data-workflow/
 │  └─ tmp/                         # 可清理临时文件
 ├─ deliveries/                    # L3 消费交付包，按来源和版本管理
 │  └─ <source>/<delivery_id>/
-└─ archive/                        # 只读历史资产和迁移前快照
+└─ 数据获取执行指南.md             # 通用采集与交付方法
 ```
+
+n8n 控制面的正式路径是 `data-workflow/orchestration/n8n/`，七个平台的正式适配器路径是 `data-workflow/adapters/<source>/`。历史脚本、一次性试采和验证材料统一进入根目录 `legacy-workflow/`，不作为正式入口。
+
+目录树仅展开了 `xianyu/` 的单来源模板；其余六个平台使用相同的 `README.md`、`src/`、`tests/` 和 `fixtures/` 边界。
 
 ## 目录边界
 
-- `orchestration/` 只负责 n8n 控制面，不放大批量原始数据、浏览器 profile、图片库或来源采集实现。
+- `orchestration/n8n/` 只负责 n8n 控制面，不放大批量原始数据、浏览器 profile、图片库或来源采集实现。
 - `adapters/` 只放来源特有逻辑；可复用能力必须下沉到 `shared/`。
 - `contracts/` 保存稳定接口和映射，避免 n8n 依赖脚本日志中的自然语言。
 - `runtime/` 保存运行现场，必须能够按 `run_id` 定位；默认不提交 Git。
 - `deliveries/` 只保存 L3 消费交付包，不能替代 `runtime/` 中的 L0-L2 来源资产。
-- `research/` 只放通用调研和可行性记录，不把历史研究清单当作当前执行顺序。
 
 ## 单来源适配器最低契约
 
@@ -101,17 +101,6 @@ data-workflow/
 - 根目录保存 `run_manifest.json` 与 `run_result.json`。
 
 主体资质以 1688 `businessinfor.html`/`wp_pc_shop_basic_info` 为正式来源；88查、企查查等外部企业来源只作补充核验。
-
-## 迁移原则
-
-当前 `manlifang/`、`1688/`、`taobao/` 中混有源码、浏览器状态、运行结果和交付物。迁移时遵循：
-
-1. 先建立目标目录、Schema 和忽略规则，再移动文件。
-2. 不删除现有批次、交付物和用户文件。
-3. 先复制/验证引用，再清理旧位置；迁移前后数量和哈希必须可核对。
-4. 浏览器 profile、凭据、缓存和临时文件进入 `runtime/` 并排除 Git。
-5. 大体积 L0/L1/L2 和图片资产优先放本地受控存储或对象存储，Git 只保留代码、配置、Schema、最小样本和清单。
-6. 迁移期间旧路径可保留兼容入口，但文档必须标记目标位置和退役条件。
 
 ## 系统对接
 

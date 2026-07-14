@@ -7,6 +7,7 @@ __pycache__/
 .codegraph/
 .idea/
 .worktrees/
+.superpowers/
 .pytest_cache/
 **/.pytest_cache/
 **/.mypy_cache/

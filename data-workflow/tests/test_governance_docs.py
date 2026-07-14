@@ -108,12 +108,32 @@ def test_baseline_defines_source_specific_update_triggers() -> None:
     assert "持续保持商品和厂家信息的新鲜度" in text
 
 
-def test_active_entry_docs_do_not_define_database_snapshot_directory() -> None:
-    for path in (ROOT / "README.md", ROOT / "AGENTS.md"):
-        text = read(path)
-        assert "`database/`" not in text
-        assert "database/public.sql" not in text
-        assert "数据库快照和 SQL" not in text
+def test_root_readme_does_not_define_database_as_current_directory() -> None:
+    text = read(ROOT / "README.md")
+    assert "`database/`" not in text
+    assert "database/public.sql" not in text
+    assert "数据库快照和 SQL" not in text
+
+
+def test_agents_preserves_database_snapshot_as_controlled_reference() -> None:
+    text = read(ROOT / "AGENTS.md")
+    for phrase in (
+        "## Database Snapshot Reference",
+        "Historical/current-environment reference only",
+        "PostgreSQL: `192.168.1.98:5432`",
+        "Database: `postgres`",
+        "Schema: `public`",
+        "Navicat connection name: `youyiquan`",
+        "Dump: `database/public.sql`",
+        "Observed formal tables include `manufacturer`, `product`, `accessory`, `category`, `document`, `file_resource`, `staging_manufacturer`",
+        "Earlier Manlifang work also observed `ingest.*` and `asset.*` receiving tables",
+        "not part of the Data Owner's current directory responsibility",
+        "Use them only to verify",
+        "must not be used as a basis for direct writes to formal business tables",
+        "Do not store passwords in Markdown",
+        "untracked `.env.local`",
+    ):
+        assert phrase in text
 
 
 def test_entry_docs_distinguish_current_guides_from_migration_targets() -> None:

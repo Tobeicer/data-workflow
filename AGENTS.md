@@ -96,10 +96,25 @@ These paths are the approved formal contract. Task 3-6 must create or migrate th
 
 The final batch contains 3128 unique public products and 5528 normalized images. Later processing must use the fresh structured JSONL, raw responses and hash-named originals as source assets.
 
+## Database Snapshot Reference
+
+Historical/current-environment reference only. These details are not part of the Data Owner's current directory responsibility.
+
+- PostgreSQL: `192.168.1.98:5432`
+- Database: `postgres`
+- Schema: `public`
+- Navicat connection name: `youyiquan`
+- Dump: `database/public.sql`
+
+Observed formal tables include `manufacturer`, `product`, `accessory`, `category`, `document`, `file_resource`, `staging_manufacturer` and supporting user/audit/settings tables. Earlier Manlifang work also observed `ingest.*` and `asset.*` receiving tables.
+
+Use them only to verify the historical/current environment and integration contract; they must not be used as a basis for direct writes to formal business tables.
+
+Do not store passwords in Markdown. Use an untracked `.env.local` file.
+
 ## Integration Rules
 
 - Do not write to `public.product`, `public.accessory`, `public.manufacturer` or other formal business tables without explicit scope expansion and an approved platform contract.
 - Preferred integration order: internal import API, agreed permission-isolated `ingest/staging`, then L3 file import.
 - The platform Git repository has not been received. When available, inspect it only to finalize the L3 adapter; never delete L0-L2 fields because the platform cannot currently consume them.
-- Store credentials only in an untracked `.env.local` file, never in Markdown.
 - If `.codegraph/` exists and the task is about locating or understanding code, use CodeGraph before text search.

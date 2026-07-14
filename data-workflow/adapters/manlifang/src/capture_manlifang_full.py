@@ -167,6 +167,11 @@ def find_image_urls(value: Any, path: str = "$") -> list[tuple[str, str, str]]:
     return found
 
 
+def default_capture_dir() -> Path:
+    workflow_root = Path(__file__).resolve().parents[3]
+    return workflow_root / "runtime" / "runs" / "manlifang" / "manual"
+
+
 class ManlifangFullCapture:
     def __init__(self) -> None:
         self.output_dir: Path | None = None
@@ -186,9 +191,7 @@ class ManlifangFullCapture:
     def running(self) -> None:
         configured = ctx.options.manlifang_capture_dir or os.environ.get("MANLIFANG_CAPTURE_DIR", "")
         if not configured:
-            configured = str(
-                Path.cwd() / "data-workflow" / "runtime" / "runs" / "manlifang" / "manual"
-            )
+            configured = str(default_capture_dir())
         self.output_dir = Path(configured).resolve()
         self.response_dir = self.output_dir / "raw" / "responses"
         self.image_dir = self.output_dir / "raw" / "images"

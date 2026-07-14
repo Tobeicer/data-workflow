@@ -24,6 +24,7 @@ MANLIFANG_SOURCE_FILES = (
 MANLIFANG_TEST_FILES = (
     "test_build_manlifang_capture_workbook.py",
     "test_build_manlifang_delivery_package.py",
+    "test_capture_manlifang_full.py",
     "test_clean_manlifang_full.py",
     "test_collect_manlifang_full_via_mitmweb.py",
     "test_download_manlifang_images.py",
@@ -229,7 +230,6 @@ def test_manlifang_unit_tests_import_from_formal_src() -> None:
 
 def test_manlifang_runtime_paths_resolve_from_formal_adapter() -> None:
     source_dir = MANLIFANG_ADAPTER / "src"
-    capture = (source_dir / "capture_manlifang_full.py").read_text(encoding="utf-8")
     collector = (source_dir / "collect_manlifang_full_via_mitmweb.py").read_text(
         encoding="utf-8"
     )
@@ -240,10 +240,6 @@ def test_manlifang_runtime_paths_resolve_from_formal_adapter() -> None:
         encoding="utf-8"
     )
 
-    assert (
-        'Path.cwd() / "data-workflow" / "runtime" / "runs" / "manlifang" / "manual"'
-        in capture
-    )
     assert 'workflow_root = Path(__file__).resolve().parents[3]' in collector
     assert (
         'workflow_root / "runtime" / "runs" / "manlifang" / f"manlifang_full_{stamp}"'

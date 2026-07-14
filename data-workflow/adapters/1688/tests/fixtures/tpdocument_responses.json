@@ -1,0 +1,6 @@
+{
+  "certificate": "mtopjsonp10({\"api\":\"mtop.com.alibaba.business.query.tpdocument.certificate\",\"data\":{\"code\":\"200\",\"data\":[{\"certificateName\":\"营业执照\",\"certificateUrl\":\"https://example.invalid/license.jpg\"}],\"total\":\"1\"},\"ret\":[\"SUCCESS::调用成功\"]})",
+  "regchanges": "mtopjsonp13({\"api\":\"mtop.com.alibaba.business.query.tpdocument.regchanges\",\"data\":{\"code\":\"200\",\"data\":{\"data\":[],\"socialCreditCode\":\"91440101MA5A3ERG2F\"}},\"ret\":[\"SUCCESS::调用成功\"]})",
+  "credit": "mtopjsonp15({\"api\":\"mtop.com.alibaba.business.query.tpdocument.credit\",\"data\":{\"code\":\"200\",\"data\":{\"qixinTags\":{\"tags\":\"多产业布局;拥有外观设计专利;拥有实用新型专利\"},\"aliAuth\":{\"creditLevel\":\"AA\",\"topN\":\"TOP20%商家\",\"description\":\"平台公开信用说明\"}}},\"ret\":[\"SUCCESS::调用成功\"]})",
+  "patent": "mtopjsonp8({\"api\":\"mtop.com.alibaba.business.query.tpdocument.patent\",\"data\":{\"code\":\"407\",\"errMsg\":\"业务处理出错\",\"pageNo\":\"1\",\"pageSize\":\"10\",\"total\":\"0\"},\"ret\":[\"UNKNOWN_FAIL_CODE::系统开小差了，请稍候重试\"]})"
+}

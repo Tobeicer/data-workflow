@@ -1,0 +1,52 @@
+{
+  "api": "mtop.alibaba.alisite.cbu.server.moduleasyncservice",
+  "data": {
+    "contactInfo": [
+      {"type": "mobileNo", "value": "13800000000"},
+      {"type": "phoneNumber", "value": "020-12345678"}
+    ],
+    "companyName": "广州领宸科技有限公司",
+    "fundDate": "2017年09月28日",
+    "member": {"name": "李刚", "male": "true"},
+    "memberId": "b2b-406915100661872",
+    "summary": "公司公开简介",
+    "address": {
+      "province": "广东",
+      "city": "广州",
+      "contry": "广州市番禺区",
+      "street": "测试路1号"
+    },
+    "propaganda": {
+      "fullView": "https://example.invalid/factory-vr",
+      "companyImg": [
+        {"summary": "true", "type": "厂房外景", "url": "//example.invalid/factory.jpg"},
+        {"summary": "true", "type": "常规设备", "url": "//example.invalid/equipment.jpg"},
+        {"summary": "false", "type": "产品/体系认证类证书", "url": "//example.invalid/cert.jpg"},
+        {"summary": "false", "type": "发明专利", "url": "//example.invalid/patent.jpg"},
+        {"summary": "true", "type": "营业执照", "url": "//example.invalid/license.jpg"}
+      ]
+    },
+    "businessInfo": {
+      "checkYear": "2025",
+      "regCapital": "500",
+      "companyBusinessLine": "游艺用品制造;经营投币夹公仔机;货物进出口;",
+      "companyName": "广州领宸科技有限公司",
+      "startYear": "1506528000000",
+      "legalStatus": "有限责任公司(自然人投资或控股)",
+      "regCode": "91440101MA5A3ERG2F",
+      "companyYearStarted": "2017-09-28",
+      "socialCreditCode": "91440101MA5A3ERG2F",
+      "authProviderName": "联信",
+      "regOrgan": "广州市番禺区市场监督管理局",
+      "authPassDate": "1755501815000",
+      "companyAddress": "广东省广州市番禺区测试路1号",
+      "companyPrincipal": "李刚"
+    },
+    "companyId": "37052851",
+    "productionService": "电玩游戏机、游乐场设备、游戏机及配件",
+    "businessLine": "运动户外",
+    "sellerType": "super_factory"
+  },
+  "ret": ["SUCCESS::调用成功"],
+  "v": "1.0"
+}

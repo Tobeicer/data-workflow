@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://youyiquan.local/schemas/1688_company_asset.schema.json",
+  "title": "1688 Company Asset",
+  "type": "object",
+  "required": [
+    "source_platform",
+    "collected_at",
+    "company",
+    "contacts",
+    "company_profile",
+    "company_media",
+    "factory_snapshots",
+    "certificate_details",
+    "patent_details",
+    "field_evidence",
+    "capture_status"
+  ],
+  "properties": {
+    "source_platform": {"const": "1688"},
+    "collected_at": {"type": "string", "minLength": 1},
+    "capture_status": {
+      "type": "string",
+      "enum": ["success", "partial_success", "login_required", "human_verification_required", "company_entry_missing", "parser_drift", "error"]
+    },
+    "company": {
+      "type": "object",
+      "required": ["company_name", "company_id", "member_id", "unified_social_credit_code"],
+      "properties": {
+        "company_name": {"type": "string"},
+        "company_id": {"type": "string"},
+        "member_id": {"type": "string"},
+        "unified_social_credit_code": {"type": "string"},
+        "registration_number": {"type": "string"},
+        "legal_representative": {"type": "string"},
+        "registered_capital_amount": {"type": ["integer", "null"]},
+        "registered_capital_text": {"type": "string"},
+        "established_date": {"type": "string"},
+        "registered_address": {"type": "string"},
+        "company_type": {"type": "string"},
+        "registration_authority": {"type": "string"},
+        "business_term": {"type": "string"},
+        "business_scope": {"type": "string"},
+        "annual_report_year": {"type": "string"},
+        "qualification_provider": {"type": "string"},
+        "qualification_passed_at": {"type": "string"},
+        "province": {"type": "string"},
+        "city": {"type": "string"},
+        "coordinates": {"type": "string"},
+        "seller_type": {"type": "string"},
+        "main_category": {"type": "string"},
+        "platform_tenure": {"type": "string"},
+        "shop_url": {"type": "string"},
+        "wangwang_url": {"type": "string"},
+        "credit_level": {"type": "string"},
+        "credit_rank": {"type": "string"},
+        "credit_description": {"type": "string"}
+      },
+      "additionalProperties": true
+    },
+    "contacts": {
+      "type": "object",
+      "properties": {
+        "contact_person": {"type": "string"},
+        "telephone": {"type": "string"},
+        "mobile": {"type": "string"},
+        "fax": {"type": "string"},
+        "address": {"type": "string"},
+        "email": {"type": "string"},
+        "wangwang": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "company_profile": {
+      "type": "object",
+      "required": ["company_summary", "production_service", "business_line", "factory_vr_url", "seller_type"],
+      "properties": {
+        "company_summary": {"type": "string"},
+        "production_service": {"type": "string"},
+        "business_line": {"type": "string"},
+        "factory_vr_url": {"type": "string"},
+        "seller_type": {"type": "string"}
+      },
+      "additionalProperties": false
+    },
+    "company_media": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["media_type", "media_url", "is_summary", "source_url", "collected_at"],
+        "properties": {
+          "media_type": {"type": "string", "minLength": 1},
+          "media_url": {"type": "string", "minLength": 1},
+          "is_summary": {"type": "boolean"},
+          "source_url": {"type": "string", "minLength": 1},
+          "collected_at": {"type": "string", "minLength": 1}
+        },
+        "additionalProperties": false
+      }
+    },
+    "factory_snapshots": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["snapshot_type", "source_url", "collected_at"],
+        "properties": {
+          "snapshot_type": {"type": "string"},
+          "source_url": {"type": "string", "minLength": 1},
+          "collected_at": {"type": "string"},
+          "factory_area_sqm": {"type": ["integer", "null"]},
+          "employee_count": {"type": ["integer", "null"]},
+          "production_equipment_count": {"type": ["integer", "null"]},
+          "patent_summary_count": {"type": ["integer", "null"]},
+          "certificate_summary_count": {"type": ["integer", "null"]}
+        },
+        "additionalProperties": true
+      }
+    },
+    "certificate_details": {
+      "type": "object",
+      "required": ["capture_status", "reported_total", "items"],
+      "additionalProperties": true
+    },
+    "patent_details": {
+      "type": "object",
+      "required": ["capture_status", "reported_total", "items"],
+      "additionalProperties": true
+    },
+    "field_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["field", "value", "source_url", "label", "collected_at"],
+        "additionalProperties": false,
+        "properties": {
+          "field": {"type": "string", "minLength": 1},
+          "value": {"type": "string"},
+          "source_url": {"type": "string", "minLength": 1},
+          "label": {"type": "string"},
+          "collected_at": {"type": "string"}
+        }
+      }
+    }
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,25 @@
+{
+  "captured_at": "2026-07-13",
+  "sources": {
+    "gti_productlist": "https://gtichinaamuse.com/qy/productlist?id=50027",
+    "gti_aboutus": "https://gtichinaamuse.com/qy/aboutus?id=50027&ref=aboutus",
+    "official_1688": "https://mlfpjc.1688.com/"
+  },
+  "evidence": [
+    {
+      "file": "gti_productlist.html",
+      "url": "https://gtichinaamuse.com/qy/productlist?id=50027",
+      "sha256": "7e8878ab9c3c3294fee266081ae8f0b80506e4eb3f163fb69b56ee0c76b1b56b"
+    },
+    {
+      "file": "gti_aboutus.html",
+      "url": "https://gtichinaamuse.com/qy/aboutus?id=50027&ref=aboutus",
+      "sha256": "80c195bdda660f41667978058e8820637adabd38fb28a67e381b20aa13a0f2a0"
+    },
+    {
+      "file": "official_1688_home.html",
+      "url": "https://mlfpjc.1688.com/",
+      "sha256": "46e3ee61e2c699d8cf3230d3df839fb2c72702542769d7188fadbf7419f521d2"
+    }
+  ]
+}

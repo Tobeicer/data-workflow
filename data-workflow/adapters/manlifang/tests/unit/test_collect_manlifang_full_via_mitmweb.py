@@ -7,9 +7,9 @@ from pathlib import Path
 import pytest
 
 
-MANLIFANG_DIR = Path(__file__).resolve().parents[1]
-if str(MANLIFANG_DIR) not in sys.path:
-    sys.path.insert(0, str(MANLIFANG_DIR))
+SOURCE_DIR = Path(__file__).resolve().parents[2] / "src"
+if str(SOURCE_DIR) not in sys.path:
+    sys.path.insert(0, str(SOURCE_DIR))
 
 from collect_manlifang_full_via_mitmweb import (  # noqa: E402
     BatchStore,

@@ -6,8 +6,8 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$ManlifangRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$StateFile = Join-Path $ManlifangRoot "current_capture_batch.json"
+$WorkflowRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..\..")).Path
+$StateFile = Join-Path $WorkflowRoot "runtime\tmp\manlifang\current_capture_batch.json"
 $State = $null
 if (Test-Path -LiteralPath $StateFile) {
     $State = Get-Content -LiteralPath $StateFile -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -47,7 +47,6 @@ if ($State) {
 
 (Get-Date).ToString("o") | Set-Content -LiteralPath (Join-Path $BatchDir "capture_completed_at.txt") -Encoding UTF8
 
-$ProjectRoot = (Resolve-Path (Join-Path $ManlifangRoot "..\..")).Path
 $Python = (Get-Command python -ErrorAction Stop).Source
 $Downloader = Join-Path $PSScriptRoot "download_manlifang_images.py"
 $Builder = Join-Path $PSScriptRoot "build_manlifang_capture_workbook.py"

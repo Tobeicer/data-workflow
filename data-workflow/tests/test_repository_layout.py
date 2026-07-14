@@ -9,6 +9,26 @@ from test_governance_docs import PROTECTED_PATHS, governance_base_ref, run_git
 
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW = ROOT / "data-workflow"
+MANLIFANG_ADAPTER = WORKFLOW / "adapters" / "manlifang"
+MANLIFANG_SOURCE_FILES = (
+    "build_manlifang_capture_workbook.py",
+    "build_manlifang_delivery_package.py",
+    "capture_manlifang_full.py",
+    "clean_manlifang_full.py",
+    "collect_manlifang_full_via_mitmweb.py",
+    "download_manlifang_images.py",
+    "finalize_manlifang_full_capture.ps1",
+    "sanitize_manlifang_capture.py",
+    "start_manlifang_full_capture.ps1",
+)
+MANLIFANG_TEST_FILES = (
+    "test_build_manlifang_capture_workbook.py",
+    "test_build_manlifang_delivery_package.py",
+    "test_clean_manlifang_full.py",
+    "test_collect_manlifang_full_via_mitmweb.py",
+    "test_download_manlifang_images.py",
+    "test_sanitize_manlifang_capture.py",
+)
 SOURCE_EXPECTATIONS = (
     ("manlifang", "stabilizing"),
     ("1688", "stabilizing"),
@@ -161,7 +181,6 @@ def test_n8n_source_readmes_do_not_claim_active_workflows() -> None:
 
 def test_adapter_readmes_describe_current_migration_state() -> None:
     current_guides = {
-        "manlifang": "data-workflow/manlifang/漫立方抓包流程.md",
         "1688": "data-workflow/1688/1688_公开商品采集流程.md",
         "taobao": "data-workflow/taobao/淘宝公开商品采集验证.md",
     }
@@ -180,6 +199,76 @@ def test_adapter_readmes_describe_current_migration_state() -> None:
         assert "目录契约已建立，采集实现尚未开始" in text
         for heading in ("## 用途", "## 公开/授权边界", "## 停止条件", "## 晋级标准"):
             assert heading in text
+
+
+def test_manlifang_tracked_files_are_in_formal_adapter() -> None:
+    source_dir = MANLIFANG_ADAPTER / "src"
+    unit_dir = MANLIFANG_ADAPTER / "tests" / "unit"
+
+    assert {path.name for path in source_dir.iterdir() if path.is_file()} == set(
+        MANLIFANG_SOURCE_FILES
+    )
+    assert {path.name for path in unit_dir.iterdir() if path.is_file()} == set(
+        MANLIFANG_TEST_FILES
+    )
+    assert not (WORKFLOW / "manlifang" / "漫立方抓包流程.md").exists()
+    legacy_tools = WORKFLOW / "manlifang" / "tools"
+    assert not list(legacy_tools.glob("*.py"))
+    assert not list(legacy_tools.glob("*.ps1"))
+
+
+def test_manlifang_unit_tests_import_from_formal_src() -> None:
+    unit_dir = MANLIFANG_ADAPTER / "tests" / "unit"
+    source_locator = 'SOURCE_DIR = Path(__file__).resolve().parents[2] / "src"'
+    for file_name in MANLIFANG_TEST_FILES:
+        text = (unit_dir / file_name).read_text(encoding="utf-8")
+        assert source_locator in text
+        assert "sys.path.insert(0, str(SOURCE_DIR))" in text
+        assert "MANLIFANG_DIR" not in text
+
+
+def test_manlifang_runtime_paths_resolve_from_formal_adapter() -> None:
+    source_dir = MANLIFANG_ADAPTER / "src"
+    capture = (source_dir / "capture_manlifang_full.py").read_text(encoding="utf-8")
+    collector = (source_dir / "collect_manlifang_full_via_mitmweb.py").read_text(
+        encoding="utf-8"
+    )
+    start = (source_dir / "start_manlifang_full_capture.ps1").read_text(
+        encoding="utf-8"
+    )
+    finalize = (source_dir / "finalize_manlifang_full_capture.ps1").read_text(
+        encoding="utf-8"
+    )
+
+    assert (
+        'Path.cwd() / "data-workflow" / "runtime" / "runs" / "manlifang" / "manual"'
+        in capture
+    )
+    assert 'workflow_root = Path(__file__).resolve().parents[3]' in collector
+    assert (
+        'workflow_root / "runtime" / "runs" / "manlifang" / f"manlifang_full_{stamp}"'
+        in collector
+    )
+    assert '$WorkflowRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\\..\\..")).Path' in start
+    assert '$ProjectRoot = (Resolve-Path (Join-Path $WorkflowRoot "..")).Path' in start
+    assert '$BatchDir = Join-Path $WorkflowRoot ("runtime\\runs\\manlifang\\" + $BatchId)' in start
+    state_line = (
+        '$StateFile = Join-Path $WorkflowRoot '
+        '"runtime\\tmp\\manlifang\\current_capture_batch.json"'
+    )
+    assert state_line in start
+    assert state_line in finalize
+
+
+def test_manlifang_readme_documents_formal_commands_and_deferred_assets() -> None:
+    text = (MANLIFANG_ADAPTER / "README.md").read_text(encoding="utf-8")
+    for file_name in MANLIFANG_SOURCE_FILES:
+        assert f"data-workflow/adapters/manlifang/src/{file_name}" in text
+    assert "data-workflow/runtime/runs/manlifang/<run_id>/" in text
+    assert "data-workflow/manlifang/captures/manlifang_full_20260710_110814/" in text
+    assert "data-workflow/manlifang/漫立方_全量数据/" in text
+    assert "data-workflow/deliveries/manlifang/manlifang_full_20260712/" in text
+    assert "Task 4B" in text
 
 
 def test_source_registry_uses_exact_order_statuses_and_disabled_state() -> None:

@@ -8,7 +8,7 @@
 ## Directory Boundaries
 
 - `docs/`: execution baseline, architecture, governance and indexes.
-- `data-workflow/`: current source directories, acquisition guides, scripts, runtime assets and deliveries.
+- `data-workflow/`: formal source adapters, acquisition guides, scripts, runtime assets and deliveries.
 - `docs/project-split/` and `docs/requirements/`: protected historical references; never modify them or let them override current decisions.
 
 ## Authority And Reading Order
@@ -69,15 +69,15 @@ n8n is the control plane for triggers, orchestration, retries, state, human gate
 
 ## Current Executable Paths
 
-- Manlifang source guide: `data-workflow/manlifang/漫立方抓包流程.md`
+- Manlifang source guide: `data-workflow/adapters/manlifang/README.md`
 - 1688 source guide: `data-workflow/1688/1688_公开商品采集流程.md`
 - Taobao source guide: `data-workflow/taobao/淘宝公开商品采集验证.md`
 
-Use the commands documented in these existing guides until the corresponding adapter migration is complete.
+Use the formal Manlifang adapter commands. Continue using the existing 1688 and Taobao guides until their adapter migrations are complete.
 
 ## Approved Migration Target Paths
 
-These paths are the approved formal contract. Task 3-6 must create or migrate them before they become executable entrypoints:
+These paths are the approved formal contract. Manlifang tracked code already uses its adapter path; remaining sources must be migrated before their adapter paths become executable entrypoints:
 
 - n8n control plane: `data-workflow/orchestration/n8n/`
 - source adapters: `data-workflow/adapters/<source>/`
@@ -92,9 +92,11 @@ These paths are the approved formal contract. Task 3-6 must create or migrate th
 - Cleaned XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
 - Delivery: `data-workflow/manlifang/漫立方_全量数据/`
 - Handoff XLSX: `data-workflow/manlifang/漫立方_全量数据/漫立方_全量数据.xlsx`
-- Source guide: `data-workflow/manlifang/漫立方抓包流程.md`
+- Source guide: `data-workflow/adapters/manlifang/README.md`
 
 The final batch contains 3128 unique public products and 5528 normalized images. Later processing must use the fresh structured JSONL, raw responses and hash-named originals as source assets.
+
+Task 4B is still required in the original checkout: move the current batch and delivery to the approved `runtime/runs/manlifang/` and `deliveries/manlifang/` targets only after before/after manifest verification. Until then, the asset paths above remain authoritative and must not be copied, simulated or regenerated.
 
 ## Database Snapshot Reference
 

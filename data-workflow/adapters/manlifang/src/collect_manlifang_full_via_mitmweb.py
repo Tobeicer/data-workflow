@@ -1009,13 +1009,14 @@ def main() -> int:
     parser.add_argument("--limit-products", type=int, default=0)
     args = parser.parse_args()
 
-    script_dir = Path(__file__).resolve().parent
-    manlifang_dir = script_dir.parent
+    workflow_root = Path(__file__).resolve().parents[3]
     if args.batch_dir:
         batch_dir = args.batch_dir.resolve()
     else:
         stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        batch_dir = manlifang_dir / "captures" / f"manlifang_full_{stamp}"
+        batch_dir = (
+            workflow_root / "runtime" / "runs" / "manlifang" / f"manlifang_full_{stamp}"
+        )
     batch_dir.mkdir(parents=True, exist_ok=True)
     store = BatchStore(batch_dir)
 

@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[2]
 BASELINE = ROOT / "docs" / "数据工作流与游艺圈系统对接执行基线.md"
 PROTECTED_PATHS = ("docs/project-split", "docs/requirements")
 CURRENT_SOURCE_GUIDES = (
-    "data-workflow/manlifang/漫立方抓包流程.md",
+    "data-workflow/adapters/manlifang/README.md",
     "data-workflow/1688/1688_公开商品采集流程.md",
     "data-workflow/taobao/淘宝公开商品采集验证.md",
 )
@@ -167,18 +167,35 @@ def test_acquisition_guide_distinguishes_current_commands_from_target() -> None:
     text = read(ROOT / "data-workflow" / "数据获取执行指南.md")
     for guide in CURRENT_SOURCE_GUIDES:
         assert guide in text
-    assert "迁移完成后" in text
+    assert "漫立方 tracked 代码与指南已经切换到正式适配器" in text
+    assert "Task 4B 物理迁移" in text
     assert "data-workflow/adapters/<source>/README.md" in text
 
 
-def test_agents_preserves_current_manlifang_asset_paths_until_migration() -> None:
+def test_agents_uses_formal_manlifang_guide_but_defers_asset_paths_to_task_4b() -> None:
     text = read(ROOT / "AGENTS.md")
-    for current_path in (
+    assert "data-workflow/adapters/manlifang/README.md" in text
+    assert "data-workflow/manlifang/漫立方抓包流程.md" not in text
+    for deferred_path in (
         "data-workflow/manlifang/captures/manlifang_full_20260710_110814/",
         "data-workflow/manlifang/漫立方_全量数据/",
-        "data-workflow/manlifang/漫立方抓包流程.md",
     ):
-        assert current_path in text
+        assert deferred_path in text
+    assert "Task 4B" in text
+
+
+def test_active_entry_docs_use_formal_manlifang_guide() -> None:
+    formal_guide = "data-workflow/adapters/manlifang/README.md"
+    retired_guide = "data-workflow/manlifang/漫立方抓包流程.md"
+    for path in (
+        ROOT / "README.md",
+        ROOT / "AGENTS.md",
+        ROOT / "data-workflow" / "README.md",
+        ROOT / "data-workflow" / "数据获取执行指南.md",
+    ):
+        text = read(path)
+        assert formal_guide in text
+        assert retired_guide not in text
 
 
 def test_active_docs_name_formal_n8n_target_path() -> None:

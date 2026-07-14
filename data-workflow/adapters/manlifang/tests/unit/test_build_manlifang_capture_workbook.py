@@ -7,9 +7,9 @@ from pathlib import Path
 from openpyxl import load_workbook
 
 
-MANLIFANG_DIR = Path(__file__).resolve().parents[1]
-if str(MANLIFANG_DIR) not in sys.path:
-    sys.path.insert(0, str(MANLIFANG_DIR))
+SOURCE_DIR = Path(__file__).resolve().parents[2] / "src"
+if str(SOURCE_DIR) not in sys.path:
+    sys.path.insert(0, str(SOURCE_DIR))
 
 from build_manlifang_capture_workbook import build_workbook  # noqa: E402
 

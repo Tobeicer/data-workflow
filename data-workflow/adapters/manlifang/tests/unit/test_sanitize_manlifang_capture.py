@@ -4,9 +4,9 @@ import sys
 from pathlib import Path
 
 
-MANLIFANG_DIR = Path(__file__).resolve().parents[1]
-if str(MANLIFANG_DIR) not in sys.path:
-    sys.path.insert(0, str(MANLIFANG_DIR))
+SOURCE_DIR = Path(__file__).resolve().parents[2] / "src"
+if str(SOURCE_DIR) not in sys.path:
+    sys.path.insert(0, str(SOURCE_DIR))
 
 from sanitize_manlifang_capture import keep_discovered_image, product_flow  # noqa: E402
 

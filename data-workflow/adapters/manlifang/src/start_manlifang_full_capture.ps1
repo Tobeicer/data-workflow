@@ -6,12 +6,12 @@ param(
 
 $ErrorActionPreference = "Stop"
 
-$ManlifangRoot = (Resolve-Path (Join-Path $PSScriptRoot "..")).Path
-$ProjectRoot = (Resolve-Path (Join-Path $ManlifangRoot "..\..")).Path
+$WorkflowRoot = (Resolve-Path (Join-Path $PSScriptRoot "..\..\..")).Path
+$ProjectRoot = (Resolve-Path (Join-Path $WorkflowRoot "..")).Path
 $Mitmweb = Join-Path $ProjectRoot ".venv-mitmproxy\Scripts\mitmweb.exe"
 $Addon = Join-Path $PSScriptRoot "capture_manlifang_full.py"
-$BatchDir = Join-Path $ManlifangRoot ("captures\" + $BatchId)
-$StateFile = Join-Path $ManlifangRoot "current_capture_batch.json"
+$BatchDir = Join-Path $WorkflowRoot ("runtime\runs\manlifang\" + $BatchId)
+$StateFile = Join-Path $WorkflowRoot "runtime\tmp\manlifang\current_capture_batch.json"
 
 if (-not (Test-Path -LiteralPath $Mitmweb)) {
     throw "mitmweb not found: $Mitmweb"
@@ -27,6 +27,7 @@ if ($BusyPorts) {
 }
 
 New-Item -ItemType Directory -Path $BatchDir -Force | Out-Null
+New-Item -ItemType Directory -Path (Split-Path -Parent $StateFile) -Force | Out-Null
 $StdoutLog = Join-Path $BatchDir "mitmweb.stdout.log"
 $StderrLog = Join-Path $BatchDir "mitmweb.stderr.log"
 

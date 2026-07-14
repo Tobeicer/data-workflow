@@ -186,7 +186,9 @@ class ManlifangFullCapture:
     def running(self) -> None:
         configured = ctx.options.manlifang_capture_dir or os.environ.get("MANLIFANG_CAPTURE_DIR", "")
         if not configured:
-            configured = str(Path.cwd() / "data-workflow" / "manlifang" / "captures" / "manual")
+            configured = str(
+                Path.cwd() / "data-workflow" / "runtime" / "runs" / "manlifang" / "manual"
+            )
         self.output_dir = Path(configured).resolve()
         self.response_dir = self.output_dir / "raw" / "responses"
         self.image_dir = self.output_dir / "raw" / "images"

@@ -12,7 +12,9 @@ import pandas as pd
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-BASE_DIR = Path(__file__).resolve().parent
+SRC_DIR = Path(__file__).resolve().parent
+WORKFLOW_DIR = Path(__file__).resolve().parents[3]
+RUNS_DIR = WORKFLOW_DIR / "runtime" / "runs" / "1688"
 
 POSITIVE = re.compile(
     r"(娃娃机|抓娃娃|夹娃娃|投币|退币|出票|彩票机|兑币|游艺|街机|电玩|礼品机|扭蛋机|篮球机|捕鱼|框体|机箱|天车|爪子|爪片|按钮|按键|微动|摇杆|主板|电源|灯条|跑马灯|锁具|门锁|币斗|币道|马达|彩票|游戏币|游戏机配件)"
@@ -50,7 +52,14 @@ def main() -> None:
     filtered["relevance_filter_status"] = "kept"
     filtered["relevance_filter_note"] = "游艺圈相关关键词命中，且未命中消费电子强排除规则"
 
-    output = Path(args.output) if args.output else BASE_DIR / f"1688_relevant_offer_index_{datetime.now().strftime('%Y%m%d_%H%M%S')}.csv"
+    stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    output = (
+        Path(args.output)
+        if args.output
+        else RUNS_DIR
+        / f"1688_filter_{stamp}"
+        / f"1688_relevant_offer_index_{stamp}.csv"
+    )
     output.parent.mkdir(parents=True, exist_ok=True)
     filtered.to_csv(output, index=False, encoding="utf-8-sig")
 

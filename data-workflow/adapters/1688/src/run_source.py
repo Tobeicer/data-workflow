@@ -10,7 +10,9 @@ from pathlib import Path
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-BASE_DIR = Path(__file__).resolve().parent
+SRC_DIR = Path(__file__).resolve().parent
+WORKFLOW_DIR = Path(__file__).resolve().parents[3]
+RUNS_DIR = WORKFLOW_DIR / "runtime" / "runs" / "1688"
 
 
 def run_command(command: list[str], *, dry_run: bool) -> None:
@@ -28,7 +30,7 @@ def add_repeated_option(command: list[str], option: str, values: list[str] | Non
 def prepare_login(args: argparse.Namespace) -> None:
     command = [
         sys.executable,
-        str(BASE_DIR / "collect_1688_public_sample.py"),
+        str(SRC_DIR / "collect_1688_public_sample.py"),
         "--prepare-login",
         "--login-wait-seconds",
         str(args.login_wait_seconds),
@@ -37,8 +39,8 @@ def prepare_login(args: argparse.Namespace) -> None:
 
 
 def sample(args: argparse.Namespace) -> None:
-    stamp = args.stamp or datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_dir = Path(args.output_dir) if args.output_dir else BASE_DIR / "runs" / stamp
+    stamp = args.stamp or ("dry_run" if args.dry_run else datetime.now().strftime("%Y%m%d_%H%M%S"))
+    output_dir = Path(args.output_dir) if args.output_dir else RUNS_DIR / stamp
 
     list_csv = output_dir / f"1688_offer_index_{stamp}.csv"
     relevant_csv = output_dir / f"1688_relevant_offer_index_{stamp}.csv"
@@ -50,7 +52,7 @@ def sample(args: argparse.Namespace) -> None:
 
     list_command = [
         sys.executable,
-        str(BASE_DIR / "collect_1688_public_sample.py"),
+        str(SRC_DIR / "collect_1688_public_sample.py"),
         "--output",
         str(list_csv),
         "--limit-per-keyword",
@@ -67,7 +69,7 @@ def sample(args: argparse.Namespace) -> None:
 
     filter_command = [
         sys.executable,
-        str(BASE_DIR / "filter_1688_relevant.py"),
+        str(SRC_DIR / "filter_1688_relevant.py"),
         "--input",
         str(list_csv),
         "--output",
@@ -78,7 +80,7 @@ def sample(args: argparse.Namespace) -> None:
     if not args.skip_detail:
         detail_command = [
             sys.executable,
-            str(BASE_DIR / "collect_1688_detail_sample.py"),
+            str(SRC_DIR / "collect_1688_detail_sample.py"),
             "--input-csv",
             str(relevant_csv),
             "--start",
@@ -109,9 +111,9 @@ def company(args: argparse.Namespace) -> None:
     output_dir = (
         Path(args.output_dir)
         if args.output_dir
-        else BASE_DIR.parent / "runtime" / "runs" / "1688" / f"1688_company_{stamp}"
+        else RUNS_DIR / f"1688_company_{stamp}"
     )
-    collector = BASE_DIR.parent / "adapters" / "1688" / "src" / "collect_company_pilot.py"
+    collector = SRC_DIR / "collect_company_pilot.py"
     command = [
         sys.executable,
         str(collector),
@@ -137,9 +139,9 @@ def multi(args: argparse.Namespace) -> None:
     output_dir = (
         Path(args.output_dir)
         if args.output_dir
-        else BASE_DIR.parent / "runtime" / "runs" / "1688" / f"1688_multi_{stamp}"
+        else RUNS_DIR / f"1688_multi_{stamp}"
     )
-    collector = BASE_DIR.parent / "adapters" / "1688" / "src" / "multi_product_workflow.py"
+    collector = SRC_DIR / "multi_product_workflow.py"
     command = [
         sys.executable,
         str(collector),
@@ -180,7 +182,7 @@ def main() -> None:
     sample_parser.add_argument("--skip-detail", action="store_true")
     sample_parser.add_argument("--debug", action="store_true")
     sample_parser.add_argument("--stamp", help="输出批次号，默认使用当前时间")
-    sample_parser.add_argument("--output-dir", help="输出目录，默认写入 data-workflow/1688/runs/<stamp>")
+    sample_parser.add_argument("--output-dir", help="输出目录，默认写入 data-workflow/runtime/runs/1688/<run_id>")
     sample_parser.add_argument("--dry-run", action="store_true")
     sample_parser.set_defaults(func=sample)
 

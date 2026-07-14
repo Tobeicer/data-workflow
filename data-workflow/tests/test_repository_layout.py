@@ -10,6 +10,18 @@ from test_governance_docs import PROTECTED_PATHS, governance_base_ref, run_git
 ROOT = Path(__file__).resolve().parents[2]
 WORKFLOW = ROOT / "data-workflow"
 MANLIFANG_ADAPTER = WORKFLOW / "adapters" / "manlifang"
+ADAPTER_1688 = WORKFLOW / "adapters" / "1688"
+LEGACY_1688 = WORKFLOW / "1688"
+MIGRATED_1688_SOURCE_FILES = {
+    "run_source.py",
+    "collect_1688_public_sample.py",
+    "filter_1688_relevant.py",
+    "collect_1688_detail_sample.py",
+}
+HISTORICAL_1688_CSV_FILES = {
+    "1688_relevant_product_20260708.csv",
+    "1688_relevant_product_sku_20260708.csv",
+}
 MANLIFANG_SOURCE_FILES = (
     "build_manlifang_capture_workbook.py",
     "build_manlifang_delivery_package.py",
@@ -182,7 +194,6 @@ def test_n8n_source_readmes_do_not_claim_active_workflows() -> None:
 
 def test_adapter_readmes_describe_current_migration_state() -> None:
     current_guides = {
-        "1688": "data-workflow/1688/1688_公开商品采集流程.md",
         "taobao": "data-workflow/taobao/淘宝公开商品采集验证.md",
     }
     for source, guide in current_guides.items():
@@ -200,6 +211,35 @@ def test_adapter_readmes_describe_current_migration_state() -> None:
         assert "目录契约已建立，采集实现尚未开始" in text
         for heading in ("## 用途", "## 公开/授权边界", "## 停止条件", "## 晋级标准"):
             assert heading in text
+
+
+def test_1688_tracked_entrypoint_is_in_formal_adapter_and_history_stays_put() -> None:
+    source_names = {path.name for path in (ADAPTER_1688 / "src").iterdir() if path.is_file()}
+    assert MIGRATED_1688_SOURCE_FILES <= source_names
+
+    for retired_name in (
+        "run_1688_workflow.py",
+        "collect_1688_public_sample.py",
+        "filter_1688_relevant.py",
+        "collect_1688_detail_sample.py",
+        "1688_公开商品采集流程.md",
+    ):
+        assert not (LEGACY_1688 / retired_name).exists()
+
+    assert {
+        path.name for path in LEGACY_1688.glob("*.csv") if path.is_file()
+    } == HISTORICAL_1688_CSV_FILES
+
+
+def test_1688_readme_documents_formal_entrypoint_and_deferred_profile() -> None:
+    text = (ADAPTER_1688 / "README.md").read_text(encoding="utf-8")
+    assert "data-workflow/adapters/1688/src/run_source.py" in text
+    assert "data-workflow/runtime/runs/1688/<run_id>/" in text
+    assert "data-workflow/runtime/browser-profiles/1688/" in text
+    assert "data-workflow/runtime/tmp/1688/" in text
+    assert "Task 5B" in text
+    assert "enabled=false" in text
+    assert "不含可启用的 n8n JSON" in text
 
 
 def test_manlifang_tracked_files_are_in_formal_adapter() -> None:

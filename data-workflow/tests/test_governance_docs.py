@@ -9,7 +9,7 @@ BASELINE = ROOT / "docs" / "数据工作流与游艺圈系统对接执行基线.
 PROTECTED_PATHS = ("docs/project-split", "docs/requirements")
 CURRENT_SOURCE_GUIDES = (
     "data-workflow/adapters/manlifang/README.md",
-    "data-workflow/1688/1688_公开商品采集流程.md",
+    "data-workflow/adapters/1688/README.md",
     "data-workflow/taobao/淘宝公开商品采集验证.md",
 )
 FORMAL_TARGET_PATHS = (
@@ -167,8 +167,9 @@ def test_acquisition_guide_distinguishes_current_commands_from_target() -> None:
     text = read(ROOT / "data-workflow" / "数据获取执行指南.md")
     for guide in CURRENT_SOURCE_GUIDES:
         assert guide in text
-    assert "漫立方 tracked 代码与指南已经切换到正式适配器" in text
+    assert "漫立方和 1688 tracked 代码与指南已经切换到正式适配器" in text
     assert "Task 4B 物理迁移" in text
+    assert "Task 5B" in text
     assert "data-workflow/adapters/<source>/README.md" in text
 
 
@@ -187,6 +188,20 @@ def test_agents_uses_formal_manlifang_guide_but_defers_asset_paths_to_task_4b() 
 def test_active_entry_docs_use_formal_manlifang_guide() -> None:
     formal_guide = "data-workflow/adapters/manlifang/README.md"
     retired_guide = "data-workflow/manlifang/漫立方抓包流程.md"
+    for path in (
+        ROOT / "README.md",
+        ROOT / "AGENTS.md",
+        ROOT / "data-workflow" / "README.md",
+        ROOT / "data-workflow" / "数据获取执行指南.md",
+    ):
+        text = read(path)
+        assert formal_guide in text
+        assert retired_guide not in text
+
+
+def test_active_entry_docs_use_formal_1688_guide() -> None:
+    formal_guide = "data-workflow/adapters/1688/README.md"
+    retired_guide = "data-workflow/1688/1688_公开商品采集流程.md"
     for path in (
         ROOT / "README.md",
         ROOT / "AGENTS.md",

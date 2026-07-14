@@ -70,14 +70,14 @@ n8n is the control plane for triggers, orchestration, retries, state, human gate
 ## Current Executable Paths
 
 - Manlifang source guide: `data-workflow/adapters/manlifang/README.md`
-- 1688 source guide: `data-workflow/1688/1688_公开商品采集流程.md`
+- 1688 source guide: `data-workflow/adapters/1688/README.md`
 - Taobao source guide: `data-workflow/taobao/淘宝公开商品采集验证.md`
 
-Use the formal Manlifang adapter commands. Continue using the existing 1688 and Taobao guides until their adapter migrations are complete.
+Use the formal Manlifang and 1688 adapter commands. Continue using the existing Taobao guide until its adapter migration is complete.
 
 ## Approved Migration Target Paths
 
-These paths are the approved formal contract. Manlifang tracked code already uses its adapter path; remaining sources must be migrated before their adapter paths become executable entrypoints:
+These paths are the approved formal contract. Manlifang and 1688 tracked code already use their adapter paths; remaining sources must be migrated before their adapter paths become executable entrypoints:
 
 - n8n control plane: `data-workflow/orchestration/n8n/`
 - source adapters: `data-workflow/adapters/<source>/`

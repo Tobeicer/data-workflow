@@ -1,6 +1,6 @@
 # 游艺圈数据工作流子项目
 
-状态：正式目录契约；漫立方 tracked 代码与指南已迁移，其他来源入口见下文
+状态：正式目录契约；漫立方和 1688 tracked 代码与指南已迁移，其他来源入口见下文
 上位规范：`../docs/数据工作流与游艺圈系统对接执行基线.md`
 
 `data-workflow/` 是游艺圈数据资产生产线的独立子项目根目录。它负责数据来源接入、采集与接收、清洗治理、增量比较、AI 增强、质量门禁、运行编排和消费交付，不负责游艺圈平台正式业务表或前后端系统建设。
@@ -10,10 +10,10 @@
 当前使用以下已验证来源文档中的命令：
 
 - `data-workflow/adapters/manlifang/README.md`
-- `data-workflow/1688/1688_公开商品采集流程.md`
+- `data-workflow/adapters/1688/README.md`
 - `data-workflow/taobao/淘宝公开商品采集验证.md`
 
-漫立方新运行产物进入 `data-workflow/runtime/runs/manlifang/<run_id>/`。现有正式批次与交付的大型本地资产仍保持旧路径，待 Task 4B 在原 checkout 中完成清单核对和同盘移动。
+漫立方新运行产物进入 `data-workflow/runtime/runs/manlifang/<run_id>/`。1688 正式入口的新运行产物进入 `data-workflow/runtime/runs/1688/<run_id>/`，真实浏览器登录态仍待 Task 5B 在原 checkout 中同盘移动。漫立方现有正式批次与交付的大型本地资产仍保持旧路径，待 Task 4B 在原 checkout 中完成清单核对和同盘移动。
 
 ## 已批准的迁移后正式目录结构
 

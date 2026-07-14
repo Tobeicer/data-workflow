@@ -17,9 +17,11 @@ from playwright.sync_api import sync_playwright
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-BASE_DIR = Path(__file__).resolve().parent
-PROFILE_DIR = BASE_DIR / ".browser-profile"
-DEBUG_DIR = BASE_DIR / "_detail_debug"
+SRC_DIR = Path(__file__).resolve().parent
+WORKFLOW_DIR = Path(__file__).resolve().parents[3]
+RUNS_DIR = WORKFLOW_DIR / "runtime" / "runs" / "1688"
+PROFILE_DIR = WORKFLOW_DIR / "runtime" / "browser-profiles" / "1688"
+DEBUG_DIR = WORKFLOW_DIR / "runtime" / "tmp" / "1688"
 CHROME_PATHS = [
     Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
     Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
@@ -270,10 +272,19 @@ def main() -> None:
 
     collected_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    detail_output = Path(args.detail_output) if args.detail_output else BASE_DIR / f"{args.output_prefix}_detail_sample_{stamp}.csv"
-    sku_output = Path(args.sku_output) if args.sku_output else BASE_DIR / f"{args.output_prefix}_sku_sample_{stamp}.csv"
+    default_output_dir = RUNS_DIR / f"1688_detail_{stamp}"
+    detail_output = (
+        Path(args.detail_output)
+        if args.detail_output
+        else default_output_dir / f"{args.output_prefix}_detail_sample_{stamp}.csv"
+    )
+    sku_output = (
+        Path(args.sku_output)
+        if args.sku_output
+        else default_output_dir / f"{args.output_prefix}_sku_sample_{stamp}.csv"
+    )
     if args.debug:
-        DEBUG_DIR.mkdir(exist_ok=True)
+        DEBUG_DIR.mkdir(parents=True, exist_ok=True)
 
     details: list[dict[str, str]] = []
     skus: list[dict[str, str]] = []

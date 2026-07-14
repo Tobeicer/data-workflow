@@ -16,8 +16,11 @@ from playwright.sync_api import sync_playwright
 if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
-BASE_DIR = Path(__file__).resolve().parent
-DEBUG_DIR = BASE_DIR / "_debug"
+SRC_DIR = Path(__file__).resolve().parent
+WORKFLOW_DIR = Path(__file__).resolve().parents[3]
+RUNS_DIR = WORKFLOW_DIR / "runtime" / "runs" / "1688"
+PROFILE_DIR = WORKFLOW_DIR / "runtime" / "browser-profiles" / "1688"
+DEBUG_DIR = WORKFLOW_DIR / "runtime" / "tmp" / "1688"
 CHROME_PATHS = [
     Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
     Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
@@ -262,10 +265,14 @@ def main() -> None:
 
     collected_at = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     stamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-    output_path = Path(args.output) if args.output else BASE_DIR / f"{args.output_prefix}_{stamp}.csv"
+    output_path = (
+        Path(args.output)
+        if args.output
+        else RUNS_DIR / f"1688_sample_{stamp}" / f"{args.output_prefix}_{stamp}.csv"
+    )
     executable_path = chrome_executable()
     if args.debug:
-        DEBUG_DIR.mkdir(exist_ok=True)
+        DEBUG_DIR.mkdir(parents=True, exist_ok=True)
 
     all_rows: list[dict[str, str]] = []
 
@@ -280,9 +287,8 @@ def main() -> None:
         if executable_path:
             launch_kwargs["executable_path"] = executable_path
 
-        user_data_dir = BASE_DIR / ".browser-profile"
         context = p.chromium.launch_persistent_context(
-            str(user_data_dir),
+            str(PROFILE_DIR),
             **launch_kwargs,
             locale="zh-CN",
             viewport={"width": 1365, "height": 900},
@@ -316,7 +322,10 @@ def main() -> None:
                     break
                 page.wait_for_timeout(3000)
             context.close()
-            print("[1688] 登录准备步骤结束。本地登录态已保存在 data-workflow/1688/.browser-profile。")
+            print(
+                "[1688] 登录准备步骤结束。本地登录态已保存在 "
+                "data-workflow/runtime/browser-profiles/1688/。"
+            )
             return
 
         for keyword in keywords:

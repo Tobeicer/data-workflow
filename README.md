@@ -37,13 +37,13 @@
 | `data-workflow/README.md` | 数据工作流目录和适配器契约 |
 | `data-workflow/数据获取执行指南.md` | 通用采集与交付方法 |
 | `data-workflow/adapters/manlifang/README.md` | 漫立方当前来源说明与复采命令 |
-| `data-workflow/1688/1688_公开商品采集流程.md` | 1688 当前补充采集与公司资产状态 |
+| `data-workflow/adapters/1688/README.md` | 1688 当前补充采集、公司资产与正式 CLI |
 | `data-workflow/taobao/淘宝公开商品采集验证.md` | 淘宝当前人工登录态补充采集边界 |
 | `游艺圈数据导入字段规范_v2.md` | 当前 L3 Excel 兼容格式 |
 
 ## 迁移后正式路径
 
-以下是已确认的正式目录契约。漫立方 tracked 代码和指南已迁入正式适配器；其余来源按后续任务逐项切换：
+以下是已确认的正式目录契约。漫立方和 1688 tracked 代码与指南已迁入正式适配器；其余来源按后续任务逐项切换：
 
 - n8n 控制面：`data-workflow/orchestration/n8n/`
 - 七个平台适配器：`data-workflow/adapters/<source>/`

@@ -28,8 +28,9 @@ if hasattr(sys.stdout, "reconfigure"):
     sys.stdout.reconfigure(encoding="utf-8")
 
 
+SRC_DIR = Path(__file__).resolve().parent
 WORKFLOW_DIR = Path(__file__).resolve().parents[3]
-DEFAULT_PROFILE_DIR = WORKFLOW_DIR / "1688" / ".browser-profile"
+DEFAULT_PROFILE_DIR = WORKFLOW_DIR / "runtime" / "browser-profiles" / "1688"
 
 
 def read_json(path: Path, default):

@@ -154,6 +154,19 @@ class TaobaoFullWorkflowHelpersTest(unittest.TestCase):
             self.assertIn(f"output: {(cwd_path / 'planned.csv').resolve()}", output)
             self.assertFalse((cwd_path / "planned.csv").exists())
 
+    def test_prepare_login_dry_run_only_plans_manual_login_profile(self):
+        module = self.load_module()
+        with tempfile.TemporaryDirectory() as cwd:
+            output = self.run_main(
+                module, Path(cwd), "--dry-run", "--prepare-login"
+            )
+
+        self.assertIn("prepare-login: true", output)
+        self.assertIn("plan: manual login preparation -> persistent profile", output)
+        self.assertNotIn("public search", output)
+        self.assertNotIn("detail enrichment", output)
+        self.assertNotIn("in-memory merge", output)
+
     def test_search_url_and_item_id_helpers(self):
         module = self.load_module()
 

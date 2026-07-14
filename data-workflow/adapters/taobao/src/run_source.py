@@ -565,10 +565,16 @@ def main() -> None:
         print(f"[taobao-dry-run] debug: {DEBUG_DIR}")
         print(f"[taobao-dry-run] output: {output_path}")
         print(f"[taobao-dry-run] prepare-login: {str(args.prepare_login).lower()}")
-        print(
-            "[taobao-dry-run] plan: "
-            "public search -> detail enrichment -> in-memory merge -> L1 CSV"
-        )
+        if args.prepare_login:
+            print(
+                "[taobao-dry-run] plan: "
+                "manual login preparation -> persistent profile"
+            )
+        else:
+            print(
+                "[taobao-dry-run] plan: "
+                "public search -> detail enrichment -> in-memory merge -> L1 CSV"
+            )
         return
 
     from playwright.sync_api import TimeoutError as PlaywrightTimeoutError

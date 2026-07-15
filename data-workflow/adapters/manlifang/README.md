@@ -1,8 +1,10 @@
 # 漫立方来源适配器
 
-状态：`stabilizing`。Git 跟踪的采集、清洗、图片和交付实现及单元测试已迁入本适配器；当前大型批次和交付资产仍在原位置，待 Task 4B 完成物理迁移。
+状态：`stabilizing`。Git 跟踪的采集、清洗、图片和交付实现及单元测试已迁入本适配器；当前大型批次和交付资产仍在原位置，待资产清单核对后完成物理迁移。
 
 上位基线：`../../../docs/数据工作流与游艺圈系统对接执行基线.md`
+
+漫立方属于邀约入驻行业店铺，正式长期策略是通过已授权数据 API 同步全量商品。当前已交付批次来自普通用户可见商品接口的既有采集链路；获得正式入驻 API 后，必须保留现有 L0-L2 字段和可追溯性，不得因平台接口字段较少而裁剪来源资产。
 
 本适配器尚未提供统一 `run_source.py`、`--dry-run` 或符合统一 Schema 的 `run_result.json`。四道启用门禁通过前，不得在 n8n 中标为 `active`。
 
@@ -16,13 +18,13 @@
 - 当前 L3 交付：`data-workflow/manlifang/漫立方_全量数据/`
 - 历史厂家核验页面与来源索引：`legacy-workflow/validation/evidence/manlifang/`（只读参考，不作为当前厂家主数据）
 
-新运行从本适配器写入 `data-workflow/runtime/runs/manlifang/<run_id>/`。Task 4B 将在原 checkout 中把现有正式批次同盘移动到 `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`，把当前交付同盘移动到 `data-workflow/deliveries/manlifang/manlifang_full_20260712/`；目标存在即停止，不合并。迁移前后必须用资产清单严格比较文件身份、相对路径、内容与硬链接拓扑。
+新运行从本适配器写入 `data-workflow/runtime/runs/manlifang/<run_id>/`。后续将在原 checkout 中把现有正式批次同盘移动到 `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`，把当前交付同盘移动到 `data-workflow/deliveries/manlifang/manlifang_full_20260712/`；目标存在即停止，不合并。迁移前后必须用资产清单严格比较文件身份、相对路径、内容与硬链接拓扑。
 
 后续清洗只读取正式批次的结构化 JSONL、原始响应和哈希原图，不继承旧 CSV/XLSX 的分类结果。
 
-## 2. 采集范围
+## 2. 数据范围与边界
 
-采集普通用户可见的公开商品资料：分类、商品、详情、SKU、规格、价格、库存、图片和来源标识。
+通过授权 API 或既有公开接口同步商品资料：分类、商品、详情、SKU、规格、价格、库存、图片和来源标识。
 
 禁止采集订单、购物车、会员、支付、地址、聊天、后台或其他非公开信息；禁止绕过登录、签名、权限和风控。
 
@@ -133,6 +135,7 @@ python data-workflow/adapters/manlifang/src/build_manlifang_capture_workbook.py 
 - 图片 URL 均有成功、代理保存或明确失败状态。
 - Excel、图片、结构化记录和原始响应数量可互相核对。
 - 不包含任何非公开用户或交易数据。
+- 获得入驻授权 API 后固化认证、全量分页、增量事件和字段契约。
 - 补齐统一 `run_source.py`、`--dry-run` 和 `run_result.json`。
 - 验证新增、修改、下架、无变化和失败恢复。
 - 通过质量门禁和连续稳定运行验收后再申请启用 n8n。

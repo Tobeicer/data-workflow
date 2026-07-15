@@ -1,50 +1,45 @@
-# 游艺圈项目入口
+# 游艺圈数据工作流
 
-本工作区当前用于建设游艺圈数据资产生产线：发现和接入数据源，保存原始证据，完成清洗、去重、关系、快照、质量和增量处理，再生成平台可消费的 L3 交付物。
-
-当前不负责小程序、APP、Web 后台、支付、订单、交易功能和正式业务数据库建设。
+本工作区用于建设游艺圈的数据资产生产线：持续获取游戏游艺设施商品与厂家信息，保存原始证据，形成可重放的 L0-L2 数据资产，再按平台契约生成 L3 交付。游艺圈是信息供应平台，不是商城；本项目不负责交易功能和正式业务数据库建设。
 
 ## 目录
 
 | 路径 | 用途 |
 |---|---|
-| `docs/` | 当前执行基线、总体架构、治理与索引 |
-| `data-workflow/` | 来源适配、采集、处理、运行产物和交付物 |
+| `docs/` | 唯一执行基线、分类参考和历史需求 |
+| `data-workflow/` | 正式来源适配器、n8n 编排、运行产物和交付物 |
 | `legacy-workflow/` | 只读历史验证归档，不是正式执行入口 |
-| `.codegraph/` | 代码索引；理解代码时优先使用 |
-| `AGENTS.md` | 后续执行人的边界与最小阅读规则 |
+| `database/` | 数据库快照和 SQL 转储，仅作受控参考 |
+| `AGENTS.md` | 执行边界与最小阅读顺序 |
 
 ## 默认阅读顺序
 
-普通数据任务只读：
+普通来源任务只读：
 
 1. `docs/数据工作流与游艺圈系统对接执行基线.md`
-2. 当前来源的现存执行文档（见“当前可用入口”）
+2. 对应的 `data-workflow/adapters/<source>/README.md`
 
-只有需要总体架构、通用方法或目录迁移时，再读：
+`docs/project-split/` 是受保护的原始需求；`docs/requirements/` 是历史参考，仅 `docs/requirements/信息整理.md` 接收后续确认的新业务要求。两者都不得覆盖执行基线。
 
-- `docs/游艺圈数据资产生产工作流总体执行方案.md`
-- `data-workflow/README.md`
-- `data-workflow/数据获取执行指南.md`
-
-`docs/project-split/` 和 `docs/requirements/` 是受保护的历史参考，不属于默认上下文，且不得覆盖当前执行基线。
-
-## 当前可用入口
+## 当前权威入口
 
 | 文件 | 作用 |
 |---|---|
-| `docs/数据工作流与游艺圈系统对接执行基线.md` | 当前唯一职责、分层、写库和对接基线 |
-| `docs/游艺圈数据资产生产工作流总体执行方案.md` | n8n、脚本、质量和长期运行架构 |
-| `data-workflow/README.md` | 数据工作流目录和适配器契约 |
-| `data-workflow/数据获取执行指南.md` | 通用采集与交付方法 |
-| `data-workflow/adapters/manlifang/README.md` | 漫立方当前来源说明与复采命令 |
-| `data-workflow/adapters/1688/README.md` | 1688 当前补充采集、公司资产与正式 CLI |
-| `data-workflow/adapters/taobao/README.md` | 淘宝正式目录中的人工登录态补充采集原型与命令 |
+| `docs/数据工作流与游艺圈系统对接执行基线.md` | 唯一执行基线：职责、分层、来源策略、运行、质量和系统对接 |
+| `docs/requirements/信息整理.md` | 新确认业务要求的持续更新入口 |
+| `docs/游艺圈游戏游艺设备完整分类清单.md` | 平台映射、关键词、包含与排除规则的分类参考 |
+| `data-workflow/README.md` | 正式目录、适配器和 n8n 契约 |
 | `游艺圈数据导入字段规范_v2.md` | 当前 L3 Excel 兼容格式 |
 
-## 迁移后正式路径
+当前已有正式代码入口：
 
-以下是已确认的正式目录契约。漫立方、1688 和淘宝 tracked 代码与指南已迁入正式适配器；其余来源按后续任务逐项切换：
+- `data-workflow/adapters/manlifang/README.md`
+- `data-workflow/adapters/1688/README.md`
+- `data-workflow/adapters/taobao/README.md`
+
+漫立方大型本地资产尚未物理迁移，过渡期资产位置仍以 `data-workflow/manlifang/漫立方抓包流程.md` 为准；采集代码和新运行命令以正式 adapter README 为准。
+
+## 正式目录契约
 
 - n8n 控制面：`data-workflow/orchestration/n8n/`
 - 七个平台适配器：`data-workflow/adapters/<source>/`
@@ -52,10 +47,12 @@
 - L3 交付：`data-workflow/deliveries/`
 - 历史归档：`legacy-workflow/`
 
+七个平台为漫立方、1688、淘宝、京东、拼多多、抖音和闲鱼。当前 n8n 来源登记全部 `enabled=false`，不得把目录存在误写成工作流已经启用。
+
 ## 执行原则
 
-- L0 原始资产不可覆盖；L3 不能替代 L0-L2。
-- 大平台数据只作补充候选，不建设全量镜像库。
-- 数据工作流不直接写正式业务表。
-- 已确定的方案直接写现行做法，不在执行文档保留被放弃的选项。
-- 过程错误和尝试记录不进入正式文档。
+- 1688、淘宝、京东、拼多多、抖音、闲鱼是大平台爬虫全量镜像的 P0 核心来源；漫立方等邀约商户优先通过授权 API 同步全量商品。
+- 先保存完整来源字段和不可覆盖的 L0，再做 L1-L2 去重、质量与变化处理；L3 不能替代 L0-L2。
+- 定时、自动和条件触发由 n8n 控制，采集、清洗、图片和质量脚本由 Python/Node 执行。
+- 数据工作流不直接写 `public.product`、`public.accessory`、`public.manufacturer` 等正式业务表。
+- 已确认方案直接写现行做法，不在活跃文档保留废弃选项和过程日志。

@@ -3,60 +3,50 @@
 - Project: 游艺圈
 - Workspace: `E:\Desktop_zm\data-workflow`
 - Current scope: data asset workflow, not platform construction
-- Product boundary: an information supply platform for amusement-facility products and manufacturers, not a marketplace
 
 ## Directory Boundaries
 
-- `docs/`: execution baseline, architecture, governance and indexes.
-- `data-workflow/`: formal source adapters, acquisition guides, scripts, runtime assets and deliveries.
-- `docs/project-split/` and `docs/requirements/`: protected historical references; never modify them or let them override current decisions.
+- `docs/`: execution baseline, classification reference and historical requirements.
+- `data-workflow/`: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
+- `database/`: database snapshots and SQL dumps (reference only).
+- `docs/project-split/`: protected original requirements; never modify.
+- `docs/requirements/`: protected historical references; only `信息整理.md` receives new confirmed requirements.
 
 ## Authority And Reading Order
 
 When documents conflict, use this order:
 
 1. The user's latest explicit instruction.
-2. `docs/数据工作流与游艺圈系统对接执行基线.md`.
-3. The current source guide under the existing `data-workflow/<source>/` directory.
-4. `docs/游艺圈数据资产生产工作流总体执行方案.md` or `data-workflow/数据获取执行指南.md` only when the task needs architecture or general workflow context.
-5. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
-6. Protected historical references, only when historical product context is explicitly needed.
+2. `docs/数据工作流与游艺圈系统对接执行基线.md` (sole execution baseline).
+3. The current source guide under `data-workflow/<source>/`.
+4. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
+5. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
 
-For ordinary source work, read only `README.md`, the execution baseline and the relevant source guide. Do not load every planning or research document by default.
+New confirmed business requirements go to `docs/requirements/信息整理.md`.
 
 ## Markdown Context Hygiene
 
-- Active documents contain current decisions and current execution instructions, not rejected alternatives.
+- Active documents contain current decisions, not rejected alternatives.
 - Once a decision is confirmed, remove A/B/C comparisons and write the selected approach directly.
 - Do not place command failures, retry history or conversational reasoning in formal documents.
-- Historical batch results should be a short dated summary, not a chronological diary.
 - A fact should have one authoritative definition; other documents link to it instead of repeating it.
-- `task_plan.md`, `findings.md` and `progress.md` keep only current work, valid findings and recent verification evidence.
 - New role, data-layer, database-boundary or integration decisions must update the execution baseline first.
 
-## Current Ownership
+## Current Data Role
 
-### Data Owner
+Responsible for:
 
-- discover, register, grade and evaluate compliant public or authorized sources;
-- maintain the Manlifang, 1688, Taobao, JD, Pinduoduo, Douyin and Xianyu adapters;
-- retain source fields as completely as possible and maintain traceable L0-L2 assets;
-- generate replaceable, contract-based L3 deliveries;
-- maintain n8n orchestration, retries, state, quality gates and update detection;
-- prioritize stable acquisition workflows; classification, field rendering and formal database models are not the current implementation focus.
+- source discovery and evaluation;
+- public data crawling (大平台爬虫), authorized API integration (店铺入驻), and file-based acquisition;
+- cleaning, deduplication, classification and AI-assisted analysis;
+- update checks, change detection, quality gates and review queues;
+- traceable L0-L2 assets and contract-based L3 deliveries.
 
-### Platform Owner
+Not responsible for:
 
-- maintain the formal database structure, migrations, indexes and permissions;
-- maintain platform applications and field consumption or rendering;
-- maintain import APIs, receiving validation and error receipts;
-- own review, promotion to formal records, publishing and rollback.
-
-### Joint Decisions
-
-- confirm the L3 contract, source legality and authorization boundaries;
-- confirm quality thresholds, exception handling and change compatibility;
-- keep formal business-table writes on the platform side.
+- mini program, APP, Web admin, payment, order or transaction features;
+- formal database schema, migrations or production business-table writes;
+- platform review, promotion to formal records or publishing.
 
 ## Data Layers And Execution Boundary
 
@@ -67,50 +57,27 @@ For ordinary source work, read only `README.md`, the execution baseline and the 
 
 n8n is the control plane for triggers, orchestration, retries, state, human gates and alerts. Python/Node scripts are the execution plane for acquisition, cleaning, images, comparison, AI batches, quality checks and delivery generation.
 
-## Current Executable Paths
-
-- Manlifang source guide: `data-workflow/adapters/manlifang/README.md`
-- 1688 source guide: `data-workflow/adapters/1688/README.md`
-- Taobao source guide: `data-workflow/adapters/taobao/README.md`
-
-Use the formal Manlifang, 1688 and Taobao adapter commands. Taobao remains a prototype; only its tracked code and guide have moved, while the historical CSV and browser profile remain deferred to Tasks 7 and 6B respectively.
-
-## Approved Migration Target Paths
-
-These paths are the approved formal contract. Manlifang, 1688 and Taobao tracked code already use their adapter paths; remaining sources must be migrated before their adapter paths become executable entrypoints:
-
-- n8n control plane: `data-workflow/orchestration/n8n/`
-- source adapters: `data-workflow/adapters/<source>/`
-- L0-L2 runtime assets: `data-workflow/runtime/`
-- L3 deliveries: `data-workflow/deliveries/`
-- historical archive: `legacy-workflow/`
-
 ## Current Manlifang Assets
 
-- Batch: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
-- Raw XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
-- Cleaned XLSX: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
-- Delivery: `data-workflow/manlifang/漫立方_全量数据/`
-- Handoff XLSX: `data-workflow/manlifang/漫立方_全量数据/漫立方_全量数据.xlsx`
-- Source guide: `data-workflow/adapters/manlifang/README.md`
+- Delivery batch: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
+- 3128 unique products, 5528 normalized images delivered.
+- Source guide: `data-workflow/manlifang/漫立方抓包流程.md`
 
-The final batch contains 3128 unique public products and 5528 normalized images. Later processing must use the fresh structured JSONL, raw responses and hash-named originals as source assets.
+Processing uses structured JSONL, raw responses and hash-named originals as source assets.
 
-Task 4B is still required in the original checkout: move the current batch and delivery to the approved `runtime/runs/manlifang/` and `deliveries/manlifang/` targets only after before/after manifest verification. Until then, the asset paths above remain authoritative and must not be copied, simulated or regenerated.
+The old source guide remains the current asset-location reference until the large local batch is physically migrated. Tracked collection code and executable commands are maintained in `data-workflow/adapters/manlifang/README.md`. The 1688 and Taobao executable guides are `data-workflow/adapters/1688/README.md` and `data-workflow/adapters/taobao/README.md`.
+
+Formal targets are `data-workflow/orchestration/n8n/`, `data-workflow/adapters/<source>/`, `data-workflow/runtime/`, `data-workflow/deliveries/` and root `legacy-workflow/`.
 
 ## Database Snapshot Reference
 
-Historical/current-environment reference only. These details are not part of the Data Owner's current directory responsibility.
+Historical/current-environment reference only:
 
 - PostgreSQL: `192.168.1.98:5432`
 - Database: `postgres`
 - Schema: `public`
 - Navicat connection name: `youyiquan`
 - Dump: `database/public.sql`
-
-Observed formal tables include `manufacturer`, `product`, `accessory`, `category`, `document`, `file_resource`, `staging_manufacturer` and supporting user/audit/settings tables. Earlier Manlifang work also observed `ingest.*` and `asset.*` receiving tables.
-
-Use them only to verify the historical/current environment and integration contract; they must not be used as a basis for direct writes to formal business tables.
 
 Do not store passwords in Markdown. Use an untracked `.env.local` file.
 

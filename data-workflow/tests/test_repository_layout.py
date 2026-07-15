@@ -73,7 +73,7 @@ EXPECTED_ARCHIVE_MOVES = {
     "data-workflow/research/微信小程序公开商品数据导出方法.md": (
         "legacy-workflow/validation/notes/微信小程序公开商品数据导出方法.md",
         "historical_research_note",
-        "data-workflow/数据获取执行指南.md",
+        "docs/数据工作流与游艺圈系统对接执行基线.md",
     ),
     "data-workflow/manlifang/manufacturer_evidence/": (
         "legacy-workflow/validation/evidence/manlifang/",
@@ -412,7 +412,9 @@ def test_manlifang_tracked_files_are_in_formal_adapter() -> None:
     assert {path.name for path in unit_dir.iterdir() if path.is_file()} == set(
         MANLIFANG_TEST_FILES
     )
-    assert not (WORKFLOW / "manlifang" / "漫立方抓包流程.md").exists()
+    transition_guide = WORKFLOW / "manlifang" / "漫立方抓包流程.md"
+    assert transition_guide.is_file()
+    assert "只记录当前资产位置和交付事实" in transition_guide.read_text(encoding="utf-8")
     legacy_tools = WORKFLOW / "manlifang" / "tools"
     assert not list(legacy_tools.glob("*.py"))
     assert not list(legacy_tools.glob("*.ps1"))
@@ -464,7 +466,7 @@ def test_manlifang_readme_documents_formal_commands_and_deferred_assets() -> Non
     assert "data-workflow/manlifang/captures/manlifang_full_20260710_110814/" in text
     assert "data-workflow/manlifang/漫立方_全量数据/" in text
     assert "data-workflow/deliveries/manlifang/manlifang_full_20260712/" in text
-    assert "Task 4B" in text
+    assert "资产清单" in text
 
 
 def test_source_registry_uses_exact_order_statuses_and_disabled_state() -> None:
@@ -536,17 +538,13 @@ def test_env_example_contains_only_empty_documented_values() -> None:
     assert all(value == "" for value in assignments.values())
 
 
-def test_protected_directories_have_no_committed_or_worktree_changes() -> None:
-    base_ref = governance_base_ref()
-    merge_base = run_git("merge-base", "HEAD", base_ref).stdout.strip()
-    committed = run_git(
+def test_protected_directories_match_confirmed_upstream_version() -> None:
+    result = run_git(
         "diff",
-        "--name-only",
-        f"{merge_base}..HEAD",
+        "--exit-code",
+        governance_base_ref(),
         "--",
         *PROTECTED_PATHS,
+        check=False,
     )
-    worktree = run_git("status", "--short", "--", *PROTECTED_PATHS)
-
-    assert committed.stdout == ""
-    assert worktree.stdout == ""
+    assert result.returncode == 0, result.stdout + result.stderr

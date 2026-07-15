@@ -262,9 +262,12 @@ def test_n8n_source_readmes_do_not_claim_active_workflows() -> None:
             / "README.md"
         ).read_text(encoding="utf-8")
         assert SOURCE_DISPLAY_NAMES[source] in text
-        assert status in text
         assert f"data-workflow/adapters/{source}/" in text
-        assert "不得在 n8n 中标为 `active`" in text
+        assert "../../../configs/source_registry.json" in text
+        assert "../../../README.md" in text
+        assert "目录存在不代表来源已启用" in text
+        assert status not in text
+        assert "enabled=false" not in text
         assert_no_active_workflow_claims(text, f"{source} n8n README")
 
 

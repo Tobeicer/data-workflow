@@ -4,6 +4,8 @@
 
 上位规范：`../docs/数据工作流与游艺圈系统对接执行基线.md`
 
+跨来源技术设计：`../docs/数据工作流总体技术设计.md`
+
 `data-workflow/` 负责来源接入、采集与接收、清洗治理、增量比较、质量门禁、n8n 编排和 L3 交付，不负责平台前后端和正式业务表。
 
 ## 当前可用入口
@@ -12,9 +14,7 @@
 - 1688 正式代码和命令：`data-workflow/adapters/1688/README.md`
 - 淘宝正式目录中的原型和命令：`data-workflow/adapters/taobao/README.md`
 
-漫立方当前 3128 条商品、5528 张规范化图片的正式批次位于 `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`，L3 交付位于 `data-workflow/deliveries/manlifang/manlifang_full_20260712/`。`data-workflow/manlifang/漫立方抓包流程.md` 只作为兼容入口，新运行产物进入 `data-workflow/runtime/runs/manlifang/<run_id>/`。
-
-1688 新运行产物进入 `data-workflow/runtime/runs/1688/<run_id>/`；淘宝原型默认输出进入 `data-workflow/runtime/runs/taobao/taobao_<timestamp>/l1/`。两者浏览器登录态分别位于 `data-workflow/runtime/browser-profiles/1688/` 和 `data-workflow/runtime/browser-profiles/taobao/`。历史验证 CSV 已进入 `legacy-workflow/validation/csv/`。
+来源批次、交付数量、浏览器 profile、当前能力和命令只在对应 adapter README 中维护。本文件只说明稳定目录和模块契约。
 
 ## 目录结构
 
@@ -81,17 +81,7 @@ data-workflow/
 
 ## 来源定位
 
-| 来源 | 数据策略 | 当前状态 |
-|---|---|---|
-| 漫立方 | 邀请入驻后的授权 API 全量同步 | 已交付一批，adapter 稳定化中 |
-| 1688 | P0 大平台公开数据全量镜像 | adapter 稳定化中，未宣称全量完成 |
-| 淘宝 | P0 大平台公开数据全量镜像 | 原型已迁入，未通过稳定运行验收 |
-| 京东 | P0 大平台公开数据全量镜像 | 目录已建，采集实现未开始 |
-| 拼多多 | P0 大平台公开数据全量镜像 | 目录已建，采集实现未开始 |
-| 抖音 | P0 大平台公开数据全量镜像 | 目录已建，采集实现未开始 |
-| 闲鱼 | P0 大平台公开数据全量镜像 | 目录已建，采集实现未开始 |
-
-平台映射、搜索关键词、包含和排除规则以 `../docs/游艺圈游戏游艺设备完整分类清单.md` 为参考；执行边界和建设顺序以唯一执行基线为准。
+七个来源分别使用独立 adapter 和来源 workflow；来源状态与启用值只以 `orchestration/n8n/configs/source_registry.json` 为准。来源差异、混合字段模型和建设顺序以 `../docs/数据工作流总体技术设计.md` 为准；平台映射、搜索关键词、包含和排除规则只以 `../docs/游艺圈游戏游艺设备完整分类清单.md` 为准。
 
 ## 系统对接
 

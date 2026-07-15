@@ -1,8 +1,9 @@
-# 京东 n8n 来源工作流
+# 京东 n8n 来源入口
 
-- 来源：京东
-- 登记状态：`planned`
-- 启用状态：`enabled=false`
-- 适配器路径：`data-workflow/adapters/jd/`
+本目录只保存未来的京东 n8n 导出 JSON，不定义来源状态或采集规则。
 
-本目录当前只有控制面说明，不含可启用的 n8n JSON；四道启用门禁全部通过前，不得在 n8n 中标为 `active`。
+- 状态与 `enabled`：`../../../configs/source_registry.json`
+- 来源边界与执行入口：`data-workflow/adapters/jd/README.md`
+- shared 控制面与启用门禁：`../../../README.md`
+
+当前目录没有可启用 workflow JSON；目录存在不代表来源已启用。

@@ -6,7 +6,7 @@
 
 ## Directory Boundaries
 
-- `docs/`: execution baseline, classification reference and historical requirements.
+- `docs/`: execution baseline, unified technical design, classification reference and historical requirements.
 - `data-workflow/`: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
 - `database/`: database snapshots and SQL dumps (reference only).
 - `docs/project-split/`: protected original requirements; never modify.
@@ -18,9 +18,11 @@ When documents conflict, use this order:
 
 1. The user's latest explicit instruction.
 2. `docs/数据工作流与游艺圈系统对接执行基线.md` (sole execution baseline).
-3. The current source guide under `data-workflow/adapters/<source>/README.md`.
-4. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
-5. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
+3. `docs/数据工作流总体技术设计.md` for cross-source architecture, logical datasets and integration contracts.
+4. The current source guide under `data-workflow/adapters/<source>/README.md` for source-specific behavior.
+5. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
+6. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
+7. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
 
 New confirmed business requirements go to `docs/requirements/信息整理.md`.
 
@@ -31,6 +33,7 @@ New confirmed business requirements go to `docs/requirements/信息整理.md`.
 - Do not place command failures, retry history or conversational reasoning in formal documents.
 - A fact should have one authoritative definition; other documents link to it instead of repeating it.
 - New role, data-layer, database-boundary or integration decisions must update the execution baseline first.
+- Cross-source implementation details belong in `docs/数据工作流总体技术设计.md`; source commands and evidence belong only in the source adapter README.
 
 ## Current Data Role
 
@@ -57,16 +60,14 @@ Not responsible for:
 
 n8n is the control plane for triggers, orchestration, retries, state, human gates and alerts. Python/Node scripts are the execution plane for acquisition, cleaning, images, comparison, AI batches, quality checks and delivery generation.
 
-## Current Manlifang Assets
+Shared control-plane behavior does not imply shared collectors. Every platform owns an independent adapter and source workflow; shop, company and manufacturer roles remain distinct, and sparse source fields are represented by typed observations plus missing reasons.
 
-- Runtime batch: `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`
-- L3 delivery: `data-workflow/deliveries/manlifang/manlifang_full_20260712/`
-- 3128 unique products, 5528 normalized images delivered.
-- Source guide: `data-workflow/manlifang/漫立方抓包流程.md`
+## Current Source References
 
-Processing uses structured JSONL, raw responses and hash-named originals as source assets.
-
-The old source guide is retained only as a compatibility entry. Current assets, tracked collection code and executable commands are documented in `data-workflow/adapters/manlifang/README.md`. The 1688 and Taobao executable guides are `data-workflow/adapters/1688/README.md` and `data-workflow/adapters/taobao/README.md`.
+- `data-workflow/manlifang/漫立方抓包流程.md` is retained only as a compatibility entry.
+- Current Manlifang assets, counts, tracked code and commands are documented only in `data-workflow/adapters/manlifang/README.md`.
+- The 1688 and Taobao executable guides are `data-workflow/adapters/1688/README.md` and `data-workflow/adapters/taobao/README.md`.
+- Source status and enabled state are defined only in `data-workflow/orchestration/n8n/configs/source_registry.json`.
 
 Formal targets are `data-workflow/orchestration/n8n/`, `data-workflow/adapters/<source>/`, `data-workflow/runtime/`, `data-workflow/deliveries/` and root `legacy-workflow/`.
 
@@ -78,7 +79,7 @@ Historical/current-environment reference only:
 - Database: `postgres`
 - Schema: `public`
 - Navicat connection name: `youyiquan`
-- Dump: `database/public.sql`
+- Expected historical dump path: `database/public.sql` (currently absent from this workspace)
 
 Do not store passwords in Markdown. Use an untracked `.env.local` file.
 
@@ -87,4 +88,5 @@ Do not store passwords in Markdown. Use an untracked `.env.local` file.
 - Do not write to `public.product`, `public.accessory`, `public.manufacturer` or other formal business tables without explicit scope expansion and an approved platform contract.
 - Preferred integration order: internal import API, agreed permission-isolated `ingest/staging`, then L3 file import.
 - The platform Git repository has not been received. When available, inspect it only to finalize the L3 adapter; never delete L0-L2 fields because the platform cannot currently consume them.
+- Logical datasets and index suggestions in `docs/数据工作流总体技术设计.md` are recommendations for the contract/staging discussion, not authorization to create production tables or migrations.
 - If `.codegraph/` exists and the task is about locating or understanding code, use CodeGraph before text search.

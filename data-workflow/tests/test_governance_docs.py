@@ -6,6 +6,7 @@ from typing import Mapping
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINE = ROOT / "docs" / "数据工作流与游艺圈系统对接执行基线.md"
+UNIFIED_DESIGN = ROOT / "docs" / "数据工作流总体技术设计.md"
 PROTECTED_PATHS = (
     "docs/project-split",
     "docs/requirements",
@@ -56,11 +57,110 @@ def governance_base_ref(environ: Mapping[str, str] = os.environ) -> str:
 
 def test_baseline_is_sole_authority_and_names_both_owners() -> None:
     text = read(BASELINE)
-    assert "版本：V1.3" in text
+    assert "版本：V1.4" in text
     assert "日期：2026-07-15" in text
     assert "状态：当前唯一执行基线" in text
     for heading in ("### 数据负责人", "### 平台负责人", "### 双方共同确认"):
         assert heading in text
+
+
+def test_document_authority_is_consolidated_around_one_design() -> None:
+    assert UNIFIED_DESIGN.is_file()
+    for path in (
+        BASELINE,
+        ROOT / "README.md",
+        ROOT / "AGENTS.md",
+        ROOT / "data-workflow" / "README.md",
+        ROOT / "AI_HANDOFF.md",
+    ):
+        assert "docs/数据工作流总体技术设计.md" in read(path), path
+
+    for retired in (
+        ROOT / "docs/superpowers/plans/2026-07-15-data-workflow-migration-closeout.md",
+        ROOT / "docs/superpowers/specs/2026-07-15-data-workflow-migration-closeout-design.md",
+    ):
+        assert not retired.exists(), retired
+
+
+def test_unified_design_defines_independent_adapters_and_hybrid_field_model() -> None:
+    text = read(UNIFIED_DESIGN)
+    for phrase in (
+        "共享控制面、独立来源适配器",
+        "公共核心字段",
+        "类型化属性事实",
+        "原始全字段",
+        "shop ≠ company ≠ manufacturer",
+        "not_provided",
+        "not_accessible",
+        "parse_failed",
+        "数据侧推荐逻辑模型，不是正式库迁移授权",
+        "不得直接写入正式业务表",
+    ):
+        assert phrase in text
+
+
+def test_unified_design_defines_database_contract_and_delivery_receipts() -> None:
+    text = read(UNIFIED_DESIGN)
+    for dataset in (
+        "source_product",
+        "source_sku",
+        "source_shop",
+        "source_company",
+        "attribute_observation",
+        "metric_snapshot",
+        "source_evidence",
+        "entity_match_candidate",
+        "classification_candidate",
+        "review_item",
+        "delivery_batch",
+        "delivery_receipt",
+    ):
+        assert f"`{dataset}`" in text
+    for phrase in (
+        "UNIQUE (source, source_product_id)",
+        "统一社会信用代码",
+        "幂等键",
+        "错误回执",
+        "权限隔离的 `ingest/staging`",
+    ):
+        assert phrase in text
+
+
+def test_classification_reference_uses_versioned_three_state_scope_decisions() -> None:
+    text = read(ROOT / "docs" / "游艺圈游戏游艺设备完整分类清单.md")
+    for phrase in (
+        "版本：",
+        "状态：持续补全",
+        "included",
+        "excluded",
+        "review_required",
+        "不能直接归入 A14",
+        "平台专用搜索词",
+        "规则版本",
+    ):
+        assert phrase in text
+
+
+def test_confirmed_requirements_preserve_sparse_fields_without_direct_database_writes() -> None:
+    text = read(ROOT / "docs" / "requirements" / "信息整理.md")
+    for phrase in (
+        "每个平台使用独立采集适配器",
+        "有值才展示",
+        "缺失原因",
+        "平台校验、审核并写入正式业务表",
+    ):
+        assert phrase in text
+
+
+def test_1688_area_fields_are_distinct_in_active_contract_docs() -> None:
+    source_guide = read(ROOT / "data-workflow" / "adapters" / "1688" / "README.md")
+    l3 = read(ROOT / "游艺圈数据导入字段规范_v2.md")
+    for field in ("factory_area_sqm", "factory_building_area_sqm"):
+        assert field in source_guide
+    assert "当前代码、Schema 和测试尚未完成字段拆分" in source_guide
+    assert "厂房面积" in l3
+    assert "只映射 `factory_building_area_sqm`" in l3
+    assert "不得使用 `factory_area_sqm` 回填" in l3
 
 
 def test_baseline_defines_information_supply_and_non_transaction_boundary() -> None:
@@ -134,16 +234,18 @@ def test_database_is_a_controlled_reference_not_a_write_target() -> None:
     root_readme = read(ROOT / "README.md")
     agents = read(ROOT / "AGENTS.md")
     baseline = read(BASELINE)
-    assert "`database/` | 数据库快照和 SQL 转储，仅作受控参考" in root_readme
+    assert "`database/` | 数据库快照预留路径；当前不存在，若收到快照也仅作受控参考" in root_readme
     for phrase in (
         "## Database Snapshot Reference",
         "PostgreSQL: `192.168.1.98:5432`",
-        "Dump: `database/public.sql`",
+        "Expected historical dump path: `database/public.sql` (currently absent from this workspace)",
         "Do not store passwords in Markdown",
     ):
         assert phrase in agents
     assert "数据库快照仅作历史/当前环境和对接契约参考" in baseline
     assert "不是直接写正式业务表的授权" in baseline
+    assert "工作区当前没有 `database/` 和 `database/public.sql`" in baseline
+    assert not (ROOT / "database").exists()
 
 
 def test_protected_requirements_are_unchanged_and_current_requirements_are_semantic() -> None:

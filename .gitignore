@@ -18,6 +18,7 @@ data-workflow/1688/archive/
 data-workflow/runtime/
 data-workflow/deliveries/
 legacy-workflow/runs/
+legacy-workflow/validation/screenshots/
 legacy-workflow/migration/*.json
 data-workflow/**/captures/
 data-workflow/**/runs/

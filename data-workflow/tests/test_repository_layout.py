@@ -81,6 +81,23 @@ EXPECTED_ARCHIVE_MOVES = {
         "data-workflow/adapters/manlifang/README.md",
     ),
 }
+EXPECTED_LOCAL_ARCHIVE_MOVES = {
+    "data-workflow/1688/_debug/": (
+        "legacy-workflow/validation/screenshots/1688/_debug/",
+        "historical_debug_assets",
+        "data-workflow/adapters/1688/README.md",
+    ),
+    "data-workflow/runtime/runs/1688/": (
+        "legacy-workflow/runs/1688/historical_validation_runs/",
+        "historical_validation_runs",
+        "data-workflow/adapters/1688/README.md",
+    ),
+    "data-workflow/platform-import-templates/": (
+        "legacy-workflow/validation/templates/platform-import-templates/",
+        "historical_import_templates",
+        "游艺圈数据导入字段规范_v2.md",
+    ),
+}
 MANLIFANG_SOURCE_FILES = (
     "build_manlifang_capture_workbook.py",
     "build_manlifang_delivery_package.py",
@@ -282,13 +299,13 @@ def test_1688_tracked_entrypoint_is_in_formal_adapter_and_history_is_archived() 
     } == HISTORICAL_1688_CSV_FILES
 
 
-def test_1688_readme_documents_formal_entrypoint_and_deferred_profile() -> None:
+def test_1688_readme_documents_formal_entrypoint_and_migrated_profile() -> None:
     text = (ADAPTER_1688 / "README.md").read_text(encoding="utf-8")
     assert "data-workflow/adapters/1688/src/run_source.py" in text
     assert "data-workflow/runtime/runs/1688/<run_id>/" in text
     assert "data-workflow/runtime/browser-profiles/1688/" in text
     assert "data-workflow/runtime/tmp/1688/" in text
-    assert "Task 5B" in text
+    assert "已于 2026-07-15 同盘迁入" in text
     assert "enabled=false" in text
     assert "不含可启用的 n8n JSON" in text
 
@@ -311,7 +328,7 @@ def test_taobao_tracked_entrypoint_is_in_formal_adapter_and_history_is_archived(
     } == HISTORICAL_TAOBAO_CSV_FILES
 
 
-def test_taobao_readme_documents_formal_entrypoint_and_deferred_assets() -> None:
+def test_taobao_readme_documents_formal_entrypoint_and_migrated_assets() -> None:
     text = (TAOBAO_ADAPTER / "README.md").read_text(encoding="utf-8")
     for phrase in (
         "现有原型已迁入正式目录，尚未通过统一 run_result 和连续稳定运行验收",
@@ -320,7 +337,7 @@ def test_taobao_readme_documents_formal_entrypoint_and_deferred_assets() -> None
         "data-workflow/runtime/browser-profiles/taobao/",
         "data-workflow/runtime/tmp/taobao/",
         "legacy-workflow/validation/csv/taobao/taobao_product_category_full_20260709.csv",
-        "Task 6B",
+        "已于 2026-07-15 同盘迁入",
         "enabled=false",
         "不含可启用的 n8n JSON",
         "L0-L2",
@@ -350,14 +367,14 @@ def test_legacy_readme_is_read_only_and_points_to_formal_entrypoints() -> None:
         "docs/数据工作流与游艺圈系统对接执行基线.md",
         "data-workflow/runtime/runs/<source>/<run_id>/",
         "data-workflow/deliveries/<source>/<delivery_id>/",
-        "Task 7B",
+        "已迁移的本地资产",
     ):
         assert phrase in text
     for source in ("manlifang", "1688", "taobao", "jd", "pinduoduo", "douyin", "xianyu"):
         assert f"data-workflow/adapters/{source}/README.md" in text
 
 
-def test_path_map_describes_only_completed_tracked_moves() -> None:
+def test_path_map_describes_completed_tracked_and_local_moves() -> None:
     with (LEGACY_WORKFLOW / "migration" / "path-map.csv").open(
         encoding="utf-8", newline=""
     ) as file:
@@ -371,7 +388,8 @@ def test_path_map_describes_only_completed_tracked_moves() -> None:
         "replacement_entry",
         "migrated_at",
     ]
-    assert len(rows) == len(EXPECTED_ARCHIVE_MOVES)
+    expected_moves = EXPECTED_ARCHIVE_MOVES | EXPECTED_LOCAL_ARCHIVE_MOVES
+    assert len(rows) == len(expected_moves)
     assert len({row["old_path"] for row in rows}) == len(rows)
     assert {
         row["old_path"]: (
@@ -380,8 +398,17 @@ def test_path_map_describes_only_completed_tracked_moves() -> None:
             row["replacement_entry"],
         )
         for row in rows
-    } == EXPECTED_ARCHIVE_MOVES
-    assert {row["migrated_at"] for row in rows} == {"2026-07-14"}
+    } == expected_moves
+    assert {row["migrated_at"] for row in rows} == {"2026-07-14", "2026-07-15"}
+
+
+def test_local_archive_moves_match_the_current_workspace_when_assets_are_present() -> None:
+    for old_path, (new_path, _classification, _replacement) in EXPECTED_LOCAL_ARCHIVE_MOVES.items():
+        old = ROOT / old_path.rstrip("/")
+        new = ROOT / new_path.rstrip("/")
+        assert not old.exists()
+        if new.exists():
+            assert any(new.rglob("*"))
 
 
 def test_formal_readmes_link_to_completed_archive_paths() -> None:
@@ -414,7 +441,7 @@ def test_manlifang_tracked_files_are_in_formal_adapter() -> None:
     )
     transition_guide = WORKFLOW / "manlifang" / "漫立方抓包流程.md"
     assert transition_guide.is_file()
-    assert "只记录当前资产位置和交付事实" in transition_guide.read_text(encoding="utf-8")
+    assert "只作为旧路径兼容入口" in transition_guide.read_text(encoding="utf-8")
     legacy_tools = WORKFLOW / "manlifang" / "tools"
     assert not list(legacy_tools.glob("*.py"))
     assert not list(legacy_tools.glob("*.ps1"))
@@ -458,15 +485,15 @@ def test_manlifang_runtime_paths_resolve_from_formal_adapter() -> None:
     assert state_line in finalize
 
 
-def test_manlifang_readme_documents_formal_commands_and_deferred_assets() -> None:
+def test_manlifang_readme_documents_formal_commands_and_migrated_assets() -> None:
     text = (MANLIFANG_ADAPTER / "README.md").read_text(encoding="utf-8")
     for file_name in MANLIFANG_SOURCE_FILES:
         assert f"data-workflow/adapters/manlifang/src/{file_name}" in text
     assert "data-workflow/runtime/runs/manlifang/<run_id>/" in text
-    assert "data-workflow/manlifang/captures/manlifang_full_20260710_110814/" in text
-    assert "data-workflow/manlifang/漫立方_全量数据/" in text
+    assert "data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/" in text
     assert "data-workflow/deliveries/manlifang/manlifang_full_20260712/" in text
     assert "资产清单" in text
+    assert "已于 2026-07-15 完成同盘移动" in text
 
 
 def test_source_registry_uses_exact_order_statuses_and_disabled_state() -> None:

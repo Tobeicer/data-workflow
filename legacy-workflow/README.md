@@ -29,13 +29,12 @@
 
 这些文件保留迁移前字节内容，只用于追溯当时的人工验证结果。
 
-## Task 7B 待迁移的本地资产
+## 已迁移的本地资产
 
-以下 ignored 本地资产不属于本次 tracked 迁移，也尚未写入 `path-map.csv`。Task 7B 只在分支审核并快进原 checkout 后，确认源存在、目标不存在且解析路径均位于 workspace 内时执行同盘移动：
+以下 ignored 本地资产已于 2026-07-15 完成同盘移动并通过资产清单核验，真实路径已写入 `path-map.csv`：
 
 - `data-workflow/1688/_debug/` → `legacy-workflow/validation/screenshots/1688/_debug/`
 - `data-workflow/runtime/runs/1688/` → `legacy-workflow/runs/1688/historical_validation_runs/`
 - `data-workflow/platform-import-templates/` → `legacy-workflow/validation/templates/platform-import-templates/`
-- 若存在 `data-workflow/source-data/` → `legacy-workflow/validation/source-data/original-inputs/`
 
-目标已存在时必须停止，不得合并或覆盖。Task 7B 实际完成后，才为真实移动追加路径映射。
+`data-workflow/source-data/` 不存在，因此未创建对应归档目录。

@@ -37,7 +37,7 @@
 - `data-workflow/adapters/1688/README.md`
 - `data-workflow/adapters/taobao/README.md`
 
-漫立方大型本地资产尚未物理迁移，过渡期资产位置仍以 `data-workflow/manlifang/漫立方抓包流程.md` 为准；采集代码和新运行命令以正式 adapter README 为准。
+漫立方正式批次位于 `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`，L3 交付位于 `data-workflow/deliveries/manlifang/manlifang_full_20260712/`；采集代码、资产说明和新运行命令以正式 adapter README 为准。
 
 ## 正式目录契约
 

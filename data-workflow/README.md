@@ -12,9 +12,9 @@
 - 1688 正式代码和命令：`data-workflow/adapters/1688/README.md`
 - 淘宝正式目录中的原型和命令：`data-workflow/adapters/taobao/README.md`
 
-漫立方当前 3128 条商品、5528 张规范化图片的大型批次仍在 `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`，当前交付仍在 `data-workflow/manlifang/漫立方_全量数据/`；物理迁移前，`data-workflow/manlifang/漫立方抓包流程.md` 只记录这组过渡资产事实。新运行产物进入 `data-workflow/runtime/runs/manlifang/<run_id>/`。
+漫立方当前 3128 条商品、5528 张规范化图片的正式批次位于 `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`，L3 交付位于 `data-workflow/deliveries/manlifang/manlifang_full_20260712/`。`data-workflow/manlifang/漫立方抓包流程.md` 只作为兼容入口，新运行产物进入 `data-workflow/runtime/runs/manlifang/<run_id>/`。
 
-1688 新运行产物进入 `data-workflow/runtime/runs/1688/<run_id>/`；淘宝原型默认输出进入 `data-workflow/runtime/runs/taobao/taobao_<timestamp>/l1/`。两者真实浏览器登录态仍待在原 checkout 中同盘移动。历史验证 CSV 已进入 `legacy-workflow/validation/csv/`。
+1688 新运行产物进入 `data-workflow/runtime/runs/1688/<run_id>/`；淘宝原型默认输出进入 `data-workflow/runtime/runs/taobao/taobao_<timestamp>/l1/`。两者浏览器登录态分别位于 `data-workflow/runtime/browser-profiles/1688/` 和 `data-workflow/runtime/browser-profiles/taobao/`。历史验证 CSV 已进入 `legacy-workflow/validation/csv/`。
 
 ## 目录结构
 

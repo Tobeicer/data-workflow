@@ -1,6 +1,6 @@
 # 漫立方来源适配器
 
-状态：`stabilizing`。Git 跟踪的采集、清洗、图片和交付实现及单元测试已迁入本适配器；当前大型批次和交付资产仍在原位置，待资产清单核对后完成物理迁移。
+状态：`stabilizing`。Git 跟踪的采集、清洗、图片和交付实现及单元测试已迁入本适配器；当前大型批次和交付资产已完成同盘迁移和资产清单核验。
 
 上位基线：`../../../docs/数据工作流与游艺圈系统对接执行基线.md`
 
@@ -8,17 +8,17 @@
 
 本适配器尚未提供统一 `run_source.py`、`--dry-run` 或符合统一 Schema 的 `run_result.json`。四道启用门禁通过前，不得在 n8n 中标为 `active`。
 
-## 1. 当前成果与资产过渡
+## 1. 当前成果与资产
 
-- 当前正式批次：`data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
+- 当前正式批次：`data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`
 - 唯一商品：3128 条
 - 规范化交付图片：5528 张
-- 当前原始 XLSX：`data-workflow/manlifang/captures/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
-- 当前清洗 XLSX：`data-workflow/manlifang/captures/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
-- 当前 L3 交付：`data-workflow/manlifang/漫立方_全量数据/`
+- 当前原始 XLSX：`data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
+- 当前清洗 XLSX：`data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
+- 当前 L3 交付：`data-workflow/deliveries/manlifang/manlifang_full_20260712/`
 - 历史厂家核验页面与来源索引：`legacy-workflow/validation/evidence/manlifang/`（只读参考，不作为当前厂家主数据）
 
-新运行从本适配器写入 `data-workflow/runtime/runs/manlifang/<run_id>/`。后续将在原 checkout 中把现有正式批次同盘移动到 `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`，把当前交付同盘移动到 `data-workflow/deliveries/manlifang/manlifang_full_20260712/`；目标存在即停止，不合并。迁移前后必须用资产清单严格比较文件身份、相对路径、内容与硬链接拓扑。
+新运行从本适配器写入 `data-workflow/runtime/runs/manlifang/<run_id>/`。当前正式批次和交付已于 2026-07-15 完成同盘移动，迁移前后资产清单的文件身份、相对路径、内容与硬链接拓扑一致。
 
 后续清洗只读取正式批次的结构化 JSONL、原始响应和哈希原图，不继承旧 CSV/XLSX 的分类结果。
 

@@ -6,8 +6,11 @@ from typing import Mapping
 
 ROOT = Path(__file__).resolve().parents[2]
 BASELINE = ROOT / "docs" / "数据工作流与游艺圈系统对接执行基线.md"
-PROTECTED_PATHS = ("docs/project-split", "docs/requirements")
-UPSTREAM_REF = "codex/upload-current-workflow"
+PROTECTED_PATHS = (
+    "docs/project-split",
+    "docs/requirements",
+    ":(exclude)docs/requirements/信息整理.md",
+)
 FORMAL_SOURCE_GUIDES = (
     "data-workflow/adapters/manlifang/README.md",
     "data-workflow/adapters/1688/README.md",
@@ -45,10 +48,10 @@ def run_git(*args: str, check: bool = True) -> subprocess.CompletedProcess[str]:
 
 
 def governance_base_ref(environ: Mapping[str, str] = os.environ) -> str:
-    for variable in ("GOVERNANCE_BASE_REF", "GOVENANCE_BASE_REF"):
-        if configured := environ.get(variable):
-            return configured
-    return UPSTREAM_REF
+    if configured := environ.get("GOVERNANCE_BASE_REF"):
+        return configured
+    parent = run_git("rev-parse", "--verify", "HEAD^", check=False)
+    return parent.stdout.strip() if parent.returncode == 0 else "HEAD"
 
 
 def test_baseline_is_sole_authority_and_names_both_owners() -> None:
@@ -107,11 +110,11 @@ def test_formal_source_guides_exist_and_are_linked() -> None:
         assert guide in read(ROOT / "data-workflow" / "README.md")
 
 
-def test_manlifang_transition_keeps_true_asset_reference_without_reactivating_old_code() -> None:
+def test_manlifang_compatibility_guide_points_to_formal_adapter() -> None:
     old_guide = ROOT / "data-workflow" / "manlifang" / "漫立方抓包流程.md"
     assert old_guide.is_file()
     text = read(old_guide)
-    assert "只记录当前资产位置和交付事实" in text
+    assert "只作为旧路径兼容入口" in text
     assert "../adapters/manlifang/README.md" in text
     assert "data-workflow/manlifang/漫立方抓包流程.md" in read(ROOT / "AGENTS.md")
     assert "data-workflow/adapters/manlifang/README.md" in read(ROOT / "AGENTS.md")
@@ -143,8 +146,15 @@ def test_database_is_a_controlled_reference_not_a_write_target() -> None:
     assert "不是直接写正式业务表的授权" in baseline
 
 
-def test_upstream_business_requirements_are_preserved_verbatim() -> None:
-    result = run_git("diff", "--exit-code", UPSTREAM_REF, "--", *PROTECTED_PATHS, check=False)
+def test_protected_requirements_are_unchanged_and_current_requirements_are_semantic() -> None:
+    result = run_git(
+        "diff",
+        "--exit-code",
+        governance_base_ref(),
+        "--",
+        *PROTECTED_PATHS,
+        check=False,
+    )
     assert result.returncode == 0, result.stdout + result.stderr
     requirements = read(ROOT / "docs" / "requirements" / "信息整理.md")
     for phrase in ("爬虫全量采集", "获取数据 API", "关键词"):

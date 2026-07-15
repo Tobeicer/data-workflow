@@ -4,3 +4,6 @@ data-workflow/1688/1688_relevant_product_sku_20260708.csv,legacy-workflow/valida
 data-workflow/taobao/taobao_product_category_full_20260709.csv,legacy-workflow/validation/csv/taobao/taobao_product_category_full_20260709.csv,historical_validation_csv,data-workflow/adapters/taobao/README.md,2026-07-14
 data-workflow/research/微信小程序公开商品数据导出方法.md,legacy-workflow/validation/notes/微信小程序公开商品数据导出方法.md,historical_research_note,docs/数据工作流与游艺圈系统对接执行基线.md,2026-07-14
 data-workflow/manlifang/manufacturer_evidence/,legacy-workflow/validation/evidence/manlifang/,historical_manufacturer_evidence,data-workflow/adapters/manlifang/README.md,2026-07-14
+data-workflow/1688/_debug/,legacy-workflow/validation/screenshots/1688/_debug/,historical_debug_assets,data-workflow/adapters/1688/README.md,2026-07-15
+data-workflow/runtime/runs/1688/,legacy-workflow/runs/1688/historical_validation_runs/,historical_validation_runs,data-workflow/adapters/1688/README.md,2026-07-15
+data-workflow/platform-import-templates/,legacy-workflow/validation/templates/platform-import-templates/,historical_import_templates,游艺圈数据导入字段规范_v2.md,2026-07-15

@@ -18,7 +18,7 @@ When documents conflict, use this order:
 
 1. The user's latest explicit instruction.
 2. `docs/数据工作流与游艺圈系统对接执行基线.md` (sole execution baseline).
-3. The current source guide under `data-workflow/<source>/`.
+3. The current source guide under `data-workflow/adapters/<source>/README.md`.
 4. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
 5. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
 
@@ -59,13 +59,14 @@ n8n is the control plane for triggers, orchestration, retries, state, human gate
 
 ## Current Manlifang Assets
 
-- Delivery batch: `data-workflow/manlifang/captures/manlifang_full_20260710_110814/`
+- Runtime batch: `data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/`
+- L3 delivery: `data-workflow/deliveries/manlifang/manlifang_full_20260712/`
 - 3128 unique products, 5528 normalized images delivered.
 - Source guide: `data-workflow/manlifang/漫立方抓包流程.md`
 
 Processing uses structured JSONL, raw responses and hash-named originals as source assets.
 
-The old source guide remains the current asset-location reference until the large local batch is physically migrated. Tracked collection code and executable commands are maintained in `data-workflow/adapters/manlifang/README.md`. The 1688 and Taobao executable guides are `data-workflow/adapters/1688/README.md` and `data-workflow/adapters/taobao/README.md`.
+The old source guide is retained only as a compatibility entry. Current assets, tracked collection code and executable commands are documented in `data-workflow/adapters/manlifang/README.md`. The 1688 and Taobao executable guides are `data-workflow/adapters/1688/README.md` and `data-workflow/adapters/taobao/README.md`.
 
 Formal targets are `data-workflow/orchestration/n8n/`, `data-workflow/adapters/<source>/`, `data-workflow/runtime/`, `data-workflow/deliveries/` and root `legacy-workflow/`.
 

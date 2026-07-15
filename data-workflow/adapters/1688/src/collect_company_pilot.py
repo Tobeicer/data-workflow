@@ -153,7 +153,10 @@ def extract_seller_identity(html: str) -> dict[str, str]:
 
 def restriction_status(page: CapturedPage) -> str:
     combined = f"{page.final_url}\n{page.title}\n{page.text}".lower()
-    if any(marker in combined for marker in ("验证码", "captcha", "滑块", "安全验证")):
+    if any(
+        marker in combined
+        for marker in ("验证码", "captcha", "滑块", "安全验证", "contactinfo_invalid")
+    ):
         return "human_verification_required"
     if "login.1688.com" in combined or "login.taobao.com" in combined:
         return "login_required"

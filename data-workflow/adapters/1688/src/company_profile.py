@@ -38,6 +38,19 @@ def parse_number(value: Any) -> int | None:
     return int(float(match.group(0)))
 
 
+def normalize_area_sqm(value: Any) -> tuple[int | None, str]:
+    text = clean_text(value)
+    if text in EMPTY_MARKERS:
+        return None, "missing"
+    match = re.search(r"([0-9]+(?:\.[0-9]+)?)", text.replace(",", ""))
+    if not match:
+        return None, "normalization_failed"
+    number = float(match.group(1))
+    if "万" in text:
+        number *= 10_000
+    return int(round(number)), "success"
+
+
 def milliseconds_to_iso(value: Any) -> str:
     text = clean_text(value)
     if text in EMPTY_MARKERS:
@@ -358,11 +371,18 @@ def parse_company_asset(
     if clean_text(cert_info.get("certType")):
         certification_tags.append(clean_text(cert_info.get("certType")).upper() + "认证")
 
+    factory_area_raw = card_value("acreage", "工厂面积")
+    factory_area_sqm, factory_area_status = normalize_area_sqm(factory_area_raw)
+    factory_building_area_raw = clean_text(details.get("厂房面积"))
+    factory_building_area_sqm, factory_building_area_status = normalize_area_sqm(
+        factory_building_area_raw
+    )
+
     summary_snapshot = {
         "snapshot_type": "company_header_summary",
         "source_url": source_urls.get("company_header", ""),
         "collected_at": collected_at,
-        "factory_area_sqm": parse_number(card_value("acreage", "工厂面积")),
+        "factory_area_sqm": factory_area_sqm,
         "employee_count": parse_number(card_value("worker_num", "员工人数")),
         "production_equipment_count": parse_number(card_value("mainDevice", "生产设备")),
         "patent_summary_count": parse_number(card_value("patent_num", "专利数")),
@@ -388,7 +408,7 @@ def parse_company_asset(
         "outsourcing_modes": [
             item.strip() for item in clean_text(details.get("代工模式")).split(",") if item.strip()
         ],
-        "factory_area_sqm": parse_number(details.get("厂房面积")),
+        "factory_building_area_sqm": factory_building_area_sqm,
         "employee_count": parse_number(details.get("员工总人数")),
         "independent_sampling": clean_text(details.get("自主打样")),
         "production_equipment_count": parse_number(details.get("设备总数")),
@@ -425,6 +445,35 @@ def parse_company_asset(
                 "value": json.dumps(value, ensure_ascii=False) if not isinstance(value, str) else value,
                 "source_url": source_url,
                 "label": label,
+                "collected_at": collected_at,
+            }
+        )
+
+    def add_area_evidence(
+        *,
+        field: str,
+        value: int | None,
+        raw_value: str,
+        source_key: str,
+        label: str,
+        source_path: str,
+        normalization_status: str,
+    ) -> None:
+        if not raw_value:
+            return
+        source_url = source_urls.get(source_key, "")
+        if not source_url:
+            return
+        field_evidence.append(
+            {
+                "field": field,
+                "value": "" if value is None else str(value),
+                "raw_value": raw_value,
+                "unit": "sqm",
+                "source_url": source_url,
+                "source_path": source_path,
+                "label": label,
+                "normalization_status": normalization_status,
                 "collected_at": collected_at,
             }
         )
@@ -487,10 +536,34 @@ def parse_company_asset(
         add_evidence(f"company.{field}", value, company_source_keys[field], field)
     for field, value in summary_snapshot.items():
         if field not in {"snapshot_type", "source_url", "collected_at"}:
-            add_evidence(f"factory_summary.{field}", value, "company_header", field)
+            if field == "factory_area_sqm":
+                continue
+            label = "工厂面积" if field == "factory_area_sqm" else field
+            add_evidence(f"factory_summary.{field}", value, "company_header", label)
     for field, value in detail_snapshot.items():
         if field not in {"snapshot_type", "source_url", "collected_at"}:
-            add_evidence(f"factory_detail.{field}", value, "credit_detail", field)
+            if field == "factory_building_area_sqm":
+                continue
+            label = "厂房面积" if field == "factory_building_area_sqm" else field
+            add_evidence(f"factory_detail.{field}", value, "credit_detail", label)
+    add_area_evidence(
+        field="factory_summary.factory_area_sqm",
+        value=factory_area_sqm,
+        raw_value=factory_area_raw,
+        source_key="company_header",
+        label="工厂面积",
+        source_path="data.data.cardDetail[code=acreage].info",
+        normalization_status=factory_area_status,
+    )
+    add_area_evidence(
+        field="factory_detail.factory_building_area_sqm",
+        value=factory_building_area_sqm,
+        raw_value=factory_building_area_raw,
+        source_key="credit_detail",
+        label="厂房面积",
+        source_path="credit_detail.labels[厂房面积]",
+        normalization_status=factory_building_area_status,
+    )
     for field, value in contacts.items():
         add_evidence(f"contacts.{field}", value, contact_source_keys[field], field)
     for field, value in company_profile.items():

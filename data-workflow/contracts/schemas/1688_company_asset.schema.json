@@ -109,11 +109,28 @@
           "source_url": {"type": "string", "minLength": 1},
           "collected_at": {"type": "string"},
           "factory_area_sqm": {"type": ["integer", "null"]},
+          "factory_building_area_sqm": {"type": ["integer", "null"]},
           "employee_count": {"type": ["integer", "null"]},
           "production_equipment_count": {"type": ["integer", "null"]},
           "patent_summary_count": {"type": ["integer", "null"]},
           "certificate_summary_count": {"type": ["integer", "null"]}
         },
+        "allOf": [
+          {
+            "if": {
+              "properties": {"snapshot_type": {"const": "company_header_summary"}},
+              "required": ["snapshot_type"]
+            },
+            "then": {"not": {"required": ["factory_building_area_sqm"]}}
+          },
+          {
+            "if": {
+              "properties": {"snapshot_type": {"const": "credit_detail_page"}},
+              "required": ["snapshot_type"]
+            },
+            "then": {"not": {"required": ["factory_area_sqm"]}}
+          }
+        ],
         "additionalProperties": true
       }
     },
@@ -136,8 +153,15 @@
         "properties": {
           "field": {"type": "string", "minLength": 1},
           "value": {"type": "string"},
+          "raw_value": {"type": "string"},
+          "unit": {"type": "string"},
           "source_url": {"type": "string", "minLength": 1},
+          "source_path": {"type": "string"},
           "label": {"type": "string"},
+          "normalization_status": {
+            "type": "string",
+            "enum": ["success", "missing", "normalization_failed"]
+          },
           "collected_at": {"type": "string"}
         }
       }

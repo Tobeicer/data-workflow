@@ -19,7 +19,9 @@ def run_command(command: list[str], *, dry_run: bool) -> None:
     print("[1688-workflow] " + " ".join(command))
     if dry_run:
         return
-    subprocess.run(command, check=True)
+    completed = subprocess.run(command, check=False)
+    if completed.returncode:
+        raise SystemExit(completed.returncode)
 
 
 def add_repeated_option(command: list[str], option: str, values: list[str] | None) -> None:

@@ -7,6 +7,7 @@ from typing import Mapping
 ROOT = Path(__file__).resolve().parents[2]
 BASELINE = ROOT / "docs" / "数据工作流与游艺圈系统对接执行基线.md"
 UNIFIED_DESIGN = ROOT / "docs" / "数据工作流总体技术设计.md"
+IMPLEMENTATION_ROADMAP = ROOT / "docs" / "数据工作流建设路线图.md"
 PROTECTED_PATHS = (
     "docs/project-split",
     "docs/requirements",
@@ -80,6 +81,33 @@ def test_document_authority_is_consolidated_around_one_design() -> None:
         ROOT / "docs/superpowers/specs/2026-07-15-data-workflow-migration-closeout-design.md",
     ):
         assert not retired.exists(), retired
+
+
+def test_confirmed_design_has_one_executable_roadmap() -> None:
+    assert IMPLEMENTATION_ROADMAP.is_file()
+    design = read(UNIFIED_DESIGN)
+    roadmap = read(IMPLEMENTATION_ROADMAP)
+    assert "状态：设计已确认，按唯一建设路线图实施" in design
+    for path in (
+        BASELINE,
+        UNIFIED_DESIGN,
+        ROOT / "README.md",
+        ROOT / "AGENTS.md",
+        ROOT / "data-workflow" / "README.md",
+        ROOT / "data-workflow" / "orchestration" / "n8n" / "README.md",
+        ROOT / "AI_HANDOFF.md",
+    ):
+        assert "数据工作流建设路线图.md" in read(path), path
+    for phrase in (
+        "For agentic workers",
+        "状态：设计已确认，进入实施",
+        "A1. 核验部署拓扑和运行边界",
+        "B6. 建设并导出 Master 与 shared n8n 工作流",
+        "G3. 确认平台接收契约并实现 L3 adapter/receipt 闭环",
+        "G4. 逐来源晋级、启用和连续 30 天稳定性验收",
+        "所有来源保持 `enabled=false`",
+    ):
+        assert phrase in roadmap
 
 
 def test_unified_design_defines_independent_adapters_and_hybrid_field_model() -> None:

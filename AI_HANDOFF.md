@@ -8,16 +8,18 @@
 1. `AGENTS.md`
 2. `docs/数据工作流与游艺圈系统对接执行基线.md`
 3. 跨来源、n8n、数据模型或数据库任务再读 `docs/数据工作流总体技术设计.md`
-4. 当前来源的 `data-workflow/adapters/<source>/README.md`
-5. 相关契约和测试
+4. `docs/数据工作流建设路线图.md` 的“当前执行点”和对应任务
+5. 当前来源的 `data-workflow/adapters/<source>/README.md`
+6. 相关契约和测试
 
 来源状态与启用值只读取 `data-workflow/orchestration/n8n/configs/source_registry.json`；来源命令、能力、批次和证据只读取对应 adapter README。
 
 ## 当前接续点
 
 - 目录与资产迁移已经完成，不得重新执行历史迁移计划。
+- 总体技术设计已确认，唯一实施路线图已经建立，不再创建分散计划。
 - 当前没有可启用的 n8n workflow JSON。
-- 下一步是复核统一技术设计，确认成文准确后编写唯一详细建设路线图；随后先统一 adapter/run_result 契约，再建设 shared 控制面和逐来源工作流。
+- 下一步严格执行路线图 A1：核验 n8n、执行器、运行目录和锁存储部署拓扑；随后执行 A2-A6 的严格契约与共享运行基础。
 
 ## 不可越过的边界
 

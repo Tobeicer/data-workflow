@@ -6,7 +6,7 @@
 
 ## Directory Boundaries
 
-- `docs/`: execution baseline, unified technical design, classification reference and historical requirements.
+- `docs/`: execution baseline, unified technical design, sole implementation roadmap, classification reference and historical requirements.
 - `data-workflow/`: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
 - `database/`: database snapshots and SQL dumps (reference only).
 - `docs/project-split/`: protected original requirements; never modify.
@@ -19,10 +19,11 @@ When documents conflict, use this order:
 1. The user's latest explicit instruction.
 2. `docs/数据工作流与游艺圈系统对接执行基线.md` (sole execution baseline).
 3. `docs/数据工作流总体技术设计.md` for cross-source architecture, logical datasets and integration contracts.
-4. The current source guide under `data-workflow/adapters/<source>/README.md` for source-specific behavior.
-5. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
-6. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
-7. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
+4. `docs/数据工作流建设路线图.md` for implementation order, status, acceptance and the next execution point; it cannot override the technical design.
+5. The current source guide under `data-workflow/adapters/<source>/README.md` for source-specific behavior.
+6. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
+7. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
+8. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
 
 New confirmed business requirements go to `docs/requirements/信息整理.md`.
 
@@ -34,6 +35,7 @@ New confirmed business requirements go to `docs/requirements/信息整理.md`.
 - A fact should have one authoritative definition; other documents link to it instead of repeating it.
 - New role, data-layer, database-boundary or integration decisions must update the execution baseline first.
 - Cross-source implementation details belong in `docs/数据工作流总体技术设计.md`; source commands and evidence belong only in the source adapter README.
+- Implementation tasks, dependencies, progress, acceptance evidence and the next execution point belong only in `docs/数据工作流建设路线图.md`.
 
 ## Current Data Role
 

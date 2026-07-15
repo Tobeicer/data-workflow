@@ -6,7 +6,7 @@
 
 ## Directory Boundaries
 
-- `docs/`: execution baseline, unified technical design, sole implementation roadmap, classification reference and historical requirements.
+- `docs/`: sole active handbook, classification reference and protected historical requirements.
 - `data-workflow/`: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
 - `database/`: database snapshots and SQL dumps (reference only).
 - `docs/project-split/`: protected original requirements; never modify.
@@ -17,13 +17,11 @@
 When documents conflict, use this order:
 
 1. The user's latest explicit instruction.
-2. `docs/数据工作流与游艺圈系统对接执行基线.md` (sole execution baseline).
-3. `docs/数据工作流总体技术设计.md` for cross-source architecture, logical datasets and integration contracts.
-4. `docs/数据工作流建设路线图.md` for implementation order, status, acceptance and the next execution point; it cannot override the technical design.
-5. The current source guide under `data-workflow/adapters/<source>/README.md` for source-specific behavior.
-6. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
-7. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
-8. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
+2. `docs/游艺圈数据工作流总纲.md` (sole active handbook: boundaries, architecture, contracts, roadmap, status and next action).
+3. The current source guide under `data-workflow/adapters/<source>/README.md` for source-specific behavior.
+4. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
+5. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
+6. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
 
 New confirmed business requirements go to `docs/requirements/信息整理.md`.
 
@@ -34,8 +32,7 @@ New confirmed business requirements go to `docs/requirements/信息整理.md`.
 - Do not place command failures, retry history or conversational reasoning in formal documents.
 - A fact should have one authoritative definition; other documents link to it instead of repeating it.
 - New role, data-layer, database-boundary or integration decisions must update the execution baseline first.
-- Cross-source implementation details belong in `docs/数据工作流总体技术设计.md`; source commands and evidence belong only in the source adapter README.
-- Implementation tasks, dependencies, progress, acceptance evidence and the next execution point belong only in `docs/数据工作流建设路线图.md`.
+- Cross-source architecture, logical datasets, implementation tasks, progress and the next execution point belong only in `docs/游艺圈数据工作流总纲.md`; source commands and evidence belong only in the source adapter README.
 
 ## Current Data Role
 
@@ -90,5 +87,5 @@ Do not store passwords in Markdown. Use an untracked `.env.local` file.
 - Do not write to `public.product`, `public.accessory`, `public.manufacturer` or other formal business tables without explicit scope expansion and an approved platform contract.
 - Preferred integration order: internal import API, agreed permission-isolated `ingest/staging`, then L3 file import.
 - The platform Git repository has not been received. When available, inspect it only to finalize the L3 adapter; never delete L0-L2 fields because the platform cannot currently consume them.
-- Logical datasets and index suggestions in `docs/数据工作流总体技术设计.md` are recommendations for the contract/staging discussion, not authorization to create production tables or migrations.
+- Logical datasets and index suggestions in `docs/游艺圈数据工作流总纲.md` are recommendations for the contract/staging discussion, not authorization to create production tables or migrations.
 - If `.codegraph/` exists and the task is about locating or understanding code, use CodeGraph before text search.

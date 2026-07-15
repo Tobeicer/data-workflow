@@ -73,7 +73,7 @@ EXPECTED_ARCHIVE_MOVES = {
     "data-workflow/research/微信小程序公开商品数据导出方法.md": (
         "legacy-workflow/validation/notes/微信小程序公开商品数据导出方法.md",
         "historical_research_note",
-        "docs/数据工作流与游艺圈系统对接执行基线.md",
+        "docs/游艺圈数据工作流总纲.md",
     ),
     "data-workflow/manlifang/manufacturer_evidence/": (
         "legacy-workflow/validation/evidence/manlifang/",
@@ -367,7 +367,7 @@ def test_legacy_readme_is_read_only_and_points_to_formal_entrypoints() -> None:
         "只作历史参考",
         "只读",
         "不得作为正式执行入口",
-        "docs/数据工作流与游艺圈系统对接执行基线.md",
+        "docs/游艺圈数据工作流总纲.md",
         "data-workflow/runtime/runs/<source>/<run_id>/",
         "data-workflow/deliveries/<source>/<delivery_id>/",
         "已迁移的本地资产",

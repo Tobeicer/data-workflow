@@ -5,9 +5,13 @@ from typing import Mapping
 
 
 ROOT = Path(__file__).resolve().parents[2]
-BASELINE = ROOT / "docs" / "数据工作流与游艺圈系统对接执行基线.md"
-UNIFIED_DESIGN = ROOT / "docs" / "数据工作流总体技术设计.md"
-IMPLEMENTATION_ROADMAP = ROOT / "docs" / "数据工作流建设路线图.md"
+HANDBOOK = ROOT / "docs" / "游艺圈数据工作流总纲.md"
+RETIRED_ACTIVE_DOCS = (
+    ROOT / "docs" / ("数据工作流与游艺圈系统对接" + "执行基线.md"),
+    ROOT / "docs" / ("数据工作流总体技术" + "设计.md"),
+    ROOT / "docs" / ("数据工作流建设" + "路线图.md"),
+    ROOT / ("AI_" + "HANDOFF.md"),
+)
 PROTECTED_PATHS = (
     "docs/project-split",
     "docs/requirements",
@@ -56,62 +60,55 @@ def governance_base_ref(environ: Mapping[str, str] = os.environ) -> str:
     return parent.stdout.strip() if parent.returncode == 0 else "HEAD"
 
 
-def test_baseline_is_sole_authority_and_names_both_owners() -> None:
-    text = read(BASELINE)
-    assert "版本：V1.4" in text
+def test_handbook_is_sole_authority_and_names_both_owners() -> None:
+    text = read(HANDBOOK)
+    assert "版本：V1.0" in text
     assert "日期：2026-07-15" in text
-    assert "状态：当前唯一执行基线" in text
-    for heading in ("### 数据负责人", "### 平台负责人", "### 双方共同确认"):
+    assert "状态：唯一现行总纲，设计已确认并进入实施" in text
+    for heading in ("### 3.1 数据负责人", "### 3.2 平台负责人", "### 3.3 双方共同确认"):
         assert heading in text
 
 
-def test_document_authority_is_consolidated_around_one_design() -> None:
-    assert UNIFIED_DESIGN.is_file()
+def test_document_authority_is_consolidated_in_one_handbook() -> None:
+    assert HANDBOOK.is_file()
     for path in (
-        BASELINE,
         ROOT / "README.md",
         ROOT / "AGENTS.md",
         ROOT / "data-workflow" / "README.md",
-        ROOT / "AI_HANDOFF.md",
     ):
-        assert "docs/数据工作流总体技术设计.md" in read(path), path
+        assert "docs/游艺圈数据工作流总纲.md" in read(path), path
 
     for retired in (
+        *RETIRED_ACTIVE_DOCS,
         ROOT / "docs/superpowers/plans/2026-07-15-data-workflow-migration-closeout.md",
         ROOT / "docs/superpowers/specs/2026-07-15-data-workflow-migration-closeout-design.md",
     ):
         assert not retired.exists(), retired
 
 
-def test_confirmed_design_has_one_executable_roadmap() -> None:
-    assert IMPLEMENTATION_ROADMAP.is_file()
-    design = read(UNIFIED_DESIGN)
-    roadmap = read(IMPLEMENTATION_ROADMAP)
-    assert "状态：设计已确认，按唯一建设路线图实施" in design
+def test_handbook_contains_confirmed_design_and_executable_roadmap() -> None:
+    handbook = read(HANDBOOK)
     for path in (
-        BASELINE,
-        UNIFIED_DESIGN,
         ROOT / "README.md",
         ROOT / "AGENTS.md",
         ROOT / "data-workflow" / "README.md",
         ROOT / "data-workflow" / "orchestration" / "n8n" / "README.md",
-        ROOT / "AI_HANDOFF.md",
     ):
-        assert "数据工作流建设路线图.md" in read(path), path
+        assert "游艺圈数据工作流总纲.md" in read(path), path
     for phrase in (
         "For agentic workers",
-        "状态：设计已确认，进入实施",
+        "状态：唯一现行总纲，设计已确认并进入实施",
         "A1. 核验部署拓扑和运行边界",
         "B6. 建设并导出 Master 与 shared n8n 工作流",
         "G3. 确认平台接收契约并实现 L3 adapter/receipt 闭环",
         "G4. 逐来源晋级、启用和连续 30 天稳定性验收",
         "所有来源保持 `enabled=false`",
     ):
-        assert phrase in roadmap
+        assert phrase in handbook
 
 
 def test_unified_design_defines_independent_adapters_and_hybrid_field_model() -> None:
-    text = read(UNIFIED_DESIGN)
+    text = read(HANDBOOK)
     for phrase in (
         "共享控制面、独立来源适配器",
         "公共核心字段",
@@ -128,7 +125,7 @@ def test_unified_design_defines_independent_adapters_and_hybrid_field_model() ->
 
 
 def test_unified_design_defines_database_contract_and_delivery_receipts() -> None:
-    text = read(UNIFIED_DESIGN)
+    text = read(HANDBOOK)
     for dataset in (
         "source_product",
         "source_sku",
@@ -192,7 +189,7 @@ def test_1688_area_fields_are_distinct_in_active_contract_docs() -> None:
 
 
 def test_baseline_defines_information_supply_and_non_transaction_boundary() -> None:
-    text = read(BASELINE)
+    text = read(HANDBOOK)
     for phrase in (
         "信息供应平台",
         "不是商城",
@@ -205,8 +202,8 @@ def test_baseline_defines_information_supply_and_non_transaction_boundary() -> N
 
 
 def test_baseline_preserves_all_seven_core_source_strategies() -> None:
-    text = read(BASELINE)
-    source_matrix = markdown_section(text, "## 7. 来源定位")
+    text = read(HANDBOOK)
+    source_matrix = markdown_section(text, "## 5. 来源能力与独立适配器")
     for source in ("漫立方", "1688", "淘宝", "京东", "拼多多", "抖音", "闲鱼"):
         assert f"| {source} |" in source_matrix
     assert "大平台通过公开数据爬虫建立全量镜像" in text
@@ -215,13 +212,13 @@ def test_baseline_preserves_all_seven_core_source_strategies() -> None:
 
 
 def test_baseline_defines_scheduled_automatic_and_conditional_triggers() -> None:
-    text = read(BASELINE)
+    text = read(HANDBOOK)
     for trigger in ("定期/定时", "自动触发", "条件触发"):
         assert trigger in text
 
 
 def test_formal_paths_and_disabled_n8n_state_remain_authoritative() -> None:
-    for path in (ROOT / "README.md", ROOT / "AGENTS.md", BASELINE, ROOT / "data-workflow" / "README.md"):
+    for path in (ROOT / "README.md", ROOT / "AGENTS.md", HANDBOOK, ROOT / "data-workflow" / "README.md"):
         text = read(path)
         for target in FORMAL_TARGET_PATHS:
             assert target in text, (path, target)
@@ -261,7 +258,7 @@ def test_retired_active_docs_stay_deleted() -> None:
 def test_database_is_a_controlled_reference_not_a_write_target() -> None:
     root_readme = read(ROOT / "README.md")
     agents = read(ROOT / "AGENTS.md")
-    baseline = read(BASELINE)
+    baseline = read(HANDBOOK)
     assert "`database/` | 数据库快照预留路径；当前不存在，若收到快照也仅作受控参考" in root_readme
     for phrase in (
         "## Database Snapshot Reference",

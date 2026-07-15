@@ -2,7 +2,7 @@
 
 状态：本目录只作历史参考，按只读归档管理。`legacy-workflow/` 不得作为正式执行入口，不得用归档文件覆盖当前代码、运行资产、交付物或现行文档。
 
-当前唯一执行基线是 `docs/数据工作流与游艺圈系统对接执行基线.md`。归档项的旧路径、新路径、分类、正式替代入口和迁移日期见 `legacy-workflow/migration/path-map.csv`。
+当前唯一现行总纲是 `docs/游艺圈数据工作流总纲.md`。归档项的旧路径、新路径、分类、正式替代入口和迁移日期见 `legacy-workflow/migration/path-map.csv`。
 
 ## 正式替代入口
 

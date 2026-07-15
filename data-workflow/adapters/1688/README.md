@@ -1,9 +1,7 @@
 # 1688 来源适配器
 
 状态：`stabilizing`。tracked 代码与指南已整合到正式适配器，n8n 启用状态仍为 `enabled=false`。
-上位基线：`../../../docs/数据工作流与游艺圈系统对接执行基线.md`
-
-跨来源模型与契约：`../../../docs/数据工作流总体技术设计.md`
+唯一现行总纲：`../../../docs/游艺圈数据工作流总纲.md`
 
 本目录是 1688 当前唯一正式代码和命令入口。`data-workflow/orchestration/n8n/workflows/sources/1688/` 目前只有控制面说明，不含可启用的 n8n JSON；在工作流 JSON、真实登录态、dry-run 和质量证据四道门禁全部通过前，不得在 n8n 中标为 `active`。
 

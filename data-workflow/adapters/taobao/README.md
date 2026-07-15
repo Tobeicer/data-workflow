@@ -8,7 +8,7 @@
 ## 正式入口与路径
 
 - 代码：`data-workflow/adapters/taobao/src/run_source.py`
-- 测试：`data-workflow/adapters/taobao/tests/unit/test_run_source.py`
+- 测试目录：`data-workflow/adapters/taobao/tests/`（已预留，正式测试将在统一契约实施时重建）
 - 默认 L1：`data-workflow/runtime/runs/taobao/taobao_<timestamp>/l1/taobao_product_full_<timestamp>.csv`
 - profile 目标：`data-workflow/runtime/browser-profiles/taobao/`
 - 调试资产：`data-workflow/runtime/tmp/taobao/`
@@ -50,8 +50,6 @@
 ## 资产目标与当前限制
 
 L0-L2 目标是保留可重放 L0、完整来源语义的 L1，以及关系、快照、质量、变化和复核队列 L2。当前迁入原型只生成合并后的 L1 CSV；尚未实现统一阶段契约、L0/L2 和 `run_result.json`，因此不得宣称来源稳定。
-
-2026-07-09 的历史验证批次使用 31 个游艺配件关键词，每个关键词最多 2 条：搜索结果 62 行、唯一商品 61 个、详情补采 61 条且全部成功。历史 CSV 已按原始字节归档到 `legacy-workflow/validation/csv/taobao/taobao_product_category_full_20260709.csv`，只作追溯参考。
 
 ## Profile 与 n8n 门禁
 

@@ -6,9 +6,8 @@
 
 | 路径 | 用途 |
 |---|---|
-| `docs/` | 唯一现行总纲、分类专项参考和受保护历史需求 |
+| `docs/` | 文档导航、唯一现行总纲、分类专项参考和受保护历史需求 |
 | `data-workflow/` | 正式来源适配器、n8n 编排、运行产物和交付物 |
-| `legacy-workflow/` | 只读历史验证归档，不是正式执行入口 |
 | `database/` | 数据库快照预留路径；当前不存在，若收到快照也仅作受控参考 |
 | `AGENTS.md` | 执行边界与最小阅读顺序 |
 
@@ -16,8 +15,9 @@
 
 普通来源任务只读：
 
-1. `docs/游艺圈数据工作流总纲.md`
-2. 对应的 `data-workflow/adapters/<source>/README.md`
+1. 需要定位文档时先读 `docs/README.md`。
+2. 执行任务读 `docs/游艺圈数据工作流总纲.md`。
+3. 涉及具体来源再读对应的 `data-workflow/adapters/<source>/README.md`。
 
 `docs/project-split/` 是受保护的原始需求；`docs/requirements/` 是历史参考，仅 `docs/requirements/信息整理.md` 接收后续确认的新业务要求。两者都不得覆盖总纲。
 
@@ -25,6 +25,7 @@
 
 | 文件 | 作用 |
 |---|---|
+| `docs/README.md` | docs 内部导航和维护规则 |
 | `docs/游艺圈数据工作流总纲.md` | 唯一现行总纲：职责、分层、技术设计、逻辑数据模型、实施路线图和下一执行点 |
 | `docs/requirements/信息整理.md` | 新确认业务要求的持续更新入口 |
 | `docs/游艺圈游戏游艺设备完整分类清单.md` | 平台映射、关键词、包含与排除规则的分类参考 |
@@ -45,7 +46,6 @@
 - 七个平台适配器：`data-workflow/adapters/<source>/`
 - L0-L2 运行资产：`data-workflow/runtime/`
 - L3 交付：`data-workflow/deliveries/`
-- 历史归档：`legacy-workflow/`
 
 七个平台为漫立方、1688、淘宝、京东、拼多多、抖音和闲鱼。当前 n8n 来源登记全部 `enabled=false`，不得把目录存在误写成工作流已经启用。
 

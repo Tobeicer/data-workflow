@@ -16,7 +16,7 @@
 
 ## 目录结构
 
-正式路径为 `data-workflow/orchestration/n8n/`、`data-workflow/adapters/<source>/`、`data-workflow/runtime/`、`data-workflow/deliveries/` 和根目录 `legacy-workflow/`。
+正式路径为 `data-workflow/orchestration/n8n/`、`data-workflow/adapters/<source>/`、`data-workflow/shared/`、`data-workflow/contracts/`、`data-workflow/configs/`、`data-workflow/tests/`、`data-workflow/tools/`、`data-workflow/runtime/` 和 `data-workflow/deliveries/`。
 
 ```text
 data-workflow/
@@ -24,12 +24,12 @@ data-workflow/
 ├─ .env.example
 ├─ orchestration/
 │  └─ n8n/
-│     ├─ workflows/
 │     ├─ configs/
-│     ├─ schemas/
-│     ├─ prompts/
-│     ├─ fixtures/
-│     └─ deployment/
+│     ├─ deployment/
+│     └─ workflows/
+│        ├─ master/
+│        ├─ shared/
+│        └─ sources/
 ├─ adapters/
 │  ├─ manlifang/
 │  ├─ 1688/
@@ -39,20 +39,24 @@ data-workflow/
 │  ├─ douyin/
 │  └─ xianyu/
 ├─ shared/
+│  ├─ src/data_workflow_core/
+│  └─ tests/
 ├─ contracts/
-├─ configs/
+│  ├─ schemas/
+│  ├─ dictionaries/
+│  └─ platform/
+├─ configs/classification/
 ├─ tests/
+│  ├─ contracts/
+│  ├─ orchestration/
+│  └─ fixtures/
 ├─ tools/
 ├─ runtime/
 │  ├─ runs/<source>/<run_id>/
 │  ├─ browser-profiles/
-│  ├─ cache/
-│  ├─ logs/
 │  └─ tmp/
 └─ deliveries/<source>/<delivery_id>/
 ```
-
-历史脚本、一次性试采和验证材料位于根目录 `legacy-workflow/`，不属于正式执行入口。
 
 ## 目录边界
 
@@ -60,6 +64,9 @@ data-workflow/
 - `adapters/` 一个来源一个模块；来源特有逻辑不得散落到根目录。
 - `shared/` 保存跨来源通用执行能力。
 - `contracts/` 保存稳定机器契约，n8n 不解析自然语言日志。
+- `configs/` 保存跨来源且版本化的机器配置。
+- `tests/` 保存共享契约、控制面和仓库级测试；来源解析测试放在对应 adapter 下。
+- `tools/` 只保存被正式流程或测试引用的维护工具。
 - `runtime/` 保存按 `run_id` 定位的 L0-L2 运行现场，默认不进入 Git。
 - `deliveries/` 只保存可替换的 L3 交付，不能替代 L0-L2。
 

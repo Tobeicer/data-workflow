@@ -1,6 +1,6 @@
 # 漫立方来源适配器
 
-状态：`stabilizing`。Git 跟踪的采集、清洗、图片和交付实现及单元测试已迁入本适配器；当前大型批次和交付资产已完成同盘迁移和资产清单核验。
+状态：`stabilizing`。Git 跟踪的采集、清洗、图片和交付实现已迁入本适配器；正式测试目录已预留，测试将在统一契约实施时重建。
 
 唯一现行总纲：`../../../docs/游艺圈数据工作流总纲.md`
 
@@ -16,7 +16,6 @@
 - 当前原始 XLSX：`data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/漫立方_原始全量商品数据_manlifang_full_20260710_110814.xlsx`
 - 当前清洗 XLSX：`data-workflow/runtime/runs/manlifang/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
 - 当前 L3 交付：`data-workflow/deliveries/manlifang/manlifang_full_20260712/`
-- 历史厂家核验页面与来源索引：`legacy-workflow/validation/evidence/manlifang/`（只读参考，不作为当前厂家主数据）
 
 新运行从本适配器写入 `data-workflow/runtime/runs/manlifang/<run_id>/`。当前正式批次和交付已于 2026-07-15 完成同盘移动，迁移前后资产清单的文件身份、相对路径、内容与硬链接拓扑一致。
 

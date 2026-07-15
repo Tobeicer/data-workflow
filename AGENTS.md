@@ -6,7 +6,7 @@
 
 ## Directory Boundaries
 
-- `docs/`: sole active handbook, classification reference and protected historical requirements.
+- `docs/`: documentation index, sole active handbook, classification reference and protected historical requirements.
 - `data-workflow/`: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
 - `database/`: database snapshots and SQL dumps (reference only).
 - `docs/project-split/`: protected original requirements; never modify.
@@ -17,11 +17,12 @@
 When documents conflict, use this order:
 
 1. The user's latest explicit instruction.
-2. `docs/游艺圈数据工作流总纲.md` (sole active handbook: boundaries, architecture, contracts, roadmap, status and next action).
-3. The current source guide under `data-workflow/adapters/<source>/README.md` for source-specific behavior.
-4. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
-5. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
-6. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
+2. `docs/README.md` when document location or maintenance ownership is needed.
+3. `docs/游艺圈数据工作流总纲.md` (sole active handbook: boundaries, architecture, contracts, roadmap, status and next action).
+4. The current source guide under `data-workflow/adapters/<source>/README.md` for source-specific behavior.
+5. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
+6. `游艺圈数据导入字段规范_v2.md` for the current L3 Excel adapter only.
+7. Protected historical references (`docs/project-split/`, `docs/requirements/`), only when historical product context is explicitly needed.
 
 New confirmed business requirements go to `docs/requirements/信息整理.md`.
 
@@ -31,7 +32,7 @@ New confirmed business requirements go to `docs/requirements/信息整理.md`.
 - Once a decision is confirmed, remove A/B/C comparisons and write the selected approach directly.
 - Do not place command failures, retry history or conversational reasoning in formal documents.
 - A fact should have one authoritative definition; other documents link to it instead of repeating it.
-- New role, data-layer, database-boundary or integration decisions must update the execution baseline first.
+- New role, data-layer, database-boundary or integration decisions must update the active handbook first.
 - Cross-source architecture, logical datasets, implementation tasks, progress and the next execution point belong only in `docs/游艺圈数据工作流总纲.md`; source commands and evidence belong only in the source adapter README.
 
 ## Current Data Role
@@ -63,12 +64,11 @@ Shared control-plane behavior does not imply shared collectors. Every platform o
 
 ## Current Source References
 
-- `data-workflow/manlifang/漫立方抓包流程.md` is retained only as a compatibility entry.
 - Current Manlifang assets, counts, tracked code and commands are documented only in `data-workflow/adapters/manlifang/README.md`.
 - The 1688 and Taobao executable guides are `data-workflow/adapters/1688/README.md` and `data-workflow/adapters/taobao/README.md`.
 - Source status and enabled state are defined only in `data-workflow/orchestration/n8n/configs/source_registry.json`.
 
-Formal targets are `data-workflow/orchestration/n8n/`, `data-workflow/adapters/<source>/`, `data-workflow/runtime/`, `data-workflow/deliveries/` and root `legacy-workflow/`.
+Formal targets are `data-workflow/orchestration/n8n/`, `data-workflow/adapters/<source>/`, `data-workflow/shared/`, `data-workflow/contracts/`, `data-workflow/configs/`, `data-workflow/tests/`, `data-workflow/tools/`, `data-workflow/runtime/` and `data-workflow/deliveries/`.
 
 ## Database Snapshot Reference
 

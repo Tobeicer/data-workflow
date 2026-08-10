@@ -205,6 +205,7 @@ def run_multi_product_workflow(
     expected_categories: list[str] | None = None,
     confirmation_window: int = 10,
     verification_wait_seconds: int = 240,
+    allow_input_change: bool = False,
 ) -> dict:
     output_dir = Path(output_dir)
     normalized_offers = normalize_offers(offers)
@@ -214,17 +215,23 @@ def run_multi_product_workflow(
     checkpoint = read_json(checkpoint_path, {"version": 1, "products": {}, "companies": {}})
     previous_fingerprint = str(checkpoint.get("input_fingerprint") or "")
     current_items = workflow_input_items(normalized_offers)
-    current_item_keys = {
-        (item["offer_id"], item["validation_category"]) for item in current_items
-    }
     previous_items = checkpoint.get("input_items") or []
     if previous_items:
-        previous_item_keys = {
-            (str(item.get("offer_id") or ""), str(item.get("validation_category") or ""))
+        previous_offer_keys = {
+            str(item.get("offer_id") or "")
             for item in previous_items
+            if str(item.get("offer_id") or "")
         }
-        if not previous_item_keys.issubset(current_item_keys):
-            raise ValueError("checkpoint input fingerprint does not match this run")
+        current_offer_keys = {item["offer_id"] for item in current_items}
+        if not previous_offer_keys.issubset(current_offer_keys):
+            if not allow_input_change:
+                raise ValueError("checkpoint input fingerprint does not match this run")
+            dropped = sorted(previous_offer_keys - current_offer_keys)
+            print(
+                "[1688] 检查点输入已变化（--resume-force）："
+                f"{len(dropped)} 个旧商品不再纳入本次清单，其已采数据保留；"
+                "仅增量采集新商品。"
+            )
     elif previous_fingerprint and previous_fingerprint != input_fingerprint:
         previous_offer_ids = set((checkpoint.get("products") or {}).keys())
         current_offer_ids = {item["offer_id"] for item in current_items}
@@ -734,6 +741,7 @@ def main() -> int:
     parser.add_argument("--headless", action="store_true")
     parser.add_argument("--confirmation-window", type=int, default=10)
     parser.add_argument("--verification-wait-seconds", type=int, default=240)
+    parser.add_argument("--resume-force", action="store_true", help="允许输入清单变化后续采（选样重排/换词场景）")
     parser.add_argument("--no-stealth", action="store_true", help="不注入 stealth 指纹（默认注入）")
     parser.add_argument("--pacing-config", help="自适应频控配置 JSON，提供后启用自适应节奏")
     parser.add_argument("--pacing-checkpoint", default=str(DEFAULT_PACING_CHECKPOINT))
@@ -771,6 +779,7 @@ def main() -> int:
             expected_categories=expected_categories,
             confirmation_window=args.confirmation_window,
             verification_wait_seconds=args.verification_wait_seconds,
+            allow_input_change=args.resume_force,
         )
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["status"] in {"success", "partial_success"} else 2

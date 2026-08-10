@@ -183,6 +183,31 @@ def test_checkpoint_allows_append_only_category_coverage_expansion(tmp_path: Pat
     assert result["counts"]["products"] == 2
 
 
+def test_checkpoint_resume_force_allows_reselected_input(tmp_path: Path) -> None:
+    browser = ProductOnlyBrowser()
+    run_multi_product_workflow(
+        offers=[{"offer_id": "1001", "validation_category": "A01"}],
+        output_dir=tmp_path,
+        browser=browser,
+        collected_at="2026-07-15T12:00:00+08:00",
+        expected_categories=["A01"],
+        confirmation_window=1,
+    )
+    result = run_multi_product_workflow(
+        offers=[{"offer_id": "2002", "validation_category": "A02"}],
+        output_dir=tmp_path,
+        browser=browser,
+        collected_at="2026-07-15T12:00:00+08:00",
+        expected_categories=["A02"],
+        confirmation_window=1,
+        allow_input_change=True,
+    )
+    assert result["counts"]["products"] == 1
+    checkpoint = json.loads((tmp_path / "checkpoint.json").read_text(encoding="utf-8"))
+    assert "1001" in checkpoint["products"]  # 旧商品缓存保留
+    assert "2002" in checkpoint["products"]  # 新商品已采
+
+
 def test_company_network_error_becomes_retryable_checkpoint_and_run_result(
     tmp_path: Path,
 ) -> None:

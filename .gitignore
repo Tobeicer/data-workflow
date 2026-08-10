@@ -14,14 +14,14 @@ __pycache__/
 **/.ruff_cache/
 **/.cache/
 **/tmp/
-data-workflow/1688/archive/
-data-workflow/runtime/
-data-workflow/deliveries/
-data-workflow/**/captures/
-data-workflow/**/runs/
-data-workflow/**/.browser-profile/
-data-workflow/**/_debug/
-data-workflow/**/_detail_debug/
+1688/archive/
+runtime/
+deliveries/
+**/captures/
+**/runs/
+**/.browser-profile/
+**/_debug/
+**/_detail_debug/
 
 # Keep generated binary assets out of Git; they remain available locally.
 *.jpg

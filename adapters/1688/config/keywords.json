@@ -1,0 +1,3746 @@
+{
+  "version": "1.0.0",
+  "source": "1688",
+  "encoding_note": "搜索 URL 使用 GBK 编码，由 collect_1688_public_sample.search_url 处理",
+  "categories": [
+    {
+      "category_code": "A01",
+      "category_name": "礼品抓取、售卖",
+      "concepts": [
+        {
+          "standard_name": "兑换机",
+          "aliases": [],
+          "platforms": {
+            "1688": [
+              "礼品兑换机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "剪刀机",
+          "aliases": [
+            "切绳机",
+            "剪线机"
+          ],
+          "platforms": {
+            "1688": [
+              "切绳机",
+              "剪线机"
+            ],
+            "taobao": [
+              "剪线机",
+              "切绳机",
+              "礼品剪刀机"
+            ],
+            "pdd": [
+              "剪线机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "娃娃机",
+          "aliases": [
+            "抓物机",
+            "抓公仔机",
+            "抓娃机",
+            "夹物机",
+            "礼品机"
+          ],
+          "platforms": {
+            "1688": [
+              "夹娃娃机",
+              "抓公仔机",
+              "迷你娃娃机",
+              "多人娃娃机"
+            ],
+            "taobao": [
+              "抓娃机",
+              "夹物机",
+              "大娃娃机",
+              "礼品机"
+            ],
+            "jd": [
+              "抓娃娃游戏机",
+              "夹公仔机",
+              "迷你抓娃娃机"
+            ],
+            "pdd": [
+              "抓娃娃机",
+              "夹公仔机",
+              "迷你抓娃机",
+              "掌上抓娃娃机"
+            ],
+            "douyin": [
+              "抓娃娃机",
+              "夹公仔",
+              "迷你娃娃机"
+            ],
+            "xianyu": [
+              "二手娃娃机",
+              "抓娃机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "扭蛋机",
+          "aliases": [
+            "胶囊机",
+            "扭蛋售卖机",
+            "扭蛋游戏机",
+            "扭蛋玩具"
+          ],
+          "platforms": {
+            "1688": [
+              "胶囊机",
+              "扭蛋售卖机",
+              "多舱扭蛋机"
+            ],
+            "taobao": [
+              "胶囊扭蛋机",
+              "扭蛋售卖机"
+            ],
+            "jd": [
+              "扭蛋游戏机",
+              "迷你扭蛋机"
+            ],
+            "pdd": [
+              "胶囊机",
+              "扭蛋玩具"
+            ],
+            "douyin": [
+              "胶囊机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "挖糖机",
+          "aliases": [
+            "糖果机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "推礼品机",
+          "aliases": [
+            "礼品门机"
+          ],
+          "platforms": {
+            "1688": [
+              "礼品门机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "盲盒机",
+          "aliases": [
+            "福袋机",
+            "盲盒售卖机"
+          ],
+          "platforms": {
+            "1688": [
+              "福袋机",
+              "盲盒售卖机"
+            ],
+            "taobao": [
+              "福袋机",
+              "盲盒售卖机"
+            ],
+            "pdd": [
+              "福袋机"
+            ],
+            "douyin": []
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "礼品兑换",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "礼品售货",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "糖果机",
+          "aliases": [
+            "挖糖机",
+            "零食机"
+          ],
+          "platforms": {
+            "1688": [
+              "挖糖机"
+            ],
+            "taobao": [
+              "挖糖机",
+              "零食机"
+            ],
+            "pdd": []
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "钥匙机",
+          "aliases": [
+            "开锁机"
+          ],
+          "platforms": {
+            "1688": [
+              "开锁机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A02",
+      "category_name": "游艺票、卡片、积分",
+      "concepts": [
+        {
+          "standard_name": "出票",
+          "aliases": [
+            "游艺票"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "卡片",
+          "aliases": [
+            "出卡"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "卡片回收",
+          "aliases": [
+            "卡片兑换"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "卡牌对战",
+          "aliases": [
+            "读卡游戏"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "积分游戏",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A03",
+      "category_name": "推币、弹珠、币珠",
+      "concepts": [
+        {
+          "standard_name": "币塔",
+          "aliases": [
+            "推币综合"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "币塔机",
+          "aliases": [
+            "叠币机"
+          ],
+          "platforms": {
+            "1688": []
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "弹珠",
+          "aliases": [
+            "弹球",
+            "钢珠"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "弹珠机",
+          "aliases": [
+            "弹球机",
+            "钢珠机"
+          ],
+          "platforms": {
+            "1688": [
+              "弹球机",
+              "钢珠机"
+            ],
+            "taobao": [
+              "弹球机"
+            ],
+            "jd": [],
+            "pdd": [
+              "弹球机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投币技巧",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投珠",
+          "aliases": [
+            "退珠"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "推币",
+          "aliases": [
+            "落币"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "推币机",
+          "aliases": [
+            "落币机",
+            "投币机",
+            "硬币机"
+          ],
+          "platforms": {
+            "1688": [
+              "落币机",
+              "中岛推币机"
+            ],
+            "taobao": [
+              "落币机"
+            ],
+            "pdd": [
+              "投币机",
+              "硬币机"
+            ],
+            "xianyu": [
+              "二手推币机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A04",
+      "category_name": "视频街机、电子竞技",
+      "concepts": [
+        {
+          "standard_name": "休闲益智街机",
+          "aliases": [
+            "益智游戏机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "射击机",
+          "aliases": [
+            "射水机",
+            "水枪机",
+            "射珠机",
+            "射水枪机"
+          ],
+          "platforms": {
+            "1688": [
+              "射水机",
+              "水枪机",
+              "射珠机"
+            ],
+            "taobao": [
+              "射水枪机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投篮机",
+          "aliases": [
+            "篮球机",
+            "商用篮球机"
+          ],
+          "platforms": {
+            "1688": [
+              "篮球机",
+              "商用篮球机"
+            ],
+            "taobao": [
+              "篮球机"
+            ],
+            "jd": [
+              "篮球机"
+            ],
+            "pdd": []
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "捕鱼机",
+          "aliases": [
+            "捞鱼机",
+            "钓鱼机"
+          ],
+          "platforms": {
+            "1688": [
+              "捞鱼机",
+              "钓鱼机"
+            ],
+            "taobao": [
+              "捞鱼机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "格斗",
+          "aliases": [
+            "动作街机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "经典街机",
+          "aliases": [
+            "多合一街机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "联机竞技",
+          "aliases": [
+            "电竞街机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "街机",
+          "aliases": [
+            "格斗机",
+            "多合一游戏机",
+            "月光宝盒",
+            "拳皇机",
+            "多合一"
+          ],
+          "platforms": {
+            "1688": [
+              "格斗机",
+              "多合一游戏机",
+              "月光宝盒"
+            ],
+            "taobao": [
+              "格斗机",
+              "拳皇机",
+              "多合一"
+            ],
+            "pdd": [
+              "月光宝盒",
+              "格斗机"
+            ],
+            "xianyu": [
+              "二手街机",
+              "格斗机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "视频射击",
+          "aliases": [
+            "飞行街机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "视频捕鱼",
+          "aliases": [
+            "捕鱼游戏机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "赛车机",
+          "aliases": [
+            "赛车模拟器",
+            "汽车驾驶模拟",
+            "驾驶模拟机"
+          ],
+          "platforms": {
+            "1688": [
+              "赛车模拟器",
+              "汽车驾驶模拟"
+            ],
+            "taobao": [
+              "驾驶模拟机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "跳舞机",
+          "aliases": [
+            "舞蹈机"
+          ],
+          "platforms": {
+            "1688": [
+              "舞蹈机"
+            ],
+            "taobao": [
+              "舞蹈机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A05",
+      "category_name": "赛车、驾驶、载具模拟",
+      "concepts": [
+        {
+          "standard_name": "摩托赛车模拟",
+          "aliases": [
+            "摩托车模拟器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "汽车赛车",
+          "aliases": [
+            "驾驶模拟"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "自行车",
+          "aliases": [
+            "骑乘模拟"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "轨道交通",
+          "aliases": [
+            "工程车辆模拟"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "飞行",
+          "aliases": [
+            "船舶模拟"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A06",
+      "category_name": "射击、射水、投射、捕获",
+      "concepts": [
+        {
+          "standard_name": "光枪射击",
+          "aliases": [
+            "激光打靶"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "实物射球",
+          "aliases": [
+            "射珠"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "射水",
+          "aliases": [
+            "水枪"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投球",
+          "aliases": [
+            "投篮",
+            "投掷"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "钓鱼",
+          "aliases": [
+            "捞鱼"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A07",
+      "category_name": "音乐、舞蹈、歌唱",
+      "concepts": [
+        {
+          "standard_name": "乐器",
+          "aliases": [
+            "音乐演奏"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "唱歌",
+          "aliases": [
+            "迷你"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "打鼓",
+          "aliases": [
+            "打击节奏"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "跳舞",
+          "aliases": [
+            "舞蹈"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A08",
+      "category_name": "体育竞技、体感健身",
+      "concepts": [
+        {
+          "standard_name": "体感健身",
+          "aliases": [
+            "数字体育"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "冰雪",
+          "aliases": [
+            "水上",
+            "极限运动模拟"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "拳击",
+          "aliases": [
+            "测力",
+            "力量测试"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "球类运动模拟",
+          "aliases": [
+            "球类模拟机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "空气曲棍球",
+          "aliases": [
+            "桌上冰球机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "篮球",
+          "aliases": [
+            "投篮"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A09",
+      "category_name": "益智、技巧、教育互动",
+      "concepts": [
+        {
+          "standard_name": "打地鼠",
+          "aliases": [
+            "敲击游戏"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "早教",
+          "aliases": [
+            "科普",
+            "职业体验"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "灯光反应",
+          "aliases": [
+            "快速按键"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "计时",
+          "aliases": [
+            "力度",
+            "技巧挑战"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "迷宫",
+          "aliases": [
+            "滚球",
+            "平衡游戏"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A10",
+      "category_name": "儿童亲子、小型机动",
+      "concepts": [
+        {
+          "standard_name": "亲子协作互动",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "儿童电子游戏",
+          "aliases": [
+            "儿童游戏机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "小火车",
+          "aliases": [
+            "轨道"
+          ],
+          "platforms": {
+            "1688": [
+              "轨道小火车"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "摇摆机",
+          "aliases": [
+            "摇摇车",
+            "儿童摇摇车"
+          ],
+          "platforms": {
+            "1688": [
+              "摇摇车",
+              "儿童摇摇车"
+            ],
+            "taobao": [
+              "摇摇车"
+            ],
+            "jd": [
+              "儿童摇摆机"
+            ],
+            "pdd": [
+              "摇摇车"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "旋转木马",
+          "aliases": [
+            "电动木马"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "碰碰车",
+          "aliases": [
+            "卡丁车",
+            "电动骑乘",
+            "电动骑乘车",
+            "儿童卡丁车"
+          ],
+          "platforms": {
+            "1688": [
+              "卡丁车",
+              "电动骑乘车"
+            ],
+            "taobao": [
+              "儿童卡丁车"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A11",
+      "category_name": "VR、AR 、沉浸式",
+      "concepts": [
+        {
+          "standard_name": "AR",
+          "aliases": [
+            "MR",
+            "混合现实"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "VR",
+          "aliases": [
+            "单机体验",
+            "多人竞技",
+            "自由行走"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "互动投影",
+          "aliases": [
+            "数字运动空间"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "动感平台",
+          "aliases": [
+            "5D",
+            "7D",
+            "影院"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A12",
+      "category_name": "自助影像、娱乐舱、创作",
+      "concepts": [
+        {
+          "standard_name": "娱乐舱",
+          "aliases": [
+            "迷你影院",
+            "录音舱"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "拍贴",
+          "aliases": [
+            "自助照相"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "绘画",
+          "aliases": [
+            "照片",
+            "纪念品打印"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "趣味测试",
+          "aliases": [
+            "互动测评"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A13",
+      "category_name": "场地游艺、无动力、水上设施",
+      "concepts": [
+        {
+          "standard_name": "充气游乐",
+          "aliases": [
+            "充气城堡"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "攀爬",
+          "aliases": [
+            "绳网",
+            "蹦床"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "游泳池",
+          "aliases": [
+            "水上游艺"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "移动游乐场",
+          "aliases": [
+            "嘉年华"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "组合滑梯",
+          "aliases": [
+            "软体游乐"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "A14",
+      "category_name": "综合、主题、非标",
+      "concepts": [
+        {
+          "standard_name": "IP",
+          "aliases": [
+            "主题",
+            "品牌联名"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "多玩法综合",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "定制非标",
+          "aliases": [
+            "新型未归类"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "模块化",
+          "aliases": [
+            "多设备联动"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "礼品",
+          "aliases": [
+            "出票",
+            "视频复合"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B01",
+      "category_name": "整机控制、升级",
+      "concepts": [
+        {
+          "standard_name": "多游戏转换",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "整机升级",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "整机改装",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "整机电子控制",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "机型专用成套配件",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B02",
+      "category_name": "机箱、框体、控台",
+      "concepts": [
+        {
+          "standard_name": "完整机箱",
+          "aliases": [
+            "空机箱"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "展示舱",
+          "aliases": [
+            "门板",
+            "外壳"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "座椅",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "控制台",
+          "aliases": [
+            "操作面板"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "街机框体",
+          "aliases": [
+            "街机机箱"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B03",
+      "category_name": "主控、计算",
+      "concepts": [
+        {
+          "standard_name": "IO",
+          "aliases": [
+            "驱动控制"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "主板",
+          "aliases": [
+            "程序",
+            "线材",
+            "电源组合"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "工控主机",
+          "aliases": [
+            "游戏主机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "联机控制",
+          "aliases": [
+            "服务器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B04",
+      "category_name": "票币卡、支付",
+      "concepts": [
+        {
+          "standard_name": "上币",
+          "aliases": [
+            "兑币",
+            "币斗"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "二维码",
+          "aliases": [
+            "NFC",
+            "会员支付"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "发卡",
+          "aliases": [
+            "读卡",
+            "收卡"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投币",
+          "aliases": [
+            "退币"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B05",
+      "category_name": "电源、配电",
+      "concepts": [
+        {
+          "standard_name": "变压",
+          "aliases": [
+            "稳压",
+            "UPS"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "多路开关电源",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "机台电源盒",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "配电",
+          "aliases": [
+            "电气保护"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B06",
+      "category_name": "显示、触控、投影",
+      "concepts": [
+        {
+          "standard_name": "LED",
+          "aliases": [
+            "显示"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投影",
+          "aliases": [
+            "互动显示"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "显示器",
+          "aliases": [
+            "游戏机屏幕"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "触摸屏",
+          "aliases": [
+            "触控屏"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B07",
+      "category_name": "音频、灯光",
+      "concepts": [
+        {
+          "standard_name": "低音炮",
+          "aliases": [
+            "环绕音频"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "装饰灯光",
+          "aliases": [
+            "灯控"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "音箱",
+          "aliases": [
+            "功放"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "麦克风",
+          "aliases": [
+            "歌音频"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B08",
+      "category_name": "运动、传动、动感",
+      "concepts": [
+        {
+          "standard_name": "三自由度",
+          "aliases": [
+            "六自由度动感平台"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "丝杆",
+          "aliases": [
+            "滑轨",
+            "连杆"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "力反馈",
+          "aliases": [
+            "振动"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "电机",
+          "aliases": [
+            "减速机构"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "齿轮",
+          "aliases": [
+            "皮带",
+            "链条传动"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B09",
+      "category_name": "气动、水路、风路",
+      "concepts": [
+        {
+          "standard_name": "喷雾",
+          "aliases": [
+            "喷水"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "水泵",
+          "aliases": [
+            "阀门",
+            "循环水路"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "空压机",
+          "aliases": [
+            "气动执行"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "鼓风机",
+          "aliases": [
+            "风路"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "B10",
+      "category_name": "运营控制、联网",
+      "concepts": [
+        {
+          "standard_name": "中央控制",
+          "aliases": [
+            "场地计费"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "会员卡",
+          "aliases": [
+            "充值管理"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "收银",
+          "aliases": [
+            "POS",
+            "打印"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "网络",
+          "aliases": [
+            "通讯",
+            "远程监控"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C01",
+      "category_name": "按钮、按键、微动开关",
+      "concepts": [
+        {
+          "standard_name": "主板电源",
+          "aliases": [
+            "游戏机主板",
+            "IO板",
+            "驱动板",
+            "开关电源",
+            "游戏机电源"
+          ],
+          "platforms": {
+            "general": [
+              "游戏机主板",
+              "IO板",
+              "驱动板",
+              "开关电源",
+              "游戏机电源"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "其他",
+          "aliases": [
+            "娃娃机爪",
+            "抓钩",
+            "防甩钩",
+            "彩票机出票器",
+            "月光宝盒主板"
+          ],
+          "platforms": {
+            "general": [
+              "娃娃机爪",
+              "抓钩",
+              "防甩钩",
+              "彩票机出票器",
+              "月光宝盒主板",
+              "投币门",
+              "灯条",
+              "娃娃机轮子"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "卡式按钮",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "即插按钮",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "圆形",
+          "aliases": [
+            "方形",
+            "异形按钮"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "大按钮",
+          "aliases": [
+            "带灯按钮"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "天车系统",
+          "aliases": [
+            "天车总成",
+            "娃娃机天车",
+            "天车配件",
+            "天车马达",
+            "天车齿轮"
+          ],
+          "platforms": {
+            "general": [
+              "天车",
+              "天车总成",
+              "娃娃机天车",
+              "天车配件",
+              "天车马达",
+              "天车齿轮"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "微动开关",
+          "aliases": [
+            "轻触开关"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投币器",
+          "aliases": [
+            "退币器",
+            "兑币器",
+            "上币马达",
+            "币斗",
+            "币盒"
+          ],
+          "platforms": {
+            "general": [
+              "退币器",
+              "兑币器",
+              "上币马达",
+              "币斗",
+              "币盒"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "按钮帽",
+          "aliases": [
+            "按钮壳"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "按钮摇杆",
+          "aliases": [
+            "游戏按钮",
+            "格斗摇杆",
+            "游戏机按钮",
+            "微动开关"
+          ],
+          "platforms": {
+            "general": [
+              "游戏按钮",
+              "摇杆",
+              "格斗摇杆",
+              "游戏机按钮",
+              "微动开关"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "电机传动",
+          "aliases": [
+            "步进电机",
+            "减速电机",
+            "同步皮带",
+            "齿轮",
+            "电磁铁"
+          ],
+          "platforms": {
+            "general": [
+              "步进电机",
+              "减速电机",
+              "同步皮带",
+              "齿轮",
+              "电磁铁"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "设置键",
+          "aliases": [
+            "服务键",
+            "复位键"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C02",
+      "category_name": "摇杆、手柄、操作",
+      "concepts": [
+        {
+          "standard_name": "方向盘",
+          "aliases": [
+            "踏板",
+            "挡位器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "旋钮摇杆",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "游戏手柄",
+          "aliases": [
+            "操作拉杆"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "游戏枪",
+          "aliases": [
+            "游戏锤",
+            "拳套"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "鼓棒",
+          "aliases": [
+            "麦克风",
+            "耳机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C03",
+      "category_name": "票币卡、支付",
+      "concepts": [
+        {
+          "standard_name": "IC",
+          "aliases": [
+            "ID",
+            "NFC",
+            "二维码支付"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "上币马达",
+          "aliases": [
+            "币斗器件"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "出票器",
+          "aliases": [
+            "彩票器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "发卡器",
+          "aliases": [
+            "读卡器",
+            "收卡器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "币斗",
+          "aliases": [
+            "币盒",
+            "币篮",
+            "钱箱"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投币口",
+          "aliases": [
+            "投币面板",
+            "投币门"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "推币器",
+          "aliases": [
+            "退币器",
+            "兑币器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C04",
+      "category_name": "主板、电子控制",
+      "concepts": [
+        {
+          "standard_name": "信号转换器",
+          "aliases": [
+            "视频分配器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "光眼板",
+          "aliases": [
+            "计数板",
+            "机型控制小板"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "游戏主板",
+          "aliases": [
+            "程序板"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "灯板",
+          "aliases": [
+            "灯卡",
+            "灯控板"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "继电器",
+          "aliases": [
+            "定时器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "音频板",
+          "aliases": [
+            "功放板"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C05",
+      "category_name": "电源、电气、保护",
+      "concepts": [
+        {
+          "standard_name": "主机电源",
+          "aliases": [
+            "电池"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "变压器",
+          "aliases": [
+            "稳压器",
+            "滤波器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "开关电源",
+          "aliases": [
+            "电源适配器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "插座",
+          "aliases": [
+            "排插",
+            "插头",
+            "电源分配器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "断路器",
+          "aliases": [
+            "漏电开关",
+            "保险丝",
+            "保险座"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "船型开关",
+          "aliases": [
+            "扭子开关",
+            "按钮开关"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "防电器",
+          "aliases": [
+            "防作弊器",
+            "报警灯",
+            "指示灯"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C06",
+      "category_name": "电机、执行、传动",
+      "concepts": [
+        {
+          "standard_name": "减速电机",
+          "aliases": [
+            "上币马达",
+            "退币马达",
+            "退珠马达"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "弹簧",
+          "aliases": [
+            "曲柄",
+            "连杆",
+            "缓冲件"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "电磁铁",
+          "aliases": [
+            "电磁线圈",
+            "电磁执行器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "直流",
+          "aliases": [
+            "交流",
+            "步进",
+            "伺服电机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "轴承",
+          "aliases": [
+            "丝杆",
+            "滑轨",
+            "导轨"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "链条",
+          "aliases": [
+            "链轮",
+            "联轴器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C07",
+      "category_name": "气动、水路、液流",
+      "concepts": [
+        {
+          "standard_name": "PU",
+          "aliases": [
+            "气管",
+            "快速接头",
+            "分路接头"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "气缸",
+          "aliases": [
+            "电磁阀",
+            "气动阀"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "水管",
+          "aliases": [
+            "喷嘴",
+            "阀门",
+            "过滤器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "水箱",
+          "aliases": [
+            "水槽",
+            "密封圈",
+            "喉箍"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C08",
+      "category_name": "传感器、光眼、仪表",
+      "concepts": [
+        {
+          "standard_name": "体感",
+          "aliases": [
+            "红外",
+            "动作传感器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "压力",
+          "aliases": [
+            "力度",
+            "称重",
+            "水位传感器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "对射",
+          "aliases": [
+            "反射",
+            "槽型光眼"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "接近开关",
+          "aliases": [
+            "限位开关",
+            "行程开关"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "机械计数器",
+          "aliases": [
+            "电子计数器",
+            "液晶码表"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "电压表",
+          "aliases": [
+            "电流表",
+            "时间表"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "霍尔传感器",
+          "aliases": [
+            "编码器",
+            "电位器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C09",
+      "category_name": "显示、触控、影像",
+      "concepts": [
+        {
+          "standard_name": "投影机",
+          "aliases": [
+            "镜头",
+            "幕布"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "摄像头",
+          "aliases": [
+            "补光设备"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "显示器支架",
+          "aliases": [
+            "保护玻璃",
+            "面板"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "显示驱动板",
+          "aliases": [
+            "背光板",
+            "高压板"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "液晶显示器",
+          "aliases": [
+            "LED",
+            "显示屏"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C10",
+      "category_name": "喇叭、功放、音频",
+      "concepts": [
+        {
+          "standard_name": "功放",
+          "aliases": [
+            "音量调节器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "喇叭",
+          "aliases": [
+            "高低音单元"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "喇叭网",
+          "aliases": [
+            "喇叭罩",
+            "音箱外壳"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C11",
+      "category_name": "装饰灯光、灯控",
+      "concepts": [
+        {
+          "standard_name": "灯光控制卡",
+          "aliases": [
+            "IC",
+            "控制器",
+            "幻彩控制器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "灯罩",
+          "aliases": [
+            "灯壳",
+            "铝槽"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "花心灯",
+          "aliases": [
+            "长城灯条",
+            "机台套灯"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "跑马灯",
+          "aliases": [
+            "霓虹灯",
+            "射灯",
+            "天花灯"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "软灯条",
+          "aliases": [
+            "硬灯板",
+            "圆灯板"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C12",
+      "category_name": "电源线、信号线、连接器",
+      "concepts": [
+        {
+          "standard_name": "USB",
+          "aliases": [
+            "串口",
+            "打印机",
+            "音频线"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "VGA",
+          "aliases": [
+            "HDMI",
+            "DVI",
+            "AV"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "各区域标准电源线",
+          "aliases": [
+            "电缆"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "插簧",
+          "aliases": [
+            "压线帽",
+            "接线端子",
+            "接线柱"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "机台线束",
+          "aliases": [
+            "排线",
+            "端子线"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "航空插头",
+          "aliases": [
+            "快速插头",
+            "公母接头"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "转接头",
+          "aliases": [
+            "延长线",
+            "分线器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C13",
+      "category_name": "网络、通讯器件",
+      "concepts": [
+        {
+          "standard_name": "串口服务器",
+          "aliases": [
+            "通讯转换器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "交换机",
+          "aliases": [
+            "网络分配设备"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "网线",
+          "aliases": [
+            "天线",
+            "通讯线束"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "联机通讯板",
+          "aliases": [
+            "联网控制器"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "路由器",
+          "aliases": [
+            "无线接入设备"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C14",
+      "category_name": "机箱五金、结构件",
+      "concepts": [
+        {
+          "standard_name": "合页",
+          "aliases": [
+            "铰链",
+            "箱扣",
+            "钩扣",
+            "门销"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "投币门",
+          "aliases": [
+            "投币口",
+            "币道",
+            "接币斗"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "拉手",
+          "aliases": [
+            "支架",
+            "角码",
+            "固定座"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "滑轨",
+          "aliases": [
+            "道轨",
+            "线槽",
+            "缠绕管"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "脚轮",
+          "aliases": [
+            "脚杯",
+            "调节脚"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "透气孔",
+          "aliases": [
+            "风扇网",
+            "防护网"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "钱箱",
+          "aliases": [
+            "币盒",
+            "彩票盒",
+            "扭蛋漏斗"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C15",
+      "category_name": "塑胶、亚克力、外观件",
+      "concepts": [
+        {
+          "standard_name": "亚克力面板",
+          "aliases": [
+            "展示窗",
+            "透明罩"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "塑胶外壳",
+          "aliases": [
+            "装饰壳"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "按键胶",
+          "aliases": [
+            "胶轮",
+            "胶条",
+            "缓冲胶"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "玻璃面板",
+          "aliases": [
+            "保护罩"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "礼品杆",
+          "aliases": [
+            "挡板",
+            "护边",
+            "铺底装饰"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "装饰框",
+          "aliases": [
+            "灯框",
+            "机台标牌"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C16",
+      "category_name": "锁具、防盗器件",
+      "concepts": [
+        {
+          "standard_name": "一字锁",
+          "aliases": [
+            "圆柱锁",
+            "利剑锁",
+            "梅花锁"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "信箱锁",
+          "aliases": [
+            "按压锁",
+            "挂锁",
+            "专用机锁"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "钥匙",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "锁片",
+          "aliases": [
+            "锁杯",
+            "锁排",
+            "锁扣"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "防盗钢丝绳",
+          "aliases": [
+            "防盗弹簧绳"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C17",
+      "category_name": "螺丝、螺母、紧固件",
+      "concepts": [
+        {
+          "standard_name": "内六角",
+          "aliases": [
+            "外六角",
+            "紧定螺丝"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "垫片",
+          "aliases": [
+            "铜柱",
+            "隔离柱",
+            "卡簧"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "平头",
+          "aliases": [
+            "圆头",
+            "大扁头",
+            "沉头螺丝"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "机丝",
+          "aliases": [
+            "自攻螺丝",
+            "自钻螺丝"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "螺母",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "销钉",
+          "aliases": [
+            "铆钉",
+            "固定夹",
+            "角码"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C18",
+      "category_name": "球珠、枪锤、实体交互件",
+      "concepts": [
+        {
+          "standard_name": "射球球",
+          "aliases": [
+            "弹力球",
+            "曲棍球球饼"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "游戏锤",
+          "aliases": [
+            "拳套",
+            "鼓棒",
+            "飞镖"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "球网",
+          "aliases": [
+            "靶标"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "C19",
+      "category_name": "散热、降温、通风",
+      "concepts": [
+        {
+          "standard_name": "散热片",
+          "aliases": [
+            "导热垫",
+            "导热硅脂"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "散热风扇",
+          "aliases": [
+            "顶部风扇"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "机柜",
+          "aliases": [
+            "娱乐舱换气"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "风扇网",
+          "aliases": [
+            "防尘网",
+            "过滤棉"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "D01",
+      "category_name": "游艺票、卡片、代币",
+      "concepts": [
+        {
+          "standard_name": "代币",
+          "aliases": [
+            "电子数码币",
+            "纪念币"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "打印耗材",
+          "aliases": [
+            "拍贴机相纸",
+            "照片纸",
+            "热敏打印纸",
+            "色带"
+          ],
+          "platforms": {
+            "general": [
+              "拍贴机相纸",
+              "照片纸",
+              "热敏打印纸",
+              "色带"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "扭蛋/胶囊",
+          "aliases": [
+            "扭蛋球",
+            "胶囊壳",
+            "扭蛋壳",
+            "空胶囊"
+          ],
+          "platforms": {
+            "general": [
+              "扭蛋球",
+              "胶囊壳",
+              "扭蛋壳",
+              "空胶囊"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "游戏卡",
+          "aliases": [
+            "收藏卡",
+            "会员卡"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "游艺彩票",
+          "aliases": [
+            "彩票纸"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "游艺票",
+          "aliases": [
+            "彩票纸",
+            "热敏纸",
+            "出票机纸"
+          ],
+          "platforms": {
+            "general": [
+              "彩票纸",
+              "热敏纸",
+              "出票机纸"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "热敏纸",
+          "aliases": [
+            "保单纸"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "礼品类",
+          "aliases": [
+            "毛绒公仔",
+            "抓机公仔",
+            "娃娃机公仔",
+            "扭蛋玩具",
+            "盲盒散货"
+          ],
+          "platforms": {
+            "general": [
+              "毛绒公仔",
+              "抓机公仔",
+              "娃娃机公仔",
+              "扭蛋玩具",
+              "盲盒散货"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "耗材类",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "D02",
+      "category_name": "胶囊、球珠、补充载体",
+      "concepts": [
+        {
+          "standard_name": "扭蛋球",
+          "aliases": [
+            "胶囊壳"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "曲棍球球饼",
+          "aliases": [
+            "其他易损游戏载体"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "D03",
+      "category_name": "礼品、奖品",
+      "concepts": [
+        {
+          "standard_name": "兑换券",
+          "aliases": [
+            "优惠券"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "小玩具",
+          "aliases": [
+            "文具",
+            "礼品卡"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "挂件",
+          "aliases": [
+            "钥匙扣",
+            "小饰品"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "毛绒公仔",
+          "aliases": [
+            "毛绒玩具"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "盲盒",
+          "aliases": [
+            "手办",
+            "扭蛋玩具"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "糖果",
+          "aliases": [
+            "零食",
+            "饮料"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "D04",
+      "category_name": "打印、影像",
+      "concepts": [
+        {
+          "standard_name": "打印膜",
+          "aliases": [
+            "覆膜",
+            "保护膜"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "相纸",
+          "aliases": [
+            "照片纸",
+            "打印纸"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "色带",
+          "aliases": [
+            "墨盒",
+            "墨水"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "D05",
+      "category_name": "电工装配",
+      "concepts": [
+        {
+          "standard_name": "扎带",
+          "aliases": [
+            "缠绕管",
+            "热缩管"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "热熔胶条",
+          "aliases": [
+            "电池"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "电工胶带",
+          "aliases": [
+            "绝缘材料",
+            "焊锡丝"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "线夹",
+          "aliases": [
+            "线卡",
+            "吸盘",
+            "固定脚"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "D06",
+      "category_name": "胶粘、包装、防护",
+      "concepts": [
+        {
+          "standard_name": "封箱胶",
+          "aliases": [
+            "双面胶",
+            "海绵胶",
+            "美纹纸"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "打包带",
+          "aliases": [
+            "缠绕膜",
+            "气泡膜",
+            "自封袋"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "玻璃胶",
+          "aliases": [
+            "结构胶",
+            "瞬间胶",
+            "热熔胶"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "纸箱",
+          "aliases": [
+            "泡棉",
+            "护角",
+            "保护膜"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "D07",
+      "category_name": "清洁、润滑、喷涂",
+      "concepts": [
+        {
+          "standard_name": "喷漆",
+          "aliases": [
+            "补漆",
+            "油漆"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "抹布",
+          "aliases": [
+            "工作手套"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "润滑油",
+          "aliases": [
+            "润滑脂",
+            "防锈油"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "清洁剂",
+          "aliases": [
+            "除胶剂",
+            "酒精",
+            "消毒液"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "砂纸",
+          "aliases": [
+            "植绒片",
+            "抛光材料"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "E01",
+      "category_name": "币卡、充值、收银",
+      "concepts": [
+        {
+          "standard_name": "售币机",
+          "aliases": [
+            "兑币机",
+            "数币机",
+            "自助兑币机"
+          ],
+          "platforms": {
+            "general": [
+              "兑币机",
+              "数币机",
+              "自助兑币机"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "小票打印",
+          "aliases": [
+            "标签打印"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "礼品兑换柜",
+          "aliases": [
+            "自助兑换"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "自助充值",
+          "aliases": [
+            "发卡"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "设备",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "E02",
+      "category_name": "中央控制、网络、监控",
+      "concepts": [
+        {
+          "standard_name": "场地中央控制台",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "联机服务器",
+          "aliases": [
+            "路由器",
+            "交换机"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "视频监控",
+          "aliases": [
+            "防盗"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "计费",
+          "aliases": [
+            "会员",
+            "卡务管理"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "远程监控",
+          "aliases": [
+            "设备状态"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "E03",
+      "category_name": "电力、环境、空气",
+      "concepts": [
+        {
+          "standard_name": "UPS",
+          "aliases": [
+            "稳压器",
+            "备用电源"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "工业风扇",
+          "aliases": [
+            "空调",
+            "通风"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "除湿机",
+          "aliases": [
+            "环境监测"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    },
+    {
+      "category_code": "E04",
+      "category_name": "清洁、储存、搬运",
+      "concepts": [
+        {
+          "standard_name": "吸尘器",
+          "aliases": [
+            "场地清洁"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "搬运车",
+          "aliases": [
+            "工具车",
+            "升降"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "维修工作台",
+          "aliases": [
+            "设备测试"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "货架",
+          "aliases": [
+            "零件柜",
+            "周转箱",
+            "收纳箱"
+          ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        }
+      ]
+    }
+  ],
+  "candidate_pool": [
+    {
+      "term": "跨境",
+      "frequency": 4,
+      "sample_titles": [
+        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机",
+        "跨境R36H promax掌上游戏机开源arkos系统psp双摇杆4.2寸掌机街机",
+        "新款跨境R40XXpromax掌机游戏机开源复古双摇杆掌上游戏机PSP街机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "游戏机开",
+      "frequency": 4,
+      "sample_titles": [
+        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
+        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
+        "跨境R36H promax掌上游戏机开源arkos系统psp双摇杆4.2寸掌机街机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "投币游戏机",
+      "frequency": 3,
+      "sample_titles": [
+        "小程序数码彩票机电玩设备自助投币游戏机马戏团商用二维码出票机",
+        "潘多拉月光宝盒拳皇街机格斗机商用投币游戏机怀旧电玩城游乐设施",
+        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "一体机",
+      "frequency": 3,
+      "sample_titles": [
+        "32寸自助取票一体机终端 在线下单机 门票/电影票出票机 游戏互动",
+        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
+        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "魔术师",
+      "frequency": 3,
+      "sample_titles": [
+        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
+        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备",
+        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "游戏厅",
+      "frequency": 3,
+      "sample_titles": [
+        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
+        "亲子篮球大型新款电玩投币投篮篮球机商场机NBA游戏厅游戏机机",
+        "商用大型双座游乐车儿童游戏厅游乐场投币式带游戏屏幕款摇摇车"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "投币商",
+      "frequency": 3,
+      "sample_titles": [
+        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
+        "新款儿童投币商用游戏机双人打枪赛车摩托车射球钓鱼超市门口摆摊",
+        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "设备投币",
+      "frequency": 3,
+      "sample_titles": [
+        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
+        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师",
+        "跨境游戏机动漫城电玩大型儿童乐园扫码投币娱乐设备投币机街机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "型娱乐",
+      "frequency": 3,
+      "sample_titles": [
+        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备",
+        "商用投币式推币游戏机 电玩城游乐场雪崩主题游艺机 大型娱乐游乐",
+        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "娱乐设备",
+      "frequency": 3,
+      "sample_titles": [
+        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备",
+        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师",
+        "跨境游戏机动漫城电玩大型儿童乐园扫码投币娱乐设备投币机街机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "游艺机",
+      "frequency": 3,
+      "sample_titles": [
+        "商用投币式推币游戏机 电玩城游乐场雪崩主题游艺机 大型娱乐游乐",
+        "篮球机投篮游戏机大型商用成人娱乐运动游艺机电玩设备跨街机电子",
+        "电动投币打地鼠游戏机宝宝商用萌宠小熊打老鼠游艺机小孩智力玩具"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "游乐设",
+      "frequency": 3,
+      "sample_titles": [
+        "潘多拉月光宝盒拳皇街机格斗机商用投币游戏机怀旧电玩城游乐设施",
+        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备",
+        "新款单人潮酷弹乐弹珠机儿童益智游戏机商用投币游乐设备可退卡片"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "用投币游",
+      "frequency": 3,
+      "sample_titles": [
+        "潘多拉月光宝盒拳皇街机格斗机商用投币游戏机怀旧电玩城游乐设施",
+        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备",
+        "新款单人潮酷弹乐弹珠机儿童益智游戏机商用投币游乐设备可退卡片"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "机游戏机",
+      "frequency": 3,
+      "sample_titles": [
+        "体育类街机游戏机 商用空气曲棍球桌 投币双人竞技游戏桌",
+        "2026年新款精灵宝贝打地鼠机游戏机游乐玩具商用儿童投币打老鼠机",
+        "新款跨境R40XXpromax掌机游戏机开源复古双摇杆掌上游戏机PSP街机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "双人",
+      "frequency": 3,
+      "sample_titles": [
+        "体育类街机游戏机 商用空气曲棍球桌 投币双人竞技游戏桌",
+        "新款儿童投币商用游戏机双人打枪赛车摩托车射球钓鱼超市门口摆摊",
+        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "童投币",
+      "frequency": 3,
+      "sample_titles": [
+        "新款儿童投币商用游戏机双人打枪赛车摩托车射球钓鱼超市门口摆摊",
+        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机",
+        "2026年新款精灵宝贝打地鼠机游戏机游乐玩具商用儿童投币打老鼠机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "赛车游戏机",
+      "frequency": 3,
+      "sample_titles": [
+        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机",
+        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机",
+        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "游戏机商",
+      "frequency": 3,
+      "sample_titles": [
+        "游戏机商用电玩城整体策划一站式采购大型游乐场游艺设备厂家定制",
+        "新款单人潮酷弹乐弹珠机儿童益智游戏机商用投币游乐设备可退卡片",
+        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "安卓",
+      "frequency": 3,
+      "sample_titles": [
+        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
+        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
+        "穿越魔盒无线游戏主机X5街机摇杆网络机顶盒安卓电视盒子游戏盒子"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "机玩具",
+      "frequency": 2,
+      "sample_titles": [
+        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机",
+        "新款儿童娃娃机家用公仔扭蛋机玩具过节小型迷你新款生日玩具礼物"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "抓娃娃机",
+      "frequency": 2,
+      "sample_titles": [
+        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机",
+        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "公仔扭蛋机",
+      "frequency": 2,
+      "sample_titles": [
+        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机",
+        "新款儿童娃娃机家用公仔扭蛋机玩具过节小型迷你新款生日玩具礼物"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "款儿",
+      "frequency": 2,
+      "sample_titles": [
+        "新款儿童娃娃机家用公仔扭蛋机玩具过节小型迷你新款生日玩具礼物",
+        "新款儿童投币商用游戏机双人打枪赛车摩托车射球钓鱼超市门口摆摊"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "马戏团",
+      "frequency": 2,
+      "sample_titles": [
+        "小程序数码彩票机电玩设备自助投币游戏机马戏团商用二维码出票机",
+        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "彩票机电玩",
+      "frequency": 2,
+      "sample_titles": [
+        "小程序数码彩票机电玩设备自助投币游戏机马戏团商用二维码出票机",
+        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "机电玩设备",
+      "frequency": 2,
+      "sample_titles": [
+        "小程序数码彩票机电玩设备自助投币游戏机马戏团商用二维码出票机",
+        "篮球机投篮游戏机大型商用成人娱乐运动游艺机电玩设备跨街机电子"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "动投币",
+      "frequency": 2,
+      "sample_titles": [
+        "源头出口可乐饮料机全自动投币自贩机电玩城商用出票礼品机",
+        "电动投币打地鼠游戏机宝宝商用萌宠小熊打老鼠游艺机小孩智力玩具"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "机电玩城商",
+      "frequency": 2,
+      "sample_titles": [
+        "源头出口可乐饮料机全自动投币自贩机电玩城商用出票礼品机",
+        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "大魔",
+      "frequency": 2,
+      "sample_titles": [
+        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
+        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    },
+    {
+      "term": "币娱",
+      "frequency": 2,
+      "sample_titles": [
+        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
+        "跨境游戏机动漫城电玩大型儿童乐园扫码投币娱乐设备投币机街机"
+      ],
+      "source": "title_mining",
+      "status": "pending"
+    }
+  ]
+}

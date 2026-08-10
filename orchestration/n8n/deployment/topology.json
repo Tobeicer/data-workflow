@@ -1,0 +1,88 @@
+{
+    "schema_version":  "1.0.0",
+    "inspected_at":  "2026-08-05T07:56:08.5253004+00:00",
+    "n8n":  {
+                "status":  "unavailable",
+                "command":  {
+                                "available":  false,
+                                "path":  null,
+                                "version":  null,
+                                "exit_code":  null
+                            },
+                "deployment_mode":  "not_detected",
+                "docker_compose":  {
+                                       "available":  true,
+                                       "path":  "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe",
+                                       "version":  "Docker Compose version v5.1.4",
+                                       "exit_code":  0
+                                   },
+                "real_import_export_ready":  false
+            },
+    "runner":  {
+                   "status":  "available",
+                   "operating_system":  "Microsoft Windows NT 10.0.19045.0",
+                   "workspace":  "E:\\Desktop_zm\\data-workflow",
+                   "python":  {
+                                  "available":  true,
+                                  "path":  "E:\\Desktop_zm\\data-workflow\\.venv-data\\Scripts\\python.exe",
+                                  "version":  "Python 3.11.9",
+                                  "exit_code":  0
+                              },
+                   "powershell":  {
+                                      "available":  true,
+                                      "path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                                      "version":  "5.1.19041.5912",
+                                      "exit_code":  0
+                                  },
+                   "node":  {
+                                "available":  true,
+                                "path":  "E:\\nodejs\\node.exe",
+                                "version":  "v24.18.0",
+                                "exit_code":  0
+                            },
+                   "invocation":  "local_process_cli"
+               },
+    "runtime_storage":  {
+                            "status":  "available",
+                            "runtime_root":  "E:\\Desktop_zm\\data-workflow\\runtime",
+                            "deliveries_root":  "E:\\Desktop_zm\\data-workflow\\deliveries",
+                            "workspace_drive":  "E:\\",
+                            "free_bytes":  882103361536,
+                            "git_tracked":  false
+                        },
+    "lock_store":  {
+                       "status":  "unavailable",
+                       "selected":  null,
+                       "detected_candidate":  "redis_service",
+                       "candidate_status":  "running",
+                       "atomic_compare_and_set_verified":  false,
+                       "lease_renewal_verified":  false,
+                       "reason":  "No project lock implementation and renewal contract has been verified."
+                   },
+    "credential_store":  {
+                             "status":  "unavailable",
+                             "owner":  "n8n_when_provisioned",
+                             "reference_policy":  "identifiers_only",
+                             "local_environment_file":  ".env.local",
+                             "local_environment_file_tracked":  false,
+                             "values_inspected":  false
+                         },
+    "network_boundary":  {
+                             "n8n_to_runner":  {
+                                                   "status":  "blocked",
+                                                   "interface":  "local_process_cli"
+                                               },
+                             "acquisition":  {
+                                                 "executor":  "windows_runner",
+                                                 "allowed_scope":  "public_or_authorized_sources"
+                                             },
+                             "database":  {
+                                              "status":  "reference_only",
+                                              "production_business_writes_allowed":  false
+                                          }
+                         },
+    "reproduction":  {
+                         "script":  "powershell -ExecutionPolicy Bypass -File orchestration/n8n/deployment/inspect_environment.ps1",
+                         "test":  ".\\.venv-data\\Scripts\\python.exe -m pytest tests/test_deployment_topology.py -q"
+                     }
+}

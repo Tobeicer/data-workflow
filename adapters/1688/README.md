@@ -1,0 +1,167 @@
+# 1688 来源适配器
+
+状态：`stabilizing`。tracked 代码与指南已整合到正式适配器，n8n 启用状态仍为 `enabled=false`。
+唯一现行总纲：`../../docs/游艺圈数据工作流总纲.md`
+
+本目录是 1688 当前唯一正式代码和命令入口。n8n 来源工作流尚未创建（`orchestration/n8n/workflows/` 随 B6 任务创建，需真实 n8n 实例导出）；在工作流 JSON、真实登录态、dry-run 和质量证据四道门禁全部通过前，不得在 n8n 中标为 `active`。
+
+## 1. 定位与采集边界
+
+1688 是游艺圈 P0 核心来源，目标是持续全量采集游戏游艺设备、配件及耗材的商品、SKU、价格、供货状态、店铺和公司信息，建立可追溯的全量镜像。采集结果先进入 L0-L2，经质量门禁后由 L3 契约交给平台侧接收，不由数据侧直接写入正式商品库。
+
+本适配器采集普通用户可见的商品、店铺、公司、工厂和 1688 官方主体资质信息；为完成采集，允许采取降低或解除来源风控影响的技术手段（拟人化行为、指纹伪装、代理/IP 轮换、自动处理验证码或滑块、跟随接口签名等），采集策略以总纲第 2 节为准。
+
+### 初版字段基准与入库方向
+
+初版以数据库真实表字段为入库基准，字段清单唯一维护于 `../../docs/数据字段规范.md`：
+
+- 厂家数据映射 `staging_manufacturer` 列（`name`、`short_name`、`region`、`main_products`、`website`、`contact_name`、`contact_phone`、`wechat`、`address`、`description`、`source_url`、`status`、`claim_status`），写入前先过质量门禁。
+- 产品/配件数据按 `product`、`accessory` 字段准备（产品 `manufacturer_id` 必填 → 先入库厂家再关联产品）；两表暂无 staging 对应表，平台确认前不直写正式表，以 L3 文件或约定接口交付。
+- 数据库未落地的来源字段（成立年份、厂房面积、资质认证、服务能力等）继续保留在 L1-L2 资产中，不因表字段缺失而删除，等待平台扩展列或正式模板。
+- 历史 v2 Excel 格式已并入 `docs/数据字段规范.md`（2026-08-05 收敛），不再单独维护；文件交付路径如需 Excel 模板，由平台按该规范生成。
+
+## 2. 正式入口与路径
+
+唯一入口：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/run_source.py <command>
+```
+
+稳定路径：
+
+- L0-L2 运行资产：`runtime/runs/1688/<run_id>/`
+- 浏览器登录态：`runtime/browser-profiles/1688/`
+- 临时 debug：`runtime/tmp/1688/`
+
+四个子命令均可先使用 `--dry-run` 查看命令计划。最小离线检查不会发起 HTTP、不会启动浏览器，也不会创建运行目录：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/run_source.py sample --dry-run
+```
+
+## 3. 当前能力与命令
+
+当前代码支持搜索列表采样、游艺相关性筛选、商品详情与 SKU 补采、单商品公司资产试采，以及按 `memberId` 去重的多商品/多公司批次。商品样本阶段仍以 CSV 为主；公司和多商品阶段输出 L0-L2、质量报告、检查点、`run_manifest.json` 和 `run_result.json`，尚未完成全来源统一契约和 n8n 编排。
+
+浏览器登录态已迁入正式 profile 目录。运行前确认浏览器登录态可用；采集节奏按来源风控承受度执行，受限时按第 5 节状态契约处理。
+
+登录准备：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/run_source.py prepare-login
+```
+
+低频商品和 SKU 补采：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/run_source.py sample `
+  --limit-per-keyword 50 `
+  --detail-limit 50
+```
+
+单商品公司资产试采：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/run_source.py company `
+  --offer-id 994122564753 `
+  --delay-seconds 5 `
+  --debug
+```
+
+按已选商品清单运行去重后的多公司批次：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/run_source.py multi `
+  --input runtime/runs/1688/<run_id>/selected_samples.json `
+  --delay-seconds 5 `
+  --debug
+```
+
+### 关键词库与自动扩词
+
+全量采集由关键词库驱动。词库为**全平台通用**（54 个游艺分类 × **概念-同义词组**，693 概念 / 808 搜索词，覆盖 1688/淘宝/京东/拼多多/抖音/闲鱼六平台 + 通用词）：
+
+- **概念-别名结构**：每个概念 = `standard_name`（标准名，如 娃娃机）+ `aliases`（**全平台合并同义词组**，如 夹娃娃机、抓公仔机、抓娃机、夹物机、抓娃娃游戏机、二手娃娃机...）+ `platforms`（分平台明细：1688/taobao/jd/pdd/douyin/xianyu/general）+ `source` + `status`。
+- 搜索时展开 `active` 概念的 `standard_name` + 全部 `aliases`（`run_source.load_keywords` 已支持）。
+- 搜索 URL 使用 GBK 编码，由 `collect_1688_public_sample.py` 的 `search_url` 处理，词库无需转码。
+- `sample`/`validate` 命令可通过 `--category-config` 指向本词库或验证用 `validation_categories.json`。
+
+交付形态（`deliveries/keywords/`，均为同一份数据）：
+
+- `keywords_all_platforms.json`：全平台总词库（唯一数据源，含平台明细）；
+- `keywords_all_platforms.xlsx`：人工总表（概念一行，全平台同义词 + 分平台列）；
+- `keywords_all_platforms.sqlite`：数据库（`keyword_concept` 概念表 + `keyword_alias` 别名表 + `keyword_candidate` 候选表）；
+- `adapters/1688/config/keywords.json`：1688 采集入口（与总库同内容，`build_keyword_library.py` 同步生成）。
+
+维护流程：
+
+```powershell
+# 1. 生成/重建词库（从分类清单提取，初始全部 pending）
+.\.venv-data\Scripts\python.exe adapters/1688/src/build_keyword_library.py
+# 2. 人工审校：编辑 keywords.json，确认概念 status 改为 active，补充/修正 aliases，删除无效概念
+# 3. 自动扩词：从已采集商品标题挖掘候选（写入 candidate_pool，不触碰主词库）
+.\.venv-data\Scripts\python.exe adapters/1688/src/mine_keywords.py `
+  --input runtime/runs/1688/<run_id>/l1/products.jsonl `
+  --min-frequency 2 --top-n 100
+# 4. 人工审校候选池：确认词作为某概念的别名或新概念并入主词库，碎片词直接删除
+```
+
+人工审校清单（Excel，按概念分组，含候选池）由工具生成到 `runtime/tmp/1688/keywords_review_*.xlsx`，审核结论回填后按结论更新 JSON；导出总表/数据库用 `tools/export_keyword_library.py`。
+
+关键词库与 `filter_1688_relevant.py` 的关系：词库管**搜索入口**（能搜到），相关性词表管**命中判定**（是否游艺相关），两者独立；标题挖掘候选来自已通过相关性筛选的商品标题，不会引入无关词。泛词（如“游戏”“设备”）与边界碎片会进入候选池，由人工审校剔除。
+
+## 4. 数据资产与关系
+
+列表层保存关键词、`offer_id`、标题、URL、价格、成交文本、店铺、地区、图片和采集状态。详情层保存商品属性、品牌、型号、材质、产地、功能、场景、SKU、规格、价格、库存和关联商品。
+
+公司、店铺和商品分别建模，并保留商品—店铺、商品—公司、店铺—公司关系。关系必须带来源页面、采集时间、匹配方法、置信度和冲突原因；店铺名、供应商名和证照主体名不得互相覆盖。外部企业来源只能补充核验，不能替代 1688 官方来源事实。
+
+### 厂家统一入口与主体资质证据链
+
+对存在工厂档案的 1688 卖家，以 `sale.1688.com/factory/card.html` 及其 `factoryCoreInfoService` 接口作为厂家采集的统一调度入口，但不把它视为唯一原始数据源：
+
+- 工厂档案负责工厂简介、面积、人员、年交易额、产能、起订量、加工方式、品牌、专利、认证报告和主体资质入口。
+- 工厂档案中的警徽/主体资质入口由 `corporateIntegrateData.businessChange` 和 `extendField.corporateIntegrateLink` 暴露；它指向独立的 1688 工商详情页面，入口存在不等于法律字段已经采集成功。
+- 法定名称、统一社会信用代码、法定代表人、注册资本、注册地址、经营范围等法律主体字段，仍以 1688 官方 `businessinfor.html`、`wp_pc_shop_basic_info` 或警徽链接到的官方工商详情端点为证据。
+- 商品页和店铺页只负责商品—店铺—公司关系及来源身份，不覆盖主体资质和工厂事实。
+- 工厂档案缺失、警徽不存在或详情受限时，记录明确缺失原因并回退主体资质主链路；不得把普通店铺自动认定为厂家。
+
+真实样本已验证工厂档案可取得 `factory_area_sqm=1300`、年交易额、员工口径、品牌、起订量、加工方式、产值、采购周期和 10 项专利，同时取得独立工商详情入口。解析结果新增 `subject_qualification`，分别记录入口发现状态、工商详情链接、法律字段采集状态和证据 URL，避免把“入口已发现”误报为“资质详情已完成”。
+
+### 工厂面积与厂房面积
+
+1688 原始标签语义必须独立保存：
+
+| 原始标签 | 标准字段 | 已验证来源 | 规则 |
+|---|---|---|---|
+| 工厂面积 | `factory_area_sqm` | 店铺/超级工厂头部卡片 `cardDetail.code=acreage` | 只保存页面原始语义，不回填厂房面积 |
+| 厂房面积 | `factory_building_area_sqm` | 公司信用档案或工厂档案“厂房面积”标签 | 只保存页面原始语义，不回填工厂面积 |
+
+两个字段都以平方米保存标准数值，并保留原始标签、原始文本、来源 URL、字段路径、采集时间和证据。二者同时存在不构成冲突；只有同一标准字段出现多个不一致值时才产生冲突复核。
+
+2026-07-13 验证批次中，广州领宸科技有限公司的头部卡片“工厂面积”是 `6600 m²`，公司信用档案“厂房面积”是 `3100 m²`。两者来源位置和原始标签不同，应分别保存，不构成面积冲突；历史 L0 不重写。
+
+2026-07-15 已完成代码、Schema 和回归测试中的字段拆分。在线单商品烟测再次取得广州领宸科技有限公司的 `factory_area_sqm=6600` 与 `factory_building_area_sqm=3100`，两条证据分别保留“工厂面积”“厂房面积”原始标签且来源页面独立；历史 L0 不重写。该字段阻断项已关闭，后续仍需通过多商品批次验证覆盖率、恢复和漂移处理。
+
+## 5. 状态、重试与恢复
+
+- 登录失效返回 `login_required`；验证码或滑块优先自动处理（自动验证、环境/指纹/代理切换），自动处理无效时返回 `human_verification_required` 转人工；解析结构变化返回 `parser_drift`；不得把受限页面写成空成功。
+- 403/429、权限、签名或来源限制出现时先按能力降频、切换环境或跟随签名处理，仍失败则停止当前路径，记录具体状态（`rate_limited`、`login_required` 等）并保留证据，按状态路由处理（重试/人工/降频），不做无限重试。
+- 多商品流程用同一输出目录中的 `checkpoint.json` 跳过已成功且可复用的商品和公司步骤；恢复前先确认上次停止原因已解除。
+- n8n 工作流尚不存在，因此当前没有自动重试或状态路由；以人工执行正式 CLI 为主，采集节奏按来源风控承受度控制。
+
+## 6. 质量门槛
+
+- 商品、SKU、店铺和公司记录均带来源 URL 与采集时间。
+- 未知数值保持空值，不写 0；摘要数量与可枚举明细口径不同则分别保存。
+- 页面和接口原始证据进入 L0，标准化实体进入 L1，关系、冲突、质量和复核队列进入 L2。
+- 专利或证书接口错误不得覆盖页面摘要；页面结构变化必须保留原始 HTML 并标记 `parser_drift`。
+- 每批核对请求数、完成数、唯一公司数、SKU 数、接口响应数、缺失字段和复核队列；数量异常、批量归零或解析为 0 时停止交付。
+- 只有正式登录态、受控在线质量证据、统一 `run_result`、n8n 状态路由和连续稳定运行验收完成后，才可申请启用。
+
+当前唯一交付为 `deliveries/1688/1688_20260807/`（2026-08-07 全量字段重采）：商品 50 列精简字段集（参数属性 + 厂家关联 + 关联商品，用户筛选定稿），厂家 73 列；JSON 与中文 Excel 同构，商品通过 `厂家ID` 关联厂家。全量原始字段保留在 L1-L2 与 `other_attributes`，不因展示精简而删除。历史 `review_only` 验证包已清理，其结论保留于本 README 第 4 节。
+
+## 7. 登录态
+
+真实浏览器 profile 已于 2026-07-15 同盘迁入 `runtime/browser-profiles/1688/`，迁移前后资产清单一致。不得把 profile、Cookie、Local Storage 或 Session Storage 写入 Git、文档内容或交付包。在线采集前确认登录态可用；首次运行建议先 `sample --dry-run` 检查命令计划。

@@ -187,8 +187,17 @@
 
 `run_source.py` 的 `company` / `multi` / `validate` 子命令透传相同参数（`--no-stealth`、`--pacing-config`、`--pacing-checkpoint`、`--daily-cap`）。
 
+`multi_product_workflow.py` 额外支持 `--resume-force`：选样重排/换词导致输入清单变化时（旧商品不再纳入但数据已采），显式放行增量续采，旧缓存保留、只采新增商品。
+
 ### 行为约定
 
 - 频控检查点默认 `runtime/state/1688_pacing.json`（git 忽略）：跨天自动重置计数、保留节奏；达到每日上限后停止采集。
 - 验证码/滑块仍走既有 `human_verification_required` 检测；人工接管增强（检测→暂停→提示→恢复）为后续增量，当前保留等待超时机制。
 - 反爬验证采集的节奏建议从 `min_delay=3s`、`initial_delay=5s` 起步，失败后自动退避；不要手动把延时调到 0。
+
+### 2026-08-10 反爬验证实测结论（54 分类 × 3 商品）
+
+- 搜索页：连续约 15 次请求触发滑块；`prepare-verification` 人工过验证后（cookie 写入 profile），后续 41 词零触发——「过验证后一次性跑完」策略有效。
+- 商品详情页：单会话 158 次请求零拦截；当日累计请求升高后，新会话早期（第 2 个请求）即可能触发，需注意会话冷却。
+- 公司/厂家页：连续约 23 次请求触发滑块，等待 240s 无人处理即中断；公司采集适合独立低频分批任务。
+- 完整报告：`runtime/runs/1688/1688_validation_20260810_150101/ANTI_CRAWL_REPORT.md`（runtime 资产，不进 git）。

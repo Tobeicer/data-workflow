@@ -17,6 +17,7 @@
 - 当前清洗 XLSX：`runtime/runs/manlifang/manlifang_full_20260710_110814/cleaned/漫立方_新全量清洗主数据_20260712.xlsx`
 - 唯一交付：`deliveries/manlifang/manlifang_direct_20260810/`（统一 JSON + 中文 Excel；商品 50 列、厂家 54 列，字段键与 1688 交付完全一致；漫立方为单厂家，全部商品 `manufacturer_id` 指向 `manlifang:manufacturer:manlifang`；由 `src/build_manlifang_direct_delivery.py` 从清洗主数据 + 图片映射 + 类目关系重新生成；历史 14-sheet 全量导出版已清理，原始资产保留在 runtime）
   - `other_attributes` 均为源头真实字段：物流方式/基础单位/商品状态/是否多规格/是否售罄/上架时间/来源描述（3128）、月销量（3066）、展示名（239）、辅助单位+换算率（202）、别名（43）、规格编号（37）；材质/产地/3C/包装尺寸等源头接口不提供的字段如实留空，不编造。
+  - 2026-08-10 实时抓包验证批次：`runtime/runs/manlifang/manlifang_full_20260810_115055/`（手机实测漫立方小程序，7 个接口全部命中且与 7 月字段一致；商品页属性无结构化字段、全部为详情图，已随 `detail_images_json` 交付）。
 
 新运行从本适配器写入 `runtime/runs/manlifang/<run_id>/`。当前正式批次和交付已于 2026-07-15 完成同盘移动，迁移前后资产清单的文件身份、相对路径、内容与硬链接拓扑一致。
 

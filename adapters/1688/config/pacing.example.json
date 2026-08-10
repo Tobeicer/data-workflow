@@ -1,0 +1,9 @@
+{
+  "min_delay": 3.0,
+  "max_delay": 90.0,
+  "initial_delay": 5.0,
+  "backoff_factor": 2.0,
+  "recovery_factor": 0.5,
+  "blocked_delay": 120.0,
+  "daily_cap": 300
+}

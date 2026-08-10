@@ -11,6 +11,7 @@ from pathlib import Path
 from collect_company_pilot import (
     BrowserSession,
     PlaywrightBrowserSession,
+    DEFAULT_PACING_CHECKPOINT,
     add_tpdocument_source_urls,
     business_info_url,
     factory_archive_url,
@@ -23,6 +24,7 @@ from collect_company_pilot import (
     write_json,
     write_jsonl,
 )
+from collect_company_pilot import build_pacer
 from company_profile import parse_company_asset
 from field_inventory import build_field_inventory
 from product_profile import normalize_product_capture, sanitize_product_record
@@ -732,6 +734,10 @@ def main() -> int:
     parser.add_argument("--headless", action="store_true")
     parser.add_argument("--confirmation-window", type=int, default=10)
     parser.add_argument("--verification-wait-seconds", type=int, default=240)
+    parser.add_argument("--no-stealth", action="store_true", help="不注入 stealth 指纹（默认注入）")
+    parser.add_argument("--pacing-config", help="自适应频控配置 JSON，提供后启用自适应节奏")
+    parser.add_argument("--pacing-checkpoint", default=str(DEFAULT_PACING_CHECKPOINT))
+    parser.add_argument("--daily-cap", type=int, help="当日请求上限（配合 --pacing-config 使用）")
     args = parser.parse_args()
 
     payload = read_json(Path(args.input), [])
@@ -740,12 +746,23 @@ def main() -> int:
     if not isinstance(offers, list) or not offers:
         raise SystemExit("input must contain a non-empty JSON array")
     output_dir = Path(args.output_dir)
+    pacing = (
+        build_pacer(
+            config_path=args.pacing_config,
+            daily_cap=args.daily_cap,
+            checkpoint=args.pacing_checkpoint,
+        )
+        if args.pacing_config
+        else None
+    )
     with PlaywrightBrowserSession(
         profile_dir=Path(args.profile_dir),
         screenshot_dir=output_dir / "l0" / "screenshots",
         delay_seconds=args.delay_seconds,
         debug=args.debug,
         headless=args.headless,
+        stealth=not args.no_stealth,
+        pacing=pacing,
     ) as browser:
         result = run_multi_product_workflow(
             offers=offers,

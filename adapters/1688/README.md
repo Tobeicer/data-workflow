@@ -165,3 +165,30 @@
 ## 7. 登录态
 
 真实浏览器 profile 已于 2026-07-15 同盘迁入 `runtime/browser-profiles/1688/`，迁移前后资产清单一致。不得把 profile、Cookie、Local Storage 或 Session Storage 写入 Git、文档内容或交付包。在线采集前确认登录态可用；首次运行建议先 `sample --dry-run` 检查命令计划。
+
+## 8. 反爬基础（stealth 与自适应频控）
+
+浏览器执行层统一来自 shared 内核（见总纲 §10.1），1688 采集脚本默认接入：
+
+| 能力 | 模块 | 说明 |
+|---|---|---|
+| stealth 指纹注入 | `shared/src/data_workflow_core/browser_stealth.py` | 抹除 `navigator.webdriver`、补齐 chrome.runtime/plugins/语言/硬件参数/窗口尺寸、WebGL/Canvas 一致性伪装；仅伪装不绕过 |
+| 自适应频控 | `shared/src/data_workflow_core/adaptive_pacing.py` | 成功回落、失败指数退避、验证拦截冷却、每日请求上限、JSON 检查点跨批次续跑 |
+
+### 用法
+
+```powershell
+# 默认已注入 stealth；关闭：
+.\.venv-data\Scripts\python.exe adapters\1688\src\multi_product_workflow.py --input <selected.json> --output-dir <out> --no-stealth
+
+# 启用自适应频控（示例配置 adapters/1688/config/pacing.example.json）：
+.\.venv-data\Scripts\python.exe adapters\1688\src\multi_product_workflow.py --input <selected.json> --output-dir <out> --pacing-config adapters\1688\config\pacing.example.json --daily-cap 300
+```
+
+`run_source.py` 的 `company` / `multi` / `validate` 子命令透传相同参数（`--no-stealth`、`--pacing-config`、`--pacing-checkpoint`、`--daily-cap`）。
+
+### 行为约定
+
+- 频控检查点默认 `runtime/state/1688_pacing.json`（git 忽略）：跨天自动重置计数、保留节奏；达到每日上限后停止采集。
+- 验证码/滑块仍走既有 `human_verification_required` 检测；人工接管增强（检测→暂停→提示→恢复）为后续增量，当前保留等待超时机制。
+- 反爬验证采集的节奏建议从 `min_delay=3s`、`initial_delay=5s` 起步，失败后自动退避；不要手动把延时调到 0。

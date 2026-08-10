@@ -31,6 +31,19 @@ def add_repeated_option(command: list[str], option: str, values: list[str] | Non
         command.extend([option, value])
 
 
+def add_browser_pacing_options(command: list[str], args: argparse.Namespace) -> None:
+    """透传 stealth 与自适应频控参数到浏览器采集脚本。"""
+    if getattr(args, "no_stealth", False):
+        command.append("--no-stealth")
+    pacing_config = getattr(args, "pacing_config", None)
+    if pacing_config:
+        command.extend(["--pacing-config", pacing_config])
+        command.extend(["--pacing-checkpoint", args.pacing_checkpoint])
+        daily_cap = getattr(args, "daily_cap", None)
+        if daily_cap:
+            command.extend(["--daily-cap", str(daily_cap)])
+
+
 def load_keywords(config_path: Path) -> list[str]:
     """从分类配置 JSON 读取启用关键词。
 
@@ -192,6 +205,7 @@ def company(args: argparse.Namespace) -> None:
         command.append("--debug")
     if args.headless:
         command.append("--headless")
+    add_browser_pacing_options(command, args)
     run_command(command, dry_run=args.dry_run)
     print("[1688-workflow] 公司试采输出目录：" + str(output_dir))
 
@@ -220,6 +234,7 @@ def multi(args: argparse.Namespace) -> None:
         command.append("--debug")
     if args.headless:
         command.append("--headless")
+    add_browser_pacing_options(command, args)
     run_command(command, dry_run=args.dry_run)
     print("[1688-workflow] 多商品批次输出目录：" + str(output_dir))
 
@@ -285,6 +300,7 @@ def validate(args: argparse.Namespace) -> None:
         multi_command.append("--debug")
     if args.headless:
         multi_command.append("--headless")
+    add_browser_pacing_options(multi_command, args)
     run_command(multi_command, dry_run=args.dry_run)
     print("[1688-workflow] 分类覆盖验证输出目录：" + str(output_dir))
 
@@ -335,6 +351,10 @@ def main() -> None:
     company_parser.add_argument("--debug", action="store_true")
     company_parser.add_argument("--headless", action="store_true")
     company_parser.add_argument("--verification-wait-seconds", type=int, default=240)
+    company_parser.add_argument("--no-stealth", action="store_true")
+    company_parser.add_argument("--pacing-config", help="自适应频控配置 JSON")
+    company_parser.add_argument("--pacing-checkpoint", default=str(WORKFLOW_DIR / "runtime" / "state" / "1688_pacing.json"))
+    company_parser.add_argument("--daily-cap", type=int)
     company_parser.add_argument("--dry-run", action="store_true")
     company_parser.set_defaults(func=company)
 
@@ -349,6 +369,10 @@ def main() -> None:
     multi_parser.add_argument("--stamp", help="默认输出目录使用的批次时间戳")
     multi_parser.add_argument("--debug", action="store_true")
     multi_parser.add_argument("--headless", action="store_true")
+    multi_parser.add_argument("--no-stealth", action="store_true")
+    multi_parser.add_argument("--pacing-config", help="自适应频控配置 JSON")
+    multi_parser.add_argument("--pacing-checkpoint", default=str(WORKFLOW_DIR / "runtime" / "state" / "1688_pacing.json"))
+    multi_parser.add_argument("--daily-cap", type=int)
     multi_parser.add_argument("--dry-run", action="store_true")
     multi_parser.set_defaults(func=multi)
 
@@ -367,6 +391,10 @@ def main() -> None:
     validate_parser.add_argument("--output-dir", help="批次输出目录")
     validate_parser.add_argument("--debug", action="store_true")
     validate_parser.add_argument("--headless", action="store_true")
+    validate_parser.add_argument("--no-stealth", action="store_true")
+    validate_parser.add_argument("--pacing-config", help="自适应频控配置 JSON")
+    validate_parser.add_argument("--pacing-checkpoint", default=str(WORKFLOW_DIR / "runtime" / "state" / "1688_pacing.json"))
+    validate_parser.add_argument("--daily-cap", type=int)
     validate_parser.add_argument("--dry-run", action="store_true")
     validate_parser.set_defaults(func=validate)
 

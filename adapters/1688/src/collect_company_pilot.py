@@ -22,9 +22,21 @@ if hasattr(sys.stdout, "reconfigure"):
 SRC_DIR = Path(__file__).resolve().parent
 WORKFLOW_DIR = Path(__file__).resolve().parents[3]
 DEFAULT_PROFILE_DIR = WORKFLOW_DIR / "runtime" / "browser-profiles" / "1688"
+DEFAULT_PACING_CHECKPOINT = WORKFLOW_DIR / "runtime" / "state" / "1688_pacing.json"
 CHROME_PATHS = (
     Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
     Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
+)
+
+sys.path.insert(0, str(WORKFLOW_DIR / "shared" / "src"))
+
+from data_workflow_core.adaptive_pacing import (  # noqa: E402
+    AdaptivePacer,
+    build_pacer,
+)
+from data_workflow_core.browser_stealth import (  # noqa: E402
+    apply_stealth,
+    stealth_launch_args,
 )
 
 
@@ -694,12 +706,16 @@ class PlaywrightBrowserSession:
         delay_seconds: float = 5.0,
         debug: bool = False,
         headless: bool = False,
+        stealth: bool = True,
+        pacing: AdaptivePacer | None = None,
     ) -> None:
         self.profile_dir = Path(profile_dir)
         self.screenshot_dir = Path(screenshot_dir)
         self.delay_seconds = max(float(delay_seconds), 0.0)
         self.debug = debug
         self.headless = headless
+        self.stealth = stealth
+        self.pacing = pacing
         self._playwright = None
         self._context = None
         self._page = None
@@ -711,7 +727,8 @@ class PlaywrightBrowserSession:
         self._playwright = sync_playwright().start()
         launch_kwargs: dict = {
             "headless": self.headless,
-            "args": ["--disable-blink-features=AutomationControlled", "--lang=zh-CN"],
+            "args": stealth_launch_args() if self.stealth
+            else ["--disable-blink-features=AutomationControlled", "--lang=zh-CN"],
         }
         executable = chrome_executable()
         if executable:
@@ -722,6 +739,8 @@ class PlaywrightBrowserSession:
             locale="zh-CN",
             viewport={"width": 1365, "height": 900},
         )
+        if self.stealth:
+            apply_stealth(self._context)
         self._page = self._context.pages[0] if self._context.pages else self._context.new_page()
         return self
 
@@ -942,9 +961,14 @@ class PlaywrightBrowserSession:
                 return
 
         page.on("response", on_response)
+        if self.pacing is not None:
+            self.pacing.wait_for_next()
         try:
             page.goto(url, wait_until="domcontentloaded", timeout=60000)
-            page.wait_for_timeout(int(self.delay_seconds * 1000))
+            if self.pacing is None:
+                page.wait_for_timeout(int(self.delay_seconds * 1000))
+            else:
+                page.wait_for_timeout(1200)  # 固定节奏已由 pacer 接管，仅保留渲染稳定等待
             if page_type in {
                 "product",
                 "shop",
@@ -974,6 +998,8 @@ class PlaywrightBrowserSession:
                     structured_data["detailImages"] = self.extract_detail_images(page)
                 except Exception:
                     structured_data = {}
+            if self.pacing is not None:
+                self.pacing.record_success()
             return CapturedPage(
                 page_type=page_type,
                 requested_url=url,
@@ -985,6 +1011,10 @@ class PlaywrightBrowserSession:
                 network_urls=network_urls,
                 structured_data=structured_data,
             )
+        except Exception:
+            if self.pacing is not None:
+                self.pacing.record_failure()
+            raise
         finally:
             page.remove_listener("response", on_response)
 
@@ -998,15 +1028,30 @@ def main() -> int:
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--headless", action="store_true")
     parser.add_argument("--verification-wait-seconds", type=int, default=240)
+    parser.add_argument("--no-stealth", action="store_true", help="不注入 stealth 指纹（默认注入）")
+    parser.add_argument("--pacing-config", help="自适应频控配置 JSON，提供后启用自适应节奏")
+    parser.add_argument("--pacing-checkpoint", default=str(DEFAULT_PACING_CHECKPOINT))
+    parser.add_argument("--daily-cap", type=int, help="当日请求上限（配合 --pacing-config 使用）")
     args = parser.parse_args()
 
     output_dir = Path(args.output_dir)
+    pacing = (
+        build_pacer(
+            config_path=args.pacing_config,
+            daily_cap=args.daily_cap,
+            checkpoint=args.pacing_checkpoint,
+        )
+        if args.pacing_config
+        else None
+    )
     with PlaywrightBrowserSession(
         profile_dir=Path(args.profile_dir),
         screenshot_dir=output_dir / "l0" / "screenshots",
         delay_seconds=args.delay_seconds,
         debug=args.debug,
         headless=args.headless,
+        stealth=not args.no_stealth,
+        pacing=pacing,
     ) as browser:
         result = run_company_pilot(
             offer_id=args.offer_id,

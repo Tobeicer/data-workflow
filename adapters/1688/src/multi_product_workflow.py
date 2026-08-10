@@ -19,12 +19,12 @@ from collect_company_pilot import (
     find_response,
     persist_page,
     product_url,
-    restriction_status,
     save_run_result,
     write_json,
     write_jsonl,
 )
 from collect_company_pilot import build_pacer
+from data_workflow_core.browser import restriction_from_page
 from company_profile import parse_company_asset
 from field_inventory import build_field_inventory
 from product_profile import normalize_product_capture, sanitize_product_record
@@ -184,7 +184,7 @@ def resolve_human_verification(
     url: str,
     verification_wait_seconds: int,
 ):
-    blocked = restriction_status(page)
+    blocked = restriction_from_page(page)
     if blocked != "human_verification_required" or verification_wait_seconds <= 0:
         return page, blocked
     waiter = getattr(browser, "wait_for_human_verification", None)
@@ -193,7 +193,7 @@ def resolve_human_verification(
     if not waiter(timeout_seconds=verification_wait_seconds):
         return page, blocked
     refreshed = browser.capture(page_type, url)
-    return refreshed, restriction_status(refreshed)
+    return refreshed, restriction_from_page(refreshed)
 
 
 def run_multi_product_workflow(

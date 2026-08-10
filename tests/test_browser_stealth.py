@@ -9,7 +9,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "shared" / "src"))
 
-from data_workflow_core.browser_stealth import (  # noqa: E402
+from data_workflow_core.browser.stealth import (  # noqa: E402
     STEALTH_INIT_SCRIPT,
     apply_stealth,
     build_stealth_init_script,

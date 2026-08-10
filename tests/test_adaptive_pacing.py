@@ -9,7 +9,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "shared" / "src"))
 
-from data_workflow_core.adaptive_pacing import (  # noqa: E402
+from data_workflow_core.browser.pacing import (  # noqa: E402
     AdaptivePacer,
     build_pacer,
     load_pacing_config,

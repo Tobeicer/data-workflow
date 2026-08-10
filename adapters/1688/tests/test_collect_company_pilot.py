@@ -8,13 +8,14 @@ SRC_DIR = TEST_DIR.parent / "src"
 sys.path.insert(0, str(SRC_DIR))
 
 import collect_company_pilot  # noqa: E402
+from data_workflow_core.browser import restriction_from_page  # noqa: E402
 
 
 class RecordingBrowser:
     def __init__(self) -> None:
         self.calls: list[tuple[str, str]] = []
 
-    def capture(self, page_type: str, url: str):
+    def capture(self, page_type: str, url: str, **kwargs):
         self.calls.append((page_type, url))
         html = ""
         if page_type == "product":
@@ -62,13 +63,13 @@ def test_account_contact_remediation_redirect_requires_human_action() -> None:
     )
 
     assert (
-        collect_company_pilot.restriction_status(page)
+        restriction_from_page(page)
         == "human_verification_required"
     )
 
 
 def test_product_detail_api_is_captured_as_relevant_public_evidence() -> None:
-    assert collect_company_pilot.PlaywrightBrowserSession.relevant_response(
+    assert collect_company_pilot.relevant_response(
         "https://h5api.m.1688.com/h5/mtop.1688.mmga.offerdetail.service/1.0/"
     )
 
@@ -137,7 +138,7 @@ def test_captcha_response_marks_page_as_human_verification_required() -> None:
         ],
     )
 
-    assert collect_company_pilot.restriction_status(page) == "human_verification_required"
+    assert restriction_from_page(page) == "human_verification_required"
 
 
 def test_human_verification_waiter_does_not_ignore_captcha_iframe(tmp_path: Path) -> None:
@@ -160,7 +161,7 @@ def test_factory_inquiry_sms_code_is_not_treated_as_a_verification_wall() -> Non
         text="工厂档案\n工厂面积\n1300m²\n立即询价\n获取验证码\n立即发送",
     )
 
-    assert collect_company_pilot.restriction_status(page) == ""
+    assert restriction_from_page(page) == ""
 
 
 def test_company_pilot_captures_the_real_factory_archive_page(tmp_path: Path) -> None:

@@ -172,8 +172,8 @@
 
 | 能力 | 模块 | 说明 |
 |---|---|---|
-| stealth 指纹注入 | `shared/src/data_workflow_core/browser_stealth.py` | 抹除 `navigator.webdriver`、补齐 chrome.runtime/plugins/语言/硬件参数/窗口尺寸、WebGL/Canvas 一致性伪装；仅伪装不绕过 |
-| 自适应频控 | `shared/src/data_workflow_core/adaptive_pacing.py` | 成功回落、失败指数退避、验证拦截冷却、每日请求上限、JSON 检查点跨批次续跑 |
+| stealth 指纹注入 | `shared/src/data_workflow_core/browser/stealth.py` | 抹除 `navigator.webdriver`、补齐 chrome.runtime/plugins/语言/硬件参数/窗口尺寸、WebGL/Canvas 一致性伪装；仅伪装不绕过 |
+| 自适应频控 | `shared/src/data_workflow_core/browser/pacing.py` | 成功回落、失败指数退避、验证拦截冷却、每日请求上限、JSON 检查点跨批次续跑 |
 
 ### 用法
 
@@ -225,7 +225,7 @@
 
 **工程盲区（待修）**
 
-- pacing 只统计请求级成功（237 请求 0 失败），**内容级滑块未计入频控**——需把 `restriction_status` 检测接入 pacing 并触发冷却退避；
+- pacing 只统计请求级成功（237 请求 0 失败），**内容级滑块未计入频控**——需把 `restriction_from_page` 检测接入 pacing 并触发冷却退避；
 - 无会话生命周期管理（请求上限/时长上限/自动重启）；
 - 人工接管仍是等待超时模式，无「检测→暂停→通知→恢复」闭环。
 

@@ -12,7 +12,6 @@ from pathlib import Path
 from urllib.parse import quote, urljoin, urlparse, parse_qs
 
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
-from playwright.sync_api import sync_playwright
 
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -20,13 +19,16 @@ if hasattr(sys.stdout, "reconfigure"):
 
 SRC_DIR = Path(__file__).resolve().parent
 WORKFLOW_DIR = Path(__file__).resolve().parents[3]
+
+sys.path.insert(0, str(WORKFLOW_DIR / "shared" / "src"))
+from data_workflow_core.browser import (  # noqa: E402
+    PlaywrightBrowserSession,
+    classify_restriction,
+)
+
 RUNS_DIR = WORKFLOW_DIR / "runtime" / "runs" / "1688"
 PROFILE_DIR = WORKFLOW_DIR / "runtime" / "browser-profiles" / "1688"
 DEBUG_DIR = WORKFLOW_DIR / "runtime" / "tmp" / "1688"
-CHROME_PATHS = [
-    Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
-    Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
-]
 
 KEYWORDS = [
     "游戏机配件",
@@ -61,13 +63,6 @@ FIELDNAMES = [
     "capture_status",
     "capture_note",
 ]
-
-
-def chrome_executable() -> str | None:
-    for path in CHROME_PATHS:
-        if path.exists():
-            return str(path)
-    return None
 
 
 def search_url(keyword: str) -> str:
@@ -118,26 +113,12 @@ def offer_id_from_report(value: str | None) -> str:
 
 
 def classify_search_restriction(page_text: str, page_url: str) -> tuple[str, str]:
-    text = page_text.lower()
-    url = page_url.lower()
-    markers = [
-        ("滑块", "human_verification_required", "页面出现滑块验证"),
-        ("验证码", "human_verification_required", "页面出现验证码"),
-        ("captcha", "human_verification_required", "页面出现验证码"),
-        ("安全验证", "human_verification_required", "页面出现安全验证"),
-        ("login.1688.com", "login_required", "页面跳转到登录"),
-        ("signin", "login_required", "页面要求登录"),
-        ("请先登录", "login_required", "页面要求登录"),
-        ("访问受限", "rate_limited", "页面访问受限"),
-    ]
-    for marker, status, note in markers:
-        if marker.lower() in text or marker.lower() in url:
-            return status, note
-    return "", ""
+    """兼容别名：统一检测在 data_workflow_core.browser.detection。"""
+    return classify_restriction(page_text, page_url)
 
 
 def looks_blocked(page_text: str, page_url: str) -> tuple[bool, str]:
-    status, note = classify_search_restriction(page_text, page_url)
+    status, note = classify_restriction(page_text, page_url)
     return bool(status), note
 
 
@@ -387,7 +368,6 @@ def main() -> int:
         if args.output
         else RUNS_DIR / f"1688_sample_{stamp}" / f"{args.output_prefix}_{stamp}.csv"
     )
-    executable_path = chrome_executable()
     if args.debug:
         DEBUG_DIR.mkdir(parents=True, exist_ok=True)
 
@@ -395,30 +375,14 @@ def main() -> int:
     stop_status = ""
     stop_message = ""
     current_keyword = ""
-
-    with sync_playwright() as p:
-        launch_kwargs: dict = {
-            "headless": False,
-            "args": [
-                "--disable-blink-features=AutomationControlled",
-                "--lang=zh-CN",
-            ],
-        }
-        if executable_path:
-            launch_kwargs["executable_path"] = executable_path
-
-        context = p.chromium.launch_persistent_context(
-            str(PROFILE_DIR),
-            **launch_kwargs,
-            locale="zh-CN",
-            viewport={"width": 1365, "height": 900},
-            user_agent=(
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) "
-                "AppleWebKit/537.36 (KHTML, like Gecko) "
-                "Chrome/122.0.0.0 Safari/537.36"
-            ),
-        )
-        page = context.pages[0] if context.pages else context.new_page()
+    
+    with PlaywrightBrowserSession(
+        profile_dir=PROFILE_DIR,
+        screenshot_dir=DEBUG_DIR if args.debug else RUNS_DIR,
+        delay_seconds=args.delay_seconds,
+        debug=args.debug,
+    ) as browser:
+        page = browser.page
 
         if args.prepare_login:
             login_url = "https://login.1688.com/member/signin.htm"
@@ -441,7 +405,6 @@ def main() -> int:
                     print("[1688] 检测到可能已登录。")
                     break
                 page.wait_for_timeout(3000)
-            context.close()
             print(
                 "[1688] 登录准备步骤结束。本地登录态已保存在 "
                 "runtime/browser-profiles/1688/。"
@@ -473,7 +436,6 @@ def main() -> int:
                 except Exception:
                     pass
                 page.wait_for_timeout(2000)
-            context.close()
             if verified:
                 print("[1688] 验证状态已保存，可使用 validate 从断点续跑。")
                 return 0
@@ -645,7 +607,6 @@ def main() -> int:
                 )
                 break
 
-        context.close()
 
     deduped = dedupe_discovery_rows(all_rows)
     final_status = stop_status or "completed"

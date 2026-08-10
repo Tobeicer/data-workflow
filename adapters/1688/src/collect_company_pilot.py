@@ -6,11 +6,8 @@ import json
 import random
 import re
 import sys
-import time
-from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
-from typing import Protocol
 from urllib.parse import quote, urlparse
 
 from company_profile import parse_company_asset
@@ -24,49 +21,19 @@ SRC_DIR = Path(__file__).resolve().parent
 WORKFLOW_DIR = Path(__file__).resolve().parents[3]
 DEFAULT_PROFILE_DIR = WORKFLOW_DIR / "runtime" / "browser-profiles" / "1688"
 DEFAULT_PACING_CHECKPOINT = WORKFLOW_DIR / "runtime" / "state" / "1688_pacing.json"
-CHROME_PATHS = (
-    Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
-    Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
-)
 
 sys.path.insert(0, str(WORKFLOW_DIR / "shared" / "src"))
 
-from data_workflow_core.adaptive_pacing import (  # noqa: E402
+from data_workflow_core.browser import (  # noqa: E402
     AdaptivePacer,
+    BrowserSession,
+    CapturedPage,
+    CapturedResponse,
+    PlaywrightBrowserSession,
     build_pacer,
+    chrome_executable,
+    restriction_from_page,
 )
-from data_workflow_core.browser_stealth import (  # noqa: E402
-    apply_stealth,
-    stealth_launch_args,
-)
-
-
-@dataclass
-class CapturedResponse:
-    url: str
-    status: int
-    body: str
-
-
-@dataclass
-class CapturedPage:
-    page_type: str
-    requested_url: str
-    final_url: str
-    title: str
-    html: str
-    text: str
-    responses: list[CapturedResponse] = field(default_factory=list)
-    network_urls: list[str] = field(default_factory=list)
-    structured_data: dict = field(default_factory=dict)
-
-
-class BrowserSession(Protocol):
-    def capture(self, page_type: str, url: str) -> CapturedPage: ...
-
-
-def chrome_executable() -> str | None:
-    return next((str(path) for path in CHROME_PATHS if path.exists()), None)
 
 
 def product_url(offer_id: str) -> str:
@@ -175,36 +142,6 @@ def extract_seller_identity(html: str) -> dict[str, str]:
     }
 
 
-def restriction_status(page: CapturedPage) -> str:
-    combined = f"{page.final_url}\n{page.title}\n{page.text}".lower()
-    if any(marker in combined for marker in (
-        "captcha",
-        "滑块",
-        "安全验证",
-        "请完成验证",
-        "访问验证",
-        "验证中心",
-        "向右滑动验证",
-        "拖动下方滑块",
-        "contactinfo_invalid",
-    )):
-        return "human_verification_required"
-    if "login.1688.com" in combined or "login.taobao.com" in combined:
-        return "login_required"
-    if any(marker in combined for marker in ("请先登录", "立即登录后", "登录后查看")):
-        return "login_required"
-    for response in page.responses:
-        response_text = f"{response.url}\n{response.body}".lower()
-        if response.status in {403, 429}:
-            return "rate_limited"
-        if any(
-            marker in response_text
-            for marker in ("/punish", "captcha", "x5step", "contactinfo_invalid")
-        ):
-            return "human_verification_required"
-    return ""
-
-
 def retry_after_human_verification(
     browser: BrowserSession,
     page: CapturedPage,
@@ -212,17 +149,18 @@ def retry_after_human_verification(
     page_type: str,
     url: str,
     timeout_seconds: int,
+    capture_kwargs: dict | None = None,
 ) -> tuple[CapturedPage, str]:
     current = page
-    blocked = restriction_status(current)
+    blocked = restriction_from_page(current)
     waiter = getattr(browser, "wait_for_human_verification", None)
     for _ in range(3):
         if blocked != "human_verification_required" or timeout_seconds <= 0:
             break
         if not callable(waiter) or not waiter(timeout_seconds=timeout_seconds):
             break
-        current = browser.capture(page_type, url)
-        blocked = restriction_status(current)
+        current = browser.capture(page_type, url, **(capture_kwargs or {}))
+        blocked = restriction_from_page(current)
     return current, blocked
 
 
@@ -382,7 +320,12 @@ def run_company_pilot(
     response_manifest: list[dict] = []
     pages: list[CapturedPage] = []
 
-    product = browser.capture("product", product_url(offer_id))
+    product_capture_kwargs = {
+        "after_load": scroll_after_load,
+        "response_filter": relevant_response,
+        "structured_extractor": product_extractor,
+    }
+    product = browser.capture("product", product_url(offer_id), **product_capture_kwargs)
     pages.append(product)
     persist_page(
         product,
@@ -396,6 +339,7 @@ def run_company_pilot(
         page_type="product",
         url=product_url(offer_id),
         timeout_seconds=verification_wait_seconds,
+        capture_kwargs=product_capture_kwargs,
     )
     if product is not pages[-1]:
         pages[-1] = product
@@ -447,7 +391,12 @@ def run_company_pilot(
         ("business_info", business_info_url(member_id)),
     )
     for page_type, url in page_targets:
-        captured = browser.capture(page_type, url)
+        captured = browser.capture(
+            page_type,
+            url,
+            after_load=scroll_after_load,
+            response_filter=relevant_response,
+        )
         pages.append(captured)
         persist_page(
             captured,
@@ -461,6 +410,10 @@ def run_company_pilot(
             page_type=page_type,
             url=url,
             timeout_seconds=verification_wait_seconds,
+            capture_kwargs={
+                "after_load": scroll_after_load,
+                "response_filter": relevant_response,
+            },
         )
         if refreshed is not captured:
             pages[-1] = refreshed
@@ -698,329 +651,244 @@ def run_company_pilot(
     )
 
 
-class PlaywrightBrowserSession:
-    def __init__(
-        self,
-        *,
-        profile_dir: Path,
-        screenshot_dir: Path,
-        delay_seconds: float = 5.0,
-        debug: bool = False,
-        headless: bool = False,
-        stealth: bool = True,
-        pacing: AdaptivePacer | None = None,
-    ) -> None:
-        self.profile_dir = Path(profile_dir)
-        self.screenshot_dir = Path(screenshot_dir)
-        self.delay_seconds = max(float(delay_seconds), 0.0)
-        self.debug = debug
-        self.headless = headless
-        self.stealth = stealth
-        self.pacing = pacing
-        self._playwright = None
-        self._context = None
-        self._page = None
-
-    def __enter__(self) -> "PlaywrightBrowserSession":
-        from playwright.sync_api import sync_playwright
-
-        self.profile_dir.mkdir(parents=True, exist_ok=True)
-        self._playwright = sync_playwright().start()
-        launch_kwargs: dict = {
-            "headless": self.headless,
-            "args": stealth_launch_args() if self.stealth
-            else ["--disable-blink-features=AutomationControlled", "--lang=zh-CN"],
-        }
-        executable = chrome_executable()
-        if executable:
-            launch_kwargs["executable_path"] = executable
-        self._context = self._playwright.chromium.launch_persistent_context(
-            str(self.profile_dir),
-            **launch_kwargs,
-            locale="zh-CN",
-            viewport={"width": 1365, "height": 900},
+def relevant_response(url: str) -> bool:
+    lowered = url.lower()
+    return any(
+        marker in lowered
+        for marker in (
+            "wp_pc_common_header",
+            "wp_pc_shop_basic_info",
+            "wp_pc_certification",
+            "getshopmarketinfo",
+            "moduleasyncservice",
+            "tpdocument.",
+            "factory.card.common",
+            "factory-card-common",
+            "mtop.1688.mmga.offerdetail.service",
+            "mtop.1688.moga.pc.shopcard",
         )
-        if self.stealth:
-            apply_stealth(self._context)
-        self._page = self._context.pages[0] if self._context.pages else self._context.new_page()
-        return self
+    )
 
-    def __exit__(self, exc_type, exc, traceback) -> None:
-        if self._context is not None:
-            self._context.close()
-        if self._playwright is not None:
-            self._playwright.stop()
 
-    def wait_for_human_verification(self, *, timeout_seconds: int = 240) -> bool:
-        if self._page is None or self.headless or timeout_seconds <= 0:
-            return False
-        page = self._page
-        print(f"[1688] 当前页面需要人工验证，浏览器将保持打开 {timeout_seconds} 秒。")
-        print("[1688] 请在浏览器中完成滑块；成功后当前页面会自动重新采集。")
-        deadline = time.time() + timeout_seconds
-        markers = (
-            "captcha",
-            "滑块",
-            "安全验证",
-            "请完成验证",
-            "访问验证",
-            "验证中心",
-            "向右滑动验证",
-            "拖动下方滑块",
-        )
-        clear_streak = 0
-        while time.time() < deadline:
-            try:
-                body_text = page.locator("body").inner_text(timeout=1500)
-            except Exception:
-                body_text = ""
-            try:
-                verification_frame_count = page.locator(
-                    'iframe[src*="punish"], iframe[src*="captcha"], '
-                    'iframe[src*="_____tmd_____"]'
-                ).count()
-            except Exception:
-                verification_frame_count = 0
-            combined = f"{page.url}\n{page.title()}\n{body_text}".lower()
-            normal_page = (
-                len(body_text.strip()) >= 100
-                and verification_frame_count == 0
-                and not any(marker in combined for marker in markers)
-                and "/punish" not in page.url.lower()
-                and "login.1688.com" not in page.url.lower()
-                and "login.taobao.com" not in page.url.lower()
-            )
-            clear_streak = clear_streak + 1 if normal_page else 0
-            if clear_streak >= 2:
-                print("[1688] 检测到人工验证已完成。")
-                return True
-            page.wait_for_timeout(2000)
-        print("[1688] 人工验证等待超时，保留断点后退出。")
-        return False
+def scroll_after_load(page) -> None:
+    """1688 页面滚动策略：分段滚动触发懒加载。"""
+    try:
+        for _ in range(2):
+            page.mouse.wheel(0, 1600)
+            page.wait_for_timeout(800)
+    except Exception:
+        return
 
-    @staticmethod
-    def relevant_response(url: str) -> bool:
-        lowered = url.lower()
-        return any(
-            marker in lowered
-            for marker in (
-                "wp_pc_common_header",
-                "wp_pc_shop_basic_info",
-                "wp_pc_certification",
-                "getshopmarketinfo",
-                "moduleasyncservice",
-                "tpdocument.",
-                "factory.card.common",
-                "factory-card-common",
-                "mtop.1688.mmga.offerdetail.service",
-                "mtop.1688.moga.pc.shopcard",
-            )
-        )
 
-    @staticmethod
-    def extract_product_structure(page) -> dict:
-        return page.evaluate(
-            r"""() => {
-                const clean = (value) => (value || '').replace(/\s+/g, ' ').trim();
-                const pickText = (selectors) => {
-                    for (const selector of selectors) {
-                        const node = document.querySelector(selector);
-                        const text = clean(node && (node.innerText || node.textContent));
-                        if (text) return text;
-                    }
-                    return '';
-                };
-                const attrs = {};
-                const rows = Array.from(document.querySelectorAll(
-                    '[data-module="od_product_attributes"] tr, #productAttributes tr, .module-od-product-attributes tr'
-                ));
-                for (const row of rows) {
-                    const cells = Array.from(row.querySelectorAll('th,td'));
-                    for (let index = 0; index + 1 < cells.length; index += 2) {
-                        const key = clean(cells[index].innerText || cells[index].textContent).replace(/[:：]$/, '');
-                        const value = clean(cells[index + 1].innerText || cells[index + 1].textContent);
-                        if (key && value && key.length <= 30) attrs[key] = value;
-                    }
+def product_extractor(page) -> dict:
+    """1688 商品页结构化提取：属性结构 + 详情图。"""
+    data = extract_product_structure(page)
+    data["detailImages"] = extract_detail_images(page)
+    return data
+
+
+def extract_product_structure(page) -> dict:
+    return page.evaluate(
+        r"""() => {
+            const clean = (value) => (value || '').replace(/\s+/g, ' ').trim();
+            const pickText = (selectors) => {
+                for (const selector of selectors) {
+                    const node = document.querySelector(selector);
+                    const text = clean(node && (node.innerText || node.textContent));
+                    if (text) return text;
                 }
-                const skuRows = [];
-                for (const node of Array.from(document.querySelectorAll('.expand-view-list .expand-view-item'))) {
-                    const labelNode = node.querySelector('.item-label');
-                    const label = clean(labelNode && (labelNode.innerText || labelNode.textContent));
-                    const values = Array.from(node.querySelectorAll('.item-price-stock'))
-                        .map((item) => clean(item.innerText || item.textContent)).filter(Boolean);
-                    const image = node.querySelector('img');
-                    if (label || values.length) {
-                        skuRows.push({
-                            label,
-                            text: clean([label, ...values].join(' ')),
-                            priceText: values[0] || '',
-                            stockText: values[1] || '',
-                            imageUrl: image ? (image.currentSrc || image.src || image.getAttribute('src') || '') : '',
-                        });
+                return '';
+            };
+            const attrs = {};
+            const rows = Array.from(document.querySelectorAll(
+                '[data-module="od_product_attributes"] tr, #productAttributes tr, .module-od-product-attributes tr'
+            ));
+            for (const row of rows) {
+                const cells = Array.from(row.querySelectorAll('th,td'));
+                for (let index = 0; index + 1 < cells.length; index += 2) {
+                    const key = clean(cells[index].innerText || cells[index].textContent).replace(/[:：]$/, '');
+                    const value = clean(cells[index + 1].innerText || cells[index + 1].textContent);
+                    if (key && value && key.length <= 30) attrs[key] = value;
+                }
+            }
+            const skuRows = [];
+            for (const node of Array.from(document.querySelectorAll('.expand-view-list .expand-view-item'))) {
+                const labelNode = node.querySelector('.item-label');
+                const label = clean(labelNode && (labelNode.innerText || labelNode.textContent));
+                const values = Array.from(node.querySelectorAll('.item-price-stock'))
+                    .map((item) => clean(item.innerText || item.textContent)).filter(Boolean);
+                const image = node.querySelector('img');
+                if (label || values.length) {
+                    skuRows.push({
+                        label,
+                        text: clean([label, ...values].join(' ')),
+                        priceText: values[0] || '',
+                        stockText: values[1] || '',
+                        imageUrl: image ? (image.currentSrc || image.src || image.getAttribute('src') || '') : '',
+                    });
+                }
+            }
+            const related = [];
+            for (const anchor of Array.from(document.querySelectorAll(
+                'a[href*="/offer/"], a[href*="offerId="]'
+            )).slice(0, 80)) {
+                const text = clean(anchor.innerText || anchor.textContent);
+                const href = anchor.href || anchor.getAttribute('href') || '';
+                if (href && text && text.length > 4) related.push({text, href});
+            }
+            // 包装信息表：表头含 长/体积/重量 的表格（规格 × 长宽高/体积/重量）
+            const packRows = [];
+            for (const table of Array.from(document.querySelectorAll('table'))) {
+                const head = (table.innerText || '').slice(0, 300);
+                if (head.includes('长') && head.includes('体积') && head.includes('重量')) {
+                    for (const tr of Array.from(table.querySelectorAll('tr'))) {
+                        const row = Array.from(tr.querySelectorAll('td, th')).map(
+                            (cell) => clean(cell.innerText || cell.textContent)
+                        );
+                        if (row.length >= 2) packRows.push(row);
                     }
+                    break;
                 }
-                const related = [];
-                for (const anchor of Array.from(document.querySelectorAll(
-                    'a[href*="/offer/"], a[href*="offerId="]'
-                )).slice(0, 80)) {
-                    const text = clean(anchor.innerText || anchor.textContent);
-                    const href = anchor.href || anchor.getAttribute('href') || '';
-                    if (href && text && text.length > 4) related.push({text, href});
-                }
-                // 包装信息表：表头含 长/体积/重量 的表格（规格 × 长宽高/体积/重量）
-                const packRows = [];
-                for (const table of Array.from(document.querySelectorAll('table'))) {
-                    const head = (table.innerText || '').slice(0, 300);
-                    if (head.includes('长') && head.includes('体积') && head.includes('重量')) {
-                        for (const tr of Array.from(table.querySelectorAll('tr'))) {
-                            const row = Array.from(tr.querySelectorAll('td, th')).map(
-                                (cell) => clean(cell.innerText || cell.textContent)
-                            );
-                            if (row.length >= 2) packRows.push(row);
-                        }
-                        break;
-                    }
-                }
-                return {
-                    title: (document.title || '').replace(/ - 阿里巴巴$/, ''),
-                    priceText: pickText([
-                        '[data-module="od_consign"] .item-price',
-                        '.module-od-consign .item-price',
-                        '.price-text'
-                    ]),
-                    supplierName: pickText([
-                        '[class*="company"] [class*="name"]',
-                        '[class*="supplier"]',
-                        '[class*="shop"] [class*="name"]'
-                    ]),
-                    moduleContext: (
-                        window.context && window.context.result && window.context.result.data
-                    ) || {},
-                    attrs,
-                    skuRows,
-                    related,
-                    packRows,
-                };
-            }"""
-        )
+            }
+            return {
+                title: (document.title || '').replace(/ - 阿里巴巴$/, ''),
+                priceText: pickText([
+                    '[data-module="od_consign"] .item-price',
+                    '.module-od-consign .item-price',
+                    '.price-text'
+                ]),
+                supplierName: pickText([
+                    '[class*="company"] [class*="name"]',
+                    '[class*="supplier"]',
+                    '[class*="shop"] [class*="name"]'
+                ]),
+                moduleContext: (
+                    window.context && window.context.result && window.context.result.data
+                ) || {},
+                attrs,
+                skuRows,
+                related,
+                packRows,
+            };
+        }"""
+    )
 
-    @staticmethod
-    def extract_detail_images(page) -> list[str]:
-        """点击「商品详情」tab 并滚动触发懒加载，收集详情区图片 URL。"""
-        try:
-            page.evaluate(
-                """() => {
-                    const nodes = Array.from(document.querySelectorAll('*'));
-                    const tab = nodes.find(
-                        (node) => node.innerText && node.innerText.trim() === '商品详情'
-                            && node.children.length === 0
-                    );
-                    if (tab) tab.click();
-                }"""
-            )
-            page.wait_for_timeout(2000)
-            for _ in range(3):
-                page.mouse.wheel(0, 2000)
-                page.wait_for_timeout(600)
-        except Exception:
-            return []
-        return page.evaluate(
+def extract_detail_images(page) -> list[str]:
+    """点击「商品详情」tab 并滚动触发懒加载，收集详情区图片 URL。"""
+    try:
+        page.evaluate(
             """() => {
-                const urls = [];
-                document.querySelectorAll('img').forEach((img) => {
-                    const src = img.currentSrc || img.src
-                        || img.getAttribute('data-lazyload') || img.getAttribute('data-src') || '';
-                    if (src && src.includes('alicdn') && !src.includes('tps-')
-                        && !src.includes('_sum.') && src.length > 40) {
-                        urls.push(src);
-                    }
-                });
-                return Array.from(new Set(urls));
+                const nodes = Array.from(document.querySelectorAll('*'));
+                const tab = nodes.find(
+                    (node) => node.innerText && node.innerText.trim() === '商品详情'
+                        && node.children.length === 0
+                );
+                if (tab) tab.click();
             }"""
         )
+        page.wait_for_timeout(2000)
+        for _ in range(3):
+            page.mouse.wheel(0, 2000)
+            page.wait_for_timeout(600)
+    except Exception:
+        return []
+    return page.evaluate(
+        """() => {
+            const urls = [];
+            document.querySelectorAll('img').forEach((img) => {
+                const src = img.currentSrc || img.src
+                    || img.getAttribute('data-lazyload') || img.getAttribute('data-src') || '';
+                if (src && src.includes('alicdn') && !src.includes('tps-')
+                    && !src.includes('_sum.') && src.length > 40) {
+                    urls.push(src);
+                }
+            });
+            return Array.from(new Set(urls));
+        }"""
+    )
 
-    def capture(self, page_type: str, url: str) -> CapturedPage:
-        if self._page is None:
-            raise RuntimeError("PlaywrightBrowserSession 尚未启动")
-        page = self._page
-        responses: list[CapturedResponse] = []
-        network_urls: list[str] = []
+def capture(self, page_type: str, url: str) -> CapturedPage:
+    if self._page is None:
+        raise RuntimeError("PlaywrightBrowserSession 尚未启动")
+    page = self._page
+    responses: list[CapturedResponse] = []
+    network_urls: list[str] = []
 
-        def on_response(response) -> None:
-            network_urls.append(response.url)
-            if not self.relevant_response(response.url):
-                return
-            try:
-                responses.append(
-                    CapturedResponse(
-                        url=response.url,
-                        status=response.status,
-                        body=response.text(),
-                    )
-                )
-            except Exception:
-                return
-
-        page.on("response", on_response)
-        if self.pacing is not None:
-            self.pacing.wait_for_next()
+    def on_response(response) -> None:
+        network_urls.append(response.url)
+        if not self.relevant_response(response.url):
+            return
         try:
-            page.goto(url, wait_until="domcontentloaded", timeout=60000)
-            if self.pacing is None:
-                page.wait_for_timeout(int(self.delay_seconds * 1000))
-            else:
-                # 节奏由 pacer 接管，页面稳定等待模拟阅读停顿（2-3.5s 随机）
-                page.wait_for_timeout(
-                    int((2000 + random.uniform(0, 1500)))
+            responses.append(
+                CapturedResponse(
+                    url=response.url,
+                    status=response.status,
+                    body=response.text(),
                 )
-            if page_type in {
-                "product",
-                "shop",
-                "credit_detail",
-                "factory_archive",
-                "contact_info",
-            }:
-                page.mouse.wheel(0, 1600)
-                page.wait_for_timeout(800)
-                page.mouse.wheel(0, 1600)
-                page.wait_for_timeout(800)
-            html = page.content()
-            try:
-                text = page.locator("body").inner_text(timeout=5000)
-            except Exception:
-                text = ""
-            if self.debug:
-                self.screenshot_dir.mkdir(parents=True, exist_ok=True)
-                page.screenshot(
-                    path=str(self.screenshot_dir / f"{page_type}.png"),
-                    full_page=True,
-                )
-            structured_data = {}
-            if page_type == "product":
-                try:
-                    structured_data = self.extract_product_structure(page)
-                    structured_data["detailImages"] = self.extract_detail_images(page)
-                except Exception:
-                    structured_data = {}
-            if self.pacing is not None:
-                self.pacing.record_success()
-            return CapturedPage(
-                page_type=page_type,
-                requested_url=url,
-                final_url=page.url,
-                title=page.title(),
-                html=html,
-                text=text,
-                responses=responses,
-                network_urls=network_urls,
-                structured_data=structured_data,
             )
         except Exception:
-            if self.pacing is not None:
-                self.pacing.record_failure()
-            raise
-        finally:
-            page.remove_listener("response", on_response)
+            return
+
+    page.on("response", on_response)
+    if self.pacing is not None:
+        self.pacing.wait_for_next()
+    try:
+        page.goto(url, wait_until="domcontentloaded", timeout=60000)
+        if self.pacing is None:
+            page.wait_for_timeout(int(self.delay_seconds * 1000))
+        else:
+            # 节奏由 pacer 接管，页面稳定等待模拟阅读停顿（2-3.5s 随机）
+            page.wait_for_timeout(
+                int((2000 + random.uniform(0, 1500)))
+            )
+        if page_type in {
+            "product",
+            "shop",
+            "credit_detail",
+            "factory_archive",
+            "contact_info",
+        }:
+            page.mouse.wheel(0, 1600)
+            page.wait_for_timeout(800)
+            page.mouse.wheel(0, 1600)
+            page.wait_for_timeout(800)
+        html = page.content()
+        try:
+            text = page.locator("body").inner_text(timeout=5000)
+        except Exception:
+            text = ""
+        if self.debug:
+            self.screenshot_dir.mkdir(parents=True, exist_ok=True)
+            page.screenshot(
+                path=str(self.screenshot_dir / f"{page_type}.png"),
+                full_page=True,
+            )
+        structured_data = {}
+        if page_type == "product":
+            try:
+                structured_data = self.extract_product_structure(page)
+                structured_data["detailImages"] = self.extract_detail_images(page)
+            except Exception:
+                structured_data = {}
+        if self.pacing is not None:
+            self.pacing.record_success()
+        return CapturedPage(
+            page_type=page_type,
+            requested_url=url,
+            final_url=page.url,
+            title=page.title(),
+            html=html,
+            text=text,
+            responses=responses,
+            network_urls=network_urls,
+            structured_data=structured_data,
+        )
+    except Exception:
+        if self.pacing is not None:
+            self.pacing.record_failure()
+        raise
+    finally:
+        page.remove_listener("response", on_response)
 
 
 def main() -> int:
@@ -1056,6 +924,7 @@ def main() -> int:
         headless=args.headless,
         stealth=not args.no_stealth,
         pacing=pacing,
+        verification_iframe_markers=("punish", "captcha", "_____tmd_____"),
     ) as browser:
         result = run_company_pilot(
             offer_id=args.offer_id,

@@ -11,7 +11,9 @@ from pathlib import Path
 
 import pandas as pd
 from playwright.sync_api import TimeoutError as PlaywrightTimeoutError
-from playwright.sync_api import sync_playwright
+
+sys.path.insert(0, str(WORKFLOW_DIR / "shared" / "src"))
+from data_workflow_core.browser import PlaywrightBrowserSession  # noqa: E402
 
 
 if hasattr(sys.stdout, "reconfigure"):
@@ -22,10 +24,6 @@ WORKFLOW_DIR = Path(__file__).resolve().parents[3]
 RUNS_DIR = WORKFLOW_DIR / "runtime" / "runs" / "1688"
 PROFILE_DIR = WORKFLOW_DIR / "runtime" / "browser-profiles" / "1688"
 DEBUG_DIR = WORKFLOW_DIR / "runtime" / "tmp" / "1688"
-CHROME_PATHS = [
-    Path(r"C:\Program Files\Google\Chrome\Application\chrome.exe"),
-    Path(r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"),
-]
 
 DETAIL_FIELDS = [
     "source_platform",
@@ -63,11 +61,6 @@ SKU_FIELDS = [
 ]
 
 
-def chrome_executable() -> str | None:
-    for path in CHROME_PATHS:
-        if path.exists():
-            return str(path)
-    return None
 
 
 def detail_url(offer_id: str) -> str:
@@ -289,22 +282,13 @@ def main() -> None:
     details: list[dict[str, str]] = []
     skus: list[dict[str, str]] = []
 
-    with sync_playwright() as p:
-        launch_kwargs: dict = {
-            "headless": False,
-            "args": ["--lang=zh-CN"],
-        }
-        executable_path = chrome_executable()
-        if executable_path:
-            launch_kwargs["executable_path"] = executable_path
-
-        context = p.chromium.launch_persistent_context(
-            str(PROFILE_DIR),
-            **launch_kwargs,
-            locale="zh-CN",
-            viewport={"width": 1365, "height": 900},
-        )
-        page = context.pages[0] if context.pages else context.new_page()
+    with PlaywrightBrowserSession(
+        profile_dir=PROFILE_DIR,
+        screenshot_dir=DEBUG_DIR if args.debug else RUNS_DIR,
+        delay_seconds=args.delay_seconds,
+        debug=args.debug,
+    ) as browser:
+        page = browser.page
 
         for offer_id in offer_ids:
             url = detail_url(offer_id)
@@ -380,7 +364,6 @@ def main() -> None:
                     }
                 )
 
-        context.close()
 
     detail_output.parent.mkdir(parents=True, exist_ok=True)
     sku_output.parent.mkdir(parents=True, exist_ok=True)

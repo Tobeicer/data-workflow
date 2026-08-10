@@ -29,6 +29,7 @@
 from __future__ import annotations
 
 import json
+import random
 import time
 from dataclasses import asdict, dataclass
 from datetime import date
@@ -61,6 +62,7 @@ class AdaptivePacer:
         backoff_factor: float = 2.0,
         recovery_factor: float = 0.5,
         blocked_delay: float = 120.0,
+        jitter_ratio: float = 0.3,
         daily_cap: Optional[int] = None,
         checkpoint: Optional[Path | str] = None,
         sleep: Callable[[float], None] = time.sleep,
@@ -71,11 +73,14 @@ class AdaptivePacer:
             raise ValueError("max_delay must be >= min_delay")
         if daily_cap is not None and daily_cap <= 0:
             raise ValueError("daily_cap must be positive when set")
+        if not 0.0 <= jitter_ratio <= 1.0:
+            raise ValueError("jitter_ratio must be in [0, 1]")
         self.min_delay = float(min_delay)
         self.max_delay = float(max_delay)
         self.backoff_factor = float(backoff_factor)
         self.recovery_factor = float(recovery_factor)
         self.blocked_delay = float(blocked_delay)
+        self.jitter_ratio = float(jitter_ratio)
         self.daily_cap = daily_cap
         self.checkpoint = Path(checkpoint) if checkpoint else None
         self._sleep = sleep
@@ -120,8 +125,11 @@ class AdaptivePacer:
     def wait_for_next(self) -> float:
         """按当前节奏休眠，返回休眠秒数。"""
         self._rollover_if_needed()
-        self._sleep(self._state.delay)
-        return self._state.delay
+        wait = self._state.delay * random.uniform(
+            1.0 - self.jitter_ratio, 1.0 + self.jitter_ratio
+        )
+        self._sleep(wait)
+        return wait
 
     def record_success(self) -> None:
         self._rollover_if_needed()
@@ -196,6 +204,7 @@ def load_pacing_config(path: Path | str) -> dict:
         "backoff_factor",
         "recovery_factor",
         "blocked_delay",
+        "jitter_ratio",
         "daily_cap",
     }
     unknown = set(payload) - allowed

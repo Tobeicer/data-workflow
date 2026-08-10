@@ -735,7 +735,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run a deduplicated multi-product 1688 workflow")
     parser.add_argument("--input", required=True, help="Selected sample JSON array")
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--delay-seconds", type=float, default=5.0)
+    parser.add_argument("--delay-seconds", type=float, default=8.0)
     parser.add_argument("--profile-dir", default=str(DEFAULT_PROFILE_DIR))
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--headless", action="store_true")

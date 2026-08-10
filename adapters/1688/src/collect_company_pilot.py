@@ -3,6 +3,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import random
 import re
 import sys
 import time
@@ -968,7 +969,10 @@ class PlaywrightBrowserSession:
             if self.pacing is None:
                 page.wait_for_timeout(int(self.delay_seconds * 1000))
             else:
-                page.wait_for_timeout(1200)  # 固定节奏已由 pacer 接管，仅保留渲染稳定等待
+                # 节奏由 pacer 接管，页面稳定等待模拟阅读停顿（2-3.5s 随机）
+                page.wait_for_timeout(
+                    int((2000 + random.uniform(0, 1500)))
+                )
             if page_type in {
                 "product",
                 "shop",
@@ -1023,7 +1027,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="1688 单商品公司全字段低频试采器")
     parser.add_argument("--offer-id", required=True)
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--delay-seconds", type=float, default=5.0)
+    parser.add_argument("--delay-seconds", type=float, default=8.0)
     parser.add_argument("--profile-dir", default=str(DEFAULT_PROFILE_DIR))
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--headless", action="store_true")

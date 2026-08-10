@@ -64,10 +64,26 @@ def test_success_resets_consecutive_failures() -> None:
 
 
 def test_wait_for_next_sleeps_current_delay() -> None:
-    pacer, sleeps = make_pacer(initial_delay=5.0)
+    pacer, sleeps = make_pacer(initial_delay=5.0, jitter_ratio=0.0)
     waited = pacer.wait_for_next()
     assert waited == 5.0
     assert sleeps == [5.0]
+
+
+def test_wait_for_next_applies_human_like_jitter() -> None:
+    pacer, sleeps = make_pacer(initial_delay=10.0, jitter_ratio=0.3)
+    waits = [pacer.wait_for_next() for _ in range(50)]
+    assert all(7.0 <= w <= 13.0 for w in waits)  # 10 * (1 ± 0.3)
+    assert len(set(waits)) > 1  # 存在随机波动
+    assert len(sleeps) == 50
+
+
+def test_jitter_ratio_validated() -> None:
+    try:
+        AdaptivePacer(jitter_ratio=1.5)
+        raise AssertionError("should raise")
+    except ValueError:
+        pass
 
 
 def test_daily_cap_stops() -> None:

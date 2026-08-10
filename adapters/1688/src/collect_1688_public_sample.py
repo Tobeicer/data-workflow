@@ -3,6 +3,7 @@ from __future__ import annotations
 import csv
 import argparse
 import json
+import random
 import re
 import sys
 import time
@@ -371,7 +372,7 @@ def main() -> int:
     parser.add_argument("--prepare-verification", action="store_true", help="打开受限搜索页，等待人工完成验证")
     parser.add_argument("--verification-wait-seconds", type=int, default=240, help="人工验证等待秒数")
     parser.add_argument("--limit-per-keyword", type=int, default=50, help="每个关键词最多保留的商品数")
-    parser.add_argument("--delay-seconds", type=float, default=3.0, help="每个关键词之间的等待秒数")
+    parser.add_argument("--delay-seconds", type=float, default=8.0, help="每个关键词之间的等待秒数")
     parser.add_argument("--scroll-count", type=int, default=2, help="每个搜索页向下滚动次数")
     parser.add_argument("--debug", action="store_true", help="保存搜索页 HTML 和截图调试文件")
     parser.add_argument("--output", help="输出 CSV 路径；默认按时间戳写入 1688 目录")
@@ -576,7 +577,7 @@ def main() -> int:
                     status="running",
                     current_keyword=keyword,
                 )
-                time.sleep(args.delay_seconds)
+                time.sleep(args.delay_seconds * random.uniform(0.9, 1.6))
             except PlaywrightTimeoutError as exc:
                 print(f"[1688] 超时：{keyword}")
                 all_rows.append(

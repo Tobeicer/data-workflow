@@ -10,6 +10,22 @@ from pathlib import Path
 DEFAULT_PLAN = {"商用娃娃机": 2, "弹珠机": 2, "老虎机": 1}
 
 
+def exclude_collected(rows: list[dict], registry_path: str) -> tuple[list[dict], int]:
+    """按已采注册表排除 offer；返回 (剩余行, 排除数)。"""
+    from collect_registry import load_registry
+
+    registry = load_registry(registry_path)
+    excluded = set(registry.get("offers", {}))
+    if not excluded:
+        return rows, 0
+    remaining = [
+        row
+        for row in rows
+        if str(row.get("offer_id") or "").strip() not in excluded
+    ]
+    return remaining, len(rows) - len(remaining)
+
+
 def load_category_plan(path: Path) -> list[dict]:
     payload = json.loads(Path(path).read_text(encoding="utf-8"))
     plan = payload.get("categories", []) if isinstance(payload, dict) else payload
@@ -190,10 +206,18 @@ def main() -> int:
     parser.add_argument("--output", required=True)
     parser.add_argument("--plan-json", help="JSON object mapping keyword to requested count")
     parser.add_argument("--category-config", help="JSON category validation plan")
+    parser.add_argument("--registry", help="已采商品注册表 JSON（跨批次查重，选样排除已采 offer）")
     args = parser.parse_args()
 
     with Path(args.input).open("r", encoding="utf-8-sig", newline="") as handle:
         rows = list(csv.DictReader(handle))
+    if args.registry:
+        rows, excluded_count = exclude_collected(rows, args.registry)
+        if excluded_count:
+            print(
+                f"[sample-selector] 已排除 {excluded_count} 个已采 offer，"
+                f"候选剩余 {len(rows)} 条"
+            )
     if args.category_config:
         category_plan = load_category_plan(Path(args.category_config))
         payload = select_category_samples(rows, category_plan)

@@ -207,6 +207,7 @@ def run_multi_product_workflow(
     verification_wait_seconds: int = 240,
     allow_input_change: bool = False,
     skip_companies: set[str] | None = None,
+    registry_path: str | None = None,
 ) -> dict:
     output_dir = Path(output_dir)
     normalized_offers = normalize_offers(offers)
@@ -251,6 +252,16 @@ def run_multi_product_workflow(
     )
     checkpoint["collected_at"] = collected_at
     write_json(checkpoint_path, checkpoint)
+    from collect_registry import (
+        load_registry,
+        register_company,
+        register_offer,
+        save_registry,
+    )
+    import collect_registry as _registry_module
+
+    registry = load_registry(registry_path or _registry_module.DEFAULT_REGISTRY_PATH)
+    registry_modified = False
     page_manifest = read_json(output_dir / "l0" / "page_manifest.json", [])
     response_manifest = read_json(output_dir / "l0" / "api_responses" / "manifest.json", [])
 
@@ -342,6 +353,16 @@ def run_multi_product_workflow(
             "skus_file": skus_file.relative_to(output_dir).as_posix(),
             "identity_file": identity_file.relative_to(output_dir).as_posix(),
         }
+        if product["capture_status"] == "success":
+            identity = read_json(identity_file, {})
+            if register_offer(
+                registry,
+                offer_id=offer_id,
+                validation_category=str(offer.get("validation_category") or ""),
+                member_id=str(identity.get("member_id") or ""),
+                run_id=output_dir.name,
+            ):
+                registry_modified = True
         write_json(checkpoint_path, checkpoint)
         if blocked in {"login_required", "human_verification_required"}:
             stop_status = blocked
@@ -495,6 +516,8 @@ def run_multi_product_workflow(
             asset_file = asset_dir / "company_asset.json"
             write_json(asset_file, asset)
             company_assets[member_id] = asset
+            if register_company(registry, member_id=member_id, run_id=output_dir.name):
+                registry_modified = True
             checkpoint["companies"][member_id] = {
                 "status": asset["capture_status"],
                 "asset_file": asset_file.relative_to(output_dir).as_posix(),
@@ -681,6 +704,8 @@ def run_multi_product_workflow(
     }
     write_json(l2_dir / "quality_report.json", quality_report)
     write_json(checkpoint_path, checkpoint)
+    if registry_modified:
+        save_registry(registry, registry_path or _registry_module.DEFAULT_REGISTRY_PATH)
 
     finished_at = datetime.now().astimezone().isoformat()
     output_artifacts = {
@@ -749,6 +774,7 @@ def main() -> int:
     parser.add_argument("--verification-wait-seconds", type=int, default=240)
     parser.add_argument("--resume-force", action="store_true", help="允许输入清单变化后续采（选样重排/换词场景）")
     parser.add_argument("--skip-companies", help="逗号分隔的 member_id 列表，跳过对应厂家采集（被标记厂家）")
+    parser.add_argument("--registry", help="已采商品注册表 JSON 路径（默认 runtime/state/1688_collected_offers.json）")
     parser.add_argument("--no-stealth", action="store_true", help="不注入 stealth 指纹（默认注入）")
     parser.add_argument("--pacing-config", help="自适应频控配置 JSON，提供后启用自适应节奏")
     parser.add_argument("--pacing-checkpoint", default=str(DEFAULT_PACING_CHECKPOINT))
@@ -792,6 +818,7 @@ def main() -> int:
                 if args.skip_companies
                 else None
             ),
+            registry_path=args.registry,
         )
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["status"] in {"success", "partial_success"} else 2

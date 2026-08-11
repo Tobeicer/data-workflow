@@ -488,6 +488,13 @@ def main() -> int:
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--limit", type=int, default=50)
     parser.add_argument("--rich-company-asset", action="append", default=[])
+    parser.add_argument(
+        "--allow-missing-manufacturer",
+        action="store_true",
+        help="厂家未采集的商品也导出（厂家字段标待补），实现商品先行交付",
+    )
+    parser.add_argument("--delivery-id", default="1688_direct_20260716")
+    parser.add_argument("--output-prefix", default="1688分类抽样最完整直接版_20260716")
     args = parser.parse_args()
 
     run_dirs = [Path(item) for item in args.run_dir]
@@ -533,14 +540,19 @@ def main() -> int:
     for product in products:
         offer_id = clean(product.get("offer_id"))
         member_id = clean(product.get("member_id"))
-        if not offer_id or offer_id in seen_offers or member_id not in assets:
+        if not offer_id or offer_id in seen_offers or (
+            member_id not in assets and not args.allow_missing_manufacturer
+        ):
             continue
         seen_offers.add(offer_id)
         selected.append(product)
         if len(selected) >= args.limit:
             break
 
-    product_records = [product_record(product, assets[clean(product.get("member_id"))]) for product in selected]
+    product_records = [
+        product_record(product, assets.get(clean(product.get("member_id"))) or {})
+        for product in selected
+    ]
     related: dict[str, list[dict]] = defaultdict(list)
     fallback_names: dict[str, str] = {}
     for record in product_records:
@@ -550,13 +562,14 @@ def main() -> int:
     manufacturer_records = [
         manufacturer_record(assets[member_id], related[member_id], fallback_names[member_id])
         for member_id in sorted(related)
+        if member_id in assets
     ]
 
     categories = sorted({clean(item.get("youyiquan_category_candidate")) for item in product_records if clean(item.get("youyiquan_category_candidate"))})
     factory_archive_count = sum(bool(item.get("factory_archive_url")) for item in manufacturer_records)
     sparse_factory_count = sum(item.get("data_quality_status") == "factory_archive_sparse_source" for item in manufacturer_records)
     payload = {
-        "delivery_id": "1688_direct_20260716",
+        "delivery_id": args.delivery_id,
         "schema_version": "1.1.0",
         "delivery_type": "direct_readable_category_sample",
         "source": "1688",
@@ -571,14 +584,23 @@ def main() -> int:
             "factory_archive_visited_count": factory_archive_count,
             "source_sparse_manufacturer_count": sparse_factory_count,
             "live_refresh_status": "completed",
+            "missing_manufacturer_product_count": (
+                sum(
+                    1
+                    for record in product_records
+                    if clean(record.get("manufacturer_member_id")) not in assets
+                )
+                if args.allow_missing_manufacturer
+                else 0
+            ),
         },
         "product_field_labels_zh": PRODUCT_FIELDS,
         "manufacturer_field_labels_zh": MANUFACTURER_FIELDS,
         "products": product_records,
         "manufacturers": manufacturer_records,
     }
-    json_path = output_dir / "1688分类抽样最完整直接版_20260716.json"
-    xlsx_path = output_dir / "1688分类抽样最完整直接版_20260716.xlsx"
+    json_path = output_dir / f"{args.output_prefix}.json"
+    xlsx_path = output_dir / f"{args.output_prefix}.xlsx"
     json_path.write_text(json.dumps(payload, ensure_ascii=False, indent=2), encoding="utf-8")
     workbook = Workbook()
     workbook.remove(workbook.active)

@@ -90,6 +90,51 @@ class CompanyCaptchaBrowser(ProductOnlyBrowser):
         )
 
 
+class TwoMemberCaptchaBrowser(ProductOnlyBrowser):
+    """两个商品不同厂家：b2b-fail 公司页触发验证，b2b-ok 公司页正常。"""
+
+    def capture(self, page_type: str, url: str) -> CapturedPage:
+        if page_type == "product":
+            page = super().capture(page_type, url)
+            offer_id = url.rsplit("/", 1)[-1].split(".", 1)[0]
+            member_id = "b2b-fail" if offer_id == "1001" else "b2b-ok"
+            page.html = json.dumps(
+                {
+                    "sellerModel": {
+                        "memberId": member_id,
+                        "winportUrl": f"https://{member_id}.1688.com",
+                        "companyName": member_id,
+                    }
+                },
+                ensure_ascii=False,
+            )
+            return page
+        if url.startswith("https://b2b-fail"):
+            return CapturedPage(
+                page_type=page_type,
+                requested_url=url,
+                final_url=url,
+                title="店铺",
+                html="<html></html>",
+                text="店铺内容",
+                responses=[
+                    CapturedResponse(
+                        url="https://h5api.1688.com/punish?action=captcha",
+                        status=200,
+                        body='{"x5step":2}',
+                    )
+                ],
+            )
+        return CapturedPage(
+            page_type=page_type,
+            requested_url=url,
+            final_url=url,
+            title="正常店铺",
+            html="<html><body>正常内容</body></html>",
+            text="正常内容" * 30,
+        )
+
+
 def test_company_cache_without_factory_archive_is_invalidated(tmp_path: Path) -> None:
     asset_path = tmp_path / "l1" / "company_items" / "demo" / "company_asset.json"
     asset_path.parent.mkdir(parents=True)
@@ -221,7 +266,7 @@ def test_company_network_error_becomes_retryable_checkpoint_and_run_result(
     )
 
     checkpoint = json.loads((tmp_path / "checkpoint.json").read_text(encoding="utf-8"))
-    assert result["status"] == "network_error"
+    assert result["status"] == "partial_success"  # 单厂家失败不再终止批次
     assert result["retryable"] is True
     assert checkpoint["companies"]["b2b-demo"]["status"] == "network_error"
     assert checkpoint["companies"]["b2b-demo"]["page_type"] == "shop"
@@ -253,7 +298,7 @@ def test_human_verification_result_is_retryable(tmp_path: Path) -> None:
         confirmation_window=1,
     )
 
-    assert result["status"] == "human_verification_required"
+    assert result["status"] == "partial_success"  # 验证拦截记录后继续
     assert result["retryable"] is True
     assert result["run_id"] == tmp_path.name
     assert result["source"] == "1688"
@@ -261,3 +306,25 @@ def test_human_verification_result_is_retryable(tmp_path: Path) -> None:
     assert result["artifacts"] == result["outputs"]
     assert result["started_at"]
     assert result["finished_at"]
+
+
+def test_company_failure_skips_failed_member_and_continues(tmp_path: Path) -> None:
+    browser = TwoMemberCaptchaBrowser()
+
+    result = run_multi_product_workflow(
+        offers=[
+            {"offer_id": "1001", "validation_category": "A01"},
+            {"offer_id": "1002", "validation_category": "A01"},
+        ],
+        output_dir=tmp_path,
+        browser=browser,
+        collected_at="2026-07-15T12:00:00+08:00",
+        expected_categories=["A01"],
+        confirmation_window=1,
+    )
+
+    checkpoint = json.loads((tmp_path / "checkpoint.json").read_text(encoding="utf-8"))
+    # 失败厂家被记录；成功厂家继续采集（第一个失败不再中断批次）
+    assert checkpoint["companies"]["b2b-fail"]["status"] == "human_verification_required"
+    assert result["counts"]["completed_companies"] >= 1
+    assert result["retryable"] is True

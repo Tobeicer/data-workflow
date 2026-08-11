@@ -353,8 +353,9 @@ def main() -> int:
     parser.add_argument("--prepare-verification", action="store_true", help="打开受限搜索页，等待人工完成验证")
     parser.add_argument("--verification-wait-seconds", type=int, default=240, help="人工验证等待秒数")
     parser.add_argument("--limit-per-keyword", type=int, default=50, help="每个关键词最多保留的商品数")
-    parser.add_argument("--delay-seconds", type=float, default=8.0, help="每个关键词之间的等待秒数")
+    parser.add_argument("--delay-seconds", type=float, default=5.0, help="每个关键词之间的等待秒数")
     parser.add_argument("--scroll-count", type=int, default=2, help="每个搜索页向下滚动次数")
+    parser.add_argument("--profile-dir", default=str(PROFILE_DIR), help="browser profile dir for account isolation")
     parser.add_argument("--debug", action="store_true", help="保存搜索页 HTML 和截图调试文件")
     parser.add_argument("--output", help="输出 CSV 路径；默认按时间戳写入 1688 目录")
     parser.add_argument("--output-prefix", default="1688_product_sample", help="未指定 --output 时使用的输出文件名前缀")
@@ -377,7 +378,7 @@ def main() -> int:
     current_keyword = ""
     
     with PlaywrightBrowserSession(
-        profile_dir=PROFILE_DIR,
+        profile_dir=Path(args.profile_dir),
         screenshot_dir=DEBUG_DIR if args.debug else RUNS_DIR,
         delay_seconds=args.delay_seconds,
         debug=args.debug,

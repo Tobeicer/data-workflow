@@ -206,6 +206,7 @@ def run_multi_product_workflow(
     confirmation_window: int = 10,
     verification_wait_seconds: int = 240,
     allow_input_change: bool = False,
+    skip_companies: set[str] | None = None,
 ) -> dict:
     output_dir = Path(output_dir)
     normalized_offers = normalize_offers(offers)
@@ -365,8 +366,13 @@ def run_multi_product_workflow(
             task["offer_ids"].append(offer_id)
 
     company_assets: dict[str, dict] = {}
+    failed_members: set[str] = set()
+    consecutive_company_failures = 0
+    skip_companies = skip_companies or set()
     if not stop_status:
         for member_id, task in company_tasks.items():
+            if member_id in skip_companies:
+                continue
             cached_asset = load_company_asset(output_dir, checkpoint["companies"].get(member_id, {}))
             if cached_asset:
                 company_assets[member_id] = cached_asset
@@ -432,15 +438,14 @@ def run_multi_product_workflow(
             if company_blocked:
                 checkpoint["companies"].setdefault(member_id, {"status": company_blocked})
                 write_json(checkpoint_path, checkpoint)
-                if company_blocked in {
-                    "login_required",
-                    "human_verification_required",
-                    "network_error",
-                    "error",
-                }:
+                failed_members.add(member_id)
+                consecutive_company_failures += 1
+                if consecutive_company_failures >= 3:
                     stop_status = company_blocked
                     break
                 continue
+
+            consecutive_company_failures = 0
 
             by_type = {page.page_type: page for page in pages}
             header = find_response(pages, "wp_pc_common_header")
@@ -720,7 +725,8 @@ def run_multi_product_workflow(
                 "login_required",
                 "rate_limited",
             }
-            or status == "quality_gate_failed",
+            or status == "quality_gate_failed"
+            or len(company_assets) < len(company_tasks),
             "error_code": stop_status or None,
             "error_message": (
                 "采集被可恢复的网络错误中止，请使用同一输出目录恢复。"
@@ -735,13 +741,14 @@ def main() -> int:
     parser = argparse.ArgumentParser(description="Run a deduplicated multi-product 1688 workflow")
     parser.add_argument("--input", required=True, help="Selected sample JSON array")
     parser.add_argument("--output-dir", required=True)
-    parser.add_argument("--delay-seconds", type=float, default=8.0)
+    parser.add_argument("--delay-seconds", type=float, default=5.0)
     parser.add_argument("--profile-dir", default=str(DEFAULT_PROFILE_DIR))
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--headless", action="store_true")
     parser.add_argument("--confirmation-window", type=int, default=10)
     parser.add_argument("--verification-wait-seconds", type=int, default=240)
     parser.add_argument("--resume-force", action="store_true", help="允许输入清单变化后续采（选样重排/换词场景）")
+    parser.add_argument("--skip-companies", help="逗号分隔的 member_id 列表，跳过对应厂家采集（被标记厂家）")
     parser.add_argument("--no-stealth", action="store_true", help="不注入 stealth 指纹（默认注入）")
     parser.add_argument("--pacing-config", help="自适应频控配置 JSON，提供后启用自适应节奏")
     parser.add_argument("--pacing-checkpoint", default=str(DEFAULT_PACING_CHECKPOINT))
@@ -780,6 +787,11 @@ def main() -> int:
             confirmation_window=args.confirmation_window,
             verification_wait_seconds=args.verification_wait_seconds,
             allow_input_change=args.resume_force,
+            skip_companies=(
+                {item.strip() for item in args.skip_companies.split(",") if item.strip()}
+                if args.skip_companies
+                else None
+            ),
         )
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["status"] in {"success", "partial_success"} else 2

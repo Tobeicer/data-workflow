@@ -221,8 +221,8 @@ class PlaywrightBrowserSession:
             if self.pacing is None:
                 page.wait_for_timeout(int(self.delay_seconds * 1000))
             else:
-                # 节奏由 pacer 接管，页面稳定等待模拟阅读停顿（2-3.5s 随机）
-                page.wait_for_timeout(int(2000 + random.uniform(0, 1500)))
+                # 节奏由 pacer 接管，页面稳定等待模拟阅读停顿（1.5-2.5s 随机）
+                page.wait_for_timeout(int(1500 + random.uniform(0, 1000)))
             if after_load is not None:
                 after_load(page)
             html = page.content()

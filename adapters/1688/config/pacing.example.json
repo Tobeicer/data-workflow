@@ -1,7 +1,7 @@
 {
-  "min_delay": 8.0,
-  "max_delay": 150.0,
-  "initial_delay": 12.0,
+  "min_delay": 4.0,
+  "max_delay": 90.0,
+  "initial_delay": 6.0,
   "backoff_factor": 2.0,
   "recovery_factor": 0.5,
   "blocked_delay": 300.0,

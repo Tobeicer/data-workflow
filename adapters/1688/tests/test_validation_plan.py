@@ -28,7 +28,7 @@ def test_validation_plan_covers_every_formal_category_with_1688_keywords() -> No
     assert {item["category_code"] for item in plan} == EXPECTED_CODES
     assert len(plan) == 54
     assert all(item["keywords"] for item in plan)
-    assert all(item["target_count"] == 3 for item in plan)
+    assert all(item["target_count"] == 10 for item in plan)
 
 
 def test_category_selector_maps_keyword_to_category_and_preserves_missing_report() -> None:

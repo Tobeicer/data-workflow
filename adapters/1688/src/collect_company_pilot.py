@@ -151,17 +151,8 @@ def retry_after_human_verification(
     timeout_seconds: int,
     capture_kwargs: dict | None = None,
 ) -> tuple[CapturedPage, str]:
-    current = page
-    blocked = restriction_from_page(current)
-    waiter = getattr(browser, "wait_for_human_verification", None)
-    for _ in range(3):
-        if blocked != "human_verification_required" or timeout_seconds <= 0:
-            break
-        if not callable(waiter) or not waiter(timeout_seconds=timeout_seconds):
-            break
-        current = browser.capture(page_type, url, **(capture_kwargs or {}))
-        blocked = restriction_from_page(current)
-    return current, blocked
+    """风控铁律：检测到验证立即停止，不等待人工、不重试。"""
+    return page, restriction_from_page(page)
 
 
 def sha256_text(value: str) -> str:

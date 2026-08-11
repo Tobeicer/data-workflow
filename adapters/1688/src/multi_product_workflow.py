@@ -184,16 +184,9 @@ def resolve_human_verification(
     url: str,
     verification_wait_seconds: int,
 ):
+    """风控铁律：检测到验证立即停止，不等待人工、不重试（返回 blocked 由上层停止）。"""
     blocked = restriction_from_page(page)
-    if blocked != "human_verification_required" or verification_wait_seconds <= 0:
-        return page, blocked
-    waiter = getattr(browser, "wait_for_human_verification", None)
-    if not callable(waiter):
-        return page, blocked
-    if not waiter(timeout_seconds=verification_wait_seconds):
-        return page, blocked
-    refreshed = browser.capture(page_type, url)
-    return refreshed, restriction_from_page(refreshed)
+    return page, blocked
 
 
 def run_multi_product_workflow(
@@ -461,7 +454,11 @@ def run_multi_product_workflow(
                 write_json(checkpoint_path, checkpoint)
                 failed_members.add(member_id)
                 consecutive_company_failures += 1
-                if consecutive_company_failures >= 3:
+                if company_blocked in {
+                    "human_verification_required",
+                    "login_required",
+                    "rate_limited",
+                } or consecutive_company_failures >= 3:
                     stop_status = company_blocked
                     break
                 continue

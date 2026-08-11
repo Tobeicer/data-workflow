@@ -9,7 +9,7 @@
         "商用娃娃机",
         "娃娃机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A02",
@@ -17,7 +17,7 @@
       "keywords": [
         "游艺机出票机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A03",
@@ -25,7 +25,7 @@
       "keywords": [
         "商用推币机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A04",
@@ -33,7 +33,7 @@
       "keywords": [
         "商用街机游戏机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A05",
@@ -41,7 +41,7 @@
       "keywords": [
         "商用赛车游戏机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A06",
@@ -49,7 +49,7 @@
       "keywords": [
         "商用射击游戏机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A07",
@@ -57,7 +57,7 @@
       "keywords": [
         "商用跳舞机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A08",
@@ -65,7 +65,7 @@
       "keywords": [
         "商用投篮机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A09",
@@ -73,7 +73,7 @@
       "keywords": [
         "商用打地鼠机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A10",
@@ -81,7 +81,7 @@
       "keywords": [
         "商用儿童摇摆机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A11",
@@ -89,7 +89,7 @@
       "keywords": [
         "商用VR游戏设备"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A12",
@@ -97,7 +97,7 @@
       "keywords": [
         "商用自助拍照机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A13",
@@ -105,7 +105,7 @@
       "keywords": [
         "游乐场组合滑梯"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "A14",
@@ -113,7 +113,7 @@
       "keywords": [
         "非标定制游艺设备"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B01",
@@ -121,7 +121,7 @@
       "keywords": [
         "游戏机整机控制套件"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B02",
@@ -129,7 +129,7 @@
       "keywords": [
         "街机游戏机空机箱"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B03",
@@ -138,7 +138,7 @@
         "游戏机主板套装",
         "街机游戏主板"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B04",
@@ -146,7 +146,7 @@
       "keywords": [
         "游戏机投币出票套件"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B05",
@@ -154,7 +154,7 @@
       "keywords": [
         "游戏机电源盒套装"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B06",
@@ -162,7 +162,7 @@
       "keywords": [
         "游戏机触摸显示器套装"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B07",
@@ -170,7 +170,7 @@
       "keywords": [
         "游戏机音响灯光套件"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B08",
@@ -178,7 +178,7 @@
       "keywords": [
         "游戏机动感平台套件"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B09",
@@ -186,7 +186,7 @@
       "keywords": [
         "游艺机水泵气动套件"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "B10",
@@ -194,7 +194,7 @@
       "keywords": [
         "游乐场中央控制系统"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C01",
@@ -202,7 +202,7 @@
       "keywords": [
         "游戏机带灯按钮"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C02",
@@ -210,7 +210,7 @@
       "keywords": [
         "街机游戏机摇杆"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C03",
@@ -218,7 +218,7 @@
       "keywords": [
         "游戏机投币器"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C04",
@@ -226,7 +226,7 @@
       "keywords": [
         "游戏机IO驱动板"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C05",
@@ -234,7 +234,7 @@
       "keywords": [
         "游戏机开关电源"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C06",
@@ -242,7 +242,7 @@
       "keywords": [
         "游戏机减速电机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C07",
@@ -250,7 +250,7 @@
       "keywords": [
         "游戏机水泵电磁阀"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C08",
@@ -258,7 +258,7 @@
       "keywords": [
         "游戏机光眼传感器"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C09",
@@ -266,7 +266,7 @@
       "keywords": [
         "游戏机液晶显示器"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C10",
@@ -274,7 +274,7 @@
       "keywords": [
         "游戏机喇叭功放"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C11",
@@ -282,7 +282,7 @@
       "keywords": [
         "游戏机幻彩灯条"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C12",
@@ -290,7 +290,7 @@
       "keywords": [
         "游戏机线束连接器"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C13",
@@ -298,7 +298,7 @@
       "keywords": [
         "游戏机联网控制器"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C14",
@@ -306,7 +306,7 @@
       "keywords": [
         "游戏机机箱五金配件"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C15",
@@ -314,7 +314,7 @@
       "keywords": [
         "游戏机亚克力面板"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C16",
@@ -322,7 +322,7 @@
       "keywords": [
         "游戏机专用锁具"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C17",
@@ -330,7 +330,7 @@
       "keywords": [
         "游戏机机箱紧固件"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C18",
@@ -338,7 +338,7 @@
       "keywords": [
         "游戏机弹珠钢珠"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "C19",
@@ -346,7 +346,7 @@
       "keywords": [
         "游戏机散热风扇"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "D01",
@@ -354,7 +354,7 @@
       "keywords": [
         "游艺机彩票耗材"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "D02",
@@ -362,7 +362,7 @@
       "keywords": [
         "扭蛋机胶囊球"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "D03",
@@ -370,7 +370,7 @@
       "keywords": [
         "娃娃机礼品公仔"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "D04",
@@ -378,7 +378,7 @@
       "keywords": [
         "拍照机相纸耗材"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "D05",
@@ -386,7 +386,7 @@
       "keywords": [
         "游戏机电工装配耗材"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "D06",
@@ -394,7 +394,7 @@
       "keywords": [
         "游艺设备包装防护耗材"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "D07",
@@ -402,7 +402,7 @@
       "keywords": [
         "游艺设备润滑清洁耗材"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "E01",
@@ -410,7 +410,7 @@
       "keywords": [
         "游乐场售币充值机"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "E02",
@@ -418,7 +418,7 @@
       "keywords": [
         "游乐场会员计费系统"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "E03",
@@ -426,7 +426,7 @@
       "keywords": [
         "游乐场空压机稳压器"
       ],
-      "target_count": 3
+      "target_count": 10
     },
     {
       "category_code": "E04",
@@ -434,7 +434,7 @@
       "keywords": [
         "游乐场设备搬运工具车"
       ],
-      "target_count": 3
+      "target_count": 10
     }
   ]
 }

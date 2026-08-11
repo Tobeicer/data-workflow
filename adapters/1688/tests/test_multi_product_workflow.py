@@ -298,7 +298,7 @@ def test_human_verification_result_is_retryable(tmp_path: Path) -> None:
         confirmation_window=1,
     )
 
-    assert result["status"] == "partial_success"  # 验证拦截记录后继续
+    assert result["status"] == "human_verification_required"  # 风控铁律：触发验证立即停止
     assert result["retryable"] is True
     assert result["run_id"] == tmp_path.name
     assert result["source"] == "1688"
@@ -308,7 +308,7 @@ def test_human_verification_result_is_retryable(tmp_path: Path) -> None:
     assert result["finished_at"]
 
 
-def test_company_failure_skips_failed_member_and_continues(tmp_path: Path) -> None:
+def test_company_verification_stops_batch_immediately(tmp_path: Path) -> None:
     browser = TwoMemberCaptchaBrowser()
 
     result = run_multi_product_workflow(
@@ -324,7 +324,8 @@ def test_company_failure_skips_failed_member_and_continues(tmp_path: Path) -> No
     )
 
     checkpoint = json.loads((tmp_path / "checkpoint.json").read_text(encoding="utf-8"))
-    # 失败厂家被记录；成功厂家继续采集（第一个失败不再中断批次）
+    # 风控铁律：触发验证立即停止整个批次，不再继续后续厂家
     assert checkpoint["companies"]["b2b-fail"]["status"] == "human_verification_required"
-    assert result["counts"]["completed_companies"] >= 1
+    assert "b2b-ok" not in checkpoint["companies"]
+    assert result["status"] == "human_verification_required"
     assert result["retryable"] is True

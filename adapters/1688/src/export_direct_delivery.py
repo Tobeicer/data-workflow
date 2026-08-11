@@ -273,10 +273,16 @@ def product_record(product: dict, asset: dict) -> dict:
         "packaging": clean(attributes.get("包装")),
         "patent_type": clean(attributes.get("专利类型")),
         "display_price": clean(product.get("price_text")),
-        "minimum_order_quantity": order_param.get("beginNum", ""),
-        "sales_unit": clean(title_fields.get("unit") or shipping.get("unit") or nested(root_data, "tempModel", "offerUnit")),
-        "available_stock": int(sum(stock_values)) if stock_values else "",
-        "delivery_commitment": clean(shipping.get("deliveryLimitText")),
+        "minimum_order_quantity": clean(product.get("minimum_order_quantity"))
+        or order_param.get("beginNum", ""),
+        "sales_unit": clean(product.get("sales_unit"))
+        or clean(title_fields.get("unit") or shipping.get("unit") or nested(root_data, "tempModel", "offerUnit")),
+        "available_stock": (
+            clean(product.get("available_stock"))
+            or (int(sum(stock_values)) if stock_values else "")
+        ),
+        "delivery_commitment": clean(product.get("delivery_commitment"))
+        or clean(shipping.get("deliveryLimitText")),
         "quality_report_number": clean(attributes.get("质检报告编号")),
         "other_attributes": other_attributes,
         "pack_length_cm": clean(first_pack.get("length_cm")),

@@ -10,6 +10,7 @@ from typing import Any
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
+from product_profile import analyze_price, parse_moq_number, parse_unit_text
 
 
 PRODUCT_FIELDS = {
@@ -41,7 +42,11 @@ PRODUCT_FIELDS = {
     "ccc_certificate_code": "商品3C认证码",
     "packaging": "包装",
     "patent_type": "专利类型",
-    "display_price": "展示价格",
+    "price_min": "最低价(元)",
+    "price_max": "最高价(元)",
+    "currency": "货币",
+    "price_status": "价格状态",
+    "price_missing_reason": "价格缺失原因",
     "minimum_order_quantity": "起订量",
     "sales_unit": "销售单位",
     "available_stock": "可售库存",
@@ -63,6 +68,17 @@ PRODUCT_FIELDS = {
     "related_product_count": "相关商品数",
     "related_products_json": "相关商品(JSON)",
     "other_attributes": "其他商品属性",
+}
+
+
+DELIVERY_SKU_FIELDS = {
+    "product_id": "商品ID",
+    "sku_name": "SKU名称",
+    "sku_price": "SKU价格(元)",
+    "sku_price_text": "SKU价格原文",
+    "stock_quantity": "SKU库存数量",
+    "sku_image_url": "SKU图片",
+    "collected_at": "采集时间",
 }
 
 
@@ -138,6 +154,20 @@ def repair_mojibake(text: str) -> str:
         return chinese * 6 - latin_noise * 2 - candidate.count("�") * 20
 
     return max(candidates, key=score)
+
+
+def fmt_price(value: Any) -> str:
+    """价格值 -> 2 位小数（元/分规范）。原始精度保留在 sku_price_text/price_text 证据。"""
+    text = clean(value)
+    if not text:
+        return ""
+    try:
+        num = float(text)
+    except ValueError:
+        return ""
+    if num == int(num):
+        return str(int(num))
+    return "%.2f" % num
 
 
 def clean(value: Any) -> str:
@@ -244,6 +274,24 @@ def product_record(product: dict, asset: dict) -> dict:
     related_products = product.get("related_products") or []
     if not isinstance(related_products, list):
         related_products = []
+    price_analysis_data = product.get("price_analysis") or {}
+    if not isinstance(price_analysis_data, dict):
+        price_analysis_data = {}
+    sku_price_values = [
+        clean(item.get("sku_price")) for item in (product.get("skus") or []) if isinstance(item, dict)
+    ]
+    sku_price_values = [v for v in sku_price_values if v]
+    pa = price_analysis_data
+    if not pa.get("price_status"):
+        pa = analyze_price(clean(product.get("price_text")), sku_price_values)
+    raw_color = clean(attributes.get("颜色"))
+    color_value = (
+        raw_color
+        if raw_color
+        and len(raw_color) <= 12
+        and not any(ch in raw_color for ch in ",，、/【】")
+        else ""
+    )
     return {
         "source_platform": "1688",
         "product_id": clean(product.get("offer_id")),
@@ -266,17 +314,23 @@ def product_record(product: dict, asset: dict) -> dict:
         "applicable_age": clean(attributes.get("适用年龄段") or attributes.get("适用年龄")),
         "applicable_scenarios": clean(attributes.get("适用场景")),
         "technical_type": clean(attributes.get("技术类型")),
-        "color": clean(attributes.get("颜色")),
+        "color": color_value,
         "ip_authorized": clean(attributes.get("是否IP授权")),
         "ccc_configuration_category": clean(attributes.get("3C配置类别")),
         "ccc_certificate_code": clean(attributes.get("商品3C认证码")),
         "packaging": clean(attributes.get("包装")),
         "patent_type": clean(attributes.get("专利类型")),
-        "display_price": clean(product.get("price_text")),
-        "minimum_order_quantity": clean(product.get("minimum_order_quantity"))
-        or order_param.get("beginNum", ""),
-        "sales_unit": clean(product.get("sales_unit"))
-        or clean(title_fields.get("unit") or shipping.get("unit") or nested(root_data, "tempModel", "offerUnit")),
+        "price_min": clean(pa.get("price_min")),
+        "price_max": clean(pa.get("price_max")),
+        "currency": clean(pa.get("currency")) or "CNY",
+        "price_status": clean(pa.get("price_status")),
+        "price_missing_reason": clean(pa.get("price_missing_reason")),
+        "minimum_order_quantity": parse_moq_number(product.get("minimum_order_quantity"))
+        or parse_moq_number(order_param.get("beginNum")),
+        "sales_unit": parse_unit_text(product.get("sales_unit"), product.get("moq_text"))
+        or parse_unit_text(
+            clean(title_fields.get("unit") or shipping.get("unit") or nested(root_data, "tempModel", "offerUnit"))
+        ),
         "available_stock": (
             clean(product.get("available_stock"))
             or (int(sum(stock_values)) if stock_values else "")
@@ -472,11 +526,15 @@ def write_sheet(workbook: Workbook, title: str, fields: dict[str, str], records:
         sheet.column_dimensions[get_column_letter(index)].width = width
 
 
-def validate_workbook(path: Path, product_count: int, manufacturer_count: int) -> None:
+def validate_workbook(path: Path, product_count: int, manufacturer_count: int, sku_count: int = 0) -> None:
     workbook = load_workbook(path, read_only=False, data_only=False)
-    if workbook.sheetnames != ["商品信息", "厂家信息"]:
+    if workbook.sheetnames != ["商品信息", "厂家信息", "SKU明细"]:
         raise RuntimeError(f"unexpected sheets: {workbook.sheetnames}")
-    expected_rows = {"商品信息": product_count + 1, "厂家信息": manufacturer_count + 1}
+    expected_rows = {
+        "商品信息": product_count + 1,
+        "厂家信息": manufacturer_count + 1,
+        "SKU明细": sku_count + 1,
+    }
     for sheet in workbook.worksheets:
         if sheet.freeze_panes is not None:
             raise RuntimeError(f"{sheet.title} still has freeze panes")
@@ -536,6 +594,13 @@ def main() -> int:
     for path in product_paths:
         product = read_json(path)
         offer_id = clean(product.get("offer_id"))
+        skus_path = path.parent / "skus.json"
+        if skus_path.exists():
+            loaded_skus = read_json(skus_path)
+            if isinstance(loaded_skus, list):
+                product["skus"] = loaded_skus
+            else:
+                product["skus"] = []
         if offer_id and (
             offer_id not in products_by_offer
             or product_rank(product) >= product_rank(products_by_offer[offer_id])
@@ -559,6 +624,33 @@ def main() -> int:
         product_record(product, assets.get(clean(product.get("member_id"))) or {})
         for product in selected
     ]
+    sku_records: list[dict] = []
+    seen_sku_rows: set[tuple[str, str, str, str]] = set()
+    for product in selected:
+        offer_id = clean(product.get("offer_id"))
+        for item in product.get("skus") or []:
+            if not isinstance(item, dict):
+                continue
+            sku_key = (
+                offer_id,
+                clean(item.get("sku_name")),
+                clean(item.get("sku_price")),
+                clean(item.get("stock_quantity")),
+            )
+            if sku_key in seen_sku_rows:
+                continue
+            seen_sku_rows.add(sku_key)
+            sku_records.append(
+                {
+                    "product_id": offer_id,
+                    "sku_name": clean(item.get("sku_name")),
+                    "sku_price": fmt_price(item.get("sku_price")),
+                    "sku_price_text": clean(item.get("sku_price_text") or item.get("price_text")),
+                    "stock_quantity": clean(item.get("stock_quantity")),
+                    "sku_image_url": clean(item.get("sku_image_url") or item.get("image_url")),
+                    "collected_at": clean(item.get("collected_at")),
+                }
+            )
     related: dict[str, list[dict]] = defaultdict(list)
     fallback_names: dict[str, str] = {}
     for record in product_records:
@@ -602,8 +694,16 @@ def main() -> int:
         },
         "product_field_labels_zh": PRODUCT_FIELDS,
         "manufacturer_field_labels_zh": MANUFACTURER_FIELDS,
+        "sku_field_labels_zh": DELIVERY_SKU_FIELDS,
+        "price_summary": {
+            "single_price_count": sum(1 for r in product_records if clean(r.get("price_status")) == "single"),
+            "range_price_count": sum(1 for r in product_records if clean(r.get("price_status")) == "range"),
+            "review_required_count": sum(1 for r in product_records if clean(r.get("price_status")) == "review_required"),
+            "missing_price_count": sum(1 for r in product_records if clean(r.get("price_status")) == "missing"),
+        },
         "products": product_records,
         "manufacturers": manufacturer_records,
+        "skus": sku_records,
     }
     json_path = output_dir / f"{args.output_prefix}.json"
     xlsx_path = output_dir / f"{args.output_prefix}.xlsx"
@@ -612,8 +712,9 @@ def main() -> int:
     workbook.remove(workbook.active)
     write_sheet(workbook, "商品信息", PRODUCT_FIELDS, product_records)
     write_sheet(workbook, "厂家信息", MANUFACTURER_FIELDS, manufacturer_records)
+    write_sheet(workbook, "SKU明细", DELIVERY_SKU_FIELDS, sku_records)
     workbook.save(xlsx_path)
-    validate_workbook(xlsx_path, len(product_records), len(manufacturer_records))
+    validate_workbook(xlsx_path, len(product_records), len(manufacturer_records), len(sku_records))
     print(json.dumps({"json": str(json_path), "xlsx": str(xlsx_path), "products": len(product_records), "manufacturers": len(manufacturer_records), "categories": len(categories)}, ensure_ascii=False))
     return 0
 

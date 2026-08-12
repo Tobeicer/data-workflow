@@ -31,6 +31,12 @@ DETAIL_FIELDS = [
     "product_url",
     "title",
     "price_text",
+    "price_range_text",
+    "price_node",
+    "moq_text",
+    "sales_unit",
+    "stock_text",
+    "delivery_text",
     "supplier_name",
     "product_category",
     "brand",
@@ -40,11 +46,15 @@ DETAIL_FIELDS = [
     "applicable_people",
     "specification",
     "applicable_scene",
+    "sku_dimension",
+    "layout_key",
+    "modules_json",
     "attributes_json",
     "sku_count",
     "sku_summary",
     "related_product_count",
     "related_products_json",
+    "member_id",
     "collected_at",
     "capture_status",
     "capture_note",
@@ -55,7 +65,9 @@ SKU_FIELDS = [
     "offer_id",
     "sku_name",
     "sku_price",
+    "sku_price_text",
     "stock_text",
+    "sku_image_url",
     "stock_quantity",
     "collected_at",
 ]
@@ -109,81 +121,17 @@ def load_offer_ids(args: argparse.Namespace) -> list[str]:
     return result[args.start : args.start + args.limit]
 
 
+def _detail_extract_js() -> str:
+    """加载统一详情页提取脚本（单一事实源：detail_extract.js）。"""
+    js_path = Path(__file__).resolve().parent / "detail_extract.js"
+    if not js_path.exists():
+        raise FileNotFoundError(f"缺少详情页提取脚本: {js_path}")
+    return js_path.read_text(encoding="utf-8")
+
+
 def extract_detail(page, offer_id: str, collected_at: str) -> tuple[dict[str, str], list[dict[str, str]]]:
-    data = page.evaluate(
-        """() => {
-            const clean = (s) => (s || '').replace(/\\s+/g, ' ').trim();
-            const pickText = (selectors) => {
-                for (const selector of selectors) {
-                    const node = document.querySelector(selector);
-                    const text = clean(node && (node.innerText || node.textContent));
-                    if (text) return text;
-                }
-                return '';
-            };
-            const allRows = Array.from(document.querySelectorAll('[data-module="od_product_attributes"] tr, #productAttributes tr, .module-od-product-attributes tr'));
-            const attrs = {};
-            for (const row of allRows) {
-                const cells = Array.from(row.querySelectorAll('th,td'));
-                if (cells.length >= 2) {
-                    for (let i = 0; i + 1 < cells.length; i += 2) {
-                        const key = clean(cells[i].innerText || cells[i].textContent).replace(/[:：]$/, '');
-                        const val = clean(cells[i + 1].innerText || cells[i + 1].textContent);
-                        if (key && val && key.length <= 20) attrs[key] = val;
-                    }
-                }
-            }
-
-            const attrSection = Array.from(document.querySelectorAll('*')).find((node) => clean(node.innerText) === '商品属性');
-            if (attrSection) {
-                let parent = attrSection.parentElement;
-                for (let depth = 0; depth < 6 && parent; depth++, parent = parent.parentElement) {
-                    const text = clean(parent.innerText);
-                    if (text.includes('商品属性') && text.length > 20) {
-                        const lines = text.split(/\\n|\\r/).map(clean).filter(Boolean);
-                        for (let i = 0; i + 1 < lines.length; i += 2) {
-                            const key = lines[i].replace(/[:：]$/, '');
-                            const val = lines[i + 1];
-                            if (key && val && key.length <= 20 && key !== '商品属性') attrs[key] = val;
-                        }
-                        break;
-                    }
-                }
-            }
-
-            const skuRows = [];
-            const candidates = Array.from(document.querySelectorAll('.expand-view-list .expand-view-item'));
-            for (const node of candidates) {
-                const label = clean((node.querySelector('.item-label') || {}).innerText || '');
-                const priceNodes = Array.from(node.querySelectorAll('.item-price-stock')).map(n => clean(n.innerText || n.textContent)).filter(Boolean);
-                const img = node.querySelector('img');
-                const imageUrl = img ? (img.currentSrc || img.src || img.getAttribute('src') || '') : '';
-                const text = clean([label, ...priceNodes].join(' '));
-                if (label && text) {
-                    skuRows.push({ text, label, priceText: priceNodes[0] || '', stockText: priceNodes[1] || '', imageUrl });
-                }
-            }
-
-            const related = [];
-            const relatedNodes = Array.from(document.querySelectorAll('a[href*="/offer/"], a[href*="offerId="]')).slice(0, 80);
-            for (const a of relatedNodes) {
-                const text = clean(a.innerText || a.textContent);
-                const href = a.href || a.getAttribute('href') || '';
-                if (href && text && text.length > 4) {
-                    related.push({ text, href });
-                }
-            }
-
-            return {
-                title: (document.title || '').replace(/ - 阿里巴巴$/, ''),
-                priceText: pickText(['[data-module="od_consign"] .item-price', '.module-od-consign .item-price', '.price-text']),
-                supplierName: pickText(['[class*="company"] [class*="name"]', '[class*="supplier"]', '[class*="shop"] [class*="name"]']),
-                attrs,
-                skuRows,
-                related,
-            };
-        }"""
-    )
+    js = _detail_extract_js()
+    data = page.evaluate(f"(function() {{ {js}; return extractDetailPage(); }})()")
 
     attrs = {clean_text(k): clean_text(v) for k, v in (data.get("attrs") or {}).items() if clean_text(k) and clean_text(v)}
     sku_rows_raw = data.get("skuRows") or []
@@ -191,27 +139,33 @@ def extract_detail(page, offer_id: str, collected_at: str) -> tuple[dict[str, st
     seen_sku: set[str] = set()
     for row in sku_rows_raw:
         if isinstance(row, dict):
-            row_text = clean_text(row.get("text") or "")
-            label = clean_text(row.get("label") or row_text)
-            price_source = clean_text(row.get("priceText") or row_text)
-            stock_source = clean_text(row.get("stockText") or row_text)
+            label = clean_text(row.get("label") or "")
+            row_text = label
+            price_source = clean_text(row.get("priceText") or "")
+            stock_source = clean_text(row.get("stockText") or "")
+            image_url = clean_text(row.get("imageUrl") or "")
         else:
             row_text = clean_text(str(row))
             label = row_text
             price_source = row_text
             stock_source = row_text
-        if row_text in seen_sku:
+            image_url = ""
+        if not row_text or row_text in seen_sku:
             continue
         seen_sku.add(row_text)
         price_match = re.search(r"[¥￥]\s*([0-9]+(?:\.[0-9]+)?)", price_source)
+        if not price_match:
+            price_match = re.search(r"([0-9]+(?:\.[0-9]+)?)", price_source)
         sku_rows.append(
             {
                 "source_platform": "1688",
                 "offer_id": offer_id,
                 "sku_name": label,
                 "sku_price": price_match.group(1) if price_match else "",
+                "sku_price_text": price_source,
                 "stock_text": stock_source if "库存" in stock_source else "",
                 "stock_quantity": stock_number(stock_source),
+                "sku_image_url": image_url,
                 "collected_at": collected_at,
             }
         )
@@ -225,6 +179,12 @@ def extract_detail(page, offer_id: str, collected_at: str) -> tuple[dict[str, st
         "product_url": page.url,
         "title": clean_text(data.get("title") or ""),
         "price_text": clean_text(data.get("priceText") or ""),
+        "price_range_text": clean_text(data.get("priceRangeText") or ""),
+        "price_node": clean_text(data.get("priceNode") or ""),
+        "moq_text": clean_text(data.get("moqText") or ""),
+        "sales_unit": clean_text(data.get("unitText") or ""),
+        "stock_text": clean_text(data.get("stockText") or ""),
+        "delivery_text": clean_text(data.get("deliveryText") or ""),
         "supplier_name": clean_text(data.get("supplierName") or ""),
         "product_category": pick_attr(attrs, "产品类别", "类目", "商品类目"),
         "brand": pick_attr(attrs, "品牌"),
@@ -234,16 +194,21 @@ def extract_detail(page, offer_id: str, collected_at: str) -> tuple[dict[str, st
         "applicable_people": pick_attr(attrs, "适用人数", "适用人群"),
         "specification": pick_attr(attrs, "规格", "型号"),
         "applicable_scene": pick_attr(attrs, "适用场景"),
+        "sku_dimension": clean_text(data.get("skuDimension") or ""),
+        "layout_key": clean_text(data.get("layoutKey") or ""),
+        "modules_json": json.dumps(data.get("modules") or {}, ensure_ascii=False),
         "attributes_json": json.dumps(attrs, ensure_ascii=False),
         "sku_count": str(len(sku_rows)),
         "sku_summary": " | ".join([x["sku_name"] for x in sku_rows[:10]]),
         "related_product_count": str(len(related)),
         "related_products_json": json.dumps(related, ensure_ascii=False),
+        "member_id": clean_text(data.get("memberId") or ""),
         "collected_at": collected_at,
         "capture_status": "success",
-        "capture_note": "",
+        "capture_note": " | ".join(clean_text(x) for x in (data.get("notes") or [])),
     }
     return detail, sku_rows
+
 
 
 def main() -> None:

@@ -53,6 +53,122 @@ ATTRIBUTE_SECTION_MARKERS = {
     "商品详情",
 }
 
+def parse_price_clean(value: Any) -> str:
+    """价格文本 -> 纯数字字符串（不含货币符号、空格、库存文本）。
+
+    规则（2026-08-12 数据链路确认）：
+    - 剥离 ¥/￥ 与空白；
+    - 价格与库存合并在同一文本（如 "¥14.04库存 874774"）时，取价格部分；
+    - 活动文案（"活动前价格…"）视为无价格，返回空串；
+    - 保留原始精度，不做四舍五入；超过 2 位小数由调用方标记 review_required。
+    """
+    text = clean_text(value)
+    if not text:
+        return ""
+    if "活动前价格" in text:
+        return ""
+    text = text.replace(",", "")
+    if "库存" in text:
+        text = text.split("库存")[0]
+    text = text.replace("¥", "").replace("￥", "").strip()
+    match = re.search(r"([0-9]+(?:\.[0-9]+)?)", text)
+    return match.group(1) if match else ""
+
+
+def parse_moq_number(value: Any) -> str:
+    """起订量文本 -> 纯数字（"1个" -> "1"；"10" -> "10"）。"""
+    text = clean_text(value)
+    if not text:
+        return ""
+    match = re.search(r"([0-9]+(?:\.[0-9]+)?)", text)
+    return match.group(1) if match else ""
+
+
+def parse_unit_text(value: Any, moq_text: Any = "") -> str:
+    """单位文本 -> 单位（"1个" -> "个"；"个" -> "个"；空 -> ""）。"""
+    text = clean_text(value)
+    if not text:
+        text = clean_text(moq_text)
+    if not text:
+        return ""
+    if re.fullmatch(r"[0-9.]+", text):
+        return ""
+    match = re.search(r"([个台件套条只米平方米㎡PCSpcs包箱张对双]+?)(?:起批|起订)?$", text)
+    if match:
+        return match.group(1)
+    match = re.search(r"([个台件套条只米平方米㎡PCSpcs包箱张对双]+?)(?:起批|起订)", text)
+    return match.group(1) if match else ""
+
+
+def parse_stock_text_number(value: Any) -> str:
+    """库存文本 -> 纯数字（"库存 874774" -> "874774"；"874774" -> "874774"）。"""
+    if value is None:
+        return ""
+    text = clean_text(value)
+    if not text:
+        return ""
+    if text.isdigit():
+        return text
+    parsed = parse_stock_quantity(text)
+    return str(parsed) if parsed is not None else ""
+
+
+def analyze_price(price_text: str, sku_prices: list[str]) -> dict:
+    """商品级价格分析（只基于页面真实值与 SKU 明细聚合，不构造）。
+
+    返回 {price_min, price_max, currency, price_status, price_missing_reason}：
+    - 有有效 SKU 价格：min/max 取 SKU 价格聚合（single/range）；
+    - 无 SKU：页面单一价格（single）；精度超 2 位小数 -> review_required（不交付数值）；
+    - 活动文案/空值 -> missing + 明确原因。
+    """
+    currency = "CNY"
+    valid_sku = []
+    for p in sku_prices:
+        v = parse_price_clean(p)
+        if v:
+            valid_sku.append(float(v))
+    if valid_sku:
+        lo, hi = min(valid_sku), max(valid_sku)
+        fmt = lambda x: ("%d" % x) if x == int(x) else ("%.2f" % x)
+        return {
+            "price_min": fmt(lo),
+            "price_max": fmt(hi),
+            "currency": currency,
+            "price_status": "range" if hi > lo else "single",
+            "price_missing_reason": "",
+        }
+    page = parse_price_clean(price_text)
+    if page:
+        if "." in page and len(page.split(".")[1]) > 2:
+            return {
+                "price_min": "",
+                "price_max": "",
+                "currency": currency,
+                "price_status": "review_required",
+                "price_missing_reason": "parse_failed_high_precision",
+            }
+        return {
+            "price_min": page,
+            "price_max": page,
+            "currency": currency,
+            "price_status": "single",
+            "price_missing_reason": "",
+        }
+    if "活动前价格" in clean_text(price_text):
+        reason = "tooltip_only"
+    elif clean_text(price_text):
+        reason = "unparsable_text"
+    else:
+        reason = "not_accessible"
+    return {
+        "price_min": "",
+        "price_max": "",
+        "currency": currency,
+        "price_status": "missing",
+        "price_missing_reason": reason,
+    }
+
+
 
 def _is_sensitive_product_path(value: Any) -> bool:
     normalized = re.sub(r"[^a-z0-9]", "", str(value).lower())
@@ -285,6 +401,19 @@ def normalize_product_capture(
         "product_url": product_url,
         "title": clean_text(raw.get("title")),
         "price_text": clean_text(raw.get("priceText")),
+        "price_range_text": clean_text(raw.get("priceRangeText")),
+        "price_node": clean_text(raw.get("priceNode")),
+        "minimum_order_quantity": parse_moq_number(raw.get("moqText")),
+        "moq_text": clean_text(raw.get("moqText")),
+        "sales_unit": parse_unit_text(raw.get("unitText"), raw.get("moqText")),
+        "available_stock": parse_stock_text_number(raw.get("stockText")),
+        "delivery_commitment": clean_text(raw.get("deliveryText")),
+        "member_id": clean_text(raw.get("memberId")),
+        "sku_dimension": clean_text(raw.get("skuDimension")),
+        "layout_key": clean_text(raw.get("layoutKey")),
+        "modules": raw.get("modules") or {},
+        "capture_notes": [clean_text(x) for x in (raw.get("notes") or [])],
+
         "supplier_name": clean_text(raw.get("supplierName")),
         "attributes": attributes,
         "pack_specs": pack_specs,
@@ -300,6 +429,10 @@ def normalize_product_capture(
         "related_product_count": len(related),
         "related_products": related,
         "collected_at": collected_at,
-        "capture_status": "success",
+        "price_analysis": analyze_price(
+            clean_text(raw.get("priceText")),
+            [clean_text(item.get("priceText")) for item in (raw.get("skuRows") or []) if isinstance(item, dict)],
+        ),
+        "capture_status": "success" if (clean_text(raw.get("title")) or clean_text(raw.get("priceText"))) else "partial",
     }
     return sanitize_product_record(product), skus

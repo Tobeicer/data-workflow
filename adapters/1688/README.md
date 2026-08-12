@@ -71,6 +71,23 @@
   --debug
 ```
 
+重爬原始 JSONL → 规范化 L1（与旧 L1 合并图片/关联等字段）：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/build_l1_v2.py `
+  --raw-jsonl runtime/runs/1688/20260812_crawl/details_v2_raw.jsonl `
+  --delivery-json deliveries/1688/<上一版>/<delivery>.json `
+  --old-l1-dir runtime/runs/1688/codex_l1_20260811 `
+  --old-l1-dir runtime/runs/1688/1688_validation_20260810_150101 `
+  --output-dir runtime/runs/1688/<run>/l1
+```
+
+交付质量门禁（价格/单位/库存/SKU 交叉校验）：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/validate_delivery_data.py <delivery.json>
+```
+
 按已选商品清单运行去重后的多公司批次：
 
 ```powershell
@@ -82,7 +99,7 @@
 
 ### 关键词库与自动扩词
 
-全量采集由关键词库驱动。词库为**全平台通用**（54 个游艺分类 × **概念-同义词组**，693 概念 / 808 搜索词，覆盖 1688/淘宝/京东/拼多多/抖音/闲鱼六平台 + 通用词）：
+全量采集由关键词库驱动。词库为**全平台通用**（54 个游艺分类 × **概念-同义词组**，280 概念 / 744 搜索词，覆盖 1688/淘宝/京东/拼多多/抖音/闲鱼六平台 + 通用词）：
 
 - **概念-别名结构**：每个概念 = `standard_name`（标准名，如 娃娃机）+ `aliases`（**全平台合并同义词组**，如 夹娃娃机、抓公仔机、抓娃机、夹物机、抓娃娃游戏机、二手娃娃机...）+ `platforms`（分平台明细：1688/taobao/jd/pdd/douyin/xianyu/general）+ `source` + `status`。
 - 搜索时展开 `active` 概念的 `standard_name` + 全部 `aliases`（`run_source.load_keywords` 已支持）。
@@ -108,6 +125,8 @@
   --min-frequency 2 --top-n 100
 # 4. 人工审校候选池：确认词作为某概念的别名或新概念并入主词库，碎片词直接删除
 ```
+
+**防漂移与元数据**：重新生成会保留人工审校状态（`status`）与已挖掘/人工词（`title_mining`/`manual`）及候选池，不会覆盖；产物头部记录 `taxonomy_version` / `source_sha256` / `generated_at`（来源清单版本、清单哈希、生成时间）。分类清单变更后必须重新生成并通过防漂移测试 `tests/test_keyword_library_fresh.py`（不一致即失败），禁止手改产物。
 
 人工审校清单（Excel，按概念分组，含候选池）由工具生成到 `runtime/tmp/1688/keywords_review_*.xlsx`，审核结论回填后按结论更新 JSON；导出总表/数据库用 `tools/export_keyword_library.py`。
 
@@ -162,13 +181,19 @@
 - 每批核对请求数、完成数、唯一公司数、SKU 数、接口响应数、缺失字段和复核队列；数量异常、批量归零或解析为 0 时停止交付。
 - 只有正式登录态、受控在线质量证据、统一 `run_result`、n8n 状态路由和连续稳定运行验收完成后，才可申请启用。
 
-当前唯一交付为 `deliveries/1688/1688_20260807/`（2026-08-07 全量字段重采）：商品 50 列精简字段集（参数属性 + 厂家关联 + 关联商品，用户筛选定稿），厂家 73 列；JSON 与中文 Excel 同构，商品通过 `厂家ID` 关联厂家。全量原始字段保留在 L1-L2 与 `other_attributes`，不因展示精简而删除。历史 `review_only` 验证包已清理，其结论保留于本 README 第 4 节。
+当前最新完整交付为 `deliveries/1688/1688_20260812_full/`（2026-08-12 全量 707 商品重爬，delivery_id=`1688_direct_20260812`，schema 1.1.0）：
+- 商品 54 列（新增 `price_min`/`price_max`/`currency`/`price_status`/`price_missing_reason`，移除原 `display_price` 原始文本列）；厂家 54 列；新增 **`SKU明细` sheet（4673 行）**；JSON 与中文 Excel 同构，商品通过 `厂家ID` 关联厂家。
+- 价格全部为纯数字（元，≤2 位小数）：单一价格 399 / 区间价格 308 / 缺失 0 / 需复核 0；价格区间由 SKU 明细聚合（页面真实值），超高精度原值保留在 `sku_price_text`。
+- 质量门禁 `validate_delivery_data.py` 通过（0 hard errors / 0 warnings）；质量报告见交付目录 `质量报告_20260812.md`。
+- 全量原始字段保留在 L1-L2 与 `other_attributes`，不因展示精简而删除。历史 `review_only` 验证包已清理，其结论保留于本 README 第 4 节；08-07/08-10/08-11 交付为历史批次。
 
 ## 7. 登录态
 
 真实浏览器 profile 已于 2026-07-15 同盘迁入 `runtime/browser-profiles/1688/`，迁移前后资产清单一致。不得把 profile、Cookie、Local Storage 或 Session Storage 写入 Git、文档内容或交付包。在线采集前确认登录态可用；首次运行建议先 `sample --dry-run` 检查命令计划。
 
 ## 8. 反爬基础（stealth 与自适应频控）
+
+详情页提取统一由 `adapters/1688/src/detail_extract.js` 承担（单一事实源，Playwright 与 Codex 控制 Chrome 共用）：多选择器容错（新旧两代价格模块 `od_main_price`/`od_price`/`od_consign`、SKU 的 expand/通用/表格/无四类结构）、活动文案节点排除、价格+库存合并节点拆分、库存文本校验防误抓、布局签名（layoutKey）与缺失原因记录。2026-08-12 全量 707 商品实测发现 **22 种布局变体**，全部由该脚本适配。
 
 浏览器执行层统一来自 shared 内核（见总纲 §10.1），1688 采集脚本默认接入：
 

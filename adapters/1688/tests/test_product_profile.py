@@ -8,10 +8,15 @@ SRC_DIR = TEST_DIR.parent / "src"
 sys.path.insert(0, str(SRC_DIR))
 
 from product_profile import (  # noqa: E402
+    analyze_price,
     build_product_source_observations,
     filter_product_attributes,
     normalize_product_capture,
+    parse_moq_number,
     parse_pack_specs,
+    parse_price_clean,
+    parse_stock_text_number,
+    parse_unit_text,
     sanitize_public_product_context,
     sanitize_product_record,
 )
@@ -281,3 +286,55 @@ def test_delivery_record_promotes_discovered_attribute_columns() -> None:
     assert "颜色" not in record["other_attributes"]
     assert record["other_attributes"]["未知扩展键"] == "扩展值"
     assert record["related_product_count"] == 0
+
+
+def test_parse_price_clean_strips_symbols_spaces_and_stock() -> None:
+    assert parse_price_clean("¥5800") == "5800"
+    assert parse_price_clean("￥ 800") == "800"
+    assert parse_price_clean("¥14.04库存 874774") == "14.04"
+    assert parse_price_clean(" 2.04-2.20 ") == "2.04"
+    assert parse_price_clean("") == ""
+    assert parse_price_clean("【平台活动下价格】 活动前价格：xxx") == ""
+    assert parse_price_clean(None) == ""
+
+
+def test_parse_moq_and_unit() -> None:
+    assert parse_moq_number("1个") == "1"
+    assert parse_moq_number("10") == "10"
+    assert parse_moq_number("") == ""
+    assert parse_unit_text("个") == "个"
+    assert parse_unit_text("", "1台") == "台"
+    assert parse_unit_text("") == ""
+    assert parse_unit_text("1个") == "个"
+
+
+def test_parse_stock_text_number() -> None:
+    assert parse_stock_text_number("库存 874774") == "874774"
+    assert parse_stock_text_number("874774") == "874774"
+    assert parse_stock_text_number("") == ""
+    assert parse_stock_text_number(None) == ""
+
+
+def test_analyze_price_single_range_review_missing() -> None:
+    # SKU 聚合 -> range
+    r = analyze_price("¥2.04", ["¥2.04", "¥2.20"])
+    assert r["price_min"] == "2.04" and r["price_max"] == "2.20"
+    assert r["price_status"] == "range" and r["price_missing_reason"] == ""
+    # 单一 SKU 价格 -> single
+    r = analyze_price("¥14.04库存 874774", ["14.04"])
+    assert r["price_status"] == "single" and r["price_min"] == "14.04"
+    # 页面价格超高精度 -> review_required，不交付数值
+    r = analyze_price("¥2.09897102", [])
+    assert r["price_status"] == "review_required"
+    assert r["price_min"] == "" and r["price_max"] == ""
+    assert r["price_missing_reason"] == "parse_failed_high_precision"
+    # 活动文案 -> missing
+    r = analyze_price("【平台活动下价格】 活动前价格：（1）非分销场景下…", [])
+    assert r["price_status"] == "missing"
+    assert r["price_missing_reason"] == "tooltip_only"
+    # 空 -> missing
+    r = analyze_price("", [])
+    assert r["price_status"] == "missing"
+    assert r["price_missing_reason"] == "not_accessible"
+    # 货币固定 CNY
+    assert r["currency"] == "CNY"

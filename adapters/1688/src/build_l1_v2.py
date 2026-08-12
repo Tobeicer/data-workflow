@@ -12,7 +12,7 @@
 用法：
   python adapters/1688/src/build_l1_v2.py \
     --raw-jsonl runtime/runs/1688/20260812_crawl/details_v2_raw.jsonl \
-    --delivery-json deliveries/1688/1688_20260812_rebuild/1688分类抽样_20260812_rebuild.json \
+    --delivery-json deliveries/1688/1688_20260812_full/1688分类抽样_20260812.json \
     --old-l1-dir runtime/runs/1688/codex_l1_20260811 \
     --old-l1-dir runtime/runs/1688/1688_validation_20260810_150101 \
     --output-dir runtime/runs/1688/20260812_crawl/l1

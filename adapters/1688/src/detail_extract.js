@@ -234,6 +234,28 @@ function extractDetailPage() {
   // ---------- SKU 明细（多路径） ----------
   const skuRows = [];
   let skuPath = 'none';
+  // 拆分“价格+库存”span 拼接单元格（2026 gyp-pro-table 变体）：
+  // <div class="gyp-pro-table-price"><span>¥2300</span><span>9983</span></div> -> price=¥2300, stock=9983
+  // <span>¥12</span><span>.677675</span> -> price=¥12.677675
+  const splitPriceStock = (text, node) => {
+    const spans = node
+      ? Array.from(node.querySelectorAll('span')).map((s) => clean(s.innerText || s.textContent)).filter(Boolean)
+      : [];
+    if (spans.length >= 2) {
+      let price = '';
+      let stock = '';
+      let seenPrice = false;
+      for (const sp of spans) {
+        if (!seenPrice && /[¥￥]/.test(sp)) { price = sp; seenPrice = true; continue; }
+        if (seenPrice && sp.startsWith('.')) { price += sp; continue; }
+        if (seenPrice) { stock = sp; break; }
+      }
+      if (price && seenPrice && stock && !/[¥￥]/.test(stock) && !stock.startsWith('.')) {
+        return { price, stock };
+      }
+    }
+    return { price: text, stock: '' };
+  };
   const pushSku = (label, priceSrc, stockSrc, imageUrl) => {
     const name = clean(label);
     if (!name || skuRows.some((x) => x.label === name)) return;
@@ -245,12 +267,21 @@ function extractDetailPage() {
     skuPath = 'expand';
     for (const node of expandItems) {
       const label = clean((node.querySelector('.item-label') || {}).innerText || '');
-      const priceNodes = Array.from(node.querySelectorAll('.item-price-stock'))
-        .map((n) => clean(n.innerText || n.textContent))
-        .filter(Boolean);
+      const stockNodes = Array.from(node.querySelectorAll('.item-price-stock'));
+      let priceSrc = '';
+      let stockSrc = '';
+      for (const sn of stockNodes) {
+        const raw = clean(sn.innerText || sn.textContent);
+        if (!raw) continue;
+        const split = splitPriceStock(raw, sn);
+        if (!priceSrc && /[¥￥]/.test(split.price)) priceSrc = split.price;
+        if (!stockSrc && split.stock) stockSrc = split.stock;
+        if (!priceSrc && /[¥￥]/.test(raw)) priceSrc = raw;
+        if (!stockSrc && RE_STOCK.test(raw)) stockSrc = raw;
+      }
       const img = node.querySelector('img');
       const imageUrl = img ? (img.currentSrc || img.src || img.getAttribute('src') || '') : '';
-      pushSku(label, priceNodes[0] || '', priceNodes[1] || '', imageUrl);
+      pushSku(label, priceSrc, stockSrc, imageUrl);
     }
   }
   // 路径 2：通用 sku item（类名含 sku 的列表项）
@@ -267,8 +298,15 @@ function extractDetailPage() {
         const texts = Array.from(node.querySelectorAll('[class*="price"], [class*="stock"], dd, td'))
           .map((n) => clean(n.innerText || n.textContent))
           .filter(Boolean);
-        const priceSrc = texts.find((t) => /[¥￥]\s*\d+(\.\d+)?/.test(t) && !isTooltip(t)) || '';
-        const stockSrc = texts.find((t) => RE_STOCK.test(t)) || '';
+        let priceSrc = texts.find((t) => /[¥￥]\s*\d+(\.\d+)?/.test(t) && !isTooltip(t)) || '';
+        let stockSrc = texts.find((t) => RE_STOCK.test(t)) || '';
+        // span 拼接单元格拆分（价格+库存）
+        if (priceSrc) {
+          const priceNodes = Array.from(node.querySelectorAll('[class*="price"], [class*="stock"], td'));
+          const split = priceNodes.map((pn) => splitPriceStock(clean(pn.innerText || pn.textContent), pn))
+            .find((x) => /[¥￥]/.test(x.price) && x.stock);
+          if (split) { priceSrc = split.price; stockSrc = split.stock; }
+        }
         if (!priceSrc && !stockSrc) continue;
         const img = node.querySelector('img');
         const imageUrl = img ? (img.currentSrc || img.src || '') : '';
@@ -282,14 +320,30 @@ function extractDetailPage() {
       document.querySelectorAll('table:not([data-module]) tr, [class*="sku"] table tr')
     );
     const rows = skuTables
-      .map((tr) => Array.from(tr.querySelectorAll('th, td')).map((c) => clean(c.innerText || c.textContent)))
-      .filter((r) => r.length >= 2 && r.some((c) => /[¥￥]\s*\d+(\.\d+)?/.test(c)));
+      .map((tr) => {
+        const cells = Array.from(tr.querySelectorAll('th, td'));
+        return {
+          texts: cells.map((c) => clean(c.innerText || c.textContent)),
+          nodes: cells,
+        };
+      })
+      .filter((r) => r.texts.length >= 2 && r.texts.some((c) => /[¥￥]\s*\d+(\.\d+)?/.test(c)));
     if (rows.length) {
       skuPath = 'table';
       for (const r of rows) {
-        const name = r[0];
-        const priceSrc = r.find((c) => /[¥￥]\s*\d+(\.\d+)?/.test(c) && !isTooltip(c)) || '';
-        const stockSrc = r.find((c) => RE_STOCK.test(c)) || '';
+        const name = r.texts[0];
+        let priceSrc = '';
+        let stockSrc = '';
+        for (let ci = 0; ci < r.nodes.length; ci++) {
+          const cellText = r.texts[ci];
+          const node = r.nodes[ci];
+          if (!/[¥￥]/.test(cellText) && !RE_STOCK.test(cellText) && !/^\d+$/.test(cellText)) continue;
+          const split = splitPriceStock(cellText, node);
+          if (/[¥￥]/.test(split.price) && !isTooltip(split.price)) priceSrc = split.price;
+          if (split.stock) stockSrc = split.stock;
+          else if (RE_STOCK.test(cellText)) stockSrc = cellText;
+          else if (/^\d+$/.test(cellText) && !priceSrc) stockSrc = cellText;
+        }
         pushSku(name, priceSrc, stockSrc, '');
       }
     }

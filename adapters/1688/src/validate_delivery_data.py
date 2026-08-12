@@ -36,6 +36,9 @@ UNIT_WORDS = {
     "个", "台", "件", "套", "条", "只", "米", "平方米", "㎡",
     "PCS", "pcs", "包", "箱", "张", "对", "双", "副", "组", "桶", "瓶",
 }
+MAX_PLAUSIBLE_PRICE = 10000000  # 1 千万：超过即视为价格-库存拼接残留或页面占位大数
+
+
 MISSING_REASONS = {
     "not_accessible", "tooltip_only", "unparsable_text",
     "parse_failed_high_precision", "not_provided", "blocked",
@@ -55,6 +58,13 @@ def check_price(record: dict, product_id: str, errors: list[str], warnings: list
             continue
         if not PRICE_RE.match(value):
             errors.append(f"{product_id}.{key}: 非规范数值 '{value}'（只允许纯数字，≤2 位小数）")
+        try:
+            if float(value) > MAX_PLAUSIBLE_PRICE:
+                errors.append(
+                    f"{product_id}.{key}: 价格 '{value}' 超过 1 千万，疑似价格+库存拼接残留或页面占位大数，需人工复核"
+                )
+        except ValueError:
+            pass
         for token in FORBIDDEN_IN_NUMERIC:
             if token in value:
                 errors.append(f"{product_id}.{key}: 含杂质文本 '{token}' -> '{value}'")
@@ -134,6 +144,13 @@ def main() -> int:
             if not PRICE_RE.match(price):
                 errors.append(f"SKU {pid}/{clean(sku.get('sku_name'))}: sku_price 非规范数值 '{price}'")
             else:
+                try:
+                    if float(price) > MAX_PLAUSIBLE_PRICE:
+                        errors.append(
+                            f"SKU {pid}/{clean(sku.get('sku_name'))}: sku_price '{price}' 超过 1 千万，疑似价格+库存拼接残留"
+                        )
+                except ValueError:
+                    pass
                 sku_prices_by_product.setdefault(pid, []).append(float(price))
         for token in FORBIDDEN_IN_NUMERIC:
             if token in price:

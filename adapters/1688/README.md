@@ -184,7 +184,7 @@
 当前最新完整交付为 `deliveries/1688/1688_20260812_full/`（2026-08-12 全量 707 商品重爬，delivery_id=`1688_direct_20260812`，schema 1.1.0）：
 - 商品 54 列（新增 `price_min`/`price_max`/`currency`/`price_status`/`price_missing_reason`，移除原 `display_price` 原始文本列）；厂家 54 列；新增 **`SKU明细` sheet（4673 行）**；JSON 与中文 Excel 同构，商品通过 `厂家ID` 关联厂家。
 - 价格全部为纯数字（元，≤2 位小数）：单一价格 402 / 区间价格 305 / 缺失 0 / 需复核 0；价格区间由 SKU 明细聚合（页面真实值），超高精度原值保留在 `sku_price_text`。
-- 质量门禁 `validate_delivery_data.py` 通过（0 hard errors / 0 warnings）；质量报告见交付目录 `质量报告_20260812.md`。
+- 质量门禁 `validate_delivery_data.py` 通过（0 hard errors / 0 warnings）；校验命令可随时重跑。
 - 全量原始字段保留在 L1-L2 与 `other_attributes`，不因展示精简而删除。历史 `review_only` 验证包已清理，其结论保留于本 README 第 4 节；被替代的历史交付目录（1688_20260807/1688_20260810_products/1688_20260811_full/1688_20260812_rebuild）已删除，L0-L2 运行资产保留在 `runtime/runs/1688/`。
 
 ## 7. 登录态

@@ -1,0 +1,14 @@
+{
+  "version": "1.0.0",
+  "mode": "whitelist",
+  "match": "glob",
+  "groups": ["*"],
+  "contacts": [],
+  "moments": "*",
+  "notes": {
+    "groups": "群聊采集范围（* = 全部群）；匹配 @chatroom 结尾的会话",
+    "contacts": "私聊白名单（wxid_xxx 或备注名）；默认空数组 = 不采集私聊",
+    "moments": "朋友圈作者范围（* = 全部）；按 SnsTimeLine.username 匹配",
+    "mode": "whitelist = 仅采集上方白名单内数据；不提供 all 模式"
+  }
+}

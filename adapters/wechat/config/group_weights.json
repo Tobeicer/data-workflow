@@ -1,0 +1,403 @@
+{
+  "version": "1.0",
+  "updated": "2026-08-11",
+  "note": "基于群名+消息内容人工标注；S=核心货源群,A=行业相关,B=杂/广告,C=无关",
+  "groups": [
+    {
+      "chat": "419127979@chatroom",
+      "name": "小赵～找产品（勿发广告）",
+      "weight": 3,
+      "reason": "设备出售：娃娃机/卡丁车/旋转木马，含价格与库存"
+    },
+    {
+      "chat": "24799167314@chatroom",
+      "name": "颖品同行交流",
+      "weight": 3,
+      "reason": "售币机/兑币机/钥匙扣，多价格信号"
+    },
+    {
+      "chat": "53580343402@chatroom",
+      "name": "微妙申元-金银狮宝加强版🦁",
+      "weight": 3,
+      "reason": "礼品机/金狮设备/支付盒子，量大104条"
+    },
+    {
+      "chat": "23637190371@chatroom",
+      "name": "讯娱科技☀物联网礼品机",
+      "weight": 3,
+      "reason": "物联网礼品机源头，娃娃机/电玩城"
+    },
+    {
+      "chat": "3800195746@chatroom",
+      "name": "电玩设备信息交流群",
+      "weight": 3,
+      "reason": "设备+支付盒子，直接对口"
+    },
+    {
+      "chat": "774790727@chatroom",
+      "name": "（番禺）同行交流专区，禁止广告",
+      "weight": 3,
+      "reason": "同行交流：二手设备出售"
+    },
+    {
+      "chat": "2224791496@chatroom",
+      "name": "游戏销售交流群",
+      "weight": 3,
+      "reason": "文审设备/整机销售"
+    },
+    {
+      "chat": "2349192768@chatroom",
+      "name": "双龙戏珠——实物十二门押注",
+      "weight": 3,
+      "reason": "推币机促销6000/台"
+    },
+    {
+      "chat": "4348438655@chatroom",
+      "name": "🍊桔子系统同行交流群",
+      "weight": 2,
+      "reason": "龙凤戏珠套件处理3500¥"
+    },
+    {
+      "chat": "318035262@chatroom",
+      "name": "游戏机同行交流",
+      "weight": 2,
+      "reason": "推币机促销"
+    },
+    {
+      "chat": "3256659146@chatroom",
+      "name": "番禺同行套件群7",
+      "weight": 2,
+      "reason": "求购彩金双名牌"
+    },
+    {
+      "chat": "1062246413@chatroom",
+      "name": "川渝动漫游戏游艺群",
+      "weight": 2,
+      "reason": "动漫游戏游艺"
+    },
+    {
+      "chat": "2286724760@chatroom",
+      "name": "动漫游戏平台",
+      "weight": 2,
+      "reason": "动漫游戏"
+    },
+    {
+      "chat": "8995033878@chatroom",
+      "name": "中国游戏娱乐业采购与供应商群",
+      "weight": 2,
+      "reason": "采购与供应商"
+    },
+    {
+      "chat": "7989011149@chatroom",
+      "name": "好集乐同行交流1群",
+      "weight": 2,
+      "reason": "同行交流"
+    },
+    {
+      "chat": "43120157582@chatroom",
+      "name": "顺宏发展行业交流群",
+      "weight": 2,
+      "reason": "电玩城/星力广场"
+    },
+    {
+      "chat": "6477417832@chatroom",
+      "name": "深向氏——官方总群【一】",
+      "weight": 2,
+      "reason": "设备厂商总群"
+    },
+    {
+      "chat": "47803813198@chatroom",
+      "name": "渠道-李超群还剩18个库存",
+      "weight": 2,
+      "reason": "渠道库存/支付盒子"
+    },
+    {
+      "chat": "48385121486@chatroom",
+      "name": "技术支持-存票机",
+      "weight": 2,
+      "reason": "存票机技术"
+    },
+    {
+      "chat": "48444822281@chatroom",
+      "name": "支付侠渠道客服-季总",
+      "weight": 2,
+      "reason": "支付盒子渠道"
+    },
+    {
+      "chat": "23998797149@chatroom",
+      "name": "大千艺术星力公司行业服务群",
+      "weight": 2,
+      "reason": "星力设备/钥匙扣"
+    },
+    {
+      "chat": "2195024102@chatroom",
+      "name": "💎1⃣番禺动漫商情💰💎🎰",
+      "weight": 2,
+      "reason": "游戏机行业招聘/设备"
+    },
+    {
+      "chat": "6424295678@chatroom",
+      "name": "【彩金王国】文审交流群",
+      "weight": 2,
+      "reason": "文审"
+    },
+    {
+      "chat": "55937318443@chatroom",
+      "name": "广州文审产品整合服务平台",
+      "weight": 2,
+      "reason": "文审"
+    },
+    {
+      "chat": "45747644698@chatroom",
+      "name": "游艺圈、夹客过户",
+      "weight": 2,
+      "reason": "过户/夹客"
+    },
+    {
+      "chat": "8041121628@chatroom",
+      "name": "川渝资源共享群",
+      "weight": 2,
+      "reason": "互动投影/展馆设备"
+    },
+    {
+      "chat": "2792634538@chatroom",
+      "name": "博远实业运动馆项目沟通群",
+      "weight": 2,
+      "reason": "运动馆项目"
+    },
+    {
+      "chat": "1279755128@chatroom",
+      "name": "教玩具游乐设备行业平台群",
+      "weight": 2,
+      "reason": "教玩具游乐设备"
+    },
+    {
+      "chat": "1663049291@chatroom",
+      "name": "CAAPA行业交流群7",
+      "weight": 2,
+      "reason": "CAAPA游乐协会"
+    },
+    {
+      "chat": "1819018827@chatroom",
+      "name": "【游艺1号】高级群",
+      "weight": 2,
+      "reason": "游艺"
+    },
+    {
+      "chat": "2570127748@chatroom",
+      "name": "番禺游艺高端联谊群",
+      "weight": 2,
+      "reason": "番禺游艺"
+    },
+    {
+      "chat": "3829642919@chatroom",
+      "name": "广州番禺网商联合会（一）",
+      "weight": 2,
+      "reason": "番禺网商"
+    },
+    {
+      "chat": "1935417241@chatroom",
+      "name": "童领产品信息交流平台",
+      "weight": 2,
+      "reason": "产品信息"
+    },
+    {
+      "chat": "10707185095@chatroom",
+      "name": "国际企业家交流群",
+      "weight": 1,
+      "reason": "杂：茅台广告等"
+    },
+    {
+      "chat": "43435459389@chatroom",
+      "name": "系统问题反馈群",
+      "weight": 1,
+      "reason": "系统客服"
+    },
+    {
+      "chat": "3633843324@chatroom",
+      "name": "四川重庆老乡聊天群",
+      "weight": 1,
+      "reason": "闲聊为主"
+    },
+    {
+      "chat": "50176581027@chatroom",
+      "name": "50176581027@chatroom(未命名)",
+      "weight": 1,
+      "reason": "设备管理/客服"
+    },
+    {
+      "chat": "1214930443@chatroom",
+      "name": "全国super艺人✨精英✨演绎部✨",
+      "weight": 1,
+      "reason": "演绎/音响"
+    },
+    {
+      "chat": "22764973720@chatroom",
+      "name": "7:武汉加油:新时代微商",
+      "weight": 1,
+      "reason": "微商"
+    },
+    {
+      "chat": "6957302658@chatroom",
+      "name": "㊙️广州互联㊙️GJJ",
+      "weight": 1,
+      "reason": "待观察"
+    },
+    {
+      "chat": "45423026010@chatroom",
+      "name": "渠道商-GHOST-西安刘琦",
+      "weight": 1,
+      "reason": "渠道客服"
+    },
+    {
+      "chat": "2001495942@chatroom",
+      "name": "广东广告业发展平台",
+      "weight": 1,
+      "reason": "广告业"
+    },
+    {
+      "chat": "6986992547@chatroom",
+      "name": "🍻花都广告平台＂",
+      "weight": 1,
+      "reason": "广告"
+    },
+    {
+      "chat": "5199065995@chatroom",
+      "name": "中国动漫行业第一发布平台",
+      "weight": 1,
+      "reason": "动漫行业"
+    },
+    {
+      "chat": "488741624@chatroom",
+      "name": "摄影化妆6群",
+      "weight": 1,
+      "reason": "化妆/假睫毛"
+    },
+    {
+      "chat": "50086695807@chatroom",
+      "name": "渠道-乐拍",
+      "weight": 1,
+      "reason": "渠道客服"
+    },
+    {
+      "chat": "5025902499@chatroom",
+      "name": "深圳乐奇多主题乐园交流群",
+      "weight": 1,
+      "reason": "主题乐园弱相关"
+    },
+    {
+      "chat": "4734042543@chatroom",
+      "name": "思尔福-智能零售1号社群",
+      "weight": 1,
+      "reason": "智能零售弱相关"
+    },
+    {
+      "chat": "11201102006@chatroom",
+      "name": "广州智慧零售交流群2",
+      "weight": 1,
+      "reason": "智慧零售弱相关"
+    },
+    {
+      "chat": "606186772@chatroom",
+      "name": "七寸联盟招商品牌广东二群",
+      "weight": 1,
+      "reason": "招商"
+    },
+    {
+      "chat": "9246971771@chatroom",
+      "name": "奶爸联盟深圳20群",
+      "weight": 1,
+      "reason": "杂"
+    },
+    {
+      "chat": "933900165@chatroom",
+      "name": "【招品汇】深圳④群",
+      "weight": 1,
+      "reason": "未标注默认B级"
+    },
+    {
+      "chat": "2013917435@chatroom",
+      "name": "万州区天方夜谈KTV客户服务中心",
+      "weight": 0,
+      "reason": "贷款广告"
+    },
+    {
+      "chat": "5673540606@chatroom",
+      "name": "媳妇姑爷群，兄妹群",
+      "weight": 0,
+      "reason": "家庭闲聊"
+    },
+    {
+      "chat": "741299355@chatroom",
+      "name": "HR家园发展5群",
+      "weight": 0,
+      "reason": "HR"
+    },
+    {
+      "chat": "47778461564@chatroom",
+      "name": "沱泊沟向氏宗亲交流群",
+      "weight": 0,
+      "reason": "宗亲"
+    },
+    {
+      "chat": "3699023212@chatroom",
+      "name": "学习-互动-交流",
+      "weight": 0,
+      "reason": "杂"
+    },
+    {
+      "chat": "4411446149@chatroom",
+      "name": "大象无形，缘聚再行",
+      "weight": 0,
+      "reason": "艺术/杂"
+    },
+    {
+      "chat": "5589117420@chatroom",
+      "name": "颗粒美积木乐园",
+      "weight": 0,
+      "reason": "积木乐园"
+    },
+    {
+      "chat": "6539925135@chatroom",
+      "name": "四川文旅会2群",
+      "weight": 0,
+      "reason": "文旅"
+    },
+    {
+      "chat": "9814034301@chatroom",
+      "name": "广东四川商会科技分会",
+      "weight": 0,
+      "reason": "商会"
+    },
+    {
+      "chat": "991719560@chatroom",
+      "name": "川家园交流群",
+      "weight": 0,
+      "reason": "老乡"
+    },
+    {
+      "chat": "23151851080@chatroom",
+      "name": "潘朵拉新档口开业群，嗨起来😄",
+      "weight": 0,
+      "reason": "开业闲聊"
+    },
+    {
+      "chat": "50388712851@chatroom",
+      "name": "111",
+      "weight": 0,
+      "reason": "未知"
+    },
+    {
+      "chat": "576996174@chatroom",
+      "name": "北大EMBA班总群",
+      "weight": 0,
+      "reason": "EMBA"
+    },
+    {
+      "chat": "5330041893@chatroom",
+      "name": "③创始人IP私董会·葛导【研修群】",
+      "weight": 0,
+      "reason": "私董会"
+    }
+  ]
+}

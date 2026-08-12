@@ -1,0 +1,46 @@
+{
+  "version": "0.1.0",
+  "updated": "2026-08-10",
+  "toolchain": {
+    "tool": "self_hosted_mit_scripts",
+    "status": "active",
+    "note": "自建管道：vendored MIT 原语（wechat-4.1.12-decrypt / WeChatDaily / wcdb-key-tool）+ 自写采集脚本，不依赖付费/过期/GUI 工具"
+  },
+  "capabilities": {
+    "group_chat": {
+      "status": "supported",
+      "evidence": ["H1 smoke 2026-08-10: message_0.db 236 会话表，文本消息明文可读"],
+      "note": "会话表 Msg_<md5>，local_type=1 文本消息明文，图片等为 protobuf"
+    },
+    "private_chat": {
+      "status": "supported",
+      "evidence": ["H1 smoke 2026-08-10: message_0.db 同结构含私聊会话表"],
+      "note": "与群聊同表结构，按 Name2Id 区分"
+    },
+    "moments_timeline": {
+      "status": "supported",
+      "evidence": ["H1 smoke 2026-08-10: sns.db SnsTimeLine 65 条，XML 含 createTime/username"],
+      "note": "SnsTimeLine.content 为 SnsDataItem XML"
+    },
+    "moments_media": {
+      "status": "unknown",
+      "evidence": [],
+      "note": "图片/视频解密属 H2 二期"
+    },
+    "contacts": {
+      "status": "supported",
+      "evidence": ["H1 smoke 2026-08-10: contact.db contact 表 545 页"],
+      "note": "contact.db contact/name2id/chat_room"
+    },
+    "group_members": {
+      "status": "supported",
+      "evidence": ["H1 smoke 2026-08-10: contact.db chat_room 表存在"],
+      "note": "chat_room/chat_room_info_detail 群成员关系"
+    },
+    "realtime_monitor": {
+      "status": "supported",
+      "evidence": ["H2 smoke 2026-08-10: --watch 每 2 秒轮询，单轮 0.01s，增量正确"],
+      "note": "sqlcipher3 只读直连 + 加密 WAL 自动重放，轮询水位增量；准实时（秒级），非推送"
+    }
+  }
+}

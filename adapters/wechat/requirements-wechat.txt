@@ -1,0 +1,4 @@
+# 微信自建管道依赖（Python 3.11，Windows x64）
+# 安装：.venv-data\Scripts\python.exe -m pip install -r adapters/wechat/requirements-wechat.txt
+sqlcipher3==0.6.2      # 只读打开微信 SQLCipher 4 加密库（含加密 WAL 自动重放）
+pycryptodome           # 备用解密/验证原语（verify_key、salt_scan）

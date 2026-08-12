@@ -6,7 +6,7 @@
 漫立方为单厂家来源：所有商品 manufacturer_id 指向漫立方一家。
 
 用法：
-    python adapters/manlifang/src/build_manlifang_direct_delivery.py
+    python adapters/manlifang/src/build_manlifang_delivery.py
 """
 
 from __future__ import annotations
@@ -16,6 +16,7 @@ import datetime
 import glob
 import json
 import os
+import re
 import sys
 from collections import Counter, OrderedDict
 
@@ -29,7 +30,23 @@ SCHEMA_VERSION = "2.3.0"
 SOURCE = "manlifang"
 MANUFACTURER_ID = "manlifang:manufacturer:manlifang"
 MANUFACTURER_NAME = "漫立方"
-OBSERVED_AT = "2026-07-10 11:08:14"  # 正式批次 manlifang_full_20260710_110814
+
+
+def derive_run_meta(run_dir):
+    """从批次目录推导交付日期与采集时间（避免硬编码）。"""
+    batch_name = os.path.basename(run_dir.rstrip("/\\"))
+    match = re.search(r"(\d{8})_(\d{6})", batch_name)
+    date_part = match.group(1) if match else datetime.date.today().strftime("%Y%m%d")
+    observed = OBSERVED_AT_FALLBACK
+    started = os.path.join(run_dir, "capture_started_at.txt")
+    if os.path.exists(started):
+        raw = open(started, encoding="utf-8").read().strip()
+        if raw:
+            observed = raw.replace("T", " ")[:19]
+    return date_part, observed
+
+
+OBSERVED_AT_FALLBACK = "2026-07-10 11:08:14"
 
 # 与 1688 交付 product_field_labels_zh 完全一致的 50 个键（顺序即交付列顺序）
 PRODUCT_KEYS = [
@@ -177,7 +194,8 @@ def load_raw_static_extra(raw_static_dir):
 
 
 def build_products(cleaned_records, image_by_code, spu_by_product, static_by_product,
-                   v2_by_code, raw_extra_by_product=None, listing_by_product=None):
+                   v2_by_code, raw_extra_by_product=None, listing_by_product=None,
+                   observed_at=OBSERVED_AT_FALLBACK):
     """组装 50 字段商品宽记录。
 
     cleaned_records: 商品清洗主表记录
@@ -251,7 +269,7 @@ def build_products(cleaned_records, image_by_code, spu_by_product, static_by_pro
             ("product_id", pid if pid is not None else ""),
             ("product_url", rec.get("source_link") or ""),
             ("title", rec.get("normalized_name") or rec.get("original_name") or ""),
-            ("observed_at", OBSERVED_AT),
+            ("observed_at", observed_at),
             ("manufacturer_id", MANUFACTURER_ID),
             ("manufacturer_member_id", "manlifang"),
             ("manufacturer_name", MANUFACTURER_NAME),
@@ -293,7 +311,7 @@ def build_products(cleaned_records, image_by_code, spu_by_product, static_by_pro
     return products, stats
 
 
-def build_manufacturer(all_product_ids, main_categories):
+def build_manufacturer(all_product_ids, main_categories, observed_at=OBSERVED_AT_FALLBACK):
     """组装单厂家（漫立方）54 字段宽记录。"""
     return OrderedDict([
         ("source_platform", "漫立方"),
@@ -327,7 +345,7 @@ def build_manufacturer(all_product_ids, main_categories):
         ("returning_customer_rate", ""), ("service_response_rate", ""),
         ("on_time_fulfillment_rate", ""), ("factory_vr_url", ""),
         ("factory_images", ""), ("factory_videos", ""),
-        ("observed_at", OBSERVED_AT),
+        ("observed_at", observed_at),
     ])
 
 
@@ -361,12 +379,13 @@ def main():
     parser = argparse.ArgumentParser(description="漫立方 1688 同格式宽表交付生成")
     parser.add_argument("--run-dir", default=r"runtime/runs/manlifang/manlifang_full_20260710_110814",
                         help="正式批次目录（相对仓库根或绝对路径）")
-    parser.add_argument("--out-dir", default="", help="输出目录，默认 deliveries/manlifang/manlifang_direct_<日期>")
+    parser.add_argument("--out-dir", default="", help="输出目录，默认 deliveries/manlifang/manlifang_<日期>")
     args = parser.parse_args()
 
     run_dir = args.run_dir
     if not os.path.isabs(run_dir):
         run_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))), run_dir)
+    date_part, observed_at = derive_run_meta(run_dir)
     structured = os.path.join(run_dir, "structured")
     xlsx_glob = glob.glob(os.path.join(run_dir, "cleaned", "*.xlsx"))
     if not xlsx_glob:
@@ -433,15 +452,15 @@ def main():
     print("[3/4] 组装商品与厂家宽记录")
     products, stats = build_products(cleaned_records, image_by_code, spu_by_product,
                                      static_by_product, v2_by_code, raw_extra_by_product,
-                                     listing_by_product)
+                                     listing_by_product, observed_at)
     all_pids = [str(p["product_id"]) for p in products if p["product_id"] != ""]
-    manufacturers = [build_manufacturer(all_pids, main_categories)]
+    manufacturers = [build_manufacturer(all_pids, main_categories, observed_at)]
 
     out_dir = args.out_dir or os.path.join(
         os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))),
-        "deliveries", "manlifang", "manlifang_direct_20260810")
+        "deliveries", "manlifang", f"manlifang_{date_part}")
     os.makedirs(out_dir, exist_ok=True)
-    delivery_id = "manlifang_20260810"
+    delivery_id = f"manlifang_{date_part}"
     json_path = os.path.join(out_dir, f"漫立方全量_{delivery_id.split('_')[1]}.json")
     xlsx_path = os.path.join(out_dir, f"漫立方全量_{delivery_id.split('_')[1]}.xlsx")
 

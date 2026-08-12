@@ -1,0 +1,75 @@
+{
+  "name": "wechat_collect",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "minutes",
+              "minutesInterval": 5
+            }
+          ]
+        }
+      },
+      "name": "定时触发(每5分钟)",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "command": "cd /d E:\\Desktop_zm\\data-workflow && .venv-data\\Scripts\\python.exe -u adapters\\wechat\\src\\collector.py --once --load --keys E:\\Desktop_zm\\data-workflow\\runtime\\tmp\\wechat\\wcd_scan\\all_keys.json --db-dir D:\\xwechat_files\\wxid_of4c5546po6t22_606e\\db_storage --out E:\\Desktop_zm\\data-workflow\\runtime\\state\\wechat --scope E:\\Desktop_zm\\data-workflow\\adapters\\wechat\\config\\scope.json"
+      },
+      "name": "采集+入库",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [200, 0]
+    },
+    {
+      "parameters": {
+        "command": "cd /d E:\\Desktop_zm\\data-workflow && .venv-data\\Scripts\\python.exe -u adapters\\wechat\\src\\product_signal.py --staging E:\\Desktop_zm\\data-workflow\\runtime\\state\\wechat\\staging.sqlite"
+      },
+      "name": "L1信号预筛",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [200, 200]
+    },
+    {
+      "parameters": {
+        "command": "cd /d E:\\Desktop_zm\\data-workflow && .venv-data\\Scripts\\python.exe -u adapters\\wechat\\src\\ai_classify.py --staging E:\\Desktop_zm\\data-workflow\\runtime\\state\\wechat\\staging.sqlite --limit 100"
+      },
+      "name": "L2 AI分类",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [400, 200]
+    },
+    {
+      "parameters": {
+        "command": "echo 微信增量已入库: {{ $json.stdout }}"
+      },
+      "name": "记录结果",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [600, 100]
+    }
+  ],
+  "connections": {
+    "定时触发(每5分钟)": {
+      "main": [[{ "node": "采集+入库", "type": "main", "index": 0 }]]
+    },
+    "采集+入库": {
+      "main": [[{ "node": "L1信号预筛", "type": "main", "index": 0 }]]
+    },
+    "L1信号预筛": {
+      "main": [[{ "node": "L2 AI分类", "type": "main", "index": 0 }]]
+    },
+    "L2 AI分类": {
+      "main": [[{ "node": "记录结果", "type": "main", "index": 0 }]]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "_note": "微信采集控制流（n8n 控制面）。密钥文件 all_keys.json 缺失时先跑一次 wcdb-key-tool extract 重新提取（只读，无需重启微信）。"
+}

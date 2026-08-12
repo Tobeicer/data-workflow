@@ -1,0 +1,22 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1041451673601",
+    "sku_name": "64GB",
+    "sku_price": "145",
+    "stock_text": "库存10000",
+    "stock_quantity": 10000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:54:22+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1041451673601",
+    "sku_name": "128GB",
+    "sku_price": "155",
+    "stock_text": "库存8901",
+    "stock_quantity": 8901,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:54:22+08:00"
+  }
+]

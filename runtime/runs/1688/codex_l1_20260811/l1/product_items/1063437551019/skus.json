@@ -1,0 +1,42 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1063437551019",
+    "sku_name": "M15 64G小包装C",
+    "sku_price": "67",
+    "stock_text": "库存815",
+    "stock_quantity": 815,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:52:41+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1063437551019",
+    "sku_name": "M15 64G大包装",
+    "sku_price": "70",
+    "stock_text": "库存990",
+    "stock_quantity": 990,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:52:41+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1063437551019",
+    "sku_name": "M15 128G小包装C",
+    "sku_price": "87",
+    "stock_text": "库存997",
+    "stock_quantity": 997,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:52:41+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1063437551019",
+    "sku_name": "M15 128G标准包装",
+    "sku_price": "88",
+    "stock_text": "库存997",
+    "stock_quantity": 997,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:52:41+08:00"
+  }
+]

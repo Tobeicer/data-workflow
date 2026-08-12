@@ -1,0 +1,42 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1003900833411",
+    "sku_name": "旋转跑马灯",
+    "sku_price": "137862",
+    "stock_text": "库存1111",
+    "stock_quantity": 1111,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:53:25+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1003900833411",
+    "sku_name": "电源开关",
+    "sku_price": "13986",
+    "stock_text": "库存1075",
+    "stock_quantity": 1075,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:53:25+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1003900833411",
+    "sku_name": "电源",
+    "sku_price": "1398.6",
+    "stock_text": "库存1073",
+    "stock_quantity": 1073,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:53:25+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1003900833411",
+    "sku_name": "电源线",
+    "sku_price": "139.86",
+    "stock_text": "库存1913",
+    "stock_quantity": 1913,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:53:25+08:00"
+  }
+]

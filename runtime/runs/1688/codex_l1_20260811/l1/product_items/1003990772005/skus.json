@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1003990772005",
+    "sku_name": "R36HProMAX-64GB",
+    "sku_price": "200",
+    "stock_text": "库存9932",
+    "stock_quantity": 9932,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:10:31+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1003990772005",
+    "sku_name": "R36HProMAX-128GB",
+    "sku_price": "225",
+    "stock_text": "库存9988",
+    "stock_quantity": 9988,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:10:31+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1003990772005",
+    "sku_name": "R36HProMAX-无卡",
+    "sku_price": "180",
+    "stock_text": "库存4324",
+    "stock_quantity": 4324,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:10:31+08:00"
+  }
+]

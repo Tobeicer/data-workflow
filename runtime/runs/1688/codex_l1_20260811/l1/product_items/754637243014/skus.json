@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "754637243014",
+    "sku_name": "超级魔法师",
+    "sku_price": "2222",
+    "stock_text": "库存2489",
+    "stock_quantity": 2489,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:26:09+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "754637243014",
+    "sku_name": "超级马戏团",
+    "sku_price": "2500",
+    "stock_text": "库存1510",
+    "stock_quantity": 1510,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:26:09+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "754637243014",
+    "sku_name": "预付定金",
+    "sku_price": "1000",
+    "stock_text": "库存2499",
+    "stock_quantity": 2499,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:26:09+08:00"
+  }
+]

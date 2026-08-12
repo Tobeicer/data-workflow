@@ -1,0 +1,52 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1008273306665",
+    "sku_name": "1米COB",
+    "sku_price": "3.8",
+    "stock_text": "库存99848",
+    "stock_quantity": 99848,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:09:13+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1008273306665",
+    "sku_name": "2米COB",
+    "sku_price": "5.7",
+    "stock_text": "库存99847",
+    "stock_quantity": 99847,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:09:13+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1008273306665",
+    "sku_name": "3米COB",
+    "sku_price": "8",
+    "stock_text": "库存99969",
+    "stock_quantity": 99969,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:09:13+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1008273306665",
+    "sku_name": "4米COB",
+    "sku_price": "10.8",
+    "stock_text": "库存99999",
+    "stock_quantity": 99999,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:09:13+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1008273306665",
+    "sku_name": "5米COB",
+    "sku_price": "13",
+    "stock_text": "库存99158",
+    "stock_quantity": 99158,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:09:13+08:00"
+  }
+]

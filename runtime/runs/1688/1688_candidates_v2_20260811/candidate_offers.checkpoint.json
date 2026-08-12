@@ -1,0 +1,27 @@
+{
+  "status": "network_error",
+  "retryable": true,
+  "requested_keywords": [
+    "商用打地鼠机",
+    "商用儿童摇摆机",
+    "商用VR游戏设备",
+    "商用自助拍照机",
+    "游乐场组合滑梯",
+    "非标定制游艺设备",
+    "游戏机整机控制套件",
+    "街机游戏机空机箱"
+  ],
+  "completed_keywords": [
+    "商用打地鼠机",
+    "商用儿童摇摆机",
+    "商用VR游戏设备",
+    "商用自助拍照机",
+    "游乐场组合滑梯"
+  ],
+  "current_keyword": "非标定制游艺设备",
+  "message": "TargetClosedError: Page.goto: Target page, context or browser has been closed",
+  "updated_at": "2026-08-11T10:42:54+08:00",
+  "output": "runtime\\runs\\1688\\1688_candidates_v2_20260811\\candidate_offers.csv",
+  "row_count": 113,
+  "success_count": 104
+}

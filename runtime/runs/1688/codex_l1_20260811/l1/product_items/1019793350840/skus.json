@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1019793350840",
+    "sku_name": "插电款",
+    "sku_price": "16.5",
+    "stock_text": "库存999992",
+    "stock_quantity": 999992,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:19:02+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1019793350840",
+    "sku_name": "2500毫安（充电款）",
+    "sku_price": "25",
+    "stock_text": "库存999987",
+    "stock_quantity": 999987,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:19:02+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1019793350840",
+    "sku_name": "5000毫安（充电款）",
+    "sku_price": "30",
+    "stock_text": "库存999997",
+    "stock_quantity": 999997,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:19:02+08:00"
+  }
+]

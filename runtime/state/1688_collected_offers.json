@@ -1,0 +1,4350 @@
+{
+  "version": 1,
+  "updated_at": "2026-08-11T16:09:00+08:00",
+  "offers": {
+    "1011690137966": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-29936524614a96c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1012442844925": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-29936524614a96c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1013874906286": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2220807604451e4811",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1059551588833": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2222172240274fbb15",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "597896650438": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-39074986252a35c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "648503172057": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "lenocrn",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1016658227165": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221509815929554138",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1051596641659": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2222225006390fe901",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "899444506492": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2217607270935cf573",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1015451921081": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-31744799410e38f",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1059684595987": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-31746897730048c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "844193527079": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-40125464058c753",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1006930011665": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-34166711948f9ad",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "627329634454": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-406915100661872",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "679820583064": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2213377209836e28ff",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1059585825919": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222223784262844d86",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "724757221054": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2381872016",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "827001323337": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2215717453598455a0",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "588233251490": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2290776577",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "747643320065": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-288293810077a49",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "747853058921": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-288293810077a49",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1073979788794": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22192318675000a706",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "844468635435": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-40125464058c753",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "996477348740": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-31746897730048c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "600186132074": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2201256452531faba0",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "608649034580": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1926927072",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "645665770328": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1926927072",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1010560824722": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2216813070610008f0",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "989769613739": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1948013319",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "998186289519": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1948013319",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1070816930476": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2218601128217b24ae",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "891583744246": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2213351911342b21c9",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "735352937621": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-40125464058c753",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "858934664784": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22126633999193d618",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "908454703782": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2217632602141d0508",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "973810629628": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221027659845726d5c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1053543131134": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222249346384211173",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1056388537430": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222249346384211173",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1056664467690": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222249346384211173",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1029278418967": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2531387385",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1060504645260": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2218738303846df61d",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1054377938125": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222249346384211173",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1045647642954": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2177667203",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1047316452527": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2177667203",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1064450477501": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222091260471914820",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1008387994598": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222048395412214928",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "659669583118": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2469105514",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "707966205903": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "lfzizhen",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1031050536336": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2221417546083ac83b",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1031297964711": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2221417546083ac83b",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "660275883544": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2211006413695f303d",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "927515066772": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221976338390065a75",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "951901739378": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-220069971151328cc4",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "587143097356": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-40125464058c753",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1059537451025": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221978855541698932",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062006061147": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22223563747025f1ad",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062771914564": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221978855541698932",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "620322231430": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2276714793",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "678692297568": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221435392109424199",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "890680501490": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22139874690826f6cb",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062589105325": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2221441584175709a9",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "982985264369": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221792437557411d17",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "660271207897": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-288339943103cbc",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "886323372706": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-27516474241969c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "887706680752": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-27516474241969c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1059840481965": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22222129050547c385",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1059845833443": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22222129050547c385",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "613674551469": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-283710504384022",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "598017282532": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "yjyiqun",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "736395913380": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "happysnow2002",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "857621320990": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "huaxiatoys",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1050371339972": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222131148347976321",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "572091199562": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-39351687589655b",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "582295273509": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "daierdz",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1058901693541": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2222410754544585ea",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1064419798677": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222088267150356ba8",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1066316088346": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22155268730432dece",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "587113880416": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-40125464058c753",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1058011396808": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "jfs0222",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1061899322784": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221252242191023c40",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "638393877693": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-4058817618fef97",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "561145749520": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "johnsonjiaowang",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "601306784358": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1710443001",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "726717580519": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2214181634537a8f93",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1066574764122": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22191180003640a5c6",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1073644688618": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1879074531",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "520419858352": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "cndf",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "39592467134": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1777788662",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "548378888171": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "boshunll",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "561861965385": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "boshunll",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1010131712096": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22161330323033d59f",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "630341300200": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2901993709dbc96",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "702235484550": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22153970968262954e",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "563986497955": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-286605557151eeb",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "852665039032": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2529936136",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "920512471769": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "hopestar168",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "531657696132": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2347071424",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "553625131246": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2743774387c0248",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "802535888684": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2424648136",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1013215111197": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2209786143989a8a79",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1026635554952": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2209786143989a8a79",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062190864569": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2209786143989a8a79",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "642969555072": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "shengyikai1688",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "677982846460": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "xiaofeiaces",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "728086288832": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "nangudi",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1063559072756": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222253869204817b74",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1063841147826": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2557962670mwn2b",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1065086471192": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2220069461572fb60e",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062340156884": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22148167278238ace1",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1066870724890": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22225317172035015e",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1069814497143": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221756765487306b59",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "680409446519": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221422173982958960",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "685154394884": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2207569416829987d4",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "785762241241": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-3584247727adaae",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062680555125": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222030221012800b91",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "40177002733": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2151237687",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "609817205839": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1777788662",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1060445371897": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2221491593961931b2",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1069696503869": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2215595039913c53f9",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1064853162666": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2221441584175709a9",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1012857824926": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22182910566667af83",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1043163509109": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2222192938191f6341",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062708653658": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22224259886553d406",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "631224331323": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-3966704679c56e5",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "659741081654": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22067840862046fd17",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "719994451956": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "baoruidianqi",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1060214547212": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22202949194084f53b",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062007565451": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22202949194084f53b",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "814661098026": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2216512697425fb67a",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "693301291137": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-33166852112114b",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "711210056349": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22128510193003aff8",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "776238283431": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "tzs518518",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1016516818618": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2211826371992bfb3c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1046010146930": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221426388074232002",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1056068911655": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221717942493860a46",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "592082115602": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "hfjnh888",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "746350523347": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22167335013255126d",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "770167504726": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-3158523919c39ef",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1054405370073": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-221969913830956fa9",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1055653530539": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2212709202843f4e31",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "985966320812": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22082279278603b1df",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1057972617141": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222245877343298afe",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062828165746": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222214482822955c1d",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "689910205583": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2200818425220cd57e",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1062823970706": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22129267088144abea",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "545665043684": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "dpzygd",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "664568165549": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-327662698900d4c",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "945580643265": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "liangguangyoule",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "992422983606": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2218958138428d335f",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1059173119347": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22224573138980f750",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "658772036970": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-3001298579e48bf",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "682822525794": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "huaxiatoys",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "737673213433": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1891171479",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "741199711345": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "hongbaohossoni",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "743036675578": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2216758652466e8ed7",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1022577571415": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2213054447969660ee",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "566676347707": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2773986481c48c7",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "581001200984": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-39370429127f883",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "641294206631": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-1777788662",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1045882783513": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-222238309836751217",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1057854850981": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2206709690680c3c72",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1061949502806": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2214761441546f0633",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1063244005883": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2222557067953694ae",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1040650600313": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2222109731908bdf63",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1046513927210": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22221944109372e1be",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1051337825592": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-2201315730134b0297",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "937535213471": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "validation_category": "",
+      "member_id": "b2b-22161330323033d59f",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "1002197095533": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012686321135": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1026715830037": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1028810477010": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1040584156105": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1045182495990": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1050719506343": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1052594868089": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1054599857946": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1058214708698": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000964858188": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1017717870372": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056029773885": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056798093851": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1064558831590": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1064858978574": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068458241452": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070967081337": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "642999087992": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "674194646861": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1019208967448": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037214684049": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041371194078": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055816337924": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "740675313771": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "754637243014": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "757070533194": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "828691299716": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "840016656576": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "944766520526": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1001057022962": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1016598039888": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037445718749": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062341664386": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063692257955": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1064393436337": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066147881213": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067092852921": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067570207670": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068128968220": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1002716913495": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1006191733082": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1044417995171": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061152598985": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067481766759": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068503944258": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068505585527": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069455314490": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070795509384": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1072181774186": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041557075781": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1071264449285": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "546733762072": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "567715968270": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "660798902159": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "688319767946": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "695451951979": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "737247452049": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "741953060655": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "765224657517": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1018045996178": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1050629292002": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055958323795": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "574239634026": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "641729257250": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "672054812133": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "672750938128": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "678664657954": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "687941208759": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "693858609584": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1002113581081": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1015004226799": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1034218013086": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1046575855313": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1048965086704": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1054754060143": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061843330808": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1073649880814": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "694442736045": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "694598518676": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000001904723": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1027697314463": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037460340366": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1051481927832": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1058534814481": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062899353348": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "520611323705": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "607459045811": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "644833078598": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "653666468313": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1008424583088": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1051339001027": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1051857129660": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1052753792873": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1072634093720": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1073017845188": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "558645212830": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "567714668537": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "618978870955": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "771073622930": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1033289541926": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049816370618": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "670844312615": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "694391469692": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "862432475913": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "951915584019": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "957749060955": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "988445923468": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "995247286079": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1027700525258": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000249801876": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1002681729303": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1015642921472": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1016381032903": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1016410136136": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1052130385721": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055269468320": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1059061398875": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1059838834911": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066204178567": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037833339258": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1048641351356": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056771500086": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057908582309": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062223914319": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062706923174": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1065657600219": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068616705472": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069800194237": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070520519218": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012047008832": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1029877722487": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1044397873469": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1048665846031": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049369354186": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049747481420": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056427377488": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057778812373": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1060831099829": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061819222445": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "A14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012074202882": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1014483792148": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "566341482813": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "579379642316": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "596283383471": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "602225197436": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "615453024247": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "678517678899": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "729554107445": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "737771957888": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1008366117396": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1025763111116": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1030164944499": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1032150160359": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1035690649852": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049896159888": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049902105355": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053850494536": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1054539233539": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055147199795": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1002623429033": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1003873332656": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1009334453594": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1011181051891": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012144034514": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012272413332": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012905533132": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1013028713957": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1013048338362": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1013771772287": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1014220906956": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1040269808730": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049692621923": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067548492441": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "591043433504": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "795952677968": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "812220670380": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "818768396445": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "828944568481": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "829003210057": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1006978094380": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1008441744464": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1008973181465": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012033168683": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1044648735443": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1045159298270": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1045728252524": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1046558535045": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1046780443650": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1052959837395": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1006905466961": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037369746738": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063587736087": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070910079229": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1074266244326": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "612579417759": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "612580677823": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "615759097294": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "623337931806": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "634851708089": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055817774025": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056770638280": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057141551285": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061565334989": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062588301385": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063437551019": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063530384041": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1064723730340": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066389137060": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067170103553": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1001885667782": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1003900833411": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1005001217704": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1010090771748": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1019429291974": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1020084106763": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1032463945043": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1032903685620": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1035598261637": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041451673601": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1002889031828": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1027797191851": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1039054295759": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1044279458358": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053410531670": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057993903521": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1060027489526": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1064454201282": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1065208644363": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "592636289647": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1011802742138": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1027793379563": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1040548044927": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1042138501615": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061758169322": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062684976456": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "585677665192": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "590379010097": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "610197166811": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "628909452423": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "B10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1028805676338": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068306163658": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070105568471": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "37649028918": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "38886086754": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "40352136465": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "40427746964": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "41436578688": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "557722257402": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "566364514507": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1058256474537": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1059218539504": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1059709330695": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1060316687812": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1060816298965": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061518530771": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061542809920": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061946416453": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062198963151": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063890751229": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1016610566260": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041460110260": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055217394020": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066681795201": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067501726056": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069652407674": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1072859169102": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "597560507940": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "724457869753": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "837986790400": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000224319293": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037210863899": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056346673158": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1242877349": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "537848682034": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "540241981521": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "545860214661": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "607839707481": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "638734582260": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "641842388169": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1054648871430": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061763021471": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1064233171636": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067290637405": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067291797399": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067714770173": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068404475571": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069656134902": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070013374575": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1071406679624": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1009908935366": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1019159471073": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1038056233386": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1042564422247": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049171900039": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1052111601977": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055119775731": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055132697268": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057555539360": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1059821841663": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000034864878": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1044013887933": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1065407359746": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068316158013": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069557285283": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "40404570361": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "522181959195": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "524547794044": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "545091652916": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "559773706529": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061027965838": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070819832947": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "44909330027": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "45790348637": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "579832031787": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "588557570480": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "639458637323": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "650603605464": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "702354732736": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "703078358674": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C08",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1018144197598": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1023855671420": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1026209896385": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037053119344": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061966250190": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1065925597765": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1065941373851": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "566397329982": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "566998415027": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "606630716421": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C09",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1032846993176": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062215344304": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066195876264": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068408162448": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "539366804041": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "563897128000": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "571974806735": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "577581357797": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "578761240989": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "624751950993": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C10",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1008273306665": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1020121794516": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1029813646263": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1029867217680": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1036951931801": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037202781254": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1038475476984": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041533619540": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041543567219": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041584647664": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C11",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1001074182047": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1003990772005": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1005421841733": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1006427813835": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1027806843154": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037937674885": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1043643853695": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057770396339": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063723453254": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069306283836": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C12",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012049681667": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1016782554529": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1021545972914": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1025609666300": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1026524661331": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1028032668858": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1028142114113": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1029850566740": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1038519624165": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049693259133": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C13",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1010176453439": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1031675719296": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037560423169": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1046604690150": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056561502615": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069172389966": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1072973444789": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "558110798699": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "613942893747": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "626504010028": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C14",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1009136528704": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041186902536": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1044567992061": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1052572831899": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057146451779": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057155875231": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063279305741": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "549042533112": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "597708329028": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "600556038810": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C15",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1024221275431": {
+      "collected_at": "2026-08-11T13:55:05+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1045200111361": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056300090929": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1065501483751": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066366855568": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068285415021": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069457409304": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1069484382411": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "40759122156": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "42664703244": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C16",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1008180612668": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1046196242557": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1054377771207": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056887961719": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062703001126": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063188329136": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066982171453": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1068023258882": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070541698676": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1072571012834": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C17",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1012917470913": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1014679475804": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1029614203375": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1031924157027": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1060203759745": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066469582590": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1067489561477": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070392836734": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1071692270862": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "686819121641": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C18",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1011811338085": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1019793350840": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1038838390791": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1039782287918": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049641377425": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1058287150619": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1059504657895": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062211398371": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1070712493311": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1071980880686": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "C19",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1031179855385": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1052489548910": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "41465437472": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "545669575640": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "554097059409": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "579089733300": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "590282232357": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "644720807025": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "660880990991": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "666850158329": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1015210631835": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1032514282069": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1033679808711": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1036697771625": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1039103679501": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1055155148595": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056107790216": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061072622463": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1064544884955": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1066183260143": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1028242577312": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1029249900274": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1042062882980": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1050518692442": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1050532080590": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1051688040468": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057557533562": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1062612921951": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063184768345": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1063855360445": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1026187196605": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1031989306732": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1036629073018": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1036629073040": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037507420465": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1038553998708": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1041237027651": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1042979205248": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1049715319071": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1050136379155": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1051369701739": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1057284557398": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "547799817318": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "589973055356": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "593994772757": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "605517075291": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "605526391859": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "649267601123": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "652361853482": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "670317468648": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D05",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1005469924476": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1006746943780": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1029188451364": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1043011868215": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1044154316106": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053006427076": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053090823570": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053095939580": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053810386918": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053866074752": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D06",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000056665687": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000640460891": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000950451633": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1002501568058": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1003079840225": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1008808210543": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1015069197260": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1026200103946": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1028084376443": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1028917020821": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "D07",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000450707099": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1005536648270": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1033186955073": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1050253749204": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1052565814349": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053863252080": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1058570144675": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1058700669770": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1058886332241": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1061415004931": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E01",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1060861139435": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1060872111115": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1064417289834": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "683745910132": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "706144172357": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "711384451547": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "713895314538": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "768517734590": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "855391947202": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "895080924672": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E02",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1000755814042": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1001923926927": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1014032000823": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1033158283899": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1037960814781": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1046627653080": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1051431369697": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053322449433": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1058602920332": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1059393091949": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E03",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1002749953133": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1008534171843": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1019631708917": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1021303360979": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1022630145538": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1024999473322": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1026728676789": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1032541264976": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1053052644532": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    },
+    "1056827823875": {
+      "collected_at": "2026-08-11T13:55:06+08:00",
+      "validation_category": "E04",
+      "member_id": "",
+      "run_id": "codex_detail_20260811"
+    }
+  },
+  "companies": {
+    "b2b-29936524614a96c": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-2220807604451e4811": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-2222172240274fbb15": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-39074986252a35c": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "lenocrn": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-221509815929554138": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-2222225006390fe901": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-2217607270935cf573": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-31744799410e38f": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-31746897730048c": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-40125464058c753": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-34166711948f9ad": {
+      "collected_at": "2026-08-11T10:24:18+08:00",
+      "run_id": "1688_validation_20260810_150101"
+    },
+    "b2b-1644861541": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1767618369": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1777788662": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1834269999": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1905762524": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1926927072": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1939756562": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1948013319": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1992935693": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1995753605": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-1999106698": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-2024071104": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    },
+    "b2b-2042262678": {
+      "collected_at": "2026-08-11T16:09:00+08:00",
+      "run_id": "codex_company_20260811"
+    }
+  }
+}

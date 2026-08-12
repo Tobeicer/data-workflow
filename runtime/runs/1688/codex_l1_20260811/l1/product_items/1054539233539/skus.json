@@ -1,0 +1,42 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1054539233539",
+    "sku_name": "M15版本1（不含内存卡）",
+    "sku_price": "68",
+    "stock_text": "库存100000",
+    "stock_quantity": 100000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:45:43+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1054539233539",
+    "sku_name": "M15版本2（不含内存卡）",
+    "sku_price": "70",
+    "stock_text": "库存99998",
+    "stock_quantity": 99998,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:45:43+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1054539233539",
+    "sku_name": "M15版本3（不含内存卡）",
+    "sku_price": "75",
+    "stock_text": "库存100000",
+    "stock_quantity": 100000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:45:43+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1054539233539",
+    "sku_name": "M15白色手柄",
+    "sku_price": "46",
+    "stock_text": "库存99996",
+    "stock_quantity": 99996,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:45:43+08:00"
+  }
+]

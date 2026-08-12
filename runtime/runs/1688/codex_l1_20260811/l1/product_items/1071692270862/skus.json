@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1071692270862",
+    "sku_name": "升级款-豌豆单人对战台（20弹珠）",
+    "sku_price": "18.5",
+    "stock_text": "库存10091",
+    "stock_quantity": 10091,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:18:40+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1071692270862",
+    "sku_name": "升级款-豌豆单人对战台（40弹珠）",
+    "sku_price": "23.12",
+    "stock_text": "库存10982",
+    "stock_quantity": 10982,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:18:40+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1071692270862",
+    "sku_name": "加硬-豌豆双人对战台（60弹珠）",
+    "sku_price": "37.9",
+    "stock_text": "库存10981",
+    "stock_quantity": 10981,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:18:40+08:00"
+  }
+]

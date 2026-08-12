@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1049747481420",
+    "sku_name": "来图定制定金",
+    "sku_price": "500",
+    "stock_text": "库存10",
+    "stock_quantity": 10,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:42:28+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1049747481420",
+    "sku_name": "设计规划定金",
+    "sku_price": "1000",
+    "stock_text": "库存10",
+    "stock_quantity": 10,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:42:28+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1049747481420",
+    "sku_name": "整园规划定金",
+    "sku_price": "1500",
+    "stock_text": "库存10",
+    "stock_quantity": 10,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:42:28+08:00"
+  }
+]

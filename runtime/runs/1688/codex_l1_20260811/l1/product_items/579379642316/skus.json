@@ -1,0 +1,152 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐A1--19寸/酷睿i5-2520/4G/128G固态",
+    "sku_price": "798",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐A2--19寸/酷睿i5-3320/8G/128G固态",
+    "sku_price": "928",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T1--23.8寸/酷睿i5-2520/8G/128G固态",
+    "sku_price": "1208",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T2--23.8寸/酷睿i5-3320/8G/256G固态",
+    "sku_price": "1358",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T3--23.8寸/酷睿i7-3610QM/8G/256G固态",
+    "sku_price": "1478",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T4--23.8寸/酷睿i5-4570/8G/256G固态",
+    "sku_price": "1498",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T5--23.8寸/酷睿i7-4790/16G/256G固态",
+    "sku_price": "1818",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T6--23.8寸/酷睿i5-6400/16G/256G固态",
+    "sku_price": "1878",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T7--23.8寸/酷睿i7-7700HQ/16G/256G固态",
+    "sku_price": "2038",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T8--23.8寸/酷睿i7-8750H/16G/256G固态",
+    "sku_price": "2218",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T9--23.8寸/酷睿i5-12450H/16G/512G固态",
+    "sku_price": "3118",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T10--23.8寸/酷睿i5-11400/16G/512G固态",
+    "sku_price": "3258",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T11--23.8寸/酷睿i5-14450HX/16G/512G固态",
+    "sku_price": "3308",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐T12--23.8寸/酷睿i7-13650HX/16G/1TB固态",
+    "sku_price": "3888",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "579379642316",
+    "sku_name": "套餐Q1--同行调货屏套件",
+    "sku_price": "398",
+    "stock_text": "库存50",
+    "stock_quantity": 50,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:43:33+08:00"
+  }
+]

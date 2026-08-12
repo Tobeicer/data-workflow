@@ -1,0 +1,22 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1068128968220",
+    "sku_name": "眼疾手快",
+    "sku_price": "1750",
+    "stock_text": "库存1000",
+    "stock_quantity": 1000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:28:13+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1068128968220",
+    "sku_name": "眼疾手快专用投币器",
+    "sku_price": "30",
+    "stock_text": "库存981",
+    "stock_quantity": 981,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:28:13+08:00"
+  }
+]

@@ -1,0 +1,42 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1055217394020",
+    "sku_name": "预付货款",
+    "sku_price": "450",
+    "stock_text": "库存999",
+    "stock_quantity": 999,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:59:39+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1055217394020",
+    "sku_name": "26寸一人位（预付货款）",
+    "sku_price": "600",
+    "stock_text": "库存1000",
+    "stock_quantity": 1000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:59:39+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1055217394020",
+    "sku_name": "32寸一人位（预付货款）",
+    "sku_price": "700",
+    "stock_text": "库存1000",
+    "stock_quantity": 1000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:59:39+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1055217394020",
+    "sku_name": "32寸两人位（预付货款）",
+    "sku_price": "800",
+    "stock_text": "库存1000",
+    "stock_quantity": 1000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:59:39+08:00"
+  }
+]

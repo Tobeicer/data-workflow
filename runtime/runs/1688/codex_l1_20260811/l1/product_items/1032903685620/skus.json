@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1032903685620",
+    "sku_name": "X10PRO128G（白色手柄）",
+    "sku_price": "165",
+    "stock_text": "库存5000",
+    "stock_quantity": 5000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:54:08+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1032903685620",
+    "sku_name": "X10PRO128G（白橙手柄）",
+    "sku_price": "170",
+    "stock_text": "库存5000",
+    "stock_quantity": 5000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:54:08+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1032903685620",
+    "sku_name": "X10PRO128G（透蓝手柄）",
+    "sku_price": "175",
+    "stock_text": "库存5000",
+    "stock_quantity": 5000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:54:08+08:00"
+  }
+]

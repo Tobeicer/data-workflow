@@ -1,0 +1,22 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1032150160359",
+    "sku_name": "T10-黑色-单机箱",
+    "sku_price": "67",
+    "stock_text": "库存48",
+    "stock_quantity": 48,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:44:55+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1032150160359",
+    "sku_name": "T10-白色-单机箱",
+    "sku_price": "77",
+    "stock_text": "库存296",
+    "stock_quantity": 296,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:44:55+08:00"
+  }
+]

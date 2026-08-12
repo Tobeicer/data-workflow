@@ -1,0 +1,42 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1061072622463",
+    "sku_name": "32透明扭蛋随机款",
+    "sku_price": "0.28",
+    "stock_text": "库存99999950",
+    "stock_quantity": 99999950,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:22:24+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1061072622463",
+    "sku_name": "32（卡通微瑕疵）",
+    "sku_price": "0.23",
+    "stock_text": "库存99989000",
+    "stock_quantity": 99989000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:22:24+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1061072622463",
+    "sku_name": "胶囊扭蛋随机",
+    "sku_price": "0.3",
+    "stock_text": "库存100000000",
+    "stock_quantity": 100000000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:22:24+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1061072622463",
+    "sku_name": "胶囊（卡通微瑕疵）",
+    "sku_price": "0.25",
+    "stock_text": "库存100000000",
+    "stock_quantity": 100000000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:22:24+08:00"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "40759122156",
+    "sku_name": "L16",
+    "sku_price": "5.5",
+    "stock_text": "库存11425",
+    "stock_quantity": 11425,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:16:17+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "40759122156",
+    "sku_name": "SK20转舌锁16mm",
+    "sku_price": "1.85",
+    "stock_text": "库存10000",
+    "stock_quantity": 10000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:16:17+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "40759122156",
+    "sku_name": "转舌锁锁片",
+    "sku_price": "1.05",
+    "stock_text": "库存100050",
+    "stock_quantity": 100050,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:16:17+08:00"
+  }
+]

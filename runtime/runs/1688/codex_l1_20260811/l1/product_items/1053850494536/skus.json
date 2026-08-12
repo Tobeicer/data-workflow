@@ -1,0 +1,22 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1053850494536",
+    "sku_name": "X2版本2（不含内存卡）",
+    "sku_price": "85",
+    "stock_text": "库存99995",
+    "stock_quantity": 99995,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:45:35+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1053850494536",
+    "sku_name": "X2 版本3（不含内存卡）",
+    "sku_price": "95",
+    "stock_text": "库存100000",
+    "stock_quantity": 100000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:45:35+08:00"
+  }
+]

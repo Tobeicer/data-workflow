@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1036951931801",
+    "sku_name": "2.4G蓝牙-美规",
+    "sku_price": "36.25",
+    "stock_text": "库存398",
+    "stock_quantity": 398,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:09:41+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1036951931801",
+    "sku_name": "2.4G蓝牙-欧规",
+    "sku_price": "36.25",
+    "stock_text": "库存685",
+    "stock_quantity": 685,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:09:41+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1036951931801",
+    "sku_name": "2.4G蓝牙-英规",
+    "sku_price": "38.25",
+    "stock_text": "库存1000",
+    "stock_quantity": 1000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:09:41+08:00"
+  }
+]

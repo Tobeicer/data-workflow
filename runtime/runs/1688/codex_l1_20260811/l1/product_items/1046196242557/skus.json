@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1046196242557",
+    "sku_name": "64G英文版",
+    "sku_price": "220",
+    "stock_text": "库存9878",
+    "stock_quantity": 9878,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:16:38+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1046196242557",
+    "sku_name": "128G英文版",
+    "sku_price": "245",
+    "stock_text": "库存9874",
+    "stock_quantity": 9874,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:16:38+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1046196242557",
+    "sku_name": "128G中文版",
+    "sku_price": "245",
+    "stock_text": "库存9892",
+    "stock_quantity": 9892,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:16:38+08:00"
+  }
+]

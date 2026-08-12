@@ -1,0 +1,42 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "694442736045",
+    "sku_name": "液晶版篮球机",
+    "sku_price": "9800",
+    "stock_text": "库存98",
+    "stock_quantity": 98,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:33:46+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "694442736045",
+    "sku_name": "普通篮球机",
+    "sku_price": "3000",
+    "stock_text": "库存100",
+    "stock_quantity": 100,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:33:46+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "694442736045",
+    "sku_name": "儿童篮球机",
+    "sku_price": "3500",
+    "stock_text": "库存100",
+    "stock_quantity": 100,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:33:46+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "694442736045",
+    "sku_name": "预付定金",
+    "sku_price": "1800",
+    "stock_text": "库存1000",
+    "stock_quantity": 1000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:33:46+08:00"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1071406679624",
+    "sku_name": "series S电源",
+    "sku_price": "80",
+    "stock_text": "库存499",
+    "stock_quantity": 499,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:02:59+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1071406679624",
+    "sku_name": "ONE X电源",
+    "sku_price": "125",
+    "stock_text": "库存500",
+    "stock_quantity": 500,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:02:59+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1071406679624",
+    "sku_name": "ONE S电源",
+    "sku_price": "60",
+    "stock_text": "库存500",
+    "stock_quantity": 500,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:02:59+08:00"
+  }
+]

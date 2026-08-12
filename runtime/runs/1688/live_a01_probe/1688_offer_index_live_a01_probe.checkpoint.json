@@ -1,0 +1,16 @@
+{
+  "status": "completed",
+  "retryable": false,
+  "requested_keywords": [
+    "商用娃娃机"
+  ],
+  "completed_keywords": [
+    "商用娃娃机"
+  ],
+  "current_keyword": "商用娃娃机",
+  "message": "",
+  "updated_at": "2026-07-15T19:13:16+08:00",
+  "output": "E:\\Desktop_zm\\data-workflow\\data-workflow\\runtime\\runs\\1688\\live_a01_probe\\1688_offer_index_live_a01_probe.csv",
+  "row_count": 2,
+  "success_count": 2
+}

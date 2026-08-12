@@ -1,0 +1,22 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "729554107445",
+    "sku_name": "奶白",
+    "sku_price": "0.7",
+    "stock_text": "库存2000",
+    "stock_quantity": 2000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:44:14+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "729554107445",
+    "sku_name": "定制",
+    "sku_price": "0.6",
+    "stock_text": "库存9878",
+    "stock_quantity": 9878,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:44:14+08:00"
+  }
+]

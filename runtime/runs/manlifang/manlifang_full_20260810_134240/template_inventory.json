@@ -1,0 +1,58 @@
+[
+  {
+    "endpoint": "dynamic_detail",
+    "flow_id": "0da639d5-76ce-4f93-a770-c6c5214c9f9e",
+    "method": "POST",
+    "path": "/cc/u0ml1ugn3ogi/f8vh9zvib8/mshop/MshopProduct/queryMshopProductDetailDynamicArchives?time=1786340956027&user_req_id=mobile_wsc_000000000_7170-f419-c1ce-ca15-92c4",
+    "status_code": 200,
+    "response_timestamp_end": 1786340924.6071987
+  },
+  {
+    "endpoint": "products_by_catalog",
+    "flow_id": "3cdc562b-3448-40ed-95f4-4554d986af91",
+    "method": "POST",
+    "path": "/cc/u0ml1ugn3ogi/f8vh9zvib8/mshop/MshopProduct/queryProductByCatalogId?time=1786340956487&user_req_id=mobile_wsc_000000000_cf9a-b848-bf68-7e79-e1a4",
+    "status_code": 200,
+    "response_timestamp_end": 1786340925.093434
+  },
+  {
+    "endpoint": "query_all",
+    "flow_id": "1ddff180-ec6d-4f07-a910-06d69bedc6fd",
+    "method": "GET",
+    "path": "/cc/u0ml1ugn3ogi/f8vh9zvib8/product/ProductCatalog/queryAll?time=1786340933385&user_req_id=mobile_wsc_000000000_c76e-f75b-f602-e0d7-3de0",
+    "status_code": 200,
+    "response_timestamp_end": 1786340901.7451663
+  },
+  {
+    "endpoint": "query_info_list",
+    "flow_id": "4578676a-e388-4734-883f-f057dd8cfa7c",
+    "method": "POST",
+    "path": "/cc/u0ml1ugn3ogi/f8vh9zvib8/mshop/MshopProduct/queryInfoList?time=1786340950076&user_req_id=mobile_wsc_000000000_daf0-0140-9739-a585-7c59",
+    "status_code": 200,
+    "response_timestamp_end": 1786340918.6889532
+  },
+  {
+    "endpoint": "spu_info",
+    "flow_id": "6dd0dd36-e264-42e4-b0c9-b1c3d479350b",
+    "method": "POST",
+    "path": "/cc/u0ml1ugn3ogi/f8vh9zvib8/mshop/MshopProduct/queryProductSpuInfoOptimize?time=1786340951174&user_req_id=mobile_wsc_000000000_b21b-141d-6fe6-e027-4a54",
+    "status_code": 200,
+    "response_timestamp_end": 1786340919.5923305
+  },
+  {
+    "endpoint": "static_detail",
+    "flow_id": "98746297-811a-4e8a-9d2f-36470647e39b",
+    "method": "POST",
+    "path": "/cc/u0ml1ugn3ogi/f8vh9zvib8/mshop/MshopProduct/queryMshopProductDetailStaticArchives?time=1786340955713&user_req_id=mobile_wsc_000000000_e4f4-088e-146b-d722-a126",
+    "status_code": 200,
+    "response_timestamp_end": 1786340924.0732462
+  },
+  {
+    "endpoint": "sub_level",
+    "flow_id": "d1d1a440-b534-4a5e-a059-3ab3c35167aa",
+    "method": "GET",
+    "path": "/cc/u0ml1ugn3ogi/f8vh9zvib8/product/ProductCatalog/subLevel/3349533965684911?time=1786340793261&user_req_id=mobile_wsc_000000000_f06d-91ef-0cad-61c3-7531",
+    "status_code": 200,
+    "response_timestamp_end": 1786340761.570063
+  }
+]

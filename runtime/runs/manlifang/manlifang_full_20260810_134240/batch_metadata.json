@@ -1,0 +1,13 @@
+{
+  "batch_id": "manlifang_full_20260810_134240",
+  "batch_dir": "E:\\Desktop_zm\\data-workflow\\runtime\\runs\\manlifang\\manlifang_full_20260810_134240",
+  "source": "Manlifang anonymous public H5 API via local mitmweb replay",
+  "collection_mode": "fresh_live_category_tree",
+  "uses_legacy_3128_csv_as_input": false,
+  "mitmweb_url": "http://127.0.0.1:8081",
+  "page_size": 20,
+  "spu_batch_size": 20,
+  "detail_workers": 4,
+  "delay_seconds": 0.25,
+  "created_at": "2026-08-10T13:49:59.721+08:00"
+}

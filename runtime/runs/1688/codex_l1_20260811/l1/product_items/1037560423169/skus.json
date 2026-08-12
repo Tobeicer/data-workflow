@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1037560423169",
+    "sku_name": "黑色",
+    "sku_price": "165",
+    "stock_text": "库存9977",
+    "stock_quantity": 9977,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:13:01+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1037560423169",
+    "sku_name": "白色",
+    "sku_price": "165",
+    "stock_text": "库存9984",
+    "stock_quantity": 9984,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:13:01+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1037560423169",
+    "sku_name": "灰色",
+    "sku_price": "165",
+    "stock_text": "库存10000",
+    "stock_quantity": 10000,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:13:01+08:00"
+  }
+]

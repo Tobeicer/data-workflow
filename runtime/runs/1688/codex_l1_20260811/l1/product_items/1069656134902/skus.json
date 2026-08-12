@@ -1,0 +1,22 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1069656134902",
+    "sku_name": "开关板不带线",
+    "sku_price": "9.8",
+    "stock_text": "库存55656",
+    "stock_quantity": 55656,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:02:45+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1069656134902",
+    "sku_name": "开关板带线",
+    "sku_price": "5.5",
+    "stock_text": "库存959656",
+    "stock_quantity": 959656,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:02:45+08:00"
+  }
+]

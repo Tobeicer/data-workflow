@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1038553998708",
+    "sku_name": "230克",
+    "sku_price": "3.25",
+    "stock_text": "库存9070",
+    "stock_quantity": 9070,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:24:32+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1038553998708",
+    "sku_name": "200克",
+    "sku_price": "2.89",
+    "stock_text": "库存8749",
+    "stock_quantity": 8749,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:24:32+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1038553998708",
+    "sku_name": "180克",
+    "sku_price": "2.65",
+    "stock_text": "库存2861",
+    "stock_quantity": 2861,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:24:32+08:00"
+  }
+]

@@ -1,0 +1,32 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "591043433504",
+    "sku_name": "投币饮料机 103g",
+    "sku_price": "7.2",
+    "stock_text": "库存212886",
+    "stock_quantity": 212886,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:47:54+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "591043433504",
+    "sku_name": "拉杆摇奖机 117g",
+    "sku_price": "7.2",
+    "stock_text": "库存334485",
+    "stock_quantity": 334485,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:47:54+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "591043433504",
+    "sku_name": "手动滚动机 89g",
+    "sku_price": "7.2",
+    "stock_text": "库存117138",
+    "stock_quantity": 117138,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T19:47:54+08:00"
+  }
+]

@@ -1,0 +1,52 @@
+[
+  {
+    "source_platform": "1688",
+    "offer_id": "1000640460891",
+    "sku_name": "滚刷1个（不含手柄）",
+    "sku_price": "9",
+    "stock_text": "库存11507",
+    "stock_quantity": 11507,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:27:46+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1000640460891",
+    "sku_name": "滚刷1个（含手柄）",
+    "sku_price": "12.5",
+    "stock_text": "库存11512",
+    "stock_quantity": 11512,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:27:46+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1000640460891",
+    "sku_name": "海帕1个",
+    "sku_price": "3.5",
+    "stock_text": "库存11494",
+    "stock_quantity": 11494,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:27:46+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1000640460891",
+    "sku_name": "清洁液一瓶（500毫升）",
+    "sku_price": "3.8",
+    "stock_text": "库存11509",
+    "stock_quantity": 11509,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:27:46+08:00"
+  },
+  {
+    "source_platform": "1688",
+    "offer_id": "1000640460891",
+    "sku_name": "抑菌清洁液一瓶（500毫升）",
+    "sku_price": "4.8",
+    "stock_text": "库存11514",
+    "stock_quantity": 11514,
+    "sku_image_url": "",
+    "collected_at": "2026-08-11T20:27:46+08:00"
+  }
+]

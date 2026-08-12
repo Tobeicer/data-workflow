@@ -24,10 +24,10 @@ sys.path.insert(0, str(SRC_DIR))
 import build_keyword_library as b  # noqa: E402
 
 
-COMMITTED_FILES = [
-    REPO_ROOT / "adapters" / "1688" / "config" / "keywords.json",
-    REPO_ROOT / "deliveries" / "keywords" / "keywords_all_platforms.json",
-]
+TRACKED_CONFIG = REPO_ROOT / "adapters" / "1688" / "config" / "keywords.json"
+DELIVERED_LIBRARY = (
+    REPO_ROOT / "deliveries" / "keywords" / "keywords_all_platforms.json"
+)
 
 
 def _strip_generated_at(data: dict) -> dict:
@@ -37,7 +37,12 @@ def _strip_generated_at(data: dict) -> dict:
 
 
 def test_keyword_library_matches_taxonomy() -> None:
-    """按当前分类清单重新生成，产物必须与仓库内提交文件一致。"""
+    """按当前分类清单重新生成，仓库内已跟踪产物必须一致。
+
+    adapters/1688/config/keywords.json 为跟踪的采集入口，必须与重新生成一致；
+    deliveries/keywords/* 是可再生的交付产物（不进 Git），存在时同样校验，
+    缺失时提示重新生成命令，不视为失败。
+    """
     text = b.DEFAULT_TAXONOMY.read_text(encoding="utf-8")
     version_match = b.TAXONOMY_VERSION_RE.search(text)
     assert version_match, "分类清单缺少 版本：Vx.y 头部"
@@ -54,8 +59,12 @@ def test_keyword_library_matches_taxonomy() -> None:
     assert b.validate_config(fresh, require_active=False) == []
     fresh = _strip_generated_at(fresh)
 
-    for path in COMMITTED_FILES:
-        assert path.exists(), f"关键词产物缺失: {path}"
+    for path in (TRACKED_CONFIG, DELIVERED_LIBRARY):
+        if not path.exists():
+            if path == TRACKED_CONFIG:
+                assert False, f"跟踪的关键词产物缺失: {path}"
+            print(f"[skip] 交付产物不在 Git 中（可重新生成）: {path}")
+            continue
         committed = json.loads(path.read_text(encoding="utf-8"))
         assert committed.get("taxonomy_version"), f"{path.name} 缺少 taxonomy_version"
         assert committed.get("source_sha256"), f"{path.name} 缺少 source_sha256"

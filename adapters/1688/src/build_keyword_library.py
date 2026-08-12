@@ -18,9 +18,11 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import re
 import sys
+from datetime import datetime, timezone
 from pathlib import Path
 
 
@@ -66,6 +68,8 @@ APPENDIX_B_FALLBACK = {
 CATEGORY_CODE_RE = re.compile(r"\b([A-E]\d{2})\b")
 APPENDIX_B_HEADER_RE = re.compile(r"^###\s+(B\d{2})\.\s+(.+)$")
 TAXONOMY_HEADER_RE = re.compile(r"^####\s+([A-E]\d{2})\.\s+(.+)$")
+TAXONOMY_VERSION_RE = re.compile(r"^版本：\s*V?([0-9]+\.[0-9]+)\s*$", re.M)
+TAXONOMY_SHA256_ALGO = "sha256"
 
 
 def split_terms(text: str) -> list[str]:
@@ -154,8 +158,15 @@ def build_config(
     taxonomy_text: str,
     *,
     version: str = "1.0.0",
+    taxonomy_version: str = "",
+    source_sha256: str = "",
+    generated_at: str = "",
 ) -> dict:
-    """从分类清单文本构建概念-别名结构的 keywords.json 配置。"""
+    """从分类清单文本构建概念-别名结构的 keywords.json 配置。
+
+    头部元数据用于防漂移识别：taxonomy_version 对应来源清单版本，
+    source_sha256 为清单文件哈希，generated_at 为生成时间（生成器固定字段）。
+    """
     taxonomy = parse_taxonomy_section(taxonomy_text)
     appendix_b = parse_appendix_b(taxonomy_text)
 
@@ -220,11 +231,58 @@ def build_config(
         )
     return {
         "version": version,
+        "taxonomy_version": taxonomy_version,
         "source": "1688",
         "encoding_note": "搜索 URL 使用 GBK 编码，由 collect_1688_public_sample.search_url 处理",
+        "generator": "adapters/1688/src/build_keyword_library.py",
+        "generated_at": generated_at,
+        "source_sha256": source_sha256,
         "categories": categories,
         "candidate_pool": [],
     }
+
+
+def merge_existing(config: dict, existing: dict | None) -> None:
+    """把已审校状态（status）和已挖掘/人工词合并回新生成的配置。
+
+    - 分类清单已有的概念：保留旧 status（active/pending/disabled），避免重新生成丢失人工审校；
+    - 非 taxonomy 来源的概念（title_mining/manual）：分类清单中不存在，重新生成后补回；
+    - candidate_pool（人工候选池）：原样保留。
+    """
+    if not existing:
+        return
+    status_map: dict[tuple[str, str], str] = {}
+    for cat in existing.get("categories", []):
+        code = cat.get("category_code", "")
+        for concept in cat.get("concepts", []):
+            status_map[(code, concept.get("standard_name", ""))] = concept.get(
+                "status", "pending"
+            )
+    for cat in config.get("categories", []):
+        code = cat.get("category_code", "")
+        for concept in cat.get("concepts", []):
+            key = (code, concept.get("standard_name", ""))
+            if key in status_map:
+                concept["status"] = status_map[key]
+    for cat in existing.get("categories", []):
+        code = cat.get("category_code", "")
+        extra = [
+            c
+            for c in cat.get("concepts", [])
+            if c.get("source") not in (None, "taxonomy")
+        ]
+        if not extra:
+            continue
+        for target in config.get("categories", []):
+            if target.get("category_code") != code:
+                continue
+            existing_names = {c.get("standard_name") for c in target.get("concepts", [])}
+            for concept in extra:
+                if concept.get("standard_name") not in existing_names:
+                    target.setdefault("concepts", []).append(concept)
+    pool = existing.get("candidate_pool")
+    if pool:
+        config["candidate_pool"] = pool
 
 
 def expand_search_terms(config: dict) -> list[str]:
@@ -305,7 +363,24 @@ def main() -> None:
     if not taxonomy_path.exists():
         raise SystemExit(f"taxonomy not found: {taxonomy_path}")
     text = taxonomy_path.read_text(encoding="utf-8")
-    config = build_config(text, version=args.version)
+    version_match = TAXONOMY_VERSION_RE.search(text)
+    taxonomy_version = f"V{version_match.group(1)}" if version_match else "unknown"
+    source_sha256 = hashlib.sha256(text.encode("utf-8")).hexdigest()
+    generated_at = datetime.now(timezone.utc).isoformat(timespec="seconds")
+    config = build_config(
+        text,
+        version=args.version,
+        taxonomy_version=taxonomy_version,
+        source_sha256=source_sha256,
+        generated_at=generated_at,
+    )
+    existing_path = Path(args.output)
+    if existing_path.exists():
+        try:
+            existing = json.loads(existing_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            existing = None
+        merge_existing(config, existing)
     errors = validate_config(config, require_active=False)
     if errors:
         print("validation errors (pending library):")

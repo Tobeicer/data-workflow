@@ -1,7 +1,11 @@
 {
   "version": "1.0.0",
+  "taxonomy_version": "V1.4",
   "source": "1688",
   "encoding_note": "搜索 URL 使用 GBK 编码，由 collect_1688_public_sample.search_url 处理",
+  "generator": "adapters/1688/src/build_keyword_library.py",
+  "generated_at": "2026-08-12T03:48:00+00:00",
+  "source_sha256": "43f87809b87ce06982fc89a28deead8647e4dfb345ea90e980c4c6cea1f90bb4",
   "categories": [
     {
       "category_code": "A01",
@@ -1239,7 +1243,7 @@
     },
     {
       "category_code": "B04",
-      "category_name": "票币卡、支付",
+      "category_name": "票币卡、支付总成",
       "concepts": [
         {
           "standard_name": "上币",
@@ -1524,10 +1528,9 @@
           "status": "pending"
         },
         {
-          "standard_name": "收银",
+          "standard_name": "机内收银",
           "aliases": [
-            "POS",
-            "打印"
+            "打印模块"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -1743,7 +1746,7 @@
     },
     {
       "category_code": "C02",
-      "category_name": "摇杆、手柄、操作",
+      "category_name": "摇杆、操作部件",
       "concepts": [
         {
           "standard_name": "方向盘",
@@ -1763,10 +1766,8 @@
           "status": "pending"
         },
         {
-          "standard_name": "游戏手柄",
-          "aliases": [
-            "操作拉杆"
-          ],
+          "standard_name": "机台操作拉杆",
+          "aliases": [],
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
@@ -1784,8 +1785,7 @@
         {
           "standard_name": "鼓棒",
           "aliases": [
-            "麦克风",
-            "耳机"
+            "机台麦克风"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -1937,9 +1937,7 @@
       "concepts": [
         {
           "standard_name": "主机电源",
-          "aliases": [
-            "电池"
-          ],
+          "aliases": [],
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
@@ -1958,28 +1956,6 @@
           "standard_name": "开关电源",
           "aliases": [
             "电源适配器"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
-          "standard_name": "插座",
-          "aliases": [
-            "排插",
-            "插头",
-            "电源分配器"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
-          "standard_name": "断路器",
-          "aliases": [
-            "漏电开关",
-            "保险丝",
-            "保险座"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -2183,16 +2159,6 @@
           "status": "pending"
         },
         {
-          "standard_name": "电压表",
-          "aliases": [
-            "电流表",
-            "时间表"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
           "standard_name": "霍尔传感器",
           "aliases": [
             "编码器",
@@ -2290,6 +2256,13 @@
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
+        },
+        {
+          "standard_name": "机台麦克风",
+          "aliases": [],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
         }
       ]
     },
@@ -2330,11 +2303,7 @@
         },
         {
           "standard_name": "跑马灯",
-          "aliases": [
-            "霓虹灯",
-            "射灯",
-            "天花灯"
-          ],
+          "aliases": [],
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
@@ -2443,15 +2412,6 @@
           "status": "pending"
         },
         {
-          "standard_name": "交换机",
-          "aliases": [
-            "网络分配设备"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
           "standard_name": "网线",
           "aliases": [
             "天线",
@@ -2465,15 +2425,6 @@
           "standard_name": "联机通讯板",
           "aliases": [
             "联网控制器"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
-          "standard_name": "路由器",
-          "aliases": [
-            "无线接入设备"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -2837,8 +2788,7 @@
         {
           "standard_name": "代币",
           "aliases": [
-            "电子数码币",
-            "纪念币"
+            "电子数码币"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -2986,15 +2936,6 @@
       "category_name": "礼品、奖品",
       "concepts": [
         {
-          "standard_name": "兑换券",
-          "aliases": [
-            "优惠券"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
           "standard_name": "小玩具",
           "aliases": [
             "文具",
@@ -3010,6 +2951,13 @@
             "钥匙扣",
             "小饰品"
           ],
+          "platforms": {},
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
+          "standard_name": "机台出票兑换券",
+          "aliases": [],
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
@@ -3097,9 +3045,7 @@
         },
         {
           "standard_name": "热熔胶条",
-          "aliases": [
-            "电池"
-          ],
+          "aliases": [],
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
@@ -3132,22 +3078,18 @@
       "category_name": "胶粘、包装、防护",
       "concepts": [
         {
-          "standard_name": "封箱胶",
+          "standard_name": "双面胶",
           "aliases": [
-            "双面胶",
-            "海绵胶",
-            "美纹纸"
+            "海绵胶"
           ],
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
         },
         {
-          "standard_name": "打包带",
+          "standard_name": "泡棉",
           "aliases": [
-            "缠绕膜",
-            "气泡膜",
-            "自封袋"
+            "护角"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -3163,23 +3105,12 @@
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
-        },
-        {
-          "standard_name": "纸箱",
-          "aliases": [
-            "泡棉",
-            "护角",
-            "保护膜"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
         }
       ]
     },
     {
       "category_code": "D07",
-      "category_name": "清洁、润滑、喷涂",
+      "category_name": "润滑、喷涂、表面处理",
       "concepts": [
         {
           "standard_name": "喷漆",
@@ -3192,30 +3123,10 @@
           "status": "pending"
         },
         {
-          "standard_name": "抹布",
-          "aliases": [
-            "工作手套"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
           "standard_name": "润滑油",
           "aliases": [
             "润滑脂",
             "防锈油"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
-          "standard_name": "清洁剂",
-          "aliases": [
-            "除胶剂",
-            "酒精",
-            "消毒液"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -3264,6 +3175,26 @@
           "status": "pending"
         },
         {
+          "standard_name": "收银",
+          "aliases": [
+            "POS",
+            "扫码收款",
+            "扫码收款机",
+            "小票打印机",
+            "礼品兑换柜"
+          ],
+          "platforms": {
+            "general": [
+              "收银POS",
+              "扫码收款机",
+              "小票打印机",
+              "礼品兑换柜"
+            ]
+          },
+          "source": "taxonomy",
+          "status": "pending"
+        },
+        {
           "standard_name": "礼品兑换柜",
           "aliases": [
             "自助兑换"
@@ -3303,10 +3234,7 @@
         },
         {
           "standard_name": "联机服务器",
-          "aliases": [
-            "路由器",
-            "交换机"
-          ],
+          "aliases": [],
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
@@ -3343,32 +3271,12 @@
     },
     {
       "category_code": "E03",
-      "category_name": "电力、环境、空气",
+      "category_name": "电力、气源保障",
       "concepts": [
         {
           "standard_name": "UPS",
           "aliases": [
-            "稳压器",
-            "备用电源"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
-          "standard_name": "工业风扇",
-          "aliases": [
-            "空调",
-            "通风"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
-        {
-          "standard_name": "除湿机",
-          "aliases": [
-            "环境监测"
+            "稳压器"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -3378,22 +3286,12 @@
     },
     {
       "category_code": "E04",
-      "category_name": "清洁、储存、搬运",
+      "category_name": "储存、搬运、维修",
       "concepts": [
-        {
-          "standard_name": "吸尘器",
-          "aliases": [
-            "场地清洁"
-          ],
-          "platforms": {},
-          "source": "taxonomy",
-          "status": "pending"
-        },
         {
           "standard_name": "搬运车",
           "aliases": [
-            "工具车",
-            "升降"
+            "工具车"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -3401,9 +3299,7 @@
         },
         {
           "standard_name": "维修工作台",
-          "aliases": [
-            "设备测试"
-          ],
+          "aliases": [],
           "platforms": {},
           "source": "taxonomy",
           "status": "pending"
@@ -3412,8 +3308,7 @@
           "standard_name": "货架",
           "aliases": [
             "零件柜",
-            "周转箱",
-            "收纳箱"
+            "周转箱"
           ],
           "platforms": {},
           "source": "taxonomy",
@@ -3422,325 +3317,5 @@
       ]
     }
   ],
-  "candidate_pool": [
-    {
-      "term": "跨境",
-      "frequency": 4,
-      "sample_titles": [
-        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机",
-        "跨境R36H promax掌上游戏机开源arkos系统psp双摇杆4.2寸掌机街机",
-        "新款跨境R40XXpromax掌机游戏机开源复古双摇杆掌上游戏机PSP街机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "游戏机开",
-      "frequency": 4,
-      "sample_titles": [
-        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
-        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
-        "跨境R36H promax掌上游戏机开源arkos系统psp双摇杆4.2寸掌机街机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "投币游戏机",
-      "frequency": 3,
-      "sample_titles": [
-        "小程序数码彩票机电玩设备自助投币游戏机马戏团商用二维码出票机",
-        "潘多拉月光宝盒拳皇街机格斗机商用投币游戏机怀旧电玩城游乐设施",
-        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "一体机",
-      "frequency": 3,
-      "sample_titles": [
-        "32寸自助取票一体机终端 在线下单机 门票/电影票出票机 游戏互动",
-        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
-        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "魔术师",
-      "frequency": 3,
-      "sample_titles": [
-        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
-        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备",
-        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "游戏厅",
-      "frequency": 3,
-      "sample_titles": [
-        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
-        "亲子篮球大型新款电玩投币投篮篮球机商场机NBA游戏厅游戏机机",
-        "商用大型双座游乐车儿童游戏厅游乐场投币式带游戏屏幕款摇摇车"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "投币商",
-      "frequency": 3,
-      "sample_titles": [
-        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
-        "新款儿童投币商用游戏机双人打枪赛车摩托车射球钓鱼超市门口摆摊",
-        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "设备投币",
-      "frequency": 3,
-      "sample_titles": [
-        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
-        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师",
-        "跨境游戏机动漫城电玩大型儿童乐园扫码投币娱乐设备投币机街机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "型娱乐",
-      "frequency": 3,
-      "sample_titles": [
-        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备",
-        "商用投币式推币游戏机 电玩城游乐场雪崩主题游艺机 大型娱乐游乐",
-        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "娱乐设备",
-      "frequency": 3,
-      "sample_titles": [
-        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备",
-        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师",
-        "跨境游戏机动漫城电玩大型儿童乐园扫码投币娱乐设备投币机街机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "游艺机",
-      "frequency": 3,
-      "sample_titles": [
-        "商用投币式推币游戏机 电玩城游乐场雪崩主题游艺机 大型娱乐游乐",
-        "篮球机投篮游戏机大型商用成人娱乐运动游艺机电玩设备跨街机电子",
-        "电动投币打地鼠游戏机宝宝商用萌宠小熊打老鼠游艺机小孩智力玩具"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "游乐设",
-      "frequency": 3,
-      "sample_titles": [
-        "潘多拉月光宝盒拳皇街机格斗机商用投币游戏机怀旧电玩城游乐设施",
-        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备",
-        "新款单人潮酷弹乐弹珠机儿童益智游戏机商用投币游乐设备可退卡片"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "用投币游",
-      "frequency": 3,
-      "sample_titles": [
-        "潘多拉月光宝盒拳皇街机格斗机商用投币游戏机怀旧电玩城游乐设施",
-        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备",
-        "新款单人潮酷弹乐弹珠机儿童益智游戏机商用投币游乐设备可退卡片"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "机游戏机",
-      "frequency": 3,
-      "sample_titles": [
-        "体育类街机游戏机 商用空气曲棍球桌 投币双人竞技游戏桌",
-        "2026年新款精灵宝贝打地鼠机游戏机游乐玩具商用儿童投币打老鼠机",
-        "新款跨境R40XXpromax掌机游戏机开源复古双摇杆掌上游戏机PSP街机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "双人",
-      "frequency": 3,
-      "sample_titles": [
-        "体育类街机游戏机 商用空气曲棍球桌 投币双人竞技游戏桌",
-        "新款儿童投币商用游戏机双人打枪赛车摩托车射球钓鱼超市门口摆摊",
-        "电玩城商用投币游戏机模拟机双人枪机大小型娱乐游艺电玩游乐设备"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "童投币",
-      "frequency": 3,
-      "sample_titles": [
-        "新款儿童投币商用游戏机双人打枪赛车摩托车射球钓鱼超市门口摆摊",
-        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机",
-        "2026年新款精灵宝贝打地鼠机游戏机游乐玩具商用儿童投币打老鼠机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "赛车游戏机",
-      "frequency": 3,
-      "sample_titles": [
-        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机",
-        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机",
-        "体验馆儿童投币商用赛车游戏机 单人赛车游戏机 儿童小赛车游戏机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "游戏机商",
-      "frequency": 3,
-      "sample_titles": [
-        "游戏机商用电玩城整体策划一站式采购大型游乐场游艺设备厂家定制",
-        "新款单人潮酷弹乐弹珠机儿童益智游戏机商用投币游乐设备可退卡片",
-        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "安卓",
-      "frequency": 3,
-      "sample_titles": [
-        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
-        "RK3288工控板 商显智能方案安卓一体机主板 游戏机开发套件板",
-        "穿越魔盒无线游戏主机X5街机摇杆网络机顶盒安卓电视盒子游戏盒子"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "机玩具",
-      "frequency": 2,
-      "sample_titles": [
-        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机",
-        "新款儿童娃娃机家用公仔扭蛋机玩具过节小型迷你新款生日玩具礼物"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "抓娃娃机",
-      "frequency": 2,
-      "sample_titles": [
-        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机",
-        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "公仔扭蛋机",
-      "frequency": 2,
-      "sample_titles": [
-        "跨境儿童抓娃娃机玩具家用夹娃娃电动夹小公仔扭蛋机迷你抓娃娃机",
-        "新款儿童娃娃机家用公仔扭蛋机玩具过节小型迷你新款生日玩具礼物"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "款儿",
-      "frequency": 2,
-      "sample_titles": [
-        "新款儿童娃娃机家用公仔扭蛋机玩具过节小型迷你新款生日玩具礼物",
-        "新款儿童投币商用游戏机双人打枪赛车摩托车射球钓鱼超市门口摆摊"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "马戏团",
-      "frequency": 2,
-      "sample_titles": [
-        "小程序数码彩票机电玩设备自助投币游戏机马戏团商用二维码出票机",
-        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "彩票机电玩",
-      "frequency": 2,
-      "sample_titles": [
-        "小程序数码彩票机电玩设备自助投币游戏机马戏团商用二维码出票机",
-        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "机电玩设备",
-      "frequency": 2,
-      "sample_titles": [
-        "小程序数码彩票机电玩设备自助投币游戏机马戏团商用二维码出票机",
-        "篮球机投篮游戏机大型商用成人娱乐运动游艺机电玩设备跨街机电子"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "动投币",
-      "frequency": 2,
-      "sample_titles": [
-        "源头出口可乐饮料机全自动投币自贩机电玩城商用出票礼品机",
-        "电动投币打地鼠游戏机宝宝商用萌宠小熊打老鼠游艺机小孩智力玩具"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "机电玩城商",
-      "frequency": 2,
-      "sample_titles": [
-        "源头出口可乐饮料机全自动投币自贩机电玩城商用出票礼品机",
-        "动漫城超级魔术师马戏团推币游戏机彩票机电玩城商用大型娱乐设备"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "大魔",
-      "frequency": 2,
-      "sample_titles": [
-        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
-        "成人娱乐设备投币扫码推币出彩票自助电玩游戏机商用超级大魔术师"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    },
-    {
-      "term": "币娱",
-      "frequency": 2,
-      "sample_titles": [
-        "大魔术师游戏厅叠币大型电玩城推币娱乐机设备投币商用游戏机厂家",
-        "跨境游戏机动漫城电玩大型儿童乐园扫码投币娱乐设备投币机街机"
-      ],
-      "source": "title_mining",
-      "status": "pending"
-    }
-  ]
+  "candidate_pool": []
 }

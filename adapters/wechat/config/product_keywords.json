@@ -1,0 +1,3877 @@
+{
+  "version": "1.4",
+  "source": "docs/游艺圈游戏游艺设备完整分类清单.md",
+  "categories": {
+    "A01": "礼品抓取、售卖",
+    "A02": "游艺票、卡片、积分",
+    "A03": "推币、弹珠、币珠",
+    "A04": "视频街机、电子竞技",
+    "A05": "赛车、驾驶、载具模拟",
+    "A06": "射击、射水、投射、捕获",
+    "A07": "音乐、舞蹈、歌唱",
+    "A08": "体育竞技、体感健身",
+    "A09": "益智、技巧、教育互动",
+    "A10": "儿童亲子、小型机动",
+    "A11": "VR、AR 、沉浸式",
+    "A12": "自助影像、娱乐舱、创作",
+    "A13": "场地游艺、无动力、水上设施",
+    "A14": "综合、主题、非标",
+    "B01": "整机控制、升级",
+    "B02": "机箱、框体、控台",
+    "B03": "主控、计算",
+    "B04": "票币卡、支付总成",
+    "B05": "电源、配电",
+    "B06": "显示、触控、投影",
+    "B07": "音频、灯光",
+    "B08": "运动、传动、动感",
+    "B09": "气动、水路、风路",
+    "B10": "运营控制、联网",
+    "C01": "按钮、按键、微动开关",
+    "C02": "摇杆、操作部件",
+    "C03": "票币卡、支付",
+    "C04": "主板、电子控制",
+    "C05": "电源、电气、保护",
+    "C06": "电机、执行、传动",
+    "C07": "气动、水路、液流",
+    "C08": "传感器、光眼、仪表",
+    "C09": "显示、触控、影像",
+    "C10": "喇叭、功放、音频",
+    "C11": "装饰灯光、灯控",
+    "C12": "电源线、信号线、连接器",
+    "C13": "网络、通讯器件",
+    "C14": "机箱五金、结构件",
+    "C15": "塑胶、亚克力、外观件",
+    "C16": "锁具、防盗器件",
+    "C17": "螺丝、螺母、紧固件",
+    "C18": "球珠、枪锤、实体交互件",
+    "C19": "散热、降温、通风",
+    "D01": "游艺票、卡片、代币",
+    "D02": "胶囊、球珠、补充载体",
+    "D03": "礼品、奖品",
+    "D04": "打印、影像",
+    "D05": "电工装配",
+    "D06": "胶粘、包装、防护",
+    "D07": "润滑、喷涂、表面处理",
+    "E01": "币卡、充值、收银",
+    "E02": "中央控制、网络、监控",
+    "E03": "电力、气源保障",
+    "E04": "储存、搬运、维修"
+  },
+  "keywords": [
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "娃娃机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "抓物机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "剪刀机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "切绳机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "钥匙机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "开锁机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "推礼品机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "礼品门机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "挖糖机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "糖果机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "扭蛋机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "胶囊机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "盲盒机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "福袋机"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "礼品售货"
+    },
+    {
+      "category": "A01",
+      "cat_name": "礼品抓取、售卖",
+      "keyword": "礼品兑换"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "出票"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "游艺票"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "积分游戏"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "卡片"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "出卡"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "卡牌对战"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "读卡游戏"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "卡片回收"
+    },
+    {
+      "category": "A02",
+      "cat_name": "游艺票、卡片、积分",
+      "keyword": "卡片兑换"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "推币"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "落币"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "币塔"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "推币综合"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "弹珠"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "弹球"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "钢珠"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "投珠"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "退珠"
+    },
+    {
+      "category": "A03",
+      "cat_name": "推币、弹珠、币珠",
+      "keyword": "投币技巧"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "格斗"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "动作街机"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "视频射击"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "飞行街机"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "休闲益智街机"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "经典街机"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "多合一街机"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "联机竞技"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "电竞街机"
+    },
+    {
+      "category": "A04",
+      "cat_name": "视频街机、电子竞技",
+      "keyword": "视频捕鱼"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "汽车赛车"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "驾驶模拟"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "摩托赛车模拟"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "自行车"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "骑乘模拟"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "飞行"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "船舶模拟"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "轨道交通"
+    },
+    {
+      "category": "A05",
+      "cat_name": "赛车、驾驶、载具模拟",
+      "keyword": "工程车辆模拟"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "光枪射击"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "激光打靶"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "实物射球"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "射珠"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "射水"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "水枪"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "投球"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "投篮"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "投掷"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "钓鱼"
+    },
+    {
+      "category": "A06",
+      "cat_name": "射击、射水、投射、捕获",
+      "keyword": "捞鱼"
+    },
+    {
+      "category": "A07",
+      "cat_name": "音乐、舞蹈、歌唱",
+      "keyword": "跳舞"
+    },
+    {
+      "category": "A07",
+      "cat_name": "音乐、舞蹈、歌唱",
+      "keyword": "舞蹈"
+    },
+    {
+      "category": "A07",
+      "cat_name": "音乐、舞蹈、歌唱",
+      "keyword": "打鼓"
+    },
+    {
+      "category": "A07",
+      "cat_name": "音乐、舞蹈、歌唱",
+      "keyword": "打击节奏"
+    },
+    {
+      "category": "A07",
+      "cat_name": "音乐、舞蹈、歌唱",
+      "keyword": "乐器"
+    },
+    {
+      "category": "A07",
+      "cat_name": "音乐、舞蹈、歌唱",
+      "keyword": "音乐演奏"
+    },
+    {
+      "category": "A07",
+      "cat_name": "音乐、舞蹈、歌唱",
+      "keyword": "唱歌"
+    },
+    {
+      "category": "A07",
+      "cat_name": "音乐、舞蹈、歌唱",
+      "keyword": "迷你 K 歌"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "篮球"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "投篮"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "空气曲棍球"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "球类运动模拟"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "拳击"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "测力"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "力量测试"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "冰雪"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "水上"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "极限运动模拟"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "体感健身"
+    },
+    {
+      "category": "A08",
+      "cat_name": "体育竞技、体感健身",
+      "keyword": "数字体育"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "打地鼠"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "敲击游戏"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "灯光反应"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "快速按键"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "迷宫"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "滚球"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "平衡游戏"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "计时"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "力度"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "技巧挑战"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "早教"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "科普"
+    },
+    {
+      "category": "A09",
+      "cat_name": "益智、技巧、教育互动",
+      "keyword": "职业体验"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "摇摆机"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "摇摇车"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "儿童电子游戏"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "小火车"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "轨道"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "旋转木马"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "旋转"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "碰碰车"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "卡丁车"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "电动骑乘"
+    },
+    {
+      "category": "A10",
+      "cat_name": "儿童亲子、小型机动",
+      "keyword": "亲子协作互动"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "VR 单机体验"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "VR 多人竞技"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "自由行走"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "动感平台"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "5D"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "7D 影院"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "AR"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "MR 混合现实"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "互动投影"
+    },
+    {
+      "category": "A11",
+      "cat_name": "VR、AR 、沉浸式",
+      "keyword": "数字运动空间"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "拍贴"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "自助照相"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "娱乐舱"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "迷你影院"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "录音舱"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "绘画"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "照片"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "纪念品打印"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "趣味测试"
+    },
+    {
+      "category": "A12",
+      "cat_name": "自助影像、娱乐舱、创作",
+      "keyword": "互动测评"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "组合滑梯"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "软体游乐"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "攀爬"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "绳网"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "蹦床"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "游泳池"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "水上游艺"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "充气游乐"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "移动游乐场"
+    },
+    {
+      "category": "A13",
+      "cat_name": "场地游艺、无动力、水上设施",
+      "keyword": "嘉年华"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "多玩法综合"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "礼品"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "出票"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "视频复合"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "IP 主题"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "品牌联名"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "模块化"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "多设备联动"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "定制非标"
+    },
+    {
+      "category": "A14",
+      "cat_name": "综合、主题、非标",
+      "keyword": "新型未归类"
+    },
+    {
+      "category": "B01",
+      "cat_name": "整机控制、升级",
+      "keyword": "整机电子控制"
+    },
+    {
+      "category": "B01",
+      "cat_name": "整机控制、升级",
+      "keyword": "整机改装"
+    },
+    {
+      "category": "B01",
+      "cat_name": "整机控制、升级",
+      "keyword": "整机升级"
+    },
+    {
+      "category": "B01",
+      "cat_name": "整机控制、升级",
+      "keyword": "多游戏转换"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "完整机箱"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "空机箱"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "街机框体"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "控制台"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "操作面板"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "座椅"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "动感座椅"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "展示舱"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "门板"
+    },
+    {
+      "category": "B02",
+      "cat_name": "机箱、框体、控台",
+      "keyword": "外壳"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "主板"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "程序"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "IO"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "驱动控制"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "工控主机"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "游戏主机"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "联机控制"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "服务器"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "线材"
+    },
+    {
+      "category": "B03",
+      "cat_name": "主控、计算",
+      "keyword": "电源组合"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "投币"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "退币"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "上币"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "兑币"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "币斗"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "出票"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "退票"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "发卡"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "读卡"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "收卡"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "二维码"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "NFC"
+    },
+    {
+      "category": "B04",
+      "cat_name": "票币卡、支付总成",
+      "keyword": "会员支付"
+    },
+    {
+      "category": "B05",
+      "cat_name": "电源、配电",
+      "keyword": "机台电源盒"
+    },
+    {
+      "category": "B05",
+      "cat_name": "电源、配电",
+      "keyword": "多路开关电源"
+    },
+    {
+      "category": "B05",
+      "cat_name": "电源、配电",
+      "keyword": "变压"
+    },
+    {
+      "category": "B05",
+      "cat_name": "电源、配电",
+      "keyword": "稳压"
+    },
+    {
+      "category": "B05",
+      "cat_name": "电源、配电",
+      "keyword": "UPS"
+    },
+    {
+      "category": "B05",
+      "cat_name": "电源、配电",
+      "keyword": "配电"
+    },
+    {
+      "category": "B05",
+      "cat_name": "电源、配电",
+      "keyword": "电气保护"
+    },
+    {
+      "category": "B06",
+      "cat_name": "显示、触控、投影",
+      "keyword": "显示器"
+    },
+    {
+      "category": "B06",
+      "cat_name": "显示、触控、投影",
+      "keyword": "触摸屏"
+    },
+    {
+      "category": "B06",
+      "cat_name": "显示、触控、投影",
+      "keyword": "LED 显示"
+    },
+    {
+      "category": "B06",
+      "cat_name": "显示、触控、投影",
+      "keyword": "投影"
+    },
+    {
+      "category": "B06",
+      "cat_name": "显示、触控、投影",
+      "keyword": "互动显示"
+    },
+    {
+      "category": "B07",
+      "cat_name": "音频、灯光",
+      "keyword": "音箱"
+    },
+    {
+      "category": "B07",
+      "cat_name": "音频、灯光",
+      "keyword": "功放"
+    },
+    {
+      "category": "B07",
+      "cat_name": "音频、灯光",
+      "keyword": "低音炮"
+    },
+    {
+      "category": "B07",
+      "cat_name": "音频、灯光",
+      "keyword": "环绕音频"
+    },
+    {
+      "category": "B07",
+      "cat_name": "音频、灯光",
+      "keyword": "麦克风"
+    },
+    {
+      "category": "B07",
+      "cat_name": "音频、灯光",
+      "keyword": "K 歌音频"
+    },
+    {
+      "category": "B07",
+      "cat_name": "音频、灯光",
+      "keyword": "装饰灯光"
+    },
+    {
+      "category": "B07",
+      "cat_name": "音频、灯光",
+      "keyword": "灯控"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "电机"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "减速机构"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "齿轮"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "皮带"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "链条传动"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "丝杆"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "滑轨"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "连杆"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "力反馈"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "振动"
+    },
+    {
+      "category": "B08",
+      "cat_name": "运动、传动、动感",
+      "keyword": "三自由度"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "空压机"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "气动执行"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "水泵"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "阀门"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "循环水路"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "鼓风机"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "风路"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "喷雾"
+    },
+    {
+      "category": "B09",
+      "cat_name": "气动、水路、风路",
+      "keyword": "喷水"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "中央控制"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "场地计费"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "会员卡"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "充值管理"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "机内收银"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "打印模块"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "网络"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "通讯"
+    },
+    {
+      "category": "B10",
+      "cat_name": "运营控制、联网",
+      "keyword": "远程监控"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "即插按钮"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "卡式按钮"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "圆形"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "方形"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "异形按钮"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "大按钮"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "带灯按钮"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "设置键"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "服务键"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "复位键"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "微动开关"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "按钮帽"
+    },
+    {
+      "category": "C01",
+      "cat_name": "按钮、按键、微动开关",
+      "keyword": "按钮壳"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "格斗"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "通用摇杆"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "360 度"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "旋钮摇杆"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "机台操作拉杆"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "方向盘"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "踏板"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "挡位器"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "游戏枪"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "游戏锤"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "拳套"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "鼓棒"
+    },
+    {
+      "category": "C02",
+      "cat_name": "摇杆、操作部件",
+      "keyword": "机台麦克风"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "投币器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "推币器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "退币器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "兑币器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "上币马达"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "币斗器件"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "投币口"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "投币面板"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "投币门"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "币斗"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "币盒"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "币篮"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "钱箱"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "出票器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "彩票器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "发卡器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "读卡器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "收卡器"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "IC"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "ID"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "NFC"
+    },
+    {
+      "category": "C03",
+      "cat_name": "票币卡、支付",
+      "keyword": "二维码支付"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "游戏主板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "程序板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "IO 板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "驱动板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "接口板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "灯板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "灯卡"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "灯控板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "音频板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "功放板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "光眼板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "计数板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "机型控制小板"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "继电器"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "固态继电器"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "定时器"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "信号转换器"
+    },
+    {
+      "category": "C04",
+      "cat_name": "主板、电子控制",
+      "keyword": "视频分配器"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "开关电源"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "电源适配器"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "主机电源"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "变压器"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "稳压器"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "滤波器"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "船型开关"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "扭子开关"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "按钮开关"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "防电器"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "防作弊器"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "报警灯"
+    },
+    {
+      "category": "C05",
+      "cat_name": "电源、电气、保护",
+      "keyword": "指示灯"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "直流"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "交流"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "步进"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "伺服电机"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "减速电机"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "上币马达"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "退币马达"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "退珠马达"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "电磁铁"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "电磁线圈"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "电磁执行器"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "齿轮"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "齿轮箱"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "皮带轮"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "同步皮带"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "链条"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "链轮"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "联轴器"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "轴"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "轴承"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "丝杆"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "滑轨"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "导轨"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "弹簧"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "曲柄"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "连杆"
+    },
+    {
+      "category": "C06",
+      "cat_name": "电机、执行、传动",
+      "keyword": "缓冲件"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "气缸"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "电磁阀"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "气动阀"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "PU 气管"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "快速接头"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "分路接头"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "水泵"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "回流泵"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "喷雾泵"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "水管"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "喷嘴"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "阀门"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "过滤器"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "水箱"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "水槽"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "密封圈"
+    },
+    {
+      "category": "C07",
+      "cat_name": "气动、水路、液流",
+      "keyword": "喉箍"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "对射"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "反射"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "槽型光眼"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "接近开关"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "限位开关"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "行程开关"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "霍尔传感器"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "编码器"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "电位器"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "压力"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "力度"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "称重"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "水位传感器"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "体感"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "红外"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "动作传感器"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "机械计数器"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "电子计数器"
+    },
+    {
+      "category": "C08",
+      "cat_name": "传感器、光眼、仪表",
+      "keyword": "液晶码表"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "液晶显示器"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "LED 显示屏"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "触摸屏"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "触摸框"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "触控板"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "显示驱动板"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "背光板"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "高压板"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "投影机"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "镜头"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "幕布"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "摄像头"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "深度摄像头"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "补光设备"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "显示器支架"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "保护玻璃"
+    },
+    {
+      "category": "C09",
+      "cat_name": "显示、触控、影像",
+      "keyword": "面板"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "喇叭"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "高低音单元"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "喇叭网"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "喇叭罩"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "音箱外壳"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "功放"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "功放板"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "音量调节器"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "音箱"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "低音炮"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "分频器"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "机台麦克风"
+    },
+    {
+      "category": "C10",
+      "cat_name": "喇叭、功放、音频",
+      "keyword": "音频接口（K 歌机台）"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "软灯条"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "硬灯板"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "圆灯板"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "LED 模组"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "灯珠"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "灯带"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "跑马灯"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "霓虹灯（机台装饰）"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "花心灯"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "长城灯条"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "机台套灯"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "灯光控制卡"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "IC 控制器"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "幻彩控制器"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "灯罩"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "灯壳"
+    },
+    {
+      "category": "C11",
+      "cat_name": "装饰灯光、灯控",
+      "keyword": "铝槽"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "电缆"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "VGA"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "HDMI"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "DVI"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "AV 线"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "USB"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "串口"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "打印机"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "音频线"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "机台线束"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "排线"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "端子线"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "转接头"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "延长线"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "分线器"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "插簧"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "压线帽"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "接线端子"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "接线柱"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "航空插头"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "快速插头"
+    },
+    {
+      "category": "C12",
+      "cat_name": "电源线、信号线、连接器",
+      "keyword": "公母接头"
+    },
+    {
+      "category": "C13",
+      "cat_name": "网络、通讯器件",
+      "keyword": "串口服务器"
+    },
+    {
+      "category": "C13",
+      "cat_name": "网络、通讯器件",
+      "keyword": "通讯转换器"
+    },
+    {
+      "category": "C13",
+      "cat_name": "网络、通讯器件",
+      "keyword": "联机通讯板"
+    },
+    {
+      "category": "C13",
+      "cat_name": "网络、通讯器件",
+      "keyword": "联网控制器"
+    },
+    {
+      "category": "C13",
+      "cat_name": "网络、通讯器件",
+      "keyword": "网线"
+    },
+    {
+      "category": "C13",
+      "cat_name": "网络、通讯器件",
+      "keyword": "天线"
+    },
+    {
+      "category": "C13",
+      "cat_name": "网络、通讯器件",
+      "keyword": "通讯线束"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "脚轮"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "脚杯"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "调节脚"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "合页"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "铰链"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "箱扣"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "钩扣"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "门销"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "拉手"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "支架"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "角码"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "固定座"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "滑轨"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "道轨"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "线槽"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "缠绕管"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "投币门"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "投币口"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "币道"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "接币斗"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "钱箱"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "币盒"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "彩票盒"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "扭蛋漏斗"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "透气孔"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "风扇网"
+    },
+    {
+      "category": "C14",
+      "cat_name": "机箱五金、结构件",
+      "keyword": "防护网"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "塑胶外壳"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "装饰壳"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "亚克力面板"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "展示窗"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "透明罩"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "玻璃面板"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "保护罩"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "装饰框"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "灯框"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "机台标牌"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "按键胶"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "胶轮"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "胶条"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "缓冲胶"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "礼品杆"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "挡板"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "护边"
+    },
+    {
+      "category": "C15",
+      "cat_name": "塑胶、亚克力、外观件",
+      "keyword": "铺底装饰"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "一字锁"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "圆柱锁"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "利剑锁"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "梅花锁"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "信箱锁"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "按压锁"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "挂锁"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "专用机锁"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "锁片"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "锁杯"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "锁排"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "锁扣"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "钥匙"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "通开钥匙"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "备用钥匙"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "防盗钢丝绳"
+    },
+    {
+      "category": "C16",
+      "cat_name": "锁具、防盗器件",
+      "keyword": "防盗弹簧绳"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "机丝"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "自攻螺丝"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "自钻螺丝"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "内六角"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "外六角"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "紧定螺丝"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "平头"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "圆头"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "大扁头"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "沉头螺丝"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "螺母"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "自锁螺母"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "法兰螺母"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "垫片"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "铜柱"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "隔离柱"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "卡簧"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "销钉"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "铆钉"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "固定夹"
+    },
+    {
+      "category": "C17",
+      "cat_name": "螺丝、螺母、紧固件",
+      "keyword": "角码"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "篮球"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "足球"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "保龄球"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "训练球"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "射球球"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "弹力球"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "曲棍球球饼"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "弹珠"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "玻璃珠"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "钢珠"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "游戏枪"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "射水枪"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "射珠枪附件"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "游戏锤"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "拳套"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "鼓棒"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "飞镖"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "球网"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "挡球网"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "接球网"
+    },
+    {
+      "category": "C18",
+      "cat_name": "球珠、枪锤、实体交互件",
+      "keyword": "靶标"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "散热风扇"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "顶部风扇"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "鼓风机"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "风道配件"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "风扇网"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "防尘网"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "过滤棉"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "散热片"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "导热垫"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "导热硅脂"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "机柜"
+    },
+    {
+      "category": "C19",
+      "cat_name": "散热、降温、通风",
+      "keyword": "娱乐舱换气"
+    },
+    {
+      "category": "D01",
+      "cat_name": "游艺票、卡片、代币",
+      "keyword": "游艺彩票"
+    },
+    {
+      "category": "D01",
+      "cat_name": "游艺票、卡片、代币",
+      "keyword": "热敏纸"
+    },
+    {
+      "category": "D01",
+      "cat_name": "游艺票、卡片、代币",
+      "keyword": "保单纸"
+    },
+    {
+      "category": "D01",
+      "cat_name": "游艺票、卡片、代币",
+      "keyword": "游戏卡"
+    },
+    {
+      "category": "D01",
+      "cat_name": "游艺票、卡片、代币",
+      "keyword": "收藏卡"
+    },
+    {
+      "category": "D01",
+      "cat_name": "游艺票、卡片、代币",
+      "keyword": "会员卡"
+    },
+    {
+      "category": "D01",
+      "cat_name": "游艺票、卡片、代币",
+      "keyword": "代币"
+    },
+    {
+      "category": "D01",
+      "cat_name": "游艺票、卡片、代币",
+      "keyword": "电子数码币"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "扭蛋球"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "胶囊壳"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "弹珠"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "玻璃珠"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "钢珠补充包"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "射球球"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "弹力球"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "替换球"
+    },
+    {
+      "category": "D02",
+      "cat_name": "胶囊、球珠、补充载体",
+      "keyword": "曲棍球球饼"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "毛绒公仔"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "盲盒"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "手办"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "扭蛋玩具"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "挂件"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "钥匙扣"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "小饰品"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "糖果"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "零食"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "饮料"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "小玩具"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "文具"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "礼品卡"
+    },
+    {
+      "category": "D03",
+      "cat_name": "礼品、奖品",
+      "keyword": "机台出票兑换券"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "相纸"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "照片纸"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "打印纸"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "热敏纸"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "标签纸"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "票据纸"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "色带"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "墨盒"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "墨水"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "打印膜"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "覆膜"
+    },
+    {
+      "category": "D04",
+      "cat_name": "打印、影像",
+      "keyword": "保护膜"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "扎带"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "缠绕管"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "热缩管"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "线夹"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "线卡"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "吸盘"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "固定脚"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "插簧"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "压线帽"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "接线端子"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "电工胶带"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "绝缘材料"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "焊锡丝"
+    },
+    {
+      "category": "D05",
+      "cat_name": "电工装配",
+      "keyword": "热熔胶条"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "双面胶"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "海绵胶"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "美纹纸（机台维护）"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "玻璃胶"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "结构胶"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "瞬间胶"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "热熔胶"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "泡棉"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "护角"
+    },
+    {
+      "category": "D06",
+      "cat_name": "胶粘、包装、防护",
+      "keyword": "保护膜（机台防护）"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "润滑油"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "润滑脂"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "防锈油"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "喷漆"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "补漆"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "油漆"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "砂纸"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "植绒片"
+    },
+    {
+      "category": "D07",
+      "cat_name": "润滑、喷涂、表面处理",
+      "keyword": "抛光材料"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "售币机"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "兑币机"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "数币机"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "自助充值"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "发卡"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "收银 POS"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "扫码收款"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "小票打印"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "标签打印"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "礼品兑换柜"
+    },
+    {
+      "category": "E01",
+      "cat_name": "币卡、充值、收银",
+      "keyword": "自助兑换"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "场地中央控制台"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "计费"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "会员"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "卡务管理"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "联机服务器"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "交换机）"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "远程监控"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "设备状态"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "视频监控"
+    },
+    {
+      "category": "E02",
+      "cat_name": "中央控制、网络、监控",
+      "keyword": "防盗"
+    },
+    {
+      "category": "E03",
+      "cat_name": "电力、气源保障",
+      "keyword": "空压机"
+    },
+    {
+      "category": "E03",
+      "cat_name": "电力、气源保障",
+      "keyword": "UPS"
+    },
+    {
+      "category": "E03",
+      "cat_name": "电力、气源保障",
+      "keyword": "稳压器"
+    },
+    {
+      "category": "E03",
+      "cat_name": "电力、气源保障",
+      "keyword": "备用电源（机台"
+    },
+    {
+      "category": "E03",
+      "cat_name": "电力、气源保障",
+      "keyword": "场地电力保障）"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "搬运车"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "工具车"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "升降（机台搬运"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "安装）"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "货架"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "零件柜"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "周转箱"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "收纳箱（机台配件仓储）"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "维修工作台"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "设备测试（机台维修）"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "尺寸：迷你型"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "标准型"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "大型"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "巨型。"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "位数：单人位"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "双人位"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "多人位。"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "框体：直立式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "坐式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "桌面式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "中岛式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "舱体式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "轨道式。"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "安装：固定式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "移动式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "壁挂式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "落地式"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "嵌入式。"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "运动：静态"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "摇摆"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "振动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "力反馈"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "三自由度"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "六自由度。"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "场地：室内"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "户外"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "商场"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "电玩城"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "儿童乐园"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "景区"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "移动嘉年华。"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "机械互动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "视频互动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "触摸互动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "体感互动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "投影互动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "VR"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "AR 互动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "机械"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "视频复合互动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "投币"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "刷卡"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "NFC"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "会员卡"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "二维码"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "现金"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "免费启动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "后台远程启动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "不出奖"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "出游艺票"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "出卡片"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "退币"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "退珠"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "出礼品"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "积分累计"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "电子成绩"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "排行榜"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "单机"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "本地联机"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "多机联动"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "在线联网"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "单人"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "双人"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "多人"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "亲子协作"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "儿童"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "青少年"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "成人"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "亲子家庭"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "全年龄"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "不能直接归入 A14"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "主题或非标设备。"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "来源类目 ID"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "路径"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "类目树快照"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "候选分类"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "置信度"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "规则版本"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "验证时间和证据。"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "最近验证时间"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "普通玩具"
+    },
+    {
+      "category": "E04",
+      "cat_name": "储存、搬运、维修",
+      "keyword": "扫码判定。"
+    }
+  ]
+}

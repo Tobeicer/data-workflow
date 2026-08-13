@@ -172,7 +172,7 @@ def test_product_media_and_service_fields_are_promoted_from_public_modules() -> 
         "video_url": "https://example.test/product.mp4",
         "cover_url": "https://example.test/product-cover.jpg",
     }
-    assert product["detail_content_url"] == "https://example.test/detail-content"
+    assert "detail_content_url" not in product
     assert product["service_guarantees"] == ["7天无理由退货", "晚发必赔"]
 
 
@@ -241,6 +241,67 @@ def test_normalize_product_capture_keeps_pack_and_detail_images() -> None:
     assert product["pack_specs"][0]["weight_g"] == "100000"
     assert len(product["detail_images"]) == 2
     assert product["attributes"]["品牌"] == "测试"
+
+
+def test_normalize_product_capture_filters_svg_placeholders() -> None:
+    product, _ = normalize_product_capture(
+        offer_id="2001",
+        product_url="https://detail.1688.com/offer/2001.html",
+        raw={
+            "title": "图片过滤测试",
+            "mainImageUrl": "https://img.alicdn.com/tps/T1.svg",
+            "imageUrls": [
+                "https://img.alicdn.com/tps/T2.svg",
+                "https://img.alicdn.com/kf/real-1.jpg",
+                "https://img.alicdn.com/kf/real-2.jpg_.webp",
+            ],
+            "detailImages": [
+                "https://img.alicdn.com/tps/icon.svg?x=1",
+                "https://img.alicdn.com/kf/detail-1.jpg",
+            ],
+            "videoUrl": "https://vod.example.test/clip.mp4",
+        },
+        collected_at="2026-08-12T10:00:00+08:00",
+    )
+
+    assert product["main_image_url"] == "https://img.alicdn.com/kf/real-1.jpg"
+    assert product["image_urls"] == [
+        "https://img.alicdn.com/kf/real-1.jpg",
+        "https://img.alicdn.com/kf/real-2.jpg_.webp",
+    ]
+    assert product["detail_images"] == ["https://img.alicdn.com/kf/detail-1.jpg"]
+    assert product["video"]["video_url"] == "https://vod.example.test/clip.mp4"
+
+
+def test_normalize_product_capture_filters_icon_and_thumbnail_urls() -> None:
+    product, _ = normalize_product_capture(
+        offer_id="2002",
+        product_url="https://detail.1688.com/offer/2002.html",
+        raw={
+            "title": "icon filter",
+            "mainImageUrl": "https://cbu01.alicdn.com/img/ibank/O1CN01A_!!1-0-cib.jpg_.webp",
+            "imageUrls": [
+                "https://cbu01.alicdn.com/img/ibank/O1CN01A_!!1-0-cib.jpg_.webp",
+                "https://img.alicdn.com/imgextra/i2/6000000006837/O1CN01DYdEcy20NP2PQrCPF_!!6000000006837-2-gg_dtc.png",
+                "https://cbu01.alicdn.com/img/ibank/O1CN01B_!!1-0-cib.jpg_sum.jpg",
+                "https://cbu01.alicdn.com/img/ibank/O1CN01C_!!1-0-cib.jpg",
+            ],
+            "detailImages": [
+                "https://cbu01.alicdn.com/img/ibank/O1CN01D_!!1-0-cib.jpg",
+                "https://img.alicdn.com/imgextra/i2/6000000006837/O1CN01DYdEcy20NP2PQrCPF_!!6000000006837-2-gg_dtc.png",
+            ],
+            "videoUrl": "",
+        },
+        collected_at="2026-08-12T10:00:00+08:00",
+    )
+
+    assert product["image_urls"] == [
+        "https://cbu01.alicdn.com/img/ibank/O1CN01A_!!1-0-cib.jpg_.webp",
+        "https://cbu01.alicdn.com/img/ibank/O1CN01C_!!1-0-cib.jpg",
+    ]
+    assert product["detail_images"] == [
+        "https://cbu01.alicdn.com/img/ibank/O1CN01D_!!1-0-cib.jpg"
+    ]
 
 
 def test_delivery_record_promotes_discovered_attribute_columns() -> None:
@@ -319,7 +380,7 @@ def test_analyze_price_single_range_review_missing() -> None:
     # SKU 聚合 -> range
     r = analyze_price("¥2.04", ["¥2.04", "¥2.20"])
     assert r["price_min"] == "2.04" and r["price_max"] == "2.20"
-    assert r["price_status"] == "range" and r["price_missing_reason"] == ""
+    assert r["price_status"] == "range"
     # 单一 SKU 价格 -> single
     r = analyze_price("¥14.04库存 874774", ["14.04"])
     assert r["price_status"] == "single" and r["price_min"] == "14.04"
@@ -327,14 +388,11 @@ def test_analyze_price_single_range_review_missing() -> None:
     r = analyze_price("¥2.09897102", [])
     assert r["price_status"] == "review_required"
     assert r["price_min"] == "" and r["price_max"] == ""
-    assert r["price_missing_reason"] == "parse_failed_high_precision"
     # 活动文案 -> missing
     r = analyze_price("【平台活动下价格】 活动前价格：（1）非分销场景下…", [])
     assert r["price_status"] == "missing"
-    assert r["price_missing_reason"] == "tooltip_only"
     # 空 -> missing
     r = analyze_price("", [])
     assert r["price_status"] == "missing"
-    assert r["price_missing_reason"] == "not_accessible"
     # 货币固定 CNY
     assert r["currency"] == "CNY"

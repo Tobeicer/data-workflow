@@ -11,6 +11,30 @@ def clean_text(value: Any) -> str:
     return re.sub(r"\s+", " ", str(value)).strip()
 
 
+SVG_OR_TPS_RE = re.compile(
+    r"tps-|\.svg($|\?)|gg_dtc|_sum\.(jpg|png|webp)($|\?)", re.IGNORECASE
+)
+REAL_IMAGE_RE = re.compile(r"^https?://", re.IGNORECASE)
+
+
+def is_real_image_url(value: Any) -> bool:
+    text = clean_text(value)
+    return bool(text and REAL_IMAGE_RE.match(text) and not SVG_OR_TPS_RE.search(text))
+
+
+def clean_image_list(values: Any) -> list[str]:
+    if not isinstance(values, list):
+        values = [values] if values else []
+    out: list[str] = []
+    for item in values:
+        if isinstance(item, dict):
+            item = item.get("url") or item.get("src") or ""
+        url = clean_text(item)
+        if url and is_real_image_url(url) and url not in out:
+            out.append(url)
+    return out
+
+
 def parse_price(value: Any) -> str:
     text = clean_text(value).replace(",", "")
     match = re.search(r"(?:¥|￥)?\s*([0-9]+(?:\.[0-9]+)?)", text)
@@ -116,10 +140,10 @@ def parse_stock_text_number(value: Any) -> str:
 def analyze_price(price_text: str, sku_prices: list[str]) -> dict:
     """商品级价格分析（只基于页面真实值与 SKU 明细聚合，不构造）。
 
-    返回 {price_min, price_max, currency, price_status, price_missing_reason}：
+    返回 {price_min, price_max, currency, price_status}：
     - 有有效 SKU 价格：min/max 取 SKU 价格聚合（single/range）；
     - 无 SKU：页面单一价格（single）；精度超 2 位小数 -> review_required（不交付数值）；
-    - 活动文案/空值 -> missing + 明确原因。
+    - 活动文案/空值 -> missing。
     """
     currency = "CNY"
     valid_sku = []
@@ -135,7 +159,6 @@ def analyze_price(price_text: str, sku_prices: list[str]) -> dict:
             "price_max": fmt(hi),
             "currency": currency,
             "price_status": "range" if hi > lo else "single",
-            "price_missing_reason": "",
         }
     page = parse_price_clean(price_text)
     if page:
@@ -145,27 +168,18 @@ def analyze_price(price_text: str, sku_prices: list[str]) -> dict:
                 "price_max": "",
                 "currency": currency,
                 "price_status": "review_required",
-                "price_missing_reason": "parse_failed_high_precision",
             }
         return {
             "price_min": page,
             "price_max": page,
             "currency": currency,
             "price_status": "single",
-            "price_missing_reason": "",
         }
-    if "活动前价格" in clean_text(price_text):
-        reason = "tooltip_only"
-    elif clean_text(price_text):
-        reason = "unparsable_text"
-    else:
-        reason = "not_accessible"
     return {
         "price_min": "",
         "price_max": "",
         "currency": currency,
         "price_status": "missing",
-        "price_missing_reason": reason,
     }
 
 
@@ -317,11 +331,7 @@ def normalize_product_capture(
 ) -> tuple[dict, list[dict]]:
     attributes = filter_product_attributes(raw.get("attrs") or {})
     pack_specs = parse_pack_specs(raw.get("packRows") or [])
-    detail_images = [
-        clean_text(url)
-        for url in (raw.get("detailImages") or [])
-        if clean_text(url)
-    ]
+    detail_images = clean_image_list(raw.get("detailImages") or [])
     related = [item for item in (raw.get("related") or []) if isinstance(item, dict)]
     skus: list[dict] = []
     seen: set[tuple[str, str, str, str]] = set()
@@ -354,31 +364,26 @@ def normalize_product_capture(
     gallery_fields = gallery.get("fields") or {} if isinstance(gallery, dict) else {}
     if not isinstance(gallery_fields, dict):
         gallery_fields = {}
-    image_urls = [
-        clean_text(url)
-        for url in gallery_fields.get("mainImage") or []
-        if clean_text(url)
-    ]
-    if not image_urls:
-        image_urls = [
-            clean_text(url)
-            for url in gallery_fields.get("offerImgList") or []
-            if clean_text(url)
-        ][:5]
+    raw_image_urls = clean_image_list(
+        raw.get("imageUrls") or raw.get("galleryImages") or []
+    )
+    gallery_image_urls = clean_image_list(
+        gallery_fields.get("mainImage") or gallery_fields.get("offerImgList") or []
+    )
+    image_urls = raw_image_urls or gallery_image_urls
+    raw_main_image = clean_text(raw.get("mainImageUrl"))
+    main_image_url = (
+        raw_main_image if is_real_image_url(raw_main_image) else (image_urls[0] if image_urls else "")
+    )
+    raw_video_url = clean_text(raw.get("videoUrl"))
     video_data = gallery_fields.get("video") or {}
     if not isinstance(video_data, dict):
         video_data = {}
     video = {
         "title": clean_text(video_data.get("title")),
-        "video_url": clean_text(video_data.get("videoUrl")),
+        "video_url": raw_video_url or clean_text(video_data.get("videoUrl")),
         "cover_url": clean_text(video_data.get("coverUrl")),
     }
-    description = source_fields.get("description") or {}
-    description_fields = (
-        description.get("fields") or {} if isinstance(description, dict) else {}
-    )
-    if not isinstance(description_fields, dict):
-        description_fields = {}
     main_services = source_fields.get("mainServices") or {}
     service_fields = (
         main_services.get("fields") or {} if isinstance(main_services, dict) else {}
@@ -418,10 +423,9 @@ def normalize_product_capture(
         "attributes": attributes,
         "pack_specs": pack_specs,
         "detail_images": detail_images,
-        "main_image_url": image_urls[0] if image_urls else "",
+        "main_image_url": main_image_url,
         "image_urls": image_urls,
         "video": video,
-        "detail_content_url": clean_text(description_fields.get("detailUrl")),
         "service_guarantees": service_guarantees,
         "source_fields": source_fields,
         "source_field_observations": source_field_observations,

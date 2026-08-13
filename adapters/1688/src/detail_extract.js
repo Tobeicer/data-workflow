@@ -24,6 +24,19 @@ function extractDetailPage() {
     }
     return '';
   };
+  const imgSrc = (img) =>
+    img
+      ? (img.currentSrc ||
+          img.getAttribute('data-src') ||
+          img.getAttribute('data-lazyload') ||
+          img.src ||
+          img.getAttribute('src') ||
+          '')
+      : '';
+  const isRealImage = (url) =>
+    /^https?:\/\//i.test(url) &&
+    !/tps-|\.svg(\?|$)|gg_dtc|_sum\.(jpg|png|webp)(\?|$)/i.test(url);
+  const uniqueUrls = (list) => Array.from(new Set(list.filter(Boolean)));
   const notes = [];
 
   // ---------- 标题 ----------
@@ -373,12 +386,91 @@ function extractDetailPage() {
       Array.from(tr.querySelectorAll('th, td')).map((c) => clean(c.innerText || c.textContent))
     );
 
-  // ---------- 详情图片 ----------
-  const detailImages = Array.from(
-    document.querySelectorAll('[data-module="od_product_description"] img, [data-module="od_detail"] img, .module-od-detail img')
-  )
-    .map((img) => img.currentSrc || img.src || img.getAttribute('src') || '')
-    .filter((s) => s && /^https?:\/\//.test(s));
+  // ---------- 图库（主图 + 轮播图，过滤 SVG 占位图标） ----------
+  const galleryModule = document.querySelector(
+    '[data-module="od_picture_gallery"], [data-module="od_gallery"], .module-od-picture-gallery'
+  );
+  const galleryScope = galleryModule || document;
+  const galleryImgs = Array.from(galleryScope.querySelectorAll('img')).filter(
+    (img) => {
+      const cls = (img.className || '') + '';
+      const url = imgSrc(img);
+      return (
+        /preview-img/.test(cls) ||
+        (/ant-image-img/.test(cls) && isRealImage(url))
+      );
+    }
+  );
+  const galleryImages = uniqueUrls(galleryImgs.map(imgSrc).filter(isRealImage));
+  const mainImgNode =
+    galleryImgs.find(
+      (img) =>
+        img.classList.contains('preview-img') && img.classList.contains('active-preview-img')
+    ) ||
+    galleryImgs.find((img) => img.classList.contains('preview-img')) ||
+    galleryImgs.find((img) => isRealImage(imgSrc(img)));
+  const mainImageUrl = mainImgNode ? imgSrc(mainImgNode) : galleryImages[0] || '';
+  const imageUrls = galleryImages.length ? galleryImages : mainImageUrl ? [mainImageUrl] : [];
+
+  // ---------- 详情图片（v-detail-8 shadow DOM 异步加载，过滤 SVG） ----------
+  const detailHosts = Array.from(
+    document.querySelectorAll(
+      '[class*="html-description"], v-detail-8, [data-module="od_product_description"], [data-module="od_detail"], .module-od-product-description, .module-od-detail'
+    )
+  ).filter((el) => {
+    const tag = (el.tagName || '').toLowerCase();
+    const marker = [
+      (el.className || ''),
+      (el.getAttribute && el.getAttribute('data-module')) || '',
+    ]
+      .join(' ')
+      .toLowerCase();
+    return (
+      /^v-detail-/.test(tag) ||
+      /html-description|module-od-product-description|module-od-detail|od_product_description|od_detail/.test(
+        marker
+      )
+    );
+  });
+  let detailImages = [];
+  const collectImages = (root) =>
+    uniqueUrls(
+      Array.from((root || document).querySelectorAll('img'))
+        .map(imgSrc)
+        .filter(isRealImage)
+    );
+  for (const host of detailHosts) {
+    detailImages = collectImages(host.shadowRoot || host);
+    if (detailImages.length) break;
+  }
+  if (!detailImages.length) {
+    detailImages = collectImages(
+      document.querySelector(
+        '[data-module="od_product_description"], [data-module="od_detail"], .module-od-product-description, .module-od-detail'
+      )
+    );
+  }
+
+  // ---------- 商品视频（页面 / shadow DOM / 图库，不重复） ----------
+  const videoCandidates = [];
+  const collectVideos = (root) => {
+    for (const v of (root || document).querySelectorAll('video, source')) {
+      const u = clean(
+        v.currentSrc ||
+          v.src ||
+          v.getAttribute('src') ||
+          v.getAttribute('data-src') ||
+          ''
+      );
+      if (u && /^https?:\/\//i.test(u)) videoCandidates.push(u);
+    }
+  };
+  collectVideos(document);
+  for (const host of detailHosts) {
+    if (host.shadowRoot) collectVideos(host.shadowRoot);
+  }
+  if (galleryModule) collectVideos(galleryModule);
+  const videoUrl = uniqueUrls(videoCandidates)[0] || '';
 
   // ---------- 关联商品 ----------
   const related = Array.from(document.querySelectorAll('a[href*="/offer/"], a[href*="offerId="]'))
@@ -429,7 +521,10 @@ function extractDetailPage() {
     skuRows,
     skuDimension,
     packRows,
+    mainImageUrl,
+    imageUrls,
     detailImages,
+    videoUrl,
     related,
     memberId,
     modules,

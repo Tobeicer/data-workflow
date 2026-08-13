@@ -4,17 +4,18 @@
 合并规则（真实数据优先，不构造值）：
   1. 新采集为准：price_text / 价格区间原文 / price_node / attributes / pack_specs /
      skus / member_id / 起订量 / 单位 / 库存 / 发货承诺 / 布局签名；
-  2. 旧 L1 保留：image_urls / main_image_url / video / detail_content_url /
-     detail_images / service_guarantees / related_products / source_fields /
+  2. 新采集优先：main_image_url / image_urls / detail_images / video_url，
+     旧 L1 仅在新采集为空时兜底；不再保留 detail_content_url（详情列统一为
+     detail_images_json）；
+  3. 旧 L1 保留：service_guarantees / related_products / source_fields /
      validation_category（分类候选来自选样登记，不属于页面采集）；
   3. 旧值仅在"新采集为空"时兜底，且始终保留原始文本证据（price_text 等）。
 
 用法：
   python adapters/1688/src/build_l1_v2.py \
     --raw-jsonl runtime/runs/1688/20260812_crawl/details_v2_raw.jsonl \
-    --delivery-json deliveries/1688/1688_20260812_full/1688分类抽样_20260812.json \
+    --delivery-json deliveries/1688/1688_20260812/1688_20260812.json \
     --old-l1-dir runtime/runs/1688/codex_l1_20260811 \
-    --old-l1-dir runtime/runs/1688/1688_validation_20260810_150101 \
     --output-dir runtime/runs/1688/20260812_crawl/l1
 """
 
@@ -28,7 +29,9 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 
 from product_profile import (  # noqa: E402
+    clean_image_list,
     filter_product_attributes,
+    is_real_image_url,
     parse_moq_number,
     parse_pack_specs,
     parse_stock_text_number,
@@ -153,6 +156,14 @@ def main() -> int:
         sku_rows = build_sku_rows(raw, offer_id, collected_at)
 
         product = dict(old)
+        raw_success = status == "success"
+        raw_image_urls = clean_image_list(raw.get("imageUrls") or []) if raw_success else []
+        raw_main_image = clean(raw.get("mainImageUrl")) if raw_success else ""
+        raw_detail_images = clean_image_list(raw.get("detailImages") or []) if raw_success else []
+        raw_video_url = clean(raw.get("videoUrl")) if raw_success else ""
+        old_video = old.get("video") or {}
+        if not isinstance(old_video, dict):
+            old_video = {}
         product.update(
             {
                 "source_platform": "1688",
@@ -185,8 +196,21 @@ def main() -> int:
                 "capture_status": "success" if status == "success" else (status or "error"),
                 "validation_category": clean(old.get("validation_category"))
                 or category_by_offer.get(offer_id),
+                "main_image_url": (
+                    raw_main_image
+                    if is_real_image_url(raw_main_image)
+                    else (raw_image_urls[0] if raw_image_urls else "")
+                ),
+                "image_urls": raw_image_urls,
+                "detail_images": raw_detail_images,
+                "video": (
+                    {"video_url": raw_video_url, "cover_url": "", "title": ""}
+                    if raw_video_url.startswith(("http://", "https://"))
+                    else {}
+                ),
             }
         )
+        product.pop("detail_content_url", None)
         if not product.get("capture_notes") and status != "success":
             product["capture_notes"] = [clean(raw.get("error"))]
 

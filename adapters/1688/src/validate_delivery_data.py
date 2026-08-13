@@ -3,9 +3,7 @@
 
 校验规则（对应"所有列只显示值，数值列无符号/无空格/无杂质文本"）：
   1. price_min/price_max 只允许空或 ^\\d+(\\.\\d{1,2})?$（纯数字，≤2 位小数）；
-  2. 价格为空时必须有 price_status=missing/review_required 且 price_missing_reason
-     为受控枚举（not_accessible / tooltip_only / unparsable_text /
-     parse_failed_high_precision / not_provided）；
+  2. 价格为空时必须有 price_status=missing/review_required；
   3. 数值列（价格/起订量/库存）禁止出现 ¥、￥、库存、活动、空格、逗号、负号等杂质；
   4. minimum_order_quantity 只允许空或纯数字；sales_unit 只允许空或单位词表；
   5. available_stock 只允许空或纯数字；
@@ -13,7 +11,9 @@
   7. 交叉校验：商品存在 SKU 且 price_status∈{single,range} 时，
      price_min/price_max 必须等于 SKU 价格聚合值（浮点比较，容差 0.005）；
   8. 颜色列只允许短纯色值（无逗号/【】/斜杠），违规列入问题；
-  9. 输出：hard errors（必须修复，退出码 1）+ warnings（建议复核）。
+  9. 图片列（main_image_url / image_urls / detail_images_json）禁止 SVG、占位图标
+     与 /tps- 静态资源路径，必须是 http(s) 真实图片 URL；
+  10. 输出：hard errors（必须修复，退出码 1）+ warnings（建议复核）。
 
 用法：
   python adapters/1688/src/validate_delivery_data.py deliveries/1688/<run>/<file>.json
@@ -39,16 +39,48 @@ UNIT_WORDS = {
 MAX_PLAUSIBLE_PRICE = 10000000  # 1 千万：超过即视为价格-库存拼接残留或页面占位大数
 
 
-MISSING_REASONS = {
-    "not_accessible", "tooltip_only", "unparsable_text",
-    "parse_failed_high_precision", "not_provided", "blocked",
-}
+SVG_OR_TPS_RE = re.compile(
+    r"tps-|\.svg($|\?)|gg_dtc|_sum\.(jpg|png|webp)($|\?)", re.IGNORECASE
+)
+REAL_IMAGE_RE = re.compile(r"^https?://", re.IGNORECASE)
 
 
 def clean(value: Any) -> str:
     if value is None:
         return ""
     return str(value).strip()
+
+
+def is_real_image_url(value: Any) -> bool:
+    text = clean(value)
+    return bool(text and REAL_IMAGE_RE.match(text) and not SVG_OR_TPS_RE.search(text))
+
+
+def _parse_image_values(value: Any) -> list[str]:
+    if isinstance(value, str):
+        text = value.strip()
+        if not text:
+            return []
+        if text.startswith("["):
+            try:
+                parsed = json.loads(text)
+            except json.JSONDecodeError:
+                return []
+            return [clean(item) for item in parsed if isinstance(item, str)]
+        return [text]
+    if isinstance(value, list):
+        return [clean(item) for item in value if isinstance(item, str)]
+    return []
+
+
+def check_images(record: dict, product_id: str, errors: list[str]) -> None:
+    main_image = clean(record.get("main_image_url"))
+    if main_image and not is_real_image_url(main_image):
+        errors.append(f"{product_id}.main_image_url: 非真实图片（SVG/占位图标/非法URL）-> '{main_image[:120]}'")
+    for key in ("image_urls", "detail_images_json"):
+        for idx, url in enumerate(_parse_image_values(record.get(key)), start=1):
+            if not is_real_image_url(url):
+                errors.append(f"{product_id}.{key}[{idx}]: 非真实图片（SVG/占位图标/非法URL）-> '{url[:120]}'")
 
 
 def check_price(record: dict, product_id: str, errors: list[str], warnings: list[str]) -> None:
@@ -69,18 +101,13 @@ def check_price(record: dict, product_id: str, errors: list[str], warnings: list
             if token in value:
                 errors.append(f"{product_id}.{key}: 含杂质文本 '{token}' -> '{value}'")
     status = clean(record.get("price_status"))
-    reason = clean(record.get("price_missing_reason"))
     has_value = bool(clean(record.get("price_min")) or clean(record.get("price_max")))
     if not has_value:
         if status not in ("missing", "review_required"):
             errors.append(f"{product_id}: 价格为空但 price_status='{status}'（应为 missing/review_required）")
-        if reason not in MISSING_REASONS:
-            errors.append(f"{product_id}: 价格为空但缺失原因='{reason}'（应为受控枚举）")
     else:
         if status not in ("single", "range"):
             warnings.append(f"{product_id}: 价格非空但 price_status='{status}'")
-        if reason:
-            warnings.append(f"{product_id}: 价格非空但仍带缺失原因 '{reason}'")
     if status == "review_required":
         if has_value:
             errors.append(f"{product_id}: review_required 状态不允许携带数值（原值保留在 L1 price_text）")
@@ -168,6 +195,7 @@ def main() -> int:
             continue
         product_ids.add(pid)
         check_price(record, pid, errors, warnings)
+        check_images(record, pid, errors)
         check_numeric_column(record, pid, "minimum_order_quantity", "起订量", errors)
         check_numeric_column(record, pid, "available_stock", "可售库存", errors)
         check_unit(record, pid, warnings)

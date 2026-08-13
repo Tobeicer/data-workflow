@@ -10,7 +10,13 @@ from typing import Any
 from openpyxl import Workbook, load_workbook
 from openpyxl.styles import Alignment, Border, Font, PatternFill, Side
 from openpyxl.utils import get_column_letter
-from product_profile import analyze_price, parse_moq_number, parse_unit_text
+from product_profile import (
+    analyze_price,
+    clean_image_list,
+    is_real_image_url,
+    parse_moq_number,
+    parse_unit_text,
+)
 
 
 PRODUCT_FIELDS = {
@@ -46,12 +52,10 @@ PRODUCT_FIELDS = {
     "price_max": "最高价(元)",
     "currency": "货币",
     "price_status": "价格状态",
-    "price_missing_reason": "价格缺失原因",
     "minimum_order_quantity": "起订量",
     "sales_unit": "销售单位",
     "available_stock": "可售库存",
     "delivery_commitment": "发货承诺",
-    "quality_report_number": "质检报告编号",
     "pack_length_cm": "包装长(cm)",
     "pack_width_cm": "包装宽(cm)",
     "pack_height_cm": "包装高(cm)",
@@ -61,7 +65,6 @@ PRODUCT_FIELDS = {
     "main_image_url": "商品主图",
     "image_urls": "商品图片",
     "video_url": "商品视频",
-    "detail_content_url": "详情内容链接",
     "detail_images_json": "详情图片(JSON)",
     "service_guarantees": "服务保障",
     "raw_sku_count": "原始SKU数量",
@@ -228,7 +231,6 @@ def product_record(product: dict, asset: dict) -> dict:
     source_fields = product.get("source_fields") or {}
     root_data = nested(source_fields, "Root", "fields", "dataJson", default={})
     gallery = nested(source_fields, "gallery", "fields", default={})
-    description = nested(source_fields, "description", "fields", default={})
     services = nested(source_fields, "mainServices", "fields", default={})
     shipping = nested(source_fields, "shippingServices", "fields", default={})
     title_fields = nested(source_fields, "productTitle", "fields", default={})
@@ -237,7 +239,12 @@ def product_record(product: dict, asset: dict) -> dict:
     if not isinstance(sku_map, dict):
         sku_map = {}
     stock_values = [item.get("canBookCount") for item in sku_map.values() if isinstance(item, dict) and isinstance(item.get("canBookCount"), (int, float))]
-    images = unique([clean(item) for item in (product.get("image_urls") or gallery.get("mainImage") or gallery.get("offerImgList") or [])])[:12]
+    images = clean_image_list(
+        product.get("image_urls")
+        or gallery.get("mainImage")
+        or gallery.get("offerImgList")
+        or []
+    )
     video = product.get("video") or gallery.get("video") or {}
     guarantees = unique(
         [
@@ -254,7 +261,7 @@ def product_record(product: dict, asset: dict) -> dict:
     mapped_attribute_keys = {
         "产品类别", "类型", "品牌", "型号", "货号", "功能", "材质", "产地", "适用人数",
         "适用年龄段", "适用年龄", "适用场景", "技术类型", "VR系统", "系统", "是否支持一件代发",
-        "是否跨境出口专供货源", "出口认证", "质检报告编号", "售后服务",
+        "是否跨境出口专供货源", "出口认证", "售后服务",
         "颜色", "是否IP授权", "3C配置类别", "商品3C认证码", "屏幕类型", "屏幕尺寸",
         "分辨率", "接口", "亮度", "对比度", "包装", "用途", "专利类型",
         "主要下游平台", "主要销售地区", "有可授权的自有品牌",
@@ -268,9 +275,7 @@ def product_record(product: dict, asset: dict) -> dict:
     first_pack = pack_specs[0] if isinstance(pack_specs, list) and pack_specs else {}
     if not isinstance(first_pack, dict):
         first_pack = {}
-    detail_images = product.get("detail_images") or []
-    if not isinstance(detail_images, list):
-        detail_images = []
+    detail_images = clean_image_list(product.get("detail_images") or [])
     related_products = product.get("related_products") or []
     if not isinstance(related_products, list):
         related_products = []
@@ -324,7 +329,6 @@ def product_record(product: dict, asset: dict) -> dict:
         "price_max": clean(pa.get("price_max")),
         "currency": clean(pa.get("currency")) or "CNY",
         "price_status": clean(pa.get("price_status")),
-        "price_missing_reason": clean(pa.get("price_missing_reason")),
         "minimum_order_quantity": parse_moq_number(product.get("minimum_order_quantity"))
         or parse_moq_number(order_param.get("beginNum")),
         "sales_unit": parse_unit_text(product.get("sales_unit"), product.get("moq_text"))
@@ -337,7 +341,6 @@ def product_record(product: dict, asset: dict) -> dict:
         ),
         "delivery_commitment": clean(product.get("delivery_commitment"))
         or clean(shipping.get("deliveryLimitText")),
-        "quality_report_number": clean(attributes.get("质检报告编号")),
         "other_attributes": other_attributes,
         "pack_length_cm": clean(first_pack.get("length_cm")),
         "pack_width_cm": clean(first_pack.get("width_cm")),
@@ -346,10 +349,13 @@ def product_record(product: dict, asset: dict) -> dict:
         "pack_weight_g": clean(first_pack.get("weight_g")),
         "pack_specs_json": json.dumps(pack_specs, ensure_ascii=False) if pack_specs else "",
         "detail_images_json": json.dumps(detail_images, ensure_ascii=False) if detail_images else "",
-        "main_image_url": clean(product.get("main_image_url")) or (images[0] if images else ""),
+        "main_image_url": (
+            clean(product.get("main_image_url"))
+            if is_real_image_url(product.get("main_image_url"))
+            else (images[0] if images else "")
+        ),
         "image_urls": images,
         "video_url": clean(video.get("video_url") or video.get("videoUrl")),
-        "detail_content_url": clean(product.get("detail_content_url") or description.get("detailUrl")),
         "service_guarantees": guarantees,
         "raw_sku_count": product.get("sku_count", ""),
         "related_product_count": len(related_products),
@@ -526,15 +532,25 @@ def write_sheet(workbook: Workbook, title: str, fields: dict[str, str], records:
         sheet.column_dimensions[get_column_letter(index)].width = width
 
 
-def validate_workbook(path: Path, product_count: int, manufacturer_count: int, sku_count: int = 0) -> None:
+def validate_workbook(
+    path: Path,
+    product_count: int,
+    manufacturer_count: int,
+    sku_count: int = 0,
+    products_only: bool = False,
+) -> None:
     workbook = load_workbook(path, read_only=False, data_only=False)
-    if workbook.sheetnames != ["商品信息", "厂家信息", "SKU明细"]:
+    expected_sheets = (
+        ["商品信息", "SKU明细"] if products_only else ["商品信息", "厂家信息", "SKU明细"]
+    )
+    if workbook.sheetnames != expected_sheets:
         raise RuntimeError(f"unexpected sheets: {workbook.sheetnames}")
     expected_rows = {
         "商品信息": product_count + 1,
-        "厂家信息": manufacturer_count + 1,
         "SKU明细": sku_count + 1,
     }
+    if not products_only:
+        expected_rows["厂家信息"] = manufacturer_count + 1
     for sheet in workbook.worksheets:
         if sheet.freeze_panes is not None:
             raise RuntimeError(f"{sheet.title} still has freeze panes")
@@ -553,9 +569,19 @@ def main() -> int:
     parser.add_argument("--limit", type=int, default=50)
     parser.add_argument("--rich-company-asset", action="append", default=[])
     parser.add_argument(
+        "--fallback-delivery",
+        default="",
+        help="旧交付 JSON：用于回填厂家名称/关联状态等商品行字段",
+    )
+    parser.add_argument(
         "--allow-missing-manufacturer",
         action="store_true",
         help="厂家未采集的商品也导出（厂家字段标待补），实现商品先行交付",
+    )
+    parser.add_argument(
+        "--products-only",
+        action="store_true",
+        help="只输出商品与 SKU，不输出厂家 sheet/记录（厂家字段保留在商品行）",
     )
     parser.add_argument("--delivery-id", default="1688_direct_20260716")
     parser.add_argument("--output-prefix", default="1688分类抽样最完整直接版_20260716")
@@ -564,6 +590,15 @@ def main() -> int:
     run_dirs = [Path(item) for item in args.run_dir]
     output_dir = Path(args.output_dir)
     output_dir.mkdir(parents=True, exist_ok=True)
+    fallback_products: dict[str, dict] = {}
+    if args.fallback_delivery:
+        fallback_path = Path(args.fallback_delivery)
+        if fallback_path.exists():
+            fallback_payload = read_json(fallback_path)
+            fallback_products = {
+                clean(item.get("product_id")): item
+                for item in fallback_payload.get("products") or []
+            }
     assets: dict[str, dict] = {}
     for run_dir in run_dirs:
         for path in sorted((run_dir / "l1" / "company_items").glob("*/company_asset.json")):
@@ -611,8 +646,9 @@ def main() -> int:
     for product in products:
         offer_id = clean(product.get("offer_id"))
         member_id = clean(product.get("member_id"))
+        allow_missing = args.allow_missing_manufacturer or args.products_only
         if not offer_id or offer_id in seen_offers or (
-            member_id not in assets and not args.allow_missing_manufacturer
+            member_id not in assets and not allow_missing
         ):
             continue
         seen_offers.add(offer_id)
@@ -620,10 +656,19 @@ def main() -> int:
         if len(selected) >= args.limit:
             break
 
-    product_records = [
-        product_record(product, assets.get(clean(product.get("member_id"))) or {})
-        for product in selected
-    ]
+    product_records = []
+    for product in selected:
+        record = product_record(product, assets.get(clean(product.get("member_id"))) or {})
+        old = fallback_products.get(clean(product.get("offer_id")), {})
+        for key in (
+            "manufacturer_name",
+            "manufacturer_relation_type",
+            "manufacturer_relation_status",
+            "youyiquan_category_candidate",
+        ):
+            if not record.get(key) and old.get(key):
+                record[key] = old[key]
+        product_records.append(record)
     sku_records: list[dict] = []
     seen_sku_rows: set[tuple[str, str, str, str]] = set()
     for product in selected:
@@ -657,7 +702,7 @@ def main() -> int:
         member_id = clean(record["manufacturer_member_id"])
         related[member_id].append(record)
         fallback_names[member_id] = clean(record["manufacturer_name"])
-    manufacturer_records = [
+    manufacturer_records = [] if args.products_only else [
         manufacturer_record(assets[member_id], related[member_id], fallback_names[member_id])
         for member_id in sorted(related)
         if member_id in assets
@@ -668,11 +713,16 @@ def main() -> int:
     sparse_factory_count = sum(item.get("data_quality_status") == "factory_archive_sparse_source" for item in manufacturer_records)
     payload = {
         "delivery_id": args.delivery_id,
-        "schema_version": "1.1.0",
+        "schema_version": "1.2.0",
         "delivery_type": "direct_readable_category_sample",
         "source": "1688",
         "status": "completed_with_source_sparse_fields",
-        "description": "商品与厂家通过manufacturer_id关联；厂家按memberId去重；全部厂家均以工厂档案为厂家字段入口，仅输出页面实际公开值，未上传或未披露字段保持空值并注明原因。",
+        "description": (
+            "商品与厂家通过manufacturer_id关联；厂家按memberId去重；全部厂家均以工厂档案为厂家字段入口，"
+            "仅输出页面实际公开值，未上传或未披露字段保持空值并注明原因。"
+            if not args.products_only
+            else "商品先行交付：仅输出商品与SKU，厂家档案本期不采集；商品行保留页面/旧交付可得的厂家基础字段。"
+        ),
         "sample_summary": {
             "product_count": len(product_records),
             "manufacturer_count": len(manufacturer_records),
@@ -688,7 +738,7 @@ def main() -> int:
                     for record in product_records
                     if clean(record.get("manufacturer_member_id")) not in assets
                 )
-                if args.allow_missing_manufacturer
+                if (args.allow_missing_manufacturer or args.products_only)
                 else 0
             ),
         },
@@ -711,10 +761,17 @@ def main() -> int:
     workbook = Workbook()
     workbook.remove(workbook.active)
     write_sheet(workbook, "商品信息", PRODUCT_FIELDS, product_records)
-    write_sheet(workbook, "厂家信息", MANUFACTURER_FIELDS, manufacturer_records)
+    if not args.products_only:
+        write_sheet(workbook, "厂家信息", MANUFACTURER_FIELDS, manufacturer_records)
     write_sheet(workbook, "SKU明细", DELIVERY_SKU_FIELDS, sku_records)
     workbook.save(xlsx_path)
-    validate_workbook(xlsx_path, len(product_records), len(manufacturer_records), len(sku_records))
+    validate_workbook(
+        xlsx_path,
+        len(product_records),
+        len(manufacturer_records),
+        len(sku_records),
+        products_only=args.products_only,
+    )
     print(json.dumps({"json": str(json_path), "xlsx": str(xlsx_path), "products": len(product_records), "manufacturers": len(manufacturer_records), "categories": len(categories)}, ensure_ascii=False))
     return 0
 

@@ -78,7 +78,7 @@
   --raw-jsonl runtime/runs/1688/20260812_crawl/details_v2_raw.jsonl `
   --delivery-json deliveries/1688/<上一版>/<delivery>.json `
   --old-l1-dir runtime/runs/1688/codex_l1_20260811 `
-  --old-l1-dir runtime/runs/1688/1688_validation_20260810_150101 `
+  --old-l1-dir runtime/runs/1688/<其他旧 L1 运行目录，按需> `
   --output-dir runtime/runs/1688/<run>/l1
 ```
 
@@ -86,6 +86,40 @@
 
 ```powershell
 .\.venv-data\Scripts\python.exe adapters/1688/src/validate_delivery_data.py <delivery.json>
+```
+
+### 图片链路正确方法（2026-08-12 踩坑后收紧）
+
+踩坑结论与当前唯一正确做法：
+
+- 主图/轮播图：必须从 `od_picture_gallery` 模块中筛选带 `preview-img` 的真实图片元素；**不能**取整个图库模块的全部 `<img>`，否则会混入 `gg_dtc.png` 页面图标和 `_sum` 缩略图。
+- 详情图：实际宿主不固定为 `v-detail-8`，当前页面为 `v-detail-q`。统一用 `[class*="html-description"]` + `v-detail-*` 前缀匹配，读取其 `shadowRoot` 内的 `<img>`；必须先滚动到页面底部触发懒加载。
+- 图片过滤：http(s) 且排除 `tps-`、`.svg`、`gg_dtc`、`_sum.(jpg|png|webp)`。浏览器提取（`detail_extract.js`）、Python 清洗（`product_profile.py`）与质量门禁（`validate_delivery_data.py`）使用同一套规则。
+- 视频：从页面、详情 shadow DOM、图库收集 `video/source` 的真实 URL；页面本身无视频时保持空值（如 1067481766759），不算失败。
+- JSONL 只能写单行 JSON（`JSON.stringify(record)`），禁止 pretty-print，否则后续 L1 构建会断行。
+- 断点：每个商品先写记录再写 `checkpoint.json`；触发验证/登录失效立即停止全部采集，不重试、不续跑。
+- 详情列统一为 `detail_images_json` 真实图片；`detail_content_url`、`price_missing_reason`、`quality_report_number` 已删除。
+- 厂家本期不采集，交付使用 `--products-only`（商品行保留厂家基础字段）。
+
+全量断点续采与交付命令：
+
+```powershell
+# 可选：把已验收的前 20 商品种子到新 run（避免重采）
+node runtime/runs/1688/crawl_full_images.mjs seed <new_run_id> 20260812_image_fix_v4
+
+# 全量采集（707 商品，遇验证立即停止）
+node runtime/runs/1688/crawl_full_images.mjs crawl <new_run_id> all
+
+# 修复模式：只重采失败/缺主图/缺详情图的记录
+node runtime/runs/1688/crawl_full_images.mjs repair <new_run_id>
+
+# 构建 L1 → 生成商品+SKU 交付 → 跑质量门禁
+python adapters/1688/src/run_full_fix.py `
+  --run-dir runtime/runs/1688/<new_run_id> `
+  --old-l1-dir runtime/runs/1688/codex_l1_20260811 `
+  --output-dir deliveries/1688/<delivery_dir> `
+  --output-prefix <prefix> `
+  --delivery-id <id>
 ```
 
 按已选商品清单运行去重后的多公司批次：
@@ -181,11 +215,13 @@
 - 每批核对请求数、完成数、唯一公司数、SKU 数、接口响应数、缺失字段和复核队列；数量异常、批量归零或解析为 0 时停止交付。
 - 只有正式登录态、受控在线质量证据、统一 `run_result`、n8n 状态路由和连续稳定运行验收完成后，才可申请启用。
 
-当前最新完整交付为 `deliveries/1688/1688_20260812_full/`（2026-08-12 全量 707 商品重爬，delivery_id=`1688_direct_20260812`，schema 1.1.0）：
-- 商品 54 列（新增 `price_min`/`price_max`/`currency`/`price_status`/`price_missing_reason`，移除原 `display_price` 原始文本列）；厂家 54 列；新增 **`SKU明细` sheet（4673 行）**；JSON 与中文 Excel 同构，商品通过 `厂家ID` 关联厂家。
-- 价格全部为纯数字（元，≤2 位小数）：单一价格 402 / 区间价格 305 / 缺失 0 / 需复核 0；价格区间由 SKU 明细聚合（页面真实值），超高精度原值保留在 `sku_price_text`。
+当前最新完整交付为 `deliveries/1688/1688_20260812/`（2026-08-12 全量 707 图片链路修复，delivery_id=`1688_full_image_fix_20260812`，schema 1.2.0）：
+- 商品+SKU 交付（厂家本期不采集）：**707 商品 / 4674 SKU**；已移除 `detail_content_url`、`price_missing_reason`、`quality_report_number`；详情统一为 `detail_images_json` 真实图片；商品行保留厂家基础字段。
+- 图片链路：主图+轮播图 706/707（唯一缺图为 `1029249900274`，页面已 404 下架）；详情图 704/707（另 2 个商品卖家未上传详情图，来源为空，不虚构）；视频 525/707；交付图片/视频 URL 抽查 40/40 可访问。
+- 价格全部为纯数字（元，≤2 位小数）：单一价格 408 / 区间价格 299 / 缺失 0 / 需复核 0；价格区间由 SKU 明细聚合（页面真实值），超高精度原值保留在 `sku_price_text`。
 - 质量门禁 `validate_delivery_data.py` 通过（0 hard errors / 0 warnings）；校验命令可随时重跑。
 - 全量原始字段保留在 L1-L2 与 `other_attributes`，不因展示精简而删除。历史 `review_only` 验证包已清理，其结论保留于本 README 第 4 节；被替代的历史交付目录（1688_20260807/1688_20260810_products/1688_20260811_full/1688_20260812_rebuild）已删除，L0-L2 运行资产保留在 `runtime/runs/1688/`。
+- 目录已收敛：旧全量、前 20 验收包与冒烟包已删除，`deliveries/1688/` 仅保留本最终版；采集与探查证据仍完整保留在 `runtime/runs/1688/`。
 
 ## 7. 登录态
 
@@ -193,7 +229,7 @@
 
 ## 8. 反爬基础（stealth 与自适应频控）
 
-详情页提取统一由 `adapters/1688/src/detail_extract.js` 承担（单一事实源，Playwright 与 Codex 控制 Chrome 共用）：多选择器容错（新旧两代价格模块 `od_main_price`/`od_price`/`od_consign`、SKU 的 expand/通用/表格/无四类结构）、活动文案节点排除、价格+库存合并节点拆分、库存文本校验防误抓、布局签名（layoutKey）与缺失原因记录。2026-08-12 全量 707 商品实测发现 **22 种布局变体**，全部由该脚本适配。
+详情页提取统一由 `adapters/1688/src/detail_extract.js` 承担（单一事实源，Playwright 与 Codex 控制 Chrome 共用）：多选择器容错（新旧两代价格模块 `od_main_price`/`od_price`/`od_consign`、SKU 的 expand/通用/表格/无四类结构）、活动文案节点排除、价格+库存合并节点拆分、库存文本校验防误抓、图库/详情图真实图片提取（`od_picture_gallery` 与 `v-detail-*` shadow DOM，兼容 `v-detail-8`/`v-detail-q` 等宿主，过滤 SVG、`/tps-`、`gg_dtc` 图标与 `_sum` 缩略图）、视频 URL 提取、布局签名（layoutKey）与缺失原因记录。2026-08-12 全量 707 商品实测发现 **22 种布局变体**，全部由该脚本适配。
 
 浏览器执行层统一来自 shared 内核（见总纲 §10.1），1688 采集脚本默认接入：
 
@@ -235,7 +271,7 @@
 - 搜索页：连续约 15 次请求触发滑块；`prepare-verification` 人工过验证后（cookie 写入 profile），后续 41 词零触发——「过验证后一次性跑完」策略有效。
 - 商品详情页：单会话 158 次请求零拦截；当日累计请求升高后，新会话早期（第 2 个请求）即可能触发，需注意会话冷却。
 - 公司/厂家页：连续约 23 次请求触发滑块，等待 240s 无人处理即中断；公司采集适合独立低频分批任务。
-- 完整报告：`runtime/runs/1688/1688_validation_20260810_150101/ANTI_CRAWL_REPORT.md`（runtime 资产，不进 git）。
+- 该批的详细报告已随 2026-08-10 验证运行目录在目录收敛时清理，结论保留在上方三点与本指南第 2 节失败链路中。
 
 ### 2026-08-11 Codex 控制浏览器采集（540 商品扩容）
 

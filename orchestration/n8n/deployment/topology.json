@@ -1,6 +1,6 @@
 {
     "schema_version":  "1.0.0",
-    "inspected_at":  "2026-08-05T07:56:08.5253004+00:00",
+    "inspected_at":  "2026-08-13T03:07:58.5175739+00:00",
     "n8n":  {
                 "status":  "unavailable",
                 "command":  {
@@ -11,50 +11,50 @@
                             },
                 "deployment_mode":  "not_detected",
                 "docker_compose":  {
-                                       "available":  true,
-                                       "path":  "C:\\Program Files\\Docker\\Docker\\resources\\bin\\docker.exe",
-                                       "version":  "Docker Compose version v5.1.4",
-                                       "exit_code":  0
+                                       "available":  false,
+                                       "path":  null,
+                                       "version":  null,
+                                       "exit_code":  null
                                    },
                 "real_import_export_ready":  false
             },
     "runner":  {
-                   "status":  "available",
-                   "operating_system":  "Microsoft Windows NT 10.0.19045.0",
-                   "workspace":  "E:\\Desktop_zm\\data-workflow",
+                   "status":  "unavailable",
+                   "operating_system":  "Microsoft Windows NT 10.0.26200.0",
+                   "workspace":  "C:\\Users\\Administrator\\Desktop\\data-workflow",
                    "python":  {
-                                  "available":  true,
-                                  "path":  "E:\\Desktop_zm\\data-workflow\\.venv-data\\Scripts\\python.exe",
-                                  "version":  "Python 3.11.9",
-                                  "exit_code":  0
+                                  "available":  false,
+                                  "path":  "C:\\Users\\Administrator\\AppData\\Local\\Microsoft\\WindowsApps\\python.exe",
+                                  "version":  "",
+                                  "exit_code":  9009
                               },
                    "powershell":  {
                                       "available":  true,
-                                      "path":  "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
-                                      "version":  "5.1.19041.5912",
+                                      "path":  "C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+                                      "version":  "5.1.26100.9168",
                                       "exit_code":  0
                                   },
                    "node":  {
-                                "available":  true,
-                                "path":  "E:\\nodejs\\node.exe",
-                                "version":  "v24.18.0",
-                                "exit_code":  0
+                                "available":  false,
+                                "path":  null,
+                                "version":  null,
+                                "exit_code":  null
                             },
                    "invocation":  "local_process_cli"
                },
     "runtime_storage":  {
                             "status":  "available",
-                            "runtime_root":  "E:\\Desktop_zm\\data-workflow\\runtime",
-                            "deliveries_root":  "E:\\Desktop_zm\\data-workflow\\deliveries",
-                            "workspace_drive":  "E:\\",
-                            "free_bytes":  882103361536,
+                            "runtime_root":  "C:\\Users\\Administrator\\Desktop\\data-workflow\\runtime",
+                            "deliveries_root":  "C:\\Users\\Administrator\\Desktop\\data-workflow\\deliveries",
+                            "workspace_drive":  "C:\\",
+                            "free_bytes":  110707150848,
                             "git_tracked":  false
                         },
     "lock_store":  {
                        "status":  "unavailable",
                        "selected":  null,
-                       "detected_candidate":  "redis_service",
-                       "candidate_status":  "running",
+                       "detected_candidate":  null,
+                       "candidate_status":  "not_detected",
                        "atomic_compare_and_set_verified":  false,
                        "lease_renewal_verified":  false,
                        "reason":  "No project lock implementation and renewal contract has been verified."

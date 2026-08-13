@@ -1,4 +1,5 @@
 .env.local
+.planning/
 database/*.sql
 .venv-mitmproxy/
 .venv-data/

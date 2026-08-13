@@ -1,6 +1,6 @@
 # 微信来源适配器（实验性）
 
-状态：`H1/H2 已验证`（密钥 18/18、解密 18/18、端到端冒烟通过、watch 轮询 0.01s/轮）。**2026-08-10 晚：个人数据已全部清理**（staging/L0/密钥/解密副本均已删除，git 无微信数据）；密钥文件删除后需重新提取（只读运行时扫描，1 分钟，无需重启微信）。采集入口已收敛为单命令 `collector.py --once --load`，n8n 编排见 `orchestration/n8n/workflows/wechat_collect.json`。
+状态：`H1/H2/H3 已验证`（密钥 18/18、解密 18/18、端到端冒烟通过、商品信号 123 条 confirmed）。**2026-08-10 晚：个人数据已全部清理**（staging/L0/密钥/解密副本均已删除，git 无微信数据）；密钥文件删除后需重新提取（只读运行时扫描，1 分钟，无需重启微信）。采集入口已收敛为单命令 `collector.py --once --load`，n8n 编排见 `orchestration/n8n/workflows/wechat_collect.json`。
 唯一现行总纲：`../../docs/游艺圈数据工作流总纲.md`（Phase H）
 
 ## 来源定位与范围
@@ -27,7 +27,7 @@
    ↓
 adapters/wechat/src/collector.py → L0 原始 JSONL
    ↓ 清洗、分类、去重
-PostgreSQL staging：wechat_msg / wechat_moment / wechat_contact / sync_watermark
+staging（本地 SQLite 默认；PostgreSQL DDL 已备、待平台确认）：wechat_msg / wechat_moment / wechat_contact / sync_watermark
 ```
 
 - 增量同步：水位表记录最后同步位置；消息以 msgId 为幂等键去重；朋友圈按时间快照增量比对（H2 实现）。
@@ -75,8 +75,6 @@ store.search("关键词")            # 跨群全文搜索：{groups, messages, m
 - 工作流：`orchestration/n8n/workflows/wechat_collect.json`
 - 链路：定时触发（每 5 分钟）→ `collector.py --once --load`（采集+入库单命令）→ 增量判断 → 记录
 - 密钥缺失时：先跑 `wcdb_key_tool_windows.py extract`（vendored，只读运行时扫描，不动微信登录）
-- 后续（H3）：接入商品信号预筛 + AI 分类节点
-
 ## H3 商品信号抽取层（2026-08-11 已实现）
 
 目标：把微信内容中的商品信息转化为结构化数据（非闲聊数据）。
@@ -91,7 +89,7 @@ store.search("关键词")            # 跨群全文搜索：{groups, messages, m
 
 `product_keywords.json` 为**信号预筛词表（非搜索词）**，来自分类清单；核心商品判断由第 2 步 AI 精筛完成。分类清单变更后需按 1688 适配器关键词库维护流程重新生成该词表以保持同步（产物头部带 `taxonomy_version`/`source_sha256`）。
 
-验证：`pytest adapters/wechat/tests -q` → 29 passed；合成端到端：闲聊全过滤，商品候选正确分级，AI 无 key 时优雅跳过。
+验证：`pytest adapters/wechat/tests -q` → 34 passed；合成端到端：闲聊全过滤，商品候选正确分级，AI 无 key 时优雅跳过。
 
 使用：配置 `.env.local` 后运行 `python src/ai_classify.py --staging <path>` 即可对 pending 信号做确认。
 
@@ -103,11 +101,11 @@ store.search("关键词")            # 跨群全文搜索：{groups, messages, m
 ```text
 uin   = kvcomm 目录 key_<uin>_*.statistic 的数字
         （Windows：%APPDATA%\Tencent\xwechat\ilink\kvcomm 与 net\kvcomm）
-wxid  = 数据目录名去 4 位 hex 后缀（a37531776_c4a9 -> a37531776）
+wxid  = 数据目录名去 4 位 hex 后缀（`<wxid>_c4a9` -> `<wxid>`）
 aes_key = md5("<uin><wxid>") 的 hex 前 16 字符（16 字节 ASCII）
 xor_key = uin & 0xFF
 ```
-本机验证：uin=2712562240，aes_key=`cfd5c933dcd4650e`，xor=0x40。
+本机验证通过（uin/aes_key/xor 具体值不写入文档）。
 
 **V2 文件布局**：`[6B magic][4B aes_size LE][4B xor_size LE][1B pad] + aes_size 字节 AES-128-ECB 密文 + 明文段 + xor_size 字节 XOR 段`。
 
@@ -126,15 +124,15 @@ python src/ai_classify.py --staging runtime/state/wechat/staging.sqlite --requeu
 
 **staging.wechat_img**：`(chat, local_id)` 唯一，含 `jpg_path / dec_ok / img_bytes / format`；解密后用 PIL 校验，损坏图标 `dec_ok=0`（微信侧文件损坏，跳过不送 AI）。
 
-**实测效果**（上级微信号 a37531776，2026-08-11）：308 张图片解密成功（9 张损坏标记跳过）；AI 多模态识别出娃娃机/街机/彩票机/礼品机/扫码支付盒子/水上摩托模拟机等，confirmed 线索从 54 条升至 **123 条**（图片新增约 69 条）。
+**实测效果**（上级微信号，本地账号已脱敏；2026-08-11）：308 张图片解密成功（9 张损坏标记跳过）；AI 多模态识别出娃娃机/街机/彩票机/礼品机/扫码支付盒子/水上摩托模拟机等，confirmed 线索从 54 条升至 **123 条**（图片新增约 69 条）。
 
 **模型**：中转站 `gpt-5.6-sol` 为多模态模型，支持 `image_url` base64 输入；`.env.local` 的 `WECHAT_AI_*` 三键即其中转站配置。
 
 ### 群权重与形态分拣（2026-08-11）
 
-- `config/group_weights.json`：66 个群人工标注权重（S=3 核心货源 8 个 / A=2 行业相关 25 个 / B=1 杂 18 个 / C=0 无关 14 个），预筛按权重加权（S×1.5 / A×1.2 / B×1.0 / C×0.5）
+- `config/group_weights.json`：66 个群人工标注权重（S=3 核心货源 8 个 / A=2 行业相关 25 个 / B=1 杂 19 个 / C=0 无关 14 个），预筛按权重加权（S×1.5 / A×1.2 / B×1.0 / C×0.5）
 - 形态分拣（`product_signal.detect_form`）：A 纯文字 / B 图片 / C 链接 / D 混合；**图片消息仅 S/A 级群进候选**（避免表情包洪水），实测 109 条图片候选全部来自 S/A 群
-- S 级群：小赵～找产品、颖品同行交流、微妙申元金银狮宝、讯娱科技礼品机、电玩设备信息交流群、（番禺）同行交流专区、游戏销售交流群、双龙戏珠押注
+- S 级群名单见 `config/group_weights.json`（8 个核心货源群，名单不在文档中复制）
 - **详细规划**：见 [docs/商品信息分析提取存储规划.md](docs/商品信息分析提取存储规划.md)（文字/图片/链接/混合四种形态的分析-提取-存储方案）
 
 ## 已落地文件（2026-08-10）

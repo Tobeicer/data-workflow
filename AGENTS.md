@@ -1,13 +1,13 @@
 # Project Context
 
 - Project: 游艺圈
-- Workspace: `E:\Desktop_zm\data-workflow`
+- Workspace: `C:\Users\Administrator\Desktop\data-workflow`
 - Current scope: data asset workflow, not platform construction
 
 ## Directory Boundaries
 
-- `docs/`: documentation index, sole active handbook, classification reference and protected historical requirements.
-- ``: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
+- `docs/`: documentation index, sole active handbook, field specification, classification reference and protected historical requirements.
+- Workspace root: source adapters, acquisition guides, scripts, raw assets, cleaned data and deliveries.
 - `docs/requirements/游艺圈历史总体需求.md`: merged historical overall requirements (former `project-split/` + requirements framework); reference only, never treated as active scope.
 - `docs/requirements/信息整理.md`: the only entry that receives new confirmed requirements.
 
@@ -20,9 +20,8 @@ When documents conflict, use this order:
 3. `docs/游艺圈数据工作流总纲.md` (sole active handbook: boundaries, architecture, contracts, roadmap, status and next action).
 4. The current source guide under `adapters/<source>/README.md` for source-specific behavior.
 5. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
-6. `docs/数据字段规范.md` for the database field baseline (public schema table structures and the only writable staging table).
-7. `docs/数据字段规范.md` for the current L3 Excel adapter only.
-8. Protected historical references (`docs/requirements/游艺圈历史总体需求.md`), only when historical product context is explicitly needed.
+6. `docs/数据字段规范.md` for the database field baseline (public schema table structures and the only writable staging table) and the current L3 Excel adapter.
+7. Protected historical references (`docs/requirements/游艺圈历史总体需求.md`), only when historical product context is explicitly needed.
 
 New confirmed business requirements go to `docs/requirements/信息整理.md`.
 
@@ -66,9 +65,10 @@ Shared control-plane behavior does not imply shared collectors. Every platform o
 
 - Current Manlifang assets, counts, tracked code and commands are documented only in `adapters/manlifang/README.md`.
 - The 1688 and Taobao executable guides are `adapters/1688/README.md` and `adapters/taobao/README.md`.
+- The experimental WeChat source (Phase H, H1/H2/H3 done) is documented only in `adapters/wechat/README.md`; it does not participate in the seven commodity sources' G4 enablement.
 - Source status and enabled state are defined only in `orchestration/n8n/configs/source_registry.json`.
 
-Formal targets are `orchestration/n8n/`, `adapters/<source>/`, `shared/`, `contracts/`, `configs/`, `tests/`, `tools/`, `runtime/` and `deliveries/`. Planned-only directories (`configs/`, `tools/`, `orchestration/n8n/workflows/`) are created when their tasks start (G1, A2/A6, B6); their contracts live in the handbook, absence in the working tree is expected.
+Formal targets are `orchestration/n8n/`, `adapters/<source>/`, `shared/`, `contracts/`, `configs/`, `tests/`, `tools/`, `runtime/` and `deliveries/`. Roadmap tasks that have not started have no placeholder files; their contracts live in the handbook. The G1 `configs/`, the A2/A6 validators under `tools/`, and the B6 master/shared/source workflows under `orchestration/n8n/workflows/` are created when those tasks start. Current `tools/` contains only the keyword export tool and current `orchestration/n8n/workflows/` contains only the experimental WeChat workflow.
 
 ## Database Snapshot Reference
 

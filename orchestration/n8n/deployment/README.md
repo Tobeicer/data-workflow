@@ -4,25 +4,25 @@
 
 ## 当前现场结论
 
-检测日期：2026-08-05（目录扁平化后重新核验）。机器记录以 `topology.json` 的 `inspected_at` 为准。
+检测日期：2026-08-13（工作区迁移到 C 盘后重新核验）。机器记录以 `topology.json` 的 `inspected_at` 为准。
 
 | 组件 | 状态 | 结论 |
 |---|---|---|
 | n8n | `unavailable` | 本机未检测到 `n8n` 命令，真实工作流导入、导出和执行保持阻塞 |
-| Docker Compose | `available` | CLI 可用；仅证明可调用 Compose，不证明 n8n 容器已经部署 |
-| Windows runner | `available` | Python 3.11、Windows PowerShell 5.1 和 Node.js 可作为本地执行基础 |
-| runtime/deliveries | `available` | 位于工作区 E 盘，运行资产不进入 Git |
-| lock store | `unavailable` | 检测到运行中的 Redis 候选，但项目尚未验证原子比较交换、租约续期和所有权校验 |
+| Docker Compose | `unavailable` | 当前机器未检测到 Docker 命令；n8n 容器部署保持阻塞 |
+| Windows runner | `unavailable` | Windows PowerShell 可用；Python 命令为 WindowsApps 占位且 `.venv-data` 尚未重建，Node 未检测到 |
+| runtime/deliveries | `available` | 位于工作区 C 盘，运行资产不进入 Git |
+| lock store | `unavailable` | Redis 未检测到，且项目尚未验证原子比较交换、租约续期和所有权校验 |
 | credential store | `unavailable` | n8n 尚未部署；检测脚本不读取任何凭据值 |
 
-因此 A2-A6 可以继续离线建设，B6 的真实 n8n 导入、导出和受控执行暂时阻塞。
+离线基础建设不依赖 n8n；B6 的真实 n8n 导入、导出和受控执行暂时阻塞。当前副本需先重建 Python 虚拟环境（`.venv-data`）并安装 Node 后，A2-A6 才能继续执行。
 
 ## 本地开发拓扑
 
 ```text
 Git 工作区
 ├─ n8n 控制面：未安装
-├─ Windows runner：本机 Python/PowerShell/Node
+├─ Windows runner：本机 PowerShell 可用；Python/Node 待安装
 ├─ runtime：runtime/（不进 Git）
 ├─ deliveries：deliveries/（不进 Git）
 ├─ lock store：未选定

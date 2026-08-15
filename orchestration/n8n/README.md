@@ -26,3 +26,21 @@ n8n 只负责触发、来源锁、编排、重试、运行状态、人工门禁�
 禁止向 Git 提交密钥、Cookie、账号密码、浏览器 profile、原始大数据、图片库或运行产物。敏感配置使用本地未跟踪环境文件或 n8n 凭据存储；L0-L2 资产进入忽略的 `runtime/`，L3 交付进入忽略的 `deliveries/`。
 
 工作流导出统一命名为 `<scope>_<source>_<version>.json`。导出前必须清除凭据引用中的敏感值，不得把不存在或未验收的工作流写成已启用状态。
+
+## 本地运行（2026-08-13 已落地）
+
+本机 n8n 已安装并运行，数据库使用本地 PostgreSQL 的 `n8n` 库；1688 工作流 `1688_pipeline_v1` 已导入但保持未激活，等待干跑和验收。
+
+启动顺序：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File orchestration/n8n/deployment/start_all.ps1
+```
+
+停止：
+
+```powershell
+powershell -ExecutionPolicy Bypass -File orchestration/n8n/deployment/stop_all.ps1
+```
+
+访问 `http://localhost:5678`。工作流 JSON 是 `orchestration/n8n/workflows/sources/1688/source_1688_v1.0.0.json`；在四道启用门禁完成前，`source_registry.json` 中的 1688 仍保持 `enabled=false`。

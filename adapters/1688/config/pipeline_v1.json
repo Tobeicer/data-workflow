@@ -1,0 +1,8 @@
+{
+  "pipeline_version": "1.0.0",
+  "source": "1688",
+  "data_root": "\\\\tdd-nas\\ai应用部\\游艺圈\\data",
+  "media_root": "\\\\tdd-nas\\ai应用部\\游艺圈\\data\\media",
+  "product_delivery": "\\\\tdd-nas\\ai应用部\\游艺圈\\data\\deliveries\\1688\\1688_20260812\\1688_20260812.json",
+  "manufacturer_delivery": "\\\\tdd-nas\\ai应用部\\游艺圈\\data\\deliveries\\1688\\1688_20260813\\1688_20260813.json"
+}

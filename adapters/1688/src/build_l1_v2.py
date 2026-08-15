@@ -37,6 +37,7 @@ from product_profile import (  # noqa: E402
     parse_stock_text_number,
     parse_unit_text,
 )
+from sku_specs import enrich_sku_row, parse_dimensions  # noqa: E402
 
 
 def clean(value) -> str:
@@ -74,7 +75,10 @@ def load_old_skus(old_dirs: list[Path]) -> dict[str, list]:
 def build_sku_rows(raw: dict, offer_id: str, collected_at: str) -> list[dict]:
     rows: list[dict] = []
     seen: set[tuple[str, str, str]] = set()
-    for item in raw.get("skuRows") or []:
+    _, dimensions = parse_dimensions(
+        raw.get("skuDimension") or raw.get("sku_dimension")
+    )
+    for item in raw.get("skuRows") or raw.get("sku_rows") or []:
         if not isinstance(item, dict):
             continue
         name = clean(item.get("label"))
@@ -92,17 +96,20 @@ def build_sku_rows(raw: dict, offer_id: str, collected_at: str) -> list[dict]:
         if not price_match:
             price_match = re.search(r"([0-9]+(?:\.[0-9]+)?)", price_text)
         rows.append(
-            {
-                "source_platform": "1688",
-                "offer_id": offer_id,
-                "sku_name": name,
-                "sku_price": price_match.group(1) if price_match else "",
-                "sku_price_text": price_text,
-                "stock_text": stock_text if "库存" in stock_text else "",
-                "stock_quantity": parse_stock_text_number(stock_text),
-                "sku_image_url": image_url,
-                "collected_at": collected_at,
-            }
+            enrich_sku_row(
+                {
+                    "source_platform": "1688",
+                    "offer_id": offer_id,
+                    "sku_name": name,
+                    "sku_price": price_match.group(1) if price_match else "",
+                    "sku_price_text": price_text,
+                    "stock_text": stock_text if "库存" in stock_text else "",
+                    "stock_quantity": parse_stock_text_number(stock_text),
+                    "sku_image_url": image_url,
+                    "collected_at": collected_at,
+                },
+                dimensions,
+            )
         )
     return rows
 
@@ -146,21 +153,26 @@ def main() -> int:
         if not offer_id:
             skipped += 1
             continue
-        status = raw.get("status")
-        collected_at = clean(raw.get("extractedAt"))
+        # 兼容两种原始格式：任务层新格式（snake_case）与 2026-08-12 旧格式（camelCase）
+        status = raw.get("status") or raw.get("capture_status") or "success"
+        collected_at = clean(raw.get("extractedAt") or raw.get("collected_at"))
         old_path = old_l1.get(offer_id)
         old = json.loads(old_path.read_text(encoding="utf-8")) if old_path else {}
 
-        attrs = filter_product_attributes(raw.get("attrs") or {})
-        pack_specs = parse_pack_specs(raw.get("packRows") or [])
+        attrs = filter_product_attributes(
+            raw.get("attrs") or raw.get("attributes") or {}
+        )
+        pack_specs = parse_pack_specs(
+            raw.get("packRows") or raw.get("pack_rows") or []
+        )
         sku_rows = build_sku_rows(raw, offer_id, collected_at)
 
         product = dict(old)
         raw_success = status == "success"
-        raw_image_urls = clean_image_list(raw.get("imageUrls") or []) if raw_success else []
-        raw_main_image = clean(raw.get("mainImageUrl")) if raw_success else ""
-        raw_detail_images = clean_image_list(raw.get("detailImages") or []) if raw_success else []
-        raw_video_url = clean(raw.get("videoUrl")) if raw_success else ""
+        raw_image_urls = clean_image_list(raw.get("imageUrls") or raw.get("image_urls") or []) if raw_success else []
+        raw_main_image = clean(raw.get("mainImageUrl") or raw.get("main_image_url")) if raw_success else ""
+        raw_detail_images = clean_image_list(raw.get("detailImages") or raw.get("detail_images") or []) if raw_success else []
+        raw_video_url = clean(raw.get("videoUrl") or raw.get("video_url")) if raw_success else ""
         old_video = old.get("video") or {}
         if not isinstance(old_video, dict):
             old_video = {}
@@ -168,28 +180,31 @@ def main() -> int:
             {
                 "source_platform": "1688",
                 "offer_id": offer_id,
-                "product_url": clean(raw.get("url")) or clean(old.get("product_url"))
+                "product_url": clean(raw.get("url") or raw.get("product_url")) or clean(old.get("product_url"))
                 or f"https://detail.1688.com/offer/{offer_id}.html",
                 "title": clean(raw.get("title")) or clean(old.get("title")),
-                "price_text": clean(raw.get("priceText")),
-                "price_range_text": clean(raw.get("priceRangeText")),
-                "price_node": clean(raw.get("priceNode")),
-                "moq_text": clean(raw.get("moqText")),
-                "minimum_order_quantity": parse_moq_number(raw.get("moqText"))
+                "price_text": clean(raw.get("priceText") or raw.get("price_text")),
+                "price_range_text": clean(raw.get("priceRangeText") or raw.get("price_range_text")),
+                "price_node": clean(raw.get("priceNode") or raw.get("price_node")),
+                "moq_text": clean(raw.get("moqText") or raw.get("moq_text")),
+                "minimum_order_quantity": parse_moq_number(raw.get("moqText") or raw.get("moq_text"))
                 or clean(old.get("minimum_order_quantity")),
-                "sales_unit": parse_unit_text(raw.get("unitText"), raw.get("moqText"))
+                "sales_unit": parse_unit_text(
+                    raw.get("unitText") or raw.get("unit_text"),
+                    raw.get("moqText") or raw.get("moq_text"),
+                )
                 or clean(old.get("sales_unit")),
-                "available_stock": parse_stock_text_number(raw.get("stockText"))
+                "available_stock": parse_stock_text_number(raw.get("stockText") or raw.get("stock_text"))
                 or clean(old.get("available_stock")),
-                "delivery_commitment": clean(raw.get("deliveryText"))
+                "delivery_commitment": clean(raw.get("deliveryText") or raw.get("delivery_commitment"))
                 or clean(old.get("delivery_commitment")),
-                "supplier_name": clean(raw.get("supplierName")) or clean(old.get("supplier_name")),
+                "supplier_name": clean(raw.get("supplierName") or raw.get("supplier_name")) or clean(old.get("supplier_name")),
                 "attributes": attrs,
                 "pack_specs": pack_specs if pack_specs else (old.get("pack_specs") or []),
                 "sku_count": len(sku_rows),
-                "member_id": clean(raw.get("memberId")) or clean(old.get("member_id")),
-                "sku_dimension": clean(raw.get("skuDimension")),
-                "layout_key": clean(raw.get("layoutKey")),
+                "member_id": clean(raw.get("memberId") or raw.get("member_id")) or clean(old.get("member_id")),
+                "sku_dimension": clean(raw.get("skuDimension") or raw.get("sku_dimension")),
+                "layout_key": clean(raw.get("layoutKey") or raw.get("layout_key")),
                 "modules": raw.get("modules") or {},
                 "capture_notes": [clean(x) for x in (raw.get("notes") or [])],
                 "collected_at": collected_at or clean(old.get("collected_at")),

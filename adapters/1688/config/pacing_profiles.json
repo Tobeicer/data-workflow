@@ -1,0 +1,20 @@
+{
+  "slow": {
+    "search_delay_s": 20,
+    "product_delay_s": 6,
+    "manufacturer_delay_s": 8,
+    "slider_cooldown_s": 90
+  },
+  "stable": {
+    "search_delay_s": 15,
+    "product_delay_s": 3,
+    "manufacturer_delay_s": 4,
+    "slider_cooldown_s": 60
+  },
+  "fast": {
+    "search_delay_s": 12,
+    "product_delay_s": 1,
+    "manufacturer_delay_s": 2,
+    "slider_cooldown_s": 45
+  }
+}

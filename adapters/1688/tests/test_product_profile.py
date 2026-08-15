@@ -136,18 +136,18 @@ def test_product_media_and_service_fields_are_promoted_from_public_modules() -> 
                 "gallery": {
                     "fields": {
                         "mainImage": [
-                            "https://example.test/a.jpg",
-                            "https://example.test/b.jpg",
+                            "https://cbu01.alicdn.com/img/ibank/a.jpg",
+                            "https://cbu01.alicdn.com/img/ibank/b.jpg",
                         ],
                         "video": {
                             "title": "商品视频",
-                            "videoUrl": "https://example.test/product.mp4",
-                            "coverUrl": "https://example.test/product-cover.jpg",
+                            "videoUrl": "https://cloud.video.taobao.com/play/product.mp4",
+                            "coverUrl": "https://cbu01.alicdn.com/img/ibank/product-cover.jpg",
                         },
                     }
                 },
                 "description": {
-                    "fields": {"detailUrl": "https://example.test/detail-content"}
+                    "fields": {"detailUrl": "https://cbu01.alicdn.com/img/ibank/detail-content"}
                 },
                 "mainServices": {
                     "fields": {
@@ -162,15 +162,15 @@ def test_product_media_and_service_fields_are_promoted_from_public_modules() -> 
         collected_at="2026-07-16T10:00:00+08:00",
     )
 
-    assert product["main_image_url"] == "https://example.test/a.jpg"
+    assert product["main_image_url"] == "https://cbu01.alicdn.com/img/ibank/a.jpg"
     assert product["image_urls"] == [
-        "https://example.test/a.jpg",
-        "https://example.test/b.jpg",
+        "https://cbu01.alicdn.com/img/ibank/a.jpg",
+        "https://cbu01.alicdn.com/img/ibank/b.jpg",
     ]
     assert product["video"] == {
         "title": "商品视频",
-        "video_url": "https://example.test/product.mp4",
-        "cover_url": "https://example.test/product-cover.jpg",
+        "video_url": "https://cloud.video.taobao.com/play/product.mp4",
+        "cover_url": "https://cbu01.alicdn.com/img/ibank/product-cover.jpg",
     }
     assert "detail_content_url" not in product
     assert product["service_guarantees"] == ["7天无理由退货", "晚发必赔"]
@@ -252,25 +252,25 @@ def test_normalize_product_capture_filters_svg_placeholders() -> None:
             "mainImageUrl": "https://img.alicdn.com/tps/T1.svg",
             "imageUrls": [
                 "https://img.alicdn.com/tps/T2.svg",
-                "https://img.alicdn.com/kf/real-1.jpg",
-                "https://img.alicdn.com/kf/real-2.jpg_.webp",
+                "https://cbu01.alicdn.com/img/ibank/real-1.jpg",
+                "https://cbu01.alicdn.com/img/ibank/real-2.jpg_.webp",
             ],
             "detailImages": [
                 "https://img.alicdn.com/tps/icon.svg?x=1",
-                "https://img.alicdn.com/kf/detail-1.jpg",
+                "https://cbu01.alicdn.com/img/ibank/detail-1.jpg",
             ],
-            "videoUrl": "https://vod.example.test/clip.mp4",
+            "videoUrl": "https://cloud.video.taobao.com/play/clip.mp4",
         },
         collected_at="2026-08-12T10:00:00+08:00",
     )
 
-    assert product["main_image_url"] == "https://img.alicdn.com/kf/real-1.jpg"
+    assert product["main_image_url"] == "https://cbu01.alicdn.com/img/ibank/real-1.jpg"
     assert product["image_urls"] == [
-        "https://img.alicdn.com/kf/real-1.jpg",
-        "https://img.alicdn.com/kf/real-2.jpg_.webp",
+        "https://cbu01.alicdn.com/img/ibank/real-1.jpg",
+        "https://cbu01.alicdn.com/img/ibank/real-2.jpg_.webp",
     ]
-    assert product["detail_images"] == ["https://img.alicdn.com/kf/detail-1.jpg"]
-    assert product["video"]["video_url"] == "https://vod.example.test/clip.mp4"
+    assert product["detail_images"] == ["https://cbu01.alicdn.com/img/ibank/detail-1.jpg"]
+    assert product["video"]["video_url"] == "https://cloud.video.taobao.com/play/clip.mp4"
 
 
 def test_normalize_product_capture_filters_icon_and_thumbnail_urls() -> None:

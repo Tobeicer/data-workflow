@@ -1,0 +1,13 @@
+{
+  "source": "1688",
+  "data_root": "\\\\tdd-nas\\ai应用部\\游艺圈\\data",
+  "master_dir": "\\\\tdd-nas\\ai应用部\\游艺圈\\data\\normalized\\1688\\master",
+  "runs_dir": "\\\\tdd-nas\\ai应用部\\游艺圈\\data\\runs\\1688",
+  "delivery_out": "\\\\tdd-nas\\ai应用部\\游艺圈\\data\\deliveries\\1688\\1688_latest",
+  "seed_products": [
+    "\\\\tdd-nas\\ai应用部\\游艺圈\\data\\deliveries\\1688\\1688_20260812\\1688_20260812.json"
+  ],
+  "seed_manufacturers": [
+    "\\\\tdd-nas\\ai应用部\\游艺圈\\data\\deliveries\\1688\\1688_20260813\\1688_20260813.json"
+  ]
+}

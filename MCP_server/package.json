@@ -1,0 +1,14 @@
+{
+  "name": "mcp-server-qwen-vision",
+  "version": "1.0.0",
+  "description": "Vision MCP server exposing analyze_image via Alibaba Cloud Bailian (阿里云百炼) qwen3-vl-flash",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.30.0",
+    "zod": "^4.4.3"
+  }
+}

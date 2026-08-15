@@ -121,7 +121,20 @@ def test_all_tpdocument_response_urls_are_attached_to_field_evidence() -> None:
     assert source_urls["tpdocument_credit"].endswith("/credit")
 
 
-def test_captcha_response_marks_page_as_human_verification_required() -> None:
+def test_verification_page_text_marks_human_verification_required() -> None:
+    page = collect_company_pilot.CapturedPage(
+        page_type="shop",
+        requested_url="https://demo.1688.com",
+        final_url="https://demo.1688.com",
+        title="店铺",
+        html="<html></html>",
+        text="安全验证 请拖动滑块完成验证",
+    )
+
+    assert restriction_from_page(page) == "human_verification_required"
+
+
+def test_benign_alibaba_security_scripts_are_not_flagged() -> None:
     page = collect_company_pilot.CapturedPage(
         page_type="shop",
         requested_url="https://demo.1688.com",
@@ -131,14 +144,14 @@ def test_captcha_response_marks_page_as_human_verification_required() -> None:
         text="店铺内容",
         responses=[
             collect_company_pilot.CapturedResponse(
-                url="https://h5api.1688.com/punish?action=captcha",
+                url="https://h5api.m.1688.com/_____tmd_____/punish?x5secdata=xg",
                 status=200,
                 body='{"x5step":2,"verify":"captcha"}',
             )
         ],
     )
 
-    assert restriction_from_page(page) == "human_verification_required"
+    assert restriction_from_page(page) == ""
 
 
 def test_human_verification_waiter_does_not_ignore_captcha_iframe(tmp_path: Path) -> None:

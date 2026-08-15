@@ -25,6 +25,7 @@ from collect_company_pilot import (
 )
 from collect_company_pilot import build_pacer
 from data_workflow_core.browser import restriction_from_page
+from data_workflow_core.browser.accounts import build_rotator
 from company_profile import parse_company_asset
 from field_inventory import build_field_inventory
 from product_profile import normalize_product_capture, sanitize_product_record
@@ -184,8 +185,23 @@ def resolve_human_verification(
     url: str,
     verification_wait_seconds: int,
 ):
-    """风控铁律：检测到验证立即停止，不等待人工、不重试（返回 blocked 由上层停止）。"""
+    """检测到验证后等待人工完成滑块，成功后重新采集当前页；失败则返回 blocked。"""
     blocked = restriction_from_page(page)
+    if not blocked:
+        return page, ""
+    waiter = getattr(browser, "wait_for_human_verification", None)
+    if (
+        waiter is not None
+        and verification_wait_seconds > 0
+        and not getattr(browser, "headless", False)
+    ):
+        try:
+            solved = waiter(timeout_seconds=verification_wait_seconds)
+            if solved:
+                refreshed = browser.capture(page_type, url)
+                return refreshed, restriction_from_page(refreshed)
+        except Exception:
+            pass
     return page, blocked
 
 
@@ -201,9 +217,13 @@ def run_multi_product_workflow(
     allow_input_change: bool = False,
     skip_companies: set[str] | None = None,
     registry_path: str | None = None,
+    company_tasks_input: list[dict] | None = None,
 ) -> dict:
     output_dir = Path(output_dir)
     normalized_offers = normalize_offers(offers)
+    if company_tasks_input is not None:
+        # 厂家直采模式：跳过商品重采，直接进入厂家 5 页链路。
+        normalized_offers = []
     expected_categories = list(dict.fromkeys(expected_categories or []))
     input_fingerprint = workflow_input_fingerprint(normalized_offers, expected_categories)
     checkpoint_path = output_dir / "checkpoint.json"
@@ -362,22 +382,42 @@ def run_multi_product_workflow(
             break
 
     company_tasks: dict[str, dict] = {}
-    for offer_id, result in product_results.items():
-        identity = result["identity"]
-        member_id = str(identity.get("member_id") or "")
-        shop_url = str(identity.get("shop_url") or "")
-        if member_id and shop_url:
+    if company_tasks_input is not None:
+        for item in company_tasks_input:
+            member_id = str(item.get("member_id") or "").strip()
+            if not member_id:
+                continue
             task = company_tasks.setdefault(
                 member_id,
                 {
                     "member_id": member_id,
-                    "shop_url": shop_url,
-                    "shop_name": identity.get("company_name", ""),
-                    "login_id": identity.get("login_id", ""),
+                    "shop_url": str(item.get("shop_url") or "").strip(),
+                    "shop_name": str(item.get("shop_name") or "").strip(),
+                    "login_id": str(item.get("login_id") or "").strip(),
                     "offer_ids": [],
                 },
             )
-            task["offer_ids"].append(offer_id)
+            for offer_id in item.get("offer_ids") or []:
+                offer_id = str(offer_id).strip()
+                if offer_id and offer_id not in task["offer_ids"]:
+                    task["offer_ids"].append(offer_id)
+    else:
+        for offer_id, result in product_results.items():
+            identity = result["identity"]
+            member_id = str(identity.get("member_id") or "")
+            shop_url = str(identity.get("shop_url") or "")
+            if member_id and shop_url:
+                task = company_tasks.setdefault(
+                    member_id,
+                    {
+                        "member_id": member_id,
+                        "shop_url": shop_url,
+                        "shop_name": identity.get("company_name", ""),
+                        "login_id": identity.get("login_id", ""),
+                        "offer_ids": [],
+                    },
+                )
+                task["offer_ids"].append(offer_id)
 
     company_assets: dict[str, dict] = {}
     failed_members: set[str] = set()
@@ -391,6 +431,42 @@ def run_multi_product_workflow(
             if cached_asset:
                 company_assets[member_id] = cached_asset
                 continue
+
+            if not task["shop_url"]:
+                # 厂家直采模式下部分厂家缺 shop_url，从首个商品页发现店铺入口。
+                offer_id = task["offer_ids"][0] if task["offer_ids"] else ""
+                if not offer_id:
+                    failed_members.add(member_id)
+                    checkpoint["companies"][member_id] = {
+                        "status": "shop_url_missing",
+                        "error": "no shop_url and no offer_id to discover",
+                    }
+                    write_json(checkpoint_path, checkpoint)
+                    continue
+                try:
+                    page = browser.capture("product", product_url(offer_id))
+                    identity = extract_seller_identity(page.html)
+                    task["shop_url"] = str(identity.get("shop_url") or "").strip()
+                    task["shop_name"] = task["shop_name"] or str(
+                        identity.get("company_name") or ""
+                    ).strip()
+                except Exception as exc:
+                    company_blocked, _ = capture_error_status(exc)
+                    checkpoint["companies"][member_id] = {
+                        "status": company_blocked or "error",
+                        "error": f"{type(exc).__name__}: {exc}",
+                    }
+                    write_json(checkpoint_path, checkpoint)
+                    failed_members.add(member_id)
+                    continue
+                if not task["shop_url"]:
+                    failed_members.add(member_id)
+                    checkpoint["companies"][member_id] = {
+                        "status": "shop_url_missing",
+                        "error": "seller identity has no shop_url",
+                    }
+                    write_json(checkpoint_path, checkpoint)
+                    continue
 
             shop_base = task["shop_url"].rstrip("/")
             targets = (
@@ -761,7 +837,11 @@ def run_multi_product_workflow(
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Run a deduplicated multi-product 1688 workflow")
-    parser.add_argument("--input", required=True, help="Selected sample JSON array")
+    parser.add_argument("--input", help="样本选择 JSON 文件（厂家直采模式可省略）")
+    parser.add_argument(
+        "--companies-input",
+        help="厂家直采清单 JSON（member_id/shop_url/offer_ids），提供后跳过商品重采直接采厂家",
+    )
     parser.add_argument("--output-dir", required=True)
     parser.add_argument("--delay-seconds", type=float, default=5.0)
     parser.add_argument("--profile-dir", default=str(DEFAULT_PROFILE_DIR))
@@ -776,47 +856,118 @@ def main() -> int:
     parser.add_argument("--pacing-config", help="自适应频控配置 JSON，提供后启用自适应节奏")
     parser.add_argument("--pacing-checkpoint", default=str(DEFAULT_PACING_CHECKPOINT))
     parser.add_argument("--daily-cap", type=int, help="当日请求上限（配合 --pacing-config 使用）")
+    parser.add_argument(
+        "--accounts-config",
+        help="多账号配置 JSON（accounts.example.json 结构）；提供后启用账号轮换",
+    )
+    parser.add_argument(
+        "--accounts-state",
+        help="账号状态 JSON（当日用量/冷却时间，git 忽略）；默认 runtime/state/accounts.json",
+    )
     args = parser.parse_args()
 
-    payload = read_json(Path(args.input), [])
-    offers = payload.get("selected", []) if isinstance(payload, dict) else payload
-    expected_categories = payload.get("expected_categories", []) if isinstance(payload, dict) else []
-    if not isinstance(offers, list) or not offers:
-        raise SystemExit("input must contain a non-empty JSON array")
+    company_tasks_input = None
+    if args.companies_input:
+        company_tasks_input = read_json(Path(args.companies_input), [])
+        if not isinstance(company_tasks_input, list) or not company_tasks_input:
+            raise SystemExit("companies-input must contain a non-empty JSON array")
+        offers = []
+        expected_categories = []
+    else:
+        if not args.input:
+            raise SystemExit("either --input or --companies-input is required")
+        payload = read_json(Path(args.input), [])
+        offers = payload.get("selected", []) if isinstance(payload, dict) else payload
+        expected_categories = payload.get("expected_categories", []) if isinstance(payload, dict) else []
+        if not isinstance(offers, list) or not offers:
+            raise SystemExit("input must contain a non-empty JSON array")
     output_dir = Path(args.output_dir)
-    pacing = (
-        build_pacer(
-            config_path=args.pacing_config,
-            daily_cap=args.daily_cap,
-            checkpoint=args.pacing_checkpoint,
-        )
-        if args.pacing_config
+    skip_companies = (
+        {item.strip() for item in args.skip_companies.split(",") if item.strip()}
+        if args.skip_companies
         else None
     )
-    with PlaywrightBrowserSession(
-        profile_dir=Path(args.profile_dir),
-        screenshot_dir=output_dir / "l0" / "screenshots",
-        delay_seconds=args.delay_seconds,
-        debug=args.debug,
-        headless=args.headless,
-        stealth=not args.no_stealth,
-        pacing=pacing,
-    ) as browser:
-        result = run_multi_product_workflow(
-            offers=offers,
-            output_dir=output_dir,
-            browser=browser,
-            expected_categories=expected_categories,
-            confirmation_window=args.confirmation_window,
-            verification_wait_seconds=args.verification_wait_seconds,
-            allow_input_change=args.resume_force,
-            skip_companies=(
-                {item.strip() for item in args.skip_companies.split(",") if item.strip()}
-                if args.skip_companies
-                else None
+    rotator = (
+        build_rotator(
+            config_path=args.accounts_config,
+            state_path=(
+                args.accounts_state
+                or str(WORKFLOW_DIR / "runtime" / "state" / "accounts.json")
             ),
-            registry_path=args.registry,
+            default_profile_dir=args.profile_dir,
         )
+        if args.accounts_config
+        else None
+    )
+
+    def run_once(profile_dir: Path, account_alias: str = "default") -> dict:
+        pacing = (
+            build_pacer(
+                config_path=args.pacing_config,
+                daily_cap=args.daily_cap,
+                checkpoint=(
+                    f"{args.pacing_checkpoint}.{account_alias}"
+                    if args.accounts_config
+                    else args.pacing_checkpoint
+                ),
+            )
+            if args.pacing_config
+            else None
+        )
+        with PlaywrightBrowserSession(
+            profile_dir=profile_dir,
+            screenshot_dir=output_dir / "l0" / "screenshots",
+            delay_seconds=args.delay_seconds,
+            debug=args.debug,
+            headless=args.headless,
+            stealth=not args.no_stealth,
+            pacing=pacing,
+        ) as browser:
+            return run_multi_product_workflow(
+                offers=offers,
+                output_dir=output_dir,
+                browser=browser,
+                expected_categories=expected_categories,
+                confirmation_window=args.confirmation_window,
+                verification_wait_seconds=args.verification_wait_seconds,
+                allow_input_change=args.resume_force,
+                skip_companies=skip_companies,
+                registry_path=args.registry,
+                company_tasks_input=company_tasks_input,
+            )
+
+    if rotator is None:
+        result = run_once(Path(args.profile_dir))
+    else:
+        result = {}
+        while rotator.can_continue():
+            account = rotator.current()
+            if account is None:
+                result = {
+                    "status": "all_accounts_exhausted",
+                    "source": "1688",
+                    "retryable": True,
+                }
+                break
+            print(
+                f"[accounts] 使用账号 {account.alias} "
+                f"(profile={account.profile_dir})"
+            )
+            result = run_once(Path(account.profile_dir), account.alias)
+            if result.get("status") in {"success", "partial_success"}:
+                break
+            if result.get("status") in {
+                "human_verification_required",
+                "login_required",
+                "rate_limited",
+            }:
+                rotator.mark_blocked(account.alias)
+                print(
+                    f"[accounts] 账号 {account.alias} 触发风控，"
+                    f"冷却 {int(rotator.cooldown_seconds)}s 并切换下一账号"
+                )
+                continue
+            break
     print(json.dumps(result, ensure_ascii=False, indent=2))
     return 0 if result["status"] in {"success", "partial_success"} else 2
 

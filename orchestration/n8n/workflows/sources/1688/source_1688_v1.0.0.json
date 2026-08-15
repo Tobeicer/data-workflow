@@ -1,0 +1,89 @@
+{
+  "id": "a1f2c3d4-1688-4a2b-9c3d-000000000001",
+  "name": "1688_pipeline_v1",
+  "active": false,
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "hours",
+              "hoursInterval": 24
+            }
+          ]
+        }
+      },
+      "name": "定时触发",
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [0, 0]
+    },
+    {
+      "parameters": {
+        "command": "cd /d C:\\Users\\Administrator\\Desktop\\data-workflow && .venv-data\\Scripts\\python.exe -u adapters\\1688\\src\\cdp_collector.py --config adapters\\1688\\config\\cdp_collector_v1.json --pacing-config adapters\\1688\\config\\pacing_profiles.json --pacing-profile stable"
+      },
+      "name": "采集1688商品和厂家",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [220, 0]
+    },
+    {
+      "parameters": {
+        "command": "cd /d C:\\Users\\Administrator\\Desktop\\data-workflow && .venv-data\\Scripts\\python.exe -u adapters\\1688\\src\\master_ingest.py --config adapters\\1688\\config\\master_ingest_v1.json"
+      },
+      "name": "去重合并主库",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [440, 0]
+    },
+    {
+      "parameters": {
+        "command": "echo {{ $json.stdout }}"
+      },
+      "name": "记录结果",
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [660, 0]
+    }
+  ],
+  "connections": {
+    "定时触发": {
+      "main": [
+        [
+          {
+            "node": "采集1688商品和厂家",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "采集1688商品和厂家": {
+      "main": [
+        [
+          {
+            "node": "去重合并主库",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "去重合并主库": {
+      "main": [
+        [
+          {
+            "node": "记录结果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "_note": "1688 数据侧 pipeline v1.0.0（n8n 控制面）：采集 -> 去重合并主库 -> 记录结果。主库与最新交付输出见 adapters/1688/config/master_ingest_v1.json。"
+}

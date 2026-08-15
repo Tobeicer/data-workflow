@@ -1,0 +1,15 @@
+{
+  "engine_version": "1.0.0",
+  "chrome_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "profile_dir": "profiles/default",
+  "cdp_port": 9222,
+  "data_root": "runtime",
+  "antibot": {
+    "slider_budget_s": 300,
+    "slider_cooldown_s": 60,
+    "max_slider_events": 3,
+    "page_timeout_ms": 60000,
+    "settle_ms": 3500,
+    "restriction_url_patterns": []
+  }
+}

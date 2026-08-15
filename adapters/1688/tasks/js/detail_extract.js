@@ -35,7 +35,8 @@ function extractDetailPage() {
       : '';
   const isRealImage = (url) =>
     /^https?:\/\//i.test(url) &&
-    !/tps-|\.svg(\?|$)|gg_dtc|_sum\.(jpg|png|webp)(\?|$)/i.test(url);
+    /(cbu\d*\.alicdn\.com|img\.alicdn\.com\/imgextra\/)/i.test(url) &&
+    !/tps-|\.svg(\?|$)|gg_dtc|_sum\.(jpg|png|webp)(\?|$)|amos\.alicdn\.com|img\.taobao\.com|NewGualianyingxiao|online\.aw/i.test(url);
   const uniqueUrls = (list) => Array.from(new Set(list.filter(Boolean)));
   const notes = [];
 
@@ -363,17 +364,36 @@ function extractDetailPage() {
   }
   if (!skuRows.length) notes.push('sku:missing');
 
-  // SKU 维度标题（如 "颜色分类"、"规格"）
-  const skuDimension = skuRows.length
-    ? clean(
-        pickText([
-          '[data-module="od_sku_selection"] [class*="title"]',
-          '[data-module="od_sku"] [class*="title"]',
-          '[class*="sku"] [class*="title"]',
-          '[class*="sku"] [class*="label"]',
-        ])
-      )
-    : '';
+  // SKU 维度标题（如 "颜色分类"、"规格"；颜色×规格多维度时收集全部标题）
+  // 2026-08-14 适配：当前布局为 od_sku_selection 内无 class 的 H3（父级 feature-item-label），
+  // 旧 [class*="title"] 选择器已失效，新选择器置前，旧选择器保留兜底。
+  const pickSkuDimensions = () => {
+    const selectors = [
+      '[data-module="od_sku_selection"] .feature-item-label',
+      '[data-module="od_sku_selection"] h3',
+      '[data-module="od_sku_selection"] [class*="title"]',
+      '[data-module="od_sku"] [class*="title"]',
+      '[class*="sku"] [class*="title"]',
+    ];
+    for (const selector of selectors) {
+      const values = [];
+      for (const node of Array.from(document.querySelectorAll(selector))) {
+        const text = clean(node && (node.innerText || node.textContent));
+        if (
+          text &&
+          text.length <= 12 &&
+          !/[¥￥]|库存|\d/.test(text) &&
+          !values.includes(text)
+        ) {
+          values.push(text);
+        }
+      }
+      if (values.length) return values;
+    }
+    return [];
+  };
+  const skuDimensions = skuRows.length ? pickSkuDimensions() : [];
+  const skuDimension = skuDimensions.join(',');
 
   // ---------- 包装参数表 ----------
   const packRows = Array.from(
@@ -519,6 +539,7 @@ function extractDetailPage() {
     deliveryText,
     attrs,
     skuRows,
+    skuDimensions,
     skuDimension,
     packRows,
     mainImageUrl,

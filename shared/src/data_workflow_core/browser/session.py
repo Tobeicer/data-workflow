@@ -14,7 +14,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Callable, Optional, Protocol
 
-from .detection import classify_restriction
+from .detection import classify_restriction, restriction_from_page
 from .pacing import AdaptivePacer
 from .stealth import apply_stealth, stealth_launch_args
 
@@ -242,9 +242,7 @@ class PlaywrightBrowserSession:
                     structured_data = structured_extractor(page) or {}
                 except Exception:
                     structured_data = {}
-            if self.pacing is not None:
-                self.pacing.record_success()
-            return CapturedPage(
+            captured = CapturedPage(
                 page_type=page_type,
                 requested_url=url,
                 final_url=page.url,
@@ -255,6 +253,14 @@ class PlaywrightBrowserSession:
                 network_urls=network_urls,
                 structured_data=structured_data,
             )
+            if self.pacing is not None:
+                # 内容级风控（滑块/验证/限流）也要计入频控并触发冷却退避，
+                # 而不是把「页面加载成功但内容被拦截」误记为成功。
+                if restriction_from_page(captured):
+                    self.pacing.record_failure(blocked=True)
+                else:
+                    self.pacing.record_success()
+            return captured
         except Exception:
             if self.pacing is not None:
                 self.pacing.record_failure()

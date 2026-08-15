@@ -20,7 +20,7 @@ When documents conflict, use this order:
 3. `docs/游艺圈数据工作流总纲.md` (sole active handbook: boundaries, architecture, contracts, roadmap, status and next action).
 4. The current source guide under `adapters/<source>/README.md` for source-specific behavior.
 5. `docs/游艺圈游戏游艺设备完整分类清单.md` for taxonomy, platform mappings, keywords and scope rules.
-6. `docs/数据字段规范.md` for the database field baseline (public schema table structures and the only writable staging table) and the current L3 Excel adapter.
+6. `docs/数据字段规范.md` for the database field baseline (public schema table structures and the platform receiving tables) and the current L3 Excel adapter.
 7. Protected historical references (`docs/requirements/游艺圈历史总体需求.md`), only when historical product context is explicitly needed.
 
 New confirmed business requirements go to `docs/requirements/信息整理.md`.
@@ -72,21 +72,25 @@ Formal targets are `orchestration/n8n/`, `adapters/<source>/`, `shared/`, `contr
 
 ## Database Snapshot Reference
 
-Historical/current-environment reference only:
+Live platform database (verified 2026-08-14):
 
-- PostgreSQL: `192.168.1.98:5432`
-- Database: `postgres`
-- Schema: `public`
-- Navicat connection name: `youyiquan`
-- Field baseline: `docs/数据字段规范.md` (queried on 2026-08-05; the only writable staging table is `staging_manufacturer`)
+- Working DB (current integration target): PostgreSQL `192.168.1.43:5432` (platform dev environment), Database `postgres`, Schema `public`, Navicat connection `youyiquan`
+- Production DB (registered, do not touch yet): cloud server `47.119.113.170` via SSH (root); PostgreSQL listens only on its local `127.0.0.1:5432`; migrate after the working DB is validated
+- Receiving tables: `industry_source_1688_product` (57 cols, unique key `(source_platform, product_id)`), `industry_source_1688_sku` (13 cols), `industry_source_1688_binding` (9 cols); manufacturers go to formal `manufacturer` (33 cols incl. `member_id`) with `import_batch` + `status='pending'`; manufacturer dedup: registry → `member_id` → `source_url` → same-name fallback
+- Write account: platform owner decided to use the `postgres` superuser during development; a least-privilege account comes later if a dedicated DB operator is assigned
+- `staging_manufacturer` (16 cols) exists but is unused by the platform (0 rows)
+- `192.168.1.98:5432` is a deprecated old environment (July ingest trial) — do not use
+- Field baseline: `docs/数据字段规范.md` (re-queried 2026-08-14)
 - Expected historical dump path: `database/public.sql` (currently absent; create the folder when a snapshot arrives)
 
 Do not store passwords in Markdown. Use an untracked `.env.local` file.
 
 ## Integration Rules
 
-- Do not write to `public.product`, `public.accessory`, `public.manufacturer` or other formal business tables without explicit scope expansion and an approved platform contract.
-- Preferred integration order: internal import API, agreed permission-isolated `ingest/staging` (currently `public.staging_manufacturer`), then L3 file import.
+- Data side writes only these platform tables: `public.manufacturer` (with `import_batch`, `status='pending'`) and `public.industry_source_1688_product` / `industry_source_1688_sku`. Never write `public.product`, `public.accessory`, or business/order/transaction tables.
+- Write account (platform owner's decision, 2026-08-14): use the `postgres` superuser during development; switch to a least-privilege account later if a dedicated DB operator is assigned.
+- Integration mode (settled 2026-08-14): direct batch writes to the receiving tables above; file snapshots under `deliveries/` (local + NAS `data/deliveries/` mirror) are kept as audit fallback. A platform import API, if provided later, can replace the direct writes.
+- NAS `\\tdd-nas\ai应用部\游艺圈\data\` holds only `media/` (images/videos) and `deliveries/` (snapshot mirror); L0-L2 assets live only in local `runtime/`; NAS never runs a database.
 - The platform Git repository has not been received. When available, inspect it only to finalize the L3 adapter; never delete L0-L2 fields because the platform cannot currently consume them.
 - Logical datasets and index suggestions in `docs/游艺圈数据工作流总纲.md` are recommendations for the contract/staging discussion, not authorization to create production tables or migrations.
 - If `.codegraph/` exists and the task is about locating or understanding code, use CodeGraph before text search.

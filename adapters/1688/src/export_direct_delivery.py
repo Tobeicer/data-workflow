@@ -62,6 +62,7 @@ PRODUCT_FIELDS = {
     "pack_volume_cm3": "包装体积(cm³)",
     "pack_weight_g": "包装重量(g)",
     "pack_specs_json": "包装明细(JSON)",
+    "sku_dimension": "SKU规格维度",
     "main_image_url": "商品主图",
     "image_urls": "商品图片",
     "video_url": "商品视频",
@@ -77,6 +78,10 @@ PRODUCT_FIELDS = {
 DELIVERY_SKU_FIELDS = {
     "product_id": "商品ID",
     "sku_name": "SKU名称",
+    "sku_dimension": "SKU规格维度",
+    "spec_attributes": "SKU规格属性",
+    "spec_fragments": "SKU规格片段",
+    "spec_parse_status": "SKU规格解析状态",
     "sku_price": "SKU价格(元)",
     "sku_price_text": "SKU价格原文",
     "stock_quantity": "SKU库存数量",
@@ -85,11 +90,21 @@ DELIVERY_SKU_FIELDS = {
 }
 
 
+RELATION_FIELDS = {
+    "source_product_id": "来源商品ID",
+    "related_product_id": "关联商品ID",
+    "relation_type": "关联类型",
+    "sort_order": "排序",
+    "related_text": "关联商品页面文本",
+    "source_url": "来源页面链接",
+    "collected_at": "采集时间",
+}
+
+
 MANUFACTURER_FIELDS = {
     "source_platform": "来源平台",
     "manufacturer_id": "厂家ID",
     "member_id": "1688 memberId",
-    "company_id": "1688公司ID",
     "manufacturer_name": "厂家名称",
     "related_product_ids": "关联商品ID",
     "product_relation_type": "商品厂家关系",
@@ -118,25 +133,18 @@ MANUFACTURER_FIELDS = {
     "factory_area_sqm": "工厂面积（㎡）",
     "factory_area_authenticated": "工厂面积已认证",
     "employee_total_range": "员工规模",
-    "production_line_count": "生产线数量",
-    "production_equipment_count": "生产设备数量",
     "annual_transaction_amount": "年交易额",
     "monthly_output_value": "月产值",
-    "processing_methods": "加工方式",
     "custom_minimum_order": "定制起订量",
-    "vat_invoice_available": "可开增值税发票",
     "qualification_tags": "工厂能力/认证标签",
     "certificate_count": "资质证书数量",
     "certificates": "资质证书明细",
     "factory_auth_provider": "深度认证机构",
-    "factory_auth_report_number": "认证报告编号",
     "patent_count": "专利数量",
     "patents": "专利明细",
     "factory_medal": "工厂牌级",
     "returning_customer_rate": "回头率",
-    "service_response_rate": "服务响应率",
-    "on_time_fulfillment_rate": "准时履约率",
-    "factory_vr_url": "工厂VR展厅",
+    "cross_border_qualification": "跨境资质",
     "factory_images": "工厂图片",
     "factory_videos": "工厂视频",
     "observed_at": "采集时间",
@@ -358,6 +366,7 @@ def product_record(product: dict, asset: dict) -> dict:
         "video_url": clean(video.get("video_url") or video.get("videoUrl")),
         "service_guarantees": guarantees,
         "raw_sku_count": product.get("sku_count", ""),
+        "sku_dimension": clean(product.get("sku_dimension")),
         "related_product_count": len(related_products),
         "related_products_json": json.dumps(related_products[:20], ensure_ascii=False) if related_products else "",
         "observed_at": clean(product.get("collected_at")),
@@ -407,10 +416,22 @@ def manufacturer_record(asset: dict, related_products: list[dict], fallback_name
     images = unique([item for item in factory.get("factory_images") or [] if isinstance(item, dict)])
     videos = unique([item for item in factory.get("factory_videos") or [] if isinstance(item, dict)])
     area = factory.get("factory_area_sqm", "")
-    if area != "":
-        area_path = "factory_archive_page.factory_area_sqm（API来源：factoryAreaData.relaDeepFactoryControlAcreage 或 fcProcessData.tagList[acreage]）"
+    if area in ("", None):
+        area = credit.get("factory_building_area_sqm", "")
+        if area in ("", None):
+            area = ""
+            area_path = ""
+        else:
+            area_path = (
+                "credit_detail_page.factory_building_area_sqm"
+                "（工商详情页「厂房面积」；工厂档案页未展示工厂面积）"
+            )
     else:
-        area_path = ""
+        area_path = (
+            "factory_archive_page.factory_area_sqm（API 来源 factoryAreaData."
+            "relaDeepFactoryControlAcreage / fcProcessData.tagList[acreage]，"
+            "或工厂档案页文本「工厂面积」）"
+        )
     established_date = clean(company.get("established_date"))
     if not established_date:
         raw_established = clean(factory.get("established_time"))
@@ -436,11 +457,13 @@ def manufacturer_record(asset: dict, related_products: list[dict], fallback_name
     else:
         quality_status = "company_pages_only"
         quality_note = "本批次仅有店铺/工商页面证据；未观测值保持空值。"
+    factory_address = clean(factory.get("factory_address"))
+    # 与注册地址相同也保留：同址属事实（工厂页与工商页各自独立展示同一地址），
+    # 空值只出现在工厂页未披露地址时。联系地址是店铺联系页字段，不用于填充工厂地址。
     return {
         "source_platform": "1688",
         "manufacturer_id": f"1688:manufacturer:{member_id}",
         "member_id": member_id,
-        "company_id": clean(company.get("company_id")),
         "manufacturer_name": clean(company.get("company_name")) or clean(fallback_name),
         "related_product_ids": [item["product_id"] for item in related_products],
         "product_relation_type": relation_type,
@@ -465,29 +488,22 @@ def manufacturer_record(asset: dict, related_products: list[dict], fallback_name
         "production_service": clean(factory.get("production_service") or profile.get("production_service")),
         "company_summary": clean(profile.get("company_summary")),
         "brands": factory.get("brands") or [],
-        "factory_address": clean(factory.get("factory_address")),
+        "factory_address": factory_address,
         "factory_area_sqm": area,
         "factory_area_authenticated": factory.get("factory_area_is_authenticated", ""),
         "employee_total_range": clean(factory.get("employee_total_range")),
-        "production_line_count": factory.get("production_line_count", ""),
-        "production_equipment_count": factory.get("production_equipment_count", credit.get("production_equipment_count", "")),
         "annual_transaction_amount": clean(factory.get("annual_transaction_amount_text") or credit.get("annual_transaction_amount_text")),
         "monthly_output_value": clean(factory.get("monthly_output_value")),
-        "processing_methods": factory.get("processing_methods") or [],
         "custom_minimum_order": clean(factory.get("custom_minimum_order")),
-        "vat_invoice_available": clean(factory.get("vat_invoice_available")),
         "qualification_tags": tags,
         "certificate_count": certificate_details.get("reported_total", ""),
         "certificates": certificate_items,
         "factory_auth_provider": clean(factory.get("factory_auth_provider")),
-        "factory_auth_report_number": clean(factory.get("factory_auth_report_number")),
         "patent_count": patents.get("reported_total", "") if patent_items else "",
         "patents": patent_items,
         "factory_medal": clean(factory.get("factory_medal")),
         "returning_customer_rate": clean(factory.get("returning_customer_rate") or credit.get("returning_customer_rate")),
-        "service_response_rate": clean(factory.get("service_response_rate")),
-        "on_time_fulfillment_rate": clean(factory.get("on_time_fulfillment_rate")),
-        "factory_vr_url": clean(factory.get("factory_vr_url") or profile.get("factory_vr_url")),
+        "cross_border_qualification": foreign_trade_display,
         "factory_images": images,
         "factory_videos": videos,
         "observed_at": clean(asset.get("collected_at")),
@@ -689,6 +705,10 @@ def main() -> int:
                 {
                     "product_id": offer_id,
                     "sku_name": clean(item.get("sku_name")),
+                    "sku_dimension": clean(item.get("sku_dimension")),
+                    "spec_attributes": json.dumps(item.get("spec_attributes") or [], ensure_ascii=False),
+                    "spec_fragments": json.dumps(item.get("spec_fragments") or [], ensure_ascii=False),
+                    "spec_parse_status": clean(item.get("spec_parse_status")),
                     "sku_price": fmt_price(item.get("sku_price")),
                     "sku_price_text": clean(item.get("sku_price_text") or item.get("price_text")),
                     "stock_quantity": clean(item.get("stock_quantity")),

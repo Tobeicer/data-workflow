@@ -1,0 +1,15 @@
+{
+  "cooldown_seconds": 1800,
+  "accounts": [
+    {
+      "alias": "main",
+      "profile_dir": "runtime/browser-profiles/1688",
+      "daily_quota": 300
+    },
+    {
+      "alias": "alt1",
+      "profile_dir": "runtime/browser-profiles/1688-alt1",
+      "daily_quota": 300
+    }
+  ]
+}

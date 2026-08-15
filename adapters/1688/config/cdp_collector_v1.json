@@ -1,0 +1,17 @@
+{
+  "source": "1688",
+  "data_root": "\\\\tdd-nas\\ai应用部\\游艺圈\\data",
+  "profile_dir": "C:\\Users\\Administrator\\Desktop\\data-workflow\\runtime\\browser-profiles\\1688\\cdp_test",
+  "cdp_port": 9222,
+  "chrome_path": "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
+  "keyword": "娃娃机",
+  "product_limit": 10,
+  "manufacturer_limit": 10,
+  "search_delay_s": 15,
+  "product_delay_s": 3,
+  "manufacturer_delay_s": 4,
+  "slider_budget_s": 300,
+  "slider_cooldown_s": 60,
+  "max_slider_events": 3,
+  "page_timeout_ms": 60000
+}

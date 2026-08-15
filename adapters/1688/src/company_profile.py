@@ -119,6 +119,38 @@ def extract_known_labels(text: str, labels: set[str]) -> dict[str, str]:
         value = lines[index + 1]
         if value not in labels:
             values[line] = value
+
+    # 工商页等页面的 innerText 可能把「标签 值」渲染在同一行、以空格分隔
+    # （例如「公司名称 深圳某某公司 注册资本 10万元」），上面的逐行解析会漏掉。
+    # 这里按已知标签的出现位置做兜底：标签值 = 该标签之后到下一个已知标签之前。
+    inline_values = extract_inline_known_labels(text, labels)
+    for label, value in inline_values.items():
+        if label not in values and value:
+            values[label] = value
+    return values
+
+
+def extract_inline_known_labels(text: str, labels: set[str]) -> dict[str, str]:
+    flat = clean_text(text)
+    if not flat:
+        return {}
+    occurrences: list[tuple[int, int, str]] = []
+    for label in labels:
+        if not label:
+            continue
+        # 标签必须是独立词元：前为行首或空白、后为空白或行尾，避免「主营」误命中「主营类目」。
+        pattern = r"(?<!\S)" + re.escape(label) + r"(?=\s|$)"
+        for match in re.finditer(pattern, flat):
+            occurrences.append((match.start(), match.end(), label))
+    if not occurrences:
+        return {}
+    occurrences.sort(key=lambda item: item[0])
+    values: dict[str, str] = {}
+    for index, (start, end, label) in enumerate(occurrences):
+        next_start = occurrences[index + 1][0] if index + 1 < len(occurrences) else len(flat)
+        value = flat[end:next_start].strip()
+        if value and label not in values:
+            values[label] = value
     return values
 
 
@@ -156,7 +188,12 @@ def parse_factory_archive_patents(
     reported_total = int(reported_match.group(0)) if reported_match else None
     stop_labels = {"合作方式", "企业诚信", "买家评价", "工厂产线"}
     items: list[dict[str, str]] = []
-    number_pattern = re.compile(r"ZL\s*\d{4}\s+\d\s+\d+(?:\.\d+)?", re.IGNORECASE)
+    # 专利号格式：ZL 2019 2 0603374.0 / ZL201811184778.7 / CN307227112S / 202430232229.2
+    number_pattern = re.compile(
+        r"(?:ZL|CN)\s*[0-9][0-9\s]*[0-9](?:\.[0-9]+)?[A-Za-z]?"
+        r"|[0-9]{10,}(?:\.[0-9]+)?",
+        re.IGNORECASE,
+    )
     for line in lines[start + 1 :]:
         if line in stop_labels:
             break
@@ -177,12 +214,271 @@ def parse_factory_archive_patents(
     return reported_total, items
 
 
-def first_value_after_prefix(text: str, prefix: str) -> str:
+FACTORY_MEDAL_TOKENS = (
+    "超级工厂",
+    "金牌制造",
+    "实力商家",
+    "实力工厂",
+    "认证工厂",
+    "宝藏工厂",
+    "源头工厂",
+    "铜牌",
+    "银牌",
+    "金牌",
+)
+CERT_ACRONYMS = {"UL", "CQC", "CCC", "CE", "RoHS", "RC06"}
+ADDRESS_END_CHARS = tuple("室号间栋楼层村街路道区园")
+FACTORY_TAG_PATTERNS = (
+    re.compile(r"认证$"),
+    re.compile(r"纳税人$"),
+    re.compile(r"(?:诚信等级|芝麻信用等级\S*)$"),
+    re.compile(r"^支持\S+"),
+    re.compile(
+        r"^(可开专票|包工包料|清加工|来图加工|来样加工|工贸一体"
+        r"|规上企业|高新技术企业|质量控制)$"
+    ),
+    re.compile(r"^拥有.+认证$"),
+)
+
+
+def extract_qualification_tags_from_text(text: str) -> list[str]:
+    """从工厂页自身区域按行提取能力标签（API 缺失时的文本兜底）。"""
+    tags: list[str] = []
+    for line in text.splitlines():
+        value = clean_text(line)
+        if not value or len(value) > 30:
+            continue
+        if any(pattern.search(value) for pattern in FACTORY_TAG_PATTERNS):
+            tags.append(value)
+    return list(dict.fromkeys(tags))
+
+
+def extract_auth_provider_from_text(text: str) -> str:
+    """「已通过CTI机构认证」→ CTI。"""
+    match = re.search(r"已通过\s*([A-Za-z0-9]+)\s*机构认证", text)
+    return match.group(1).upper() if match else ""
+
+
+def factory_own_section(text: str) -> str:
+    """工厂档案页在「为你推荐相似工厂」之前的内容属于目标工厂本身。
+
+    推荐区里是其他工厂的卡片（面积、员工、金牌制造、回头率等），
+    任何针对目标工厂的文本兜底都必须先切掉推荐区，避免串数据。
+    """
+    if not text:
+        return ""
+    for marker in ("为你推荐相似工厂", "为你推荐", "推荐相似工厂"):
+        index = text.find(marker)
+        if index >= 0:
+            return text[:index]
+    return text
+
+
+def extract_metric_rate(text: str, label: str) -> str:
+    """提取「X%」样式指标，兼容「38 % 回头率」与「回头率 33%」两种排版。"""
+    if not text:
+        return ""
+    match = re.search(
+        r"([0-9]+(?:\.[0-9]+)?)\s*%\s*" + re.escape(label), text
+    )
+    if not match:
+        match = re.search(
+            r"(?<!\S)" + re.escape(label) + r"\s*([0-9]+(?:\.[0-9]+)?)\s*%",
+            text,
+        )
+    if not match:
+        return ""
+    return f"{match.group(1)}%"
+
+
+def extract_area_before_label(text: str, label: str) -> str:
+    """兼容「3000 m² 工厂面积」这类值在标签之前的排版。"""
+    match = re.search(
+        r"([0-9]+(?:\.[0-9]+)?)\s*(万)?\s*(?:m²|㎡|平方米|平米)\s*"
+        + re.escape(label),
+        text,
+    )
+    if not match:
+        return ""
+    number = float(match.group(1))
+    if match.group(2):
+        number *= 10_000
+    return f"{number:g}m²"
+
+
+def extract_factory_intro_from_text(text: str) -> str:
+    """「工厂展厅」与「工厂档案」之间的文字是工厂自我介绍（截断于「查看更多」）。"""
+    start = text.find("工厂展厅")
+    if start < 0:
+        return ""
+    segment = text[start + len("工厂展厅") :]
+    positions = [
+        segment.find(marker)
+        for marker in ("工厂档案", "查看更多", "为你推荐相似工厂")
+        if segment.find(marker) >= 0
+    ]
+    end = min(positions) if positions else len(segment)
+    intro = clean_text(segment[:end])
+    return intro if len(intro) >= 20 else ""
+
+
+def extract_factory_medal_from_text(text: str) -> str:
+    """从工厂页自身区域取牌级：兼容「X 工厂牌级」与「工厂牌级 X」两种排版。"""
+    if not text:
+        return ""
+    empty_values = {"暂无牌级", "暂无数据", "暂无", "无", "-", "—"}
+    for pattern in (
+        r"([^\n]{1,12})\s*工厂牌级",
+        r"工厂牌级\s*([^\n]{1,12})",
+    ):
+        for match in re.finditer(pattern, text):
+            value = clean_text(match.group(1)).rstrip("：:")
+            if not value or value in empty_values:
+                continue
+            if any(token in value for token in FACTORY_MEDAL_TOKENS):
+                return value
+    for token in FACTORY_MEDAL_TOKENS:
+        if token in text:
+            return token
+    # 「2026上榜一钻工厂」这类等级徽标
+    level_match = re.search(r"[一二三四五]钻工厂", text)
+    return level_match.group(0) if level_match else ""
+
+
+def parse_brand_lines(text: str) -> list[str]:
+    """「商标/品牌(N)」标签之后逐行收集品牌名，直到下一个版块标签。"""
     lines = [clean_text(line) for line in text.splitlines() if clean_text(line)]
-    for index, line in enumerate(lines):
-        if line.startswith(prefix) and index + 1 < len(lines):
-            return lines[index + 1]
+    start = next(
+        (index for index, line in enumerate(lines) if line.startswith("商标/品牌")),
+        -1,
+    )
+    if start < 0:
+        return []
+    stop_pattern = re.compile(
+        r"^(资质证书|专利[（(]|合作方式|企业诚信|展开更多|接外贸订单|加工方式|开票点数)"
+    )
+    brands: list[str] = []
+    for line in lines[start + 1 :]:
+        if stop_pattern.search(line) or re.fullmatch(r"[（(]\d+[)）]", line):
+            break
+        if not line or len(line) > 40:
+            continue
+        brands.append(line)
+    return list(dict.fromkeys(brands))
+
+
+def extract_factory_card_address(text: str) -> str:
+    """工厂真实性保障卡片里「地图查看」之前那行地址（工厂所在地）。
+
+    只取行尾是室/号/栋/间等地址收尾词的行，排除公司名（行尾为厂/公司/店等）。
+    """
+    lines = [clean_text(line) for line in text.splitlines() if clean_text(line)]
+    map_index = next(
+        (index for index, line in enumerate(lines) if line == "地图查看"), -1
+    )
+    if map_index < 0:
+        return ""
+    for line in reversed(lines[:map_index]):
+        if len(line) < 8 or len(line) > 60:
+            continue
+        if not re.search(r"(?:省|市|区|县|镇|街道|路|村|幢|栋|号)", line):
+            continue
+        if re.search(r"(?:厂|公司|商行|经营部|有限公司|店|部)$", line):
+            continue
+        if line.endswith(ADDRESS_END_CHARS):
+            return line
+        # 房号收尾的地址行，如「…6352号1栋厂房301A」「…2街22号101」
+        if re.search(r"(?:号|路|街道|镇|村|幢|栋)", line) and re.search(
+            r"[0-9]", line[-6:]
+        ):
+            return line
     return ""
+
+
+def parse_certificate_block(
+    text: str, *, source_url: str, collected_at: str
+) -> tuple[int | None, list[dict[str, str]]]:
+    """从「资质证书(N) 证书名…」文本块解析证书数量与明细（API 缺失时的兜底）。"""
+    if not text:
+        return None, []
+    match = re.search(r"资质证书[（(]\s*(\d+)\s*[)）]", text)
+    if not match:
+        return None, []
+    reported_total = int(match.group(1))
+    segment = text[match.end() :]
+    cut = re.search(
+        r"展开更多|专利[（(]|合作方式|企业诚信|企业信用|企业年报|税务评级"
+        r"|主体资质|知识产权|买家评价|工厂产线|产品图册|更多"
+        r"|企业动态|商机动态|招投标|新闻动态|中标单位|招标单位|正文内容|相关产品",
+        segment,
+    )
+    if cut:
+        segment = segment[: cut.start()]
+    lines = [clean_text(line) for line in segment.splitlines() if clean_text(line)]
+    number_pattern = re.compile(r"^[0-9][0-9\-/A-Za-z.]{3,}$")
+    boundary_pattern = re.compile(r"(证书\d*|认证|证|英文)$")
+    cert_code_pattern = re.compile(r"^[A-Z]{2,6}(?:-[A-Z0-9]{2,6})?\d*$")
+    badge_pattern = re.compile(r"口碑|榜单|十大|^第[0-9]+名$")
+    product_tail_pattern = re.compile(r"机$|柜$|亭$|屋$|币$")
+    names: list[str] = []
+    for line in lines:
+        tokens = line.split()
+        current: list[str] = []
+        index = 0
+        while index < len(tokens):
+            token = tokens[index]
+            if number_pattern.fullmatch(token) or token in {
+                "查看更多",
+                "查看全部",
+                "有效期至",
+                "更多",
+            }:
+                index += 1
+                continue
+            if badge_pattern.search(token) or (
+                product_tail_pattern.search(token)
+                and re.search(r"[\u4e00-\u9fff]", token)
+            ):
+                index += 1
+                continue
+            # 「ISO 14001」拆词后重新并回一个证书名
+            if token == "ISO" and index + 1 < len(tokens) and re.fullmatch(
+                r"[0-9]+", tokens[index + 1]
+            ):
+                current.append(f"ISO {tokens[index + 1]}")
+                names.append(" ".join(current))
+                current = []
+                index += 2
+                continue
+            current.append(token)
+            if (
+                boundary_pattern.search(token)
+                or token in CERT_ACRONYMS
+                or cert_code_pattern.fullmatch(token)
+            ):
+                name = " ".join(current)
+                if name not in {"证书", "资质证书"}:
+                    names.append(name)
+                current = []
+            index += 1
+        name = " ".join(current)
+        if name:
+            names.append(name)
+    items: list[dict[str, str]] = []
+    seen: set[str] = set()
+    for name in names:
+        if name in seen:
+            continue
+        seen.add(name)
+        items.append(
+            {
+                "certificate_name": name,
+                "certificate_url": "",
+                "source_url": source_url,
+                "collected_at": collected_at,
+            }
+        )
+    return reported_total, items
 
 
 def flatten_scalar_observations(value: Any, prefix: str = "") -> list[tuple[str, str]]:
@@ -211,7 +507,9 @@ def nested_payload(body: str) -> dict[str, Any]:
 def parse_contacts(text: str) -> dict[str, str]:
     def field(label: str) -> str:
         match = re.search(rf"(?:^|\n){re.escape(label)}[：:]\s*([^\n]+)", text)
-        return clean_text(match.group(1)) if match else ""
+        value = clean_text(match.group(1)) if match else ""
+        # 页面原样「暂无/无/-」视为未披露，避免占住电话位让手机号无法回退
+        return "" if value in EMPTY_MARKERS else value
 
     lines = [clean_text(line) for line in text.splitlines() if clean_text(line)]
     contact_person = next(
@@ -275,9 +573,11 @@ def parse_company_asset(
         "成立时间",
         "经营模式",
         "年交易额",
+        "年营业额",
         "代工模式",
         "厂房面积",
         "员工总人数",
+        "员工人数",
         "自主打样",
         "设备总数",
         "生产流水线",
@@ -300,6 +600,9 @@ def parse_company_asset(
             "成立时间",
             "年交易额",
             "工厂面积",
+            "厂房面积",
+            "占地面积",
+            "企业面积",
             "员工总数",
             "定制起订量",
             "贴牌起订量",
@@ -310,9 +613,12 @@ def parse_company_asset(
             "生产人数",
             "月产值",
             "原材料采购时间",
+            "工厂地址",
+            "厂址",
         },
     )
     factory_payload = parse_json_or_jsonp(factory_archive_body) if factory_archive_body else {}
+    factory_own_text = factory_own_section(factory_archive_text)
     factory_data = (factory_payload.get("data") or {}).get("result") or {}
     if not isinstance(factory_data, dict):
         factory_data = {}
@@ -439,6 +745,23 @@ def parse_company_asset(
         for item in certificate_items_raw
         if isinstance(item, dict)
     ]
+    certificate_from_api = bool(certificate_items)
+    text_certificate_total, text_certificate_items = parse_certificate_block(
+        factory_archive_text,
+        source_url=source_urls.get("factory_archive", ""),
+        collected_at=collected_at,
+    )
+    if not text_certificate_items:
+        text_certificate_total, text_certificate_items = parse_certificate_block(
+            credit_detail_text,
+            source_url=source_urls.get("credit_detail", ""),
+            collected_at=collected_at,
+        )
+    if not certificate_items and text_certificate_items:
+        certificate_items = text_certificate_items
+    certificate_total = parse_number(certificate_response.get("total"))
+    if certificate_total is None:
+        certificate_total = text_certificate_total
 
     patent_response = parse_document_response(tpdocument_bodies.get("patent", ""))
     patent_code = clean_text(patent_response.get("code"))
@@ -613,7 +936,8 @@ def parse_company_asset(
         if isinstance(item, dict) and clean_text(item.get("url"))
     ]
     company_profile = {
-        "company_summary": clean_text(business_payload.get("summary")),
+        "company_summary": clean_text(business_payload.get("summary"))
+        or extract_factory_intro_from_text(factory_own_text),
         "production_service": clean_text(business_payload.get("productionService")),
         "business_line": clean_text(business_payload.get("businessLine")),
         "factory_vr_url": normalize_public_url(propaganda.get("fullView")),
@@ -642,10 +966,14 @@ def parse_company_asset(
         factory_building_area_raw
     )
     process_area = process_tags.get("acreage") or {}
-    factory_archive_area_raw = clean_text(
-        factory_area_data.get("relaDeepFactoryControlAcreage")
-    ) or clean_text(process_area.get("value")) or clean_text(
-        factory_labels.get("工厂面积")
+    factory_archive_area_raw = (
+        clean_text(factory_area_data.get("relaDeepFactoryControlAcreage"))
+        or clean_text(process_area.get("value"))
+        or clean_text(factory_labels.get("工厂面积"))
+        or clean_text(factory_labels.get("厂房面积"))
+        or clean_text(factory_labels.get("占地面积"))
+        or clean_text(factory_labels.get("企业面积"))
+        or extract_area_before_label(factory_own_text, "工厂面积")
     )
     if clean_text(factory_area_data.get("relaDeepFactoryControlAcreage")):
         factory_archive_area_source_path = (
@@ -655,8 +983,18 @@ def parse_company_asset(
         factory_archive_area_source_path = (
             "data.result.fcProcessData.tagList[enType=acreage].value"
         )
-    else:
+    elif clean_text(factory_labels.get("工厂面积")):
         factory_archive_area_source_path = "factory_archive.labels[工厂面积]"
+    elif clean_text(factory_labels.get("厂房面积")):
+        factory_archive_area_source_path = "factory_archive.labels[厂房面积]"
+    elif clean_text(factory_labels.get("占地面积")):
+        factory_archive_area_source_path = "factory_archive.labels[占地面积]"
+    elif clean_text(factory_labels.get("企业面积")):
+        factory_archive_area_source_path = "factory_archive.labels[企业面积]"
+    else:
+        factory_archive_area_source_path = (
+            "factory_archive.text[面积值在「工厂面积」标签之前]"
+        )
     factory_archive_area_sqm, factory_archive_area_status = normalize_area_sqm(
         factory_archive_area_raw
     )
@@ -669,8 +1007,7 @@ def parse_company_asset(
         if isinstance(item, dict) and clean_text(item.get("brand_name") or item.get("name"))
     ]
     if not factory_brands:
-        brand_text = first_value_after_prefix(factory_archive_text, "商标/品牌")
-        factory_brands = [brand_text] if brand_text else []
+        factory_brands = parse_brand_lines(factory_archive_text)
 
     processing_text = clean_text(factory_scale.get("processingCapacity")) or clean_text(
         factory_labels.get("加工方式")
@@ -722,6 +1059,10 @@ def parse_company_asset(
             and clean_text(item.get("txtContent") or item.get("value"))
         )
     )
+    if not factory_qualification_tags:
+        factory_qualification_tags = extract_qualification_tags_from_text(
+            factory_own_text
+        )
 
     factory_images: list[dict[str, str]] = []
     factory_image_urls: set[str] = set()
@@ -835,7 +1176,10 @@ def parse_company_asset(
         "annual_new_product_count": parse_number(details.get("年均新款")),
         "rd_employee_count": parse_number(details.get("研发人员")),
         "self_uploaded_certificates": clean_text(details.get("自传证书")),
-        "returning_customer_rate": clean_text(details.get("回头率")),
+        "returning_customer_rate": (
+            extract_metric_rate(credit_detail_text, "回头率")
+            or clean_text(details.get("回头率"))
+        ),
         "platform_follower_count_text": clean_text(details.get("粉丝数")),
         "recent_30d_metrics": {
             "paid_order_count": parse_number(details.get("最近30天支付订单数")),
@@ -856,7 +1200,8 @@ def parse_company_asset(
         "annual_transaction_amount_text": clean_text(
             factory_scale.get("annualTradeVolume")
         )
-        or clean_text(factory_labels.get("年交易额")),
+        or clean_text(factory_labels.get("年交易额"))
+        or clean_text(details.get("年营业额")),
         "factory_area_sqm": factory_archive_area_sqm,
         "factory_area_is_authenticated": (
             bool(factory_area_data.get("isAuthed"))
@@ -871,27 +1216,47 @@ def parse_company_asset(
             if "isAuthed" in employee_data
             else None
         ),
-        "employee_total_range": clean_text(employee_data.get("workerNum2")),
+        "employee_total_range": (
+            clean_text(employee_data.get("workerNum2"))
+            or clean_text(factory_labels.get("员工总数"))
+            or clean_text(details.get("员工总人数"))
+            or clean_text(details.get("员工人数"))
+        ),
         "brands": factory_brands,
         "patent_summary_count": factory_patent_total,
         "production_line_count": parse_number(product_line.get("productLineNum")),
         "production_service": clean_text(factory_data.get("productionService")),
-        "factory_address": clean_text(factory_data.get("factoryDetailedAddress")),
+        "factory_address": (
+            clean_text(factory_data.get("factoryDetailedAddress"))
+            or clean_text(factory_labels.get("工厂地址"))
+            or clean_text(factory_labels.get("厂址"))
+            or extract_factory_card_address(factory_own_text)
+        ),
         "factory_profile": factory_profile_text,
         "factory_service_hotline": factory_service_hotline,
         "factory_latitude": clean_text(factory_data.get("factoryLatitude")),
         "factory_longitude": clean_text(factory_data.get("factoryLongitude")),
-        "factory_auth_provider": clean_text(
-            factory_data.get("factory3rdPartyAuthProvider")
-        ).upper(),
+        "factory_auth_provider": (
+            clean_text(
+                factory_data.get("factory3rdPartyAuthProvider")
+            ).upper()
+            or extract_auth_provider_from_text(factory_own_text)
+        ),
         "factory_auth_report_number": clean_text(auth_data.get("reportNum")),
         "factory_qualification_tags": factory_qualification_tags,
-        "factory_medal": clean_text(
-            (major_index.get("medalName") or {}).get("data")
-            if isinstance(major_index.get("medalName"), dict)
-            else ""
+        "factory_medal": (
+            clean_text(
+                (major_index.get("medalName") or {}).get("data")
+                if isinstance(major_index.get("medalName"), dict)
+                else ""
+            )
+            or extract_factory_medal_from_text(factory_own_text)
         ),
-        "returning_customer_rate": metric_text("reBuyRate"),
+        "returning_customer_rate": (
+            metric_text("reBuyRate")
+            or extract_metric_rate(factory_own_text, "回头率")
+            or extract_metric_rate(credit_detail_text, "回头率")
+        ),
         "service_response_rate": metric_text("responseRate"),
         "on_time_fulfillment_rate": metric_text("protectionRate"),
         "custom_minimum_order": clean_text(factory_scale.get("minOrderNum"))
@@ -1102,8 +1467,16 @@ def parse_company_asset(
         "certification_tags": list(dict.fromkeys(certification_tags)),
         "credit_tags": credit_tags,
         "certificate_details": {
-            "capture_status": "success" if clean_text(certificate_response.get("code")) == "200" else "api_error",
-            "reported_total": parse_number(certificate_response.get("total")),
+            "capture_status": (
+                "success"
+                if certificate_from_api
+                else "text_fallback"
+                if text_certificate_items
+                else "success"
+                if clean_text(certificate_response.get("code")) == "200"
+                else "api_error"
+            ),
+            "reported_total": certificate_total,
             "items": certificate_items,
         },
         "patent_details": {

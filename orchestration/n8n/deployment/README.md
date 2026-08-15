@@ -1,28 +1,33 @@
 # n8n 部署拓扑与运行边界
 
-本目录只记录现场可复现的部署证据。当前结论来自 `inspect_environment.ps1`，不代表 n8n 控制面已经部署或来源工作流已经启用。
+本目录只记录现场可复现的部署证据。
 
 ## 当前现场结论
 
-检测日期：2026-08-13（工作区迁移到 C 盘后重新核验）。机器记录以 `topology.json` 的 `inspected_at` 为准。
+检测日期：2026-08-13（工作区迁移到 C 盘后重新核验，并在当日完成本机部署）。
 
 | 组件 | 状态 | 结论 |
 |---|---|---|
-| n8n | `unavailable` | 本机未检测到 `n8n` 命令，真实工作流导入、导出和执行保持阻塞 |
-| Docker Compose | `unavailable` | 当前机器未检测到 Docker 命令；n8n 容器部署保持阻塞 |
-| Windows runner | `unavailable` | Windows PowerShell 可用；Python 命令为 WindowsApps 占位且 `.venv-data` 尚未重建，Node 未检测到 |
+| n8n | `available` | 本机 npm 部署 `runtime/n8n`，v2.34.5，PostgreSQL 库 `n8n`，访问 `http://localhost:5678` |
+| Docker Compose | `unavailable` | 本机未使用 Docker；n8n 以 npm + 本地 PostgreSQL 运行 |
+| Windows runner | `available` | PowerShell、`.venv-data`（Python 3.12）、Node 均已就绪 |
 | runtime/deliveries | `available` | 位于工作区 C 盘，运行资产不进入 Git |
-| lock store | `unavailable` | Redis 未检测到，且项目尚未验证原子比较交换、租约续期和所有权校验 |
-| credential store | `unavailable` | n8n 尚未部署；检测脚本不读取任何凭据值 |
+| lock store | `unavailable` | Redis 未部署；原子占用、租期续期与所有权校验待实现 |
+| credential store | `available` | n8n 内置 credential store + Windows Credential Manager 持有 NAS 凭据；检测脚本不读取任何凭据值 |
 
-离线基础建设不依赖 n8n；B6 的真实 n8n 导入、导出和受控执行暂时阻塞。当前副本需先重建 Python 虚拟环境（`.venv-data`）并安装 Node 后，A2-A6 才能继续执行。
+启动/停止入口：`orchestration/n8n/deployment/start_all.ps1`、`stop_all.ps1`（n8n 单进程入口为 `runtime/n8n/start_n8n.ps1`）。
+
+关键运行参数（已写入 `runtime/n8n/start_n8n.ps1`）：
+
+- `GENERIC_TIMEZONE=Asia/Shanghai`、`N8N_DEFAULT_LOCALE=zh`。
+- `NODES_EXCLUDE=[]`：n8n 2.x 默认禁用 ExecuteCommand / LocalFileTrigger 节点，本机实例显式清空排除列表以重新启用。仅适用于 localhost 实例；对外暴露时必须重新收紧该权限。
 
 ## 本地开发拓扑
 
 ```text
 Git 工作区
-├─ n8n 控制面：未安装
-├─ Windows runner：本机 PowerShell 可用；Python/Node 待安装
+├─ n8n 控制面：runtime/n8n（npm，本机 PostgreSQL）
+├─ Windows runner：本机 PowerShell + .venv-data Python
 ├─ runtime：runtime/（不进 Git）
 ├─ deliveries：deliveries/（不进 Git）
 ├─ lock store：未选定

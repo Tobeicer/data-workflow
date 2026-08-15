@@ -12,9 +12,13 @@ def clean_text(value: Any) -> str:
 
 
 SVG_OR_TPS_RE = re.compile(
-    r"tps-|\.svg($|\?)|gg_dtc|_sum\.(jpg|png|webp)($|\?)", re.IGNORECASE
+    r"tps-|\.svg($|\?)|gg_dtc|_sum\.(jpg|png|webp)($|\?)"
+    r"|amos\.alicdn\.com|img\.taobao\.com|NewGualianyingxiao|online\.aw",
+    re.IGNORECASE,
 )
-REAL_IMAGE_RE = re.compile(r"^https?://", re.IGNORECASE)
+REAL_IMAGE_RE = re.compile(
+    r"^https?://(cbu\d*\.alicdn\.com|img\.alicdn\.com/imgextra/)", re.IGNORECASE
+)
 
 
 def is_real_image_url(value: Any) -> bool:

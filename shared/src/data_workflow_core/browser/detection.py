@@ -77,13 +77,6 @@ def restriction_from_page(
         return status
     responses = getattr(page, "responses", None) or []
     for response in responses:
-        body = getattr(response, "body", "") or ""
-        response_text = f"{getattr(response, 'url', '')}\n{body}".lower()
         if getattr(response, "status", 0) in {403, 429}:
             return "rate_limited"
-        if any(
-            marker in response_text
-            for marker in ("/punish", "captcha", "x5step") + tuple(extra_response_markers)
-        ):
-            return "human_verification_required"
     return ""

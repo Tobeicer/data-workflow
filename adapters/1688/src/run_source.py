@@ -44,6 +44,21 @@ def add_browser_pacing_options(command: list[str], args: argparse.Namespace) -> 
             command.extend(["--daily-cap", str(daily_cap)])
 
 
+def resolve_account_profile_dir(
+    alias: str | None,
+    accounts_config: str | None,
+) -> str:
+    """按账号别名解析 profile 目录；未配置时退化为 1688-<alias> 约定。"""
+    if alias:
+        if accounts_config:
+            payload = json.loads(Path(accounts_config).read_text(encoding="utf-8"))
+            for account in payload.get("accounts") or []:
+                if account.get("alias") == alias and account.get("profile_dir"):
+                    return str(account["profile_dir"])
+        return str(WORKFLOW_DIR / "runtime" / "browser-profiles" / f"1688-{alias}")
+    return str(WORKFLOW_DIR / "runtime" / "browser-profiles" / "1688")
+
+
 def load_keywords(config_path: Path) -> list[str]:
     """从分类配置 JSON 读取启用关键词。
 
@@ -87,6 +102,11 @@ def prepare_login(args: argparse.Namespace) -> None:
         "--prepare-login",
         "--login-wait-seconds",
         str(args.login_wait_seconds),
+        "--profile-dir",
+        resolve_account_profile_dir(
+            getattr(args, "account", None),
+            getattr(args, "accounts_config", None),
+        ),
     ]
     run_command(command, dry_run=args.dry_run)
 
@@ -221,13 +241,17 @@ def multi(args: argparse.Namespace) -> None:
     command = [
         sys.executable,
         str(collector),
-        "--input",
-        args.input,
-        "--output-dir",
-        str(output_dir),
-        "--delay-seconds",
-        str(args.delay_seconds),
     ]
+    if args.input:
+        command.extend(["--input", args.input])
+    command.extend(
+        [
+            "--output-dir",
+            str(output_dir),
+            "--delay-seconds",
+            str(args.delay_seconds),
+        ]
+    )
     if args.profile_dir:
         command.extend(["--profile-dir", args.profile_dir])
     if args.debug:
@@ -235,6 +259,12 @@ def multi(args: argparse.Namespace) -> None:
     if args.headless:
         command.append("--headless")
     add_browser_pacing_options(command, args)
+    if getattr(args, "accounts_config", None):
+        command.extend(["--accounts-config", args.accounts_config])
+    if getattr(args, "accounts_state", None):
+        command.extend(["--accounts-state", args.accounts_state])
+    if getattr(args, "companies_input", None):
+        command.extend(["--companies-input", args.companies_input])
     run_command(command, dry_run=args.dry_run)
     print("[1688-workflow] 多商品批次输出目录：" + str(output_dir))
 
@@ -311,6 +341,8 @@ def main() -> None:
 
     login_parser = subparsers.add_parser("prepare-login", help="打开 1688 登录页并保存本地浏览器登录态")
     login_parser.add_argument("--login-wait-seconds", type=int, default=240)
+    login_parser.add_argument("--account", help="账号别名（登录态存到 1688-<alias> profile）")
+    login_parser.add_argument("--accounts-config", help="多账号配置 JSON，用于解析 alias → profile 目录")
     login_parser.add_argument("--dry-run", action="store_true")
     login_parser.set_defaults(func=prepare_login)
 
@@ -362,7 +394,7 @@ def main() -> None:
         "multi",
         help="按已选商品清单采集完整商品/SKU，并按 memberId 去重采集公司资产",
     )
-    multi_parser.add_argument("--input", required=True, help="样本选择 JSON 文件")
+    multi_parser.add_argument("--input", help="样本选择 JSON 文件（厂家直采模式可省略）")
     multi_parser.add_argument("--output-dir", help="批次输出目录")
     multi_parser.add_argument("--delay-seconds", type=float, default=5.0)
     multi_parser.add_argument("--profile-dir", help="自定义持久化浏览器登录态目录")
@@ -373,6 +405,15 @@ def main() -> None:
     multi_parser.add_argument("--pacing-config", help="自适应频控配置 JSON")
     multi_parser.add_argument("--pacing-checkpoint", default=str(WORKFLOW_DIR / "runtime" / "state" / "1688_pacing.json"))
     multi_parser.add_argument("--daily-cap", type=int)
+    multi_parser.add_argument(
+        "--accounts-config",
+        help="多账号配置 JSON（提供后启用账号轮换）",
+    )
+    multi_parser.add_argument("--accounts-state", help="账号状态 JSON 路径")
+    multi_parser.add_argument(
+        "--companies-input",
+        help="厂家直采清单 JSON（member_id/shop_url/offer_ids），跳过商品重采直接采厂家",
+    )
     multi_parser.add_argument("--dry-run", action="store_true")
     multi_parser.set_defaults(func=multi)
 

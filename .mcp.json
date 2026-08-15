@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "qwen-vision": {
+      "command": "node",
+      "args": [
+        "C:\\Users\\Administrator\\Desktop\\data-workflow\\MCP_server\\index.js"
+      ]
+    }
+  }
+}

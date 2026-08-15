@@ -199,6 +199,16 @@ python adapters/1688/src/run_full_fix.py `
 
 2026-07-15 已完成代码、Schema 和回归测试中的字段拆分。在线单商品烟测再次取得广州领宸科技有限公司的 `factory_area_sqm=6600` 与 `factory_building_area_sqm=3100`，两条证据分别保留“工厂面积”“厂房面积”原始标签且来源页面独立；历史 L0 不重写。该字段阻断项已关闭，后续仍需通过多商品批次验证覆盖率、恢复和漂移处理。
 
+### 工厂页文本兜底与污染防线（2026-08-14）
+
+四页文本采集路径（`tasks/company.py` + `normalize_companies_raw.py`）在 API 载荷缺失时按页面文本兜底，全部以「为你推荐相似工厂」为界只取目标工厂自身区域：
+
+- 面积：`工厂面积`/`厂房面积`/`占地面积` 标签 + 「3000 m² 工厂面积」值前排版；交付层再回退工商详情页“厂房面积”。
+- 员工规模、回头率（「38 % 回头率」值前排版）、工厂牌级（「X 工厂牌级」，暂无牌级不伪造）、资质证书（「资质证书(N)」文本块）、能力标签、工厂地址（工厂真实性保障卡片行；与注册地址相同则置空）、认证机构（「已通过CTI机构认证」）。
+- 店铺链接：从信用页域名回退（排除 `rule/picman/img/show` 等基础设施域）；无店铺链接时 `source_url` 回退工厂档案页 URL（含 memberId）作查重键。
+
+防污染三重防线：①店铺域排除表（任务层 + 规范化层双保险）；②`src/page_guards.py` 淘宝页哨兵——1688 基础设施域上的无效路径会被阿里体系重定向到淘宝错误页/首页，此类文本在质量层标记、在规范化层直接丢弃（曾拦截“千牛卖家中心”被误当公司名）；③工商页空文本重试一次后仍空则如实留空，无名行跳过不写库。
+
 ## 5. 状态、重试与恢复
 
 - 登录失效返回 `login_required`；验证码或滑块优先自动处理（自动验证、环境/指纹/代理切换），自动处理无效时返回 `human_verification_required` 转人工；解析结构变化返回 `parser_drift`；不得把受限页面写成空成功。
@@ -229,7 +239,7 @@ python adapters/1688/src/run_full_fix.py `
 
 ## 8. 反爬基础（stealth 与自适应频控）
 
-详情页提取统一由 `adapters/1688/src/detail_extract.js` 承担（单一事实源，Playwright 与 Codex 控制 Chrome 共用）：多选择器容错（新旧两代价格模块 `od_main_price`/`od_price`/`od_consign`、SKU 的 expand/通用/表格/无四类结构）、活动文案节点排除、价格+库存合并节点拆分、库存文本校验防误抓、图库/详情图真实图片提取（`od_picture_gallery` 与 `v-detail-*` shadow DOM，兼容 `v-detail-8`/`v-detail-q` 等宿主，过滤 SVG、`/tps-`、`gg_dtc` 图标与 `_sum` 缩略图）、视频 URL 提取、布局签名（layoutKey）与缺失原因记录。2026-08-12 全量 707 商品实测发现 **22 种布局变体**，全部由该脚本适配。
+详情页提取统一由 `adapters/1688/tasks/js/detail_extract.js` 承担（单一事实源，Playwright 与 Codex 控制 Chrome 共用）：多选择器容错（新旧两代价格模块 `od_main_price`/`od_price`/`od_consign`、SKU 的 expand/通用/表格/无四类结构）、活动文案节点排除、价格+库存合并节点拆分、库存文本校验防误抓、图库/详情图真实图片提取（`od_picture_gallery` 与 `v-detail-*` shadow DOM，兼容 `v-detail-8`/`v-detail-q` 等宿主，过滤 SVG、`/tps-`、`gg_dtc` 图标与 `_sum` 缩略图）、视频 URL 提取、布局签名（layoutKey）与缺失原因记录。2026-08-12 全量 707 商品实测发现 **22 种布局变体**，全部由该脚本适配。
 
 浏览器执行层统一来自 shared 内核（见总纲 §10.1），1688 采集脚本默认接入：
 
@@ -307,7 +317,7 @@ python adapters/1688/src/run_full_fix.py `
 - 无会话生命周期管理（请求上限/时长上限/自动重启）；
 - 人工接管仍是等待超时模式，无「检测→暂停→通知→恢复」闭环。
 
-### 9.2 多账号轮换方案（已确认方向，实施前需准备）
+### 9.2 多账号轮换（已实现，2026-08-13）
 
 **目标**：把单账号日额度（约 300 请求）扩展为 N 账号 × 日额度，按账号轮换实现持续采集。
 
@@ -327,10 +337,61 @@ python adapters/1688/src/run_full_fix.py `
 - 至少 3-5 个可用 1688 账号（越多越稳）；每账号先人工完成一次登录与搜索验证；
 - 账号质量要求：能正常登录、能通过搜索页验证（新注册/低信誉账号可能触发更严风控，建议先小号试采）。
 
-**实施顺序（下次开工时）**
+**落地状态（2026-08-13）**
 
-1. 修复 pacing 滑块盲区（内容级限制计入频控 + 冷却退避）；
-2. 实现会话生命周期（单会话请求/时长上限，自动重启）；
-3. 落地账号配置与轮换器（accounts.json + 状态文件 + 切换逻辑）；
-4. 每账号 `prepare-login` 并小批量试采（10 商品/账号）验证账号信誉；
-5. 接入 54 类全量/增量采集，观察多账号下触发率与日吞吐。
+- 已完成：① pacing 滑块盲区修复——`PlaywrightBrowserSession.capture` 现在对内容级风控（滑块/验证/限流）调用 `record_failure(blocked=True)`，不再误记为成功；② 账号轮换器 `shared/src/data_workflow_core/browser/accounts.py`（日配额 + 冷却 + 跨天重置 + 状态持久化，14 项单测）；③ CLI 接入 `run_source.py multi --accounts-config ... --accounts-state ...`，触发 `human_verification_required/login_required/rate_limited` 时自动 `mark_blocked` 并切下一账号；④ 示例配置 `adapters/1688/config/accounts.example.json`。
+- 仍待人工准备：至少 2 个可用 1688 账号（越多越稳），每账号 `prepare-login --account <alias>` 人工登录一次并验证可搜索；之后把 `accounts.example.json` 复制为 `accounts.json` 填好 `alias/profile_dir` 即可启用。
+
+启用轮换采集：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/run_source.py multi `
+  --input <selected.json> `
+  --accounts-config adapters/1688/config/accounts.json `
+  --pacing-config adapters/1688/config/pacing.example.json `
+  --delay-seconds 8
+```
+
+## 自动化执行（2026-08-13 落地；2026-08-14 任务化）
+
+采集基于独立反风控引擎（`shared/src/data_workflow_core/engine/`）+ 1688 任务层
+（`adapters/1688/tasks/`）：任务脚本启动真实 Chrome，用 Playwright `connect_over_cdp`
+连接，不依赖 Codex 浏览器桥。真实实测“娃娃机”10 商品 + 8 厂家，0 滑块。
+
+一键采集（搜索 → 详情 → 厂家，单会话）：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/tasks/collect.py `
+  --engine-config shared/src/data_workflow_core/engine/config/engine.example.json `
+  --keyword 娃娃机 `
+  --product-limit 10 `
+  --manufacturer-limit 10
+```
+
+也可分任务执行：`tasks/search.py`（--keyword --limit）、`tasks/detail.py`（--offers --keyword）、`tasks/company.py`（--members 或 --members-file）。所有任务输出严格 `run_result.json`（退出码 0 完成 / 4 受限停止 / 3 前置失败），供 n8n 路由。
+
+稳定节奏（2026-08-13 校准；2026-08-14 厂家页收紧为 12 秒）：
+
+- 搜索页：15 秒（敏感页面，不变）
+- 商品页：3 秒（详情页安全）
+- 厂家页：12 秒（四页任务请求密度高；8 家小样本的 4 秒不可外推；20 家/批）
+
+铁律（引擎统一执行，2026-08-14 收紧）：验证出现**立即停止整批**并保存断点（不再"等人工过完继续"）；触发后短冷却（实测 15-30 分钟即可恢复，以页面正常为准），**恢复前先单请求探测**，探测通过再小批（3-5 家）恢复；当日多轮在线采集的累计请求量同样计入风控阈值。
+
+NAS 数据家为 `\\tdd-nas\ai应用部\游艺圈\data`。
+
+### 增量主库（2026-08-13 落地）
+
+每次采集的新 L0 通过 `master_ingest.py` 按 `product_id` / `member_id` 去重合并进持续累积的主数据文件：
+
+```powershell
+.\.venv-data\Scripts\python.exe adapters/1688/src/master_ingest.py `
+  --config adapters/1688/config/master_ingest_v1.json
+```
+
+- 主库：`data\normalized\1688\master\` 下 `products.jsonl` / `manufacturers.jsonl` / `skus.jsonl` / `relations.jsonl`，另有 `meta.json` 与 `change_log.jsonl`；
+- 最新交付：`data\deliveries\1688\1688_latest\1688_master.json` + `1688_master.xlsx`（商品/厂家/SKU/商品关联四 sheet）；
+- 已摄入的 run 记录在 `meta.json`，重复执行幂等，不会重复追加；
+- 主库为空时用 2026-08-12/13 交付文件播种，只发生一次。
+
+n8n 工作流 `1688_pipeline_v1` 节点顺序：定时触发 → 采集1688商品和厂家 → 去重合并主库 → 记录结果。AI 底座、媒体清单和媒体下载由 `build_ai_foundation.py`、`download_media.py` 独立完成。

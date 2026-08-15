@@ -79,14 +79,7 @@ class CompanyCaptchaBrowser(ProductOnlyBrowser):
             final_url=url,
             title="店铺",
             html="<html></html>",
-            text="店铺内容",
-            responses=[
-                CapturedResponse(
-                    url="https://h5api.1688.com/punish?action=captcha",
-                    status=200,
-                    body='{"x5step":2}',
-                )
-            ],
+            text="安全验证 请拖动滑块完成验证",
         )
 
 
@@ -116,14 +109,7 @@ class TwoMemberCaptchaBrowser(ProductOnlyBrowser):
                 final_url=url,
                 title="店铺",
                 html="<html></html>",
-                text="店铺内容",
-                responses=[
-                    CapturedResponse(
-                        url="https://h5api.1688.com/punish?action=captcha",
-                        status=200,
-                        body='{"x5step":2}',
-                    )
-                ],
+                text="安全验证 请拖动滑块完成验证",
             )
         return CapturedPage(
             page_type=page_type,
